@@ -81,6 +81,9 @@ Gametelier-Portfolio/
 ├── .gitignore
 ├── README.md
 ├── AGENTS.md                  <-- This master roadmap document
+├── EDITOR.md                  <-- Visual local editor specifications & guide
+├── editor.html                <-- Visual Local Catalog Editor (Zero-token in-browser CMS)
+├── publicar.bat               <-- 1-Click Windows script to commit & push to GitHub Pages
 ├── index.html                 <-- Showcase landing page (NO prices, NO cart)
 ├── cotizador.html             <-- Quote builder landing page (With prices, cart, checkout)
 ├── seccion.html               <-- Reusable vertical detail list (?tipo=...&mode=showcase|cotizador)
@@ -403,3 +406,12 @@ Future agents should consult this checklist and update the status boxes as featu
 - [ ] Verify zero cross-linking between `index.html` and `cotizador.html`
 - [ ] Test bilingual switcher (ES/EN) across all views and dynamic strings
 - [ ] Test mobile responsiveness, touch swipe on carousels, and GitHub Pages compatibility
+
+### Phase 7: Visual Local Editor & Deploy Companion (EDITOR.md)
+- [ ] Implement `editor.html` standalone visual interface with Dark Tech-Studio styling
+- [ ] Implement File System Access API integration (`showDirectoryPicker` & `showOpenFilePicker`)
+- [ ] Implement form binders for games, add-ons, tools, campaigns, and promo rules
+- [ ] Implement live quoting & promo calculation simulator inside the editor
+- [ ] Implement image file picker & drag-and-drop auto-copy into `assets/images/`
+- [ ] Implement 1-Click `publicar.bat` script in repository root for GitHub Pages
+
