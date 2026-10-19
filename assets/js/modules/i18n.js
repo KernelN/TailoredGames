@@ -1,0 +1,352 @@
+/**
+ * Corpfolio Studio — Smart Internationalization (i18n) Module
+ * Handles language detection, manual switching, currency formatting, and translation dispatching.
+ */
+
+(function () {
+  const STORAGE_KEY = "corpfolio_lang";
+
+  // Common UI translation dictionary
+  const UI_DICTIONARY = {
+    heroBadge: {
+      es: "Estudio Interactivo B2B",
+      en: "B2B Interactive Studio"
+    },
+    days: {
+      es: "días",
+      en: "days"
+    },
+    day: {
+      es: "día",
+      en: "day"
+    },
+    perDay: {
+      es: "/ día",
+      en: "/ day"
+    },
+    addToQuote: {
+      es: "+ Agregar a Cotización",
+      en: "+ Add to Quote"
+    },
+    addedToQuote: {
+      es: "✓ Agregado",
+      en: "✓ Added"
+    },
+    remove: {
+      es: "Eliminar",
+      en: "Remove"
+    },
+    viewAll: {
+      es: "Ver todos y detalles →",
+      en: "View all & details →"
+    },
+    viewSection: {
+      es: "Explorar sección →",
+      en: "Explore section →"
+    },
+    cartTitle: {
+      es: "Cotización de Evento",
+      en: "Event Quote Summary"
+    },
+    emptyCartTitle: {
+      es: "Aún no has agregado juegos",
+      en: "No games selected yet"
+    },
+    emptyCartSubtitle: {
+      es: "Explora el catálogo y agrega juegos o agregados para calcular tu presupuesto con descuentos automáticos.",
+      en: "Browse the catalog and add games or add-ons to calculate your quote with automatic discounts."
+    },
+    checkoutBtn: {
+      es: "Solicitar Presupuesto",
+      en: "Request Formal Quote"
+    },
+    backToHome: {
+      es: "← Volver al catálogo",
+      en: "← Back to catalog"
+    },
+    durationDays: {
+      es: "Duración del evento:",
+      en: "Event duration:"
+    },
+    gameDuration: {
+      es: "Días:",
+      en: "Days:"
+    },
+    assignAddonTo: {
+      es: "Asignar a juego:",
+      en: "Assign to game:"
+    },
+    selectGamePrompt: {
+      es: "Selecciona un juego...",
+      en: "Select a game..."
+    },
+    noGamesForAddon: {
+      es: "Primero debes agregar al menos un juego a la cotización.",
+      en: "You must add at least one game to the quote first."
+    },
+    discountsApplied: {
+      es: "Descuentos Aplicados",
+      en: "Discounts Applied"
+    },
+    grossTotal: {
+      es: "Subtotal Bruto:",
+      en: "Gross Subtotal:"
+    },
+    discountSavings: {
+      es: "Ahorro total:",
+      en: "Total Savings:"
+    },
+    finalTotal: {
+      es: "Total Estimado:",
+      en: "Estimated Total:"
+    },
+    contactWhatsApp: {
+      es: "Enviar por WhatsApp",
+      en: "Send via WhatsApp"
+    },
+    contactEmail: {
+      es: "Enviar por Email",
+      en: "Send via Email"
+    },
+    copySummary: {
+      es: "Copiar Resumen",
+      en: "Copy Summary"
+    },
+    copied: {
+      es: "¡Resumen copiado al portapapeles!",
+      en: "Summary copied to clipboard!"
+    },
+    companyNameLabel: {
+      es: "Nombre de Productora / Empresa",
+      en: "Company / Producer Name"
+    },
+    companyNamePlaceholder: {
+      es: "Ej: Productora Eventos X / Empresa Y",
+      en: "e.g. Events Agency X / Company Y"
+    },
+    eventDateLabel: {
+      es: "Fecha tentativa del evento",
+      en: "Tentative Event Date"
+    },
+    contactNameLabel: {
+      es: "Tu Nombre",
+      en: "Your Name"
+    },
+    contactInfoLabel: {
+      es: "Email o Teléfono",
+      en: "Email or Phone"
+    },
+    modalTitle: {
+      es: "Solicitar Presupuesto Formal",
+      en: "Request Formal Event Quote"
+    },
+    modalSubtitle: {
+      es: "Ingresa los datos del evento para generar tu presupuesto desglosado con descuentos aplicados.",
+      en: "Enter event details to generate your itemized quotation with applied discounts."
+    },
+    close: {
+      es: "Cerrar",
+      en: "Close"
+    },
+    contactStudioTitle: {
+      es: "Hablemos de tu próximo evento",
+      en: "Let's discuss your next event"
+    },
+    contactStudioSubtitle: {
+      es: "¿Tienes un requerimiento especial, desarrollo a medida o consulta técnica? Escríbenos directamente.",
+      en: "Have a custom development inquiry or technical question? Reach out to our team directly."
+    },
+    consultPrice: {
+      es: "Consultar cotización a medida",
+      en: "Inquire for custom quote"
+    },
+    addonsCount: {
+      es: "Agregados incluidos:",
+      en: "Included add-ons:"
+    },
+    featuresIncluded: {
+      es: "Características destacadas:",
+      en: "Key features:"
+    },
+    contactUs: {
+      es: "Contactanos",
+      en: "Contact Us"
+    },
+    conceptBadge: {
+      es: "💡 Concepto / En Desarrollo",
+      en: "💡 Concept / In Development"
+    },
+    addClassicGame: {
+      es: "+ Agregar Juego Clásico",
+      en: "+ Add Classic Game"
+    },
+    addCustomGame: {
+      es: "+ Agregar Juego A Medida",
+      en: "+ Add Custom Game"
+    },
+    campaignsTitle: {
+      es: "Juegos como Campaña",
+      en: "Games as Campaigns"
+    },
+    campaignsSubtitle: {
+      es: "Soluciones lúdicas de mediano y largo plazo orientadas a educación, concientización o publicidad masiva.",
+      en: "Medium-to-long term playful solutions for education, awareness, or mass marketing campaigns."
+    },
+    templateBadge: {
+      es: "⚙️ Plantilla / Mecánica Base",
+      en: "⚙️ Base Game Template"
+    },
+    specPlayers: {
+      es: "👥 Participantes",
+      en: "👥 Players"
+    },
+    specMechanic: {
+      es: "🎹 Mecánica Base",
+      en: "🎹 Core Mechanic"
+    },
+    specB2bGoal: {
+      es: "🎯 Objetivo B2B",
+      en: "🎯 B2B Goal"
+    },
+    implementationsTitle: {
+      es: "Casos e Implementaciones Reales",
+      en: "Real Brand Implementations"
+    },
+    eventApplicationLabel: {
+      es: "💡 Aplicación en Eventos:",
+      en: "💡 Event Application:"
+    },
+    quoteTemplateBtn: {
+      es: "+ Cotizar esta Mecánica",
+      en: "+ Quote this Mechanic"
+    },
+    gamesInCartGroup: {
+      es: "Juegos en tu cotización",
+      en: "Games in your quote"
+    },
+    gamesInCatalogGroup: {
+      es: "Agregar juego del catálogo + este módulo...",
+      en: "Add game from catalog + this add-on..."
+    },
+    assignAddonBtn: {
+      es: "+ Asignar",
+      en: "+ Assign"
+    },
+    includedZeroCost: {
+      es: "Sin cargo extra ($0)",
+      en: "Included ($0)"
+    },
+    openGamePickerOption: {
+      es: "➕ Agregar nuevo juego del catálogo...",
+      en: "➕ Add new game from catalog..."
+    },
+    pickGameBtn: {
+      es: "🎮 Elegir Juego...",
+      en: "🎮 Pick Game..."
+    },
+    gamePickerModalTitle: {
+      es: "Seleccionar Juego para Agregado",
+      en: "Select Game for Add-On"
+    },
+    gamePickerSearchPlaceholder: {
+      es: "🔍 Buscar juego por nombre...",
+      en: "🔍 Search game by name..."
+    },
+    selectAndAssignBtn: {
+      es: "+ Seleccionar y Asignar",
+      en: "+ Select & Assign"
+    }
+  };
+
+  class I18nManager {
+    constructor() {
+      this.currentLang = this.detectLanguage();
+      document.documentElement.lang = this.currentLang;
+    }
+
+    detectLanguage() {
+      // 1. Check URL param ?lang=es|en
+      const params = new URLSearchParams(window.location.search);
+      const urlLang = params.get("lang");
+      if (urlLang && (urlLang === "es" || urlLang === "en")) {
+        return urlLang;
+      }
+
+      // 2. Check localStorage
+      try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored && (stored === "es" || stored === "en")) {
+          return stored;
+        }
+      } catch (e) {
+        console.warn("localStorage not accessible", e);
+      }
+
+      // 3. Check browser locale (es-* defaults to 'es', everything else to 'en')
+      const browserLang = (navigator.language || navigator.userLanguage || "es").toLowerCase();
+      if (browserLang.startsWith("es")) {
+        return "es";
+      }
+
+      return "en";
+    }
+
+    getLang() {
+      return this.currentLang;
+    }
+
+    setLang(lang) {
+      if (lang !== "es" && lang !== "en") return;
+      this.currentLang = lang;
+      document.documentElement.lang = lang;
+      try {
+        localStorage.setItem(STORAGE_KEY, lang);
+      } catch (e) {
+        console.warn("Failed to persist language in localStorage", e);
+      }
+
+      // Dispatch event for UI updates
+      window.dispatchEvent(new CustomEvent("corpfolio:langchange", { detail: { lang } }));
+    }
+
+    toggle() {
+      this.setLang(this.currentLang === "es" ? "en" : "es");
+    }
+
+    /**
+     * Resolves localized string from an object { es: "...", en: "..." } or string
+     */
+    t(obj) {
+      if (!obj) return "";
+      if (typeof obj === "string") return obj;
+      return obj[this.currentLang] || obj["es"] || obj["en"] || "";
+    }
+
+    /**
+     * Resolves static UI string from dictionary
+     */
+    ui(key) {
+      const entry = UI_DICTIONARY[key];
+      if (!entry) return key;
+      return entry[this.currentLang] || entry["es"] || entry["en"] || key;
+    }
+
+    /**
+     * Formats currency with thousands separators (e.g. $180.000 in ES, $180,000 in EN)
+     */
+    formatPrice(amount) {
+      const num = Math.round(Number(amount) || 0);
+      try {
+        return new Intl.NumberFormat(this.currentLang === "es" ? "es-AR" : "en-US", {
+          maximumFractionDigits: 0
+        }).format(num);
+      } catch (e) {
+        return num.toLocaleString();
+      }
+    }
+  }
+
+  // Expose global instance
+  const instance = new I18nManager();
+  window.CorpfolioI18n = instance;
+})();

@@ -376,42 +376,51 @@ Future agents should consult this checklist and update the status boxes as featu
 - [x] Create comprehensive implementation plan artifact (`gametelier_portfolio_plan.md`)
 - [x] Complete alignment on tech stack, quoting math, and Dark Tech-Studio palette
 - [x] Create master `AGENTS.md` guide document
-- [ ] Implement `assets/js/data/catalog.js` with full bilingual data, games, add-ons, and promo rules
-- [ ] Implement `assets/js/modules/i18n.js` with auto-detection, `localStorage` persistence, and translation helper
+- [x] Implement `assets/js/data/catalog.js` with full bilingual data, games, add-ons, and promo rules
+- [x] Implement `assets/js/modules/i18n.js` with auto-detection, `localStorage` persistence, and translation helper
 
 ### Phase 2: Design System & Styling
-- [ ] Implement `assets/css/main.css` (Dark Tech-Studio tokens, typography, surfaces, buttons)
-- [ ] Implement `assets/css/components.css` (Carousels, 4-screenshot grid, cart drawer, badges, modal)
-- [ ] Implement `assets/css/responsive.css` (Mobile breakpoint `< 768px`, touch carousels, responsive modals)
+- [x] Implement `assets/css/main.css` (Dark Tech-Studio tokens, typography, surfaces, buttons)
+- [x] Implement `assets/css/components.css` (Carousels, 4-screenshot grid, cart drawer, badges, modal)
+- [x] Implement `assets/css/responsive.css` (Mobile breakpoint `< 768px`, touch carousels, responsive modals)
 
 ### Phase 3: Interactive Modules
-- [ ] Implement `assets/js/modules/carousel.js` (Auto-advance 3.5s, pause on hover, touch swipe support)
-- [ ] Implement `assets/js/modules/cart.js` (Store, days selector, add-on assignment to game, compound discounts)
-- [ ] Implement `assets/js/modules/renderer.js` (HTML card builders, carousels, modals, cart item templates)
+- [x] Implement `assets/js/modules/carousel.js` (Auto-advance 3.5s, pause on hover, touch swipe support)
+- [x] Implement `assets/js/modules/cart.js` (Store, days selector, add-on assignment to game, compound discounts)
+- [x] Implement `assets/js/modules/renderer.js` (HTML card builders, carousels, modals, cart item templates)
 
 ### Phase 4: Landing Pages Execution
-- [ ] Implement `index.html` (Showcase Mode: carousels, features, no prices, no cart, no cotizador links)
-- [ ] Implement `cotizador.html` (Quote Builder Mode: prices, days selector, cart drawer, checkout modal)
-- [ ] Implement `seccion.html` (Vertical category view with `?tipo=` and `?mode=showcase|cotizador`)
-- [ ] Implement landing page controller `assets/js/app.js` and vertical view controller `assets/js/seccion.js`
+- [x] Implement `index.html` (Showcase Mode: carousels, features, no prices, no cart, no cotizador links)
+- [x] Implement `cotizador.html` (Quote Builder Mode: prices, days selector, cart drawer, checkout modal)
+- [x] Implement `seccion.html` (Vertical category view with `?tipo=` and `?mode=showcase|cotizador`)
+- [x] Implement landing page controller `assets/js/app.js` and vertical view controller `assets/js/seccion.js`
 
 ### Phase 5: Checkout & Communication
-- [ ] Implement checkout modal (Company/Producer name, event date, contact info)
-- [ ] Implement WhatsApp pre-formatted URL generator
-- [ ] Implement Mailto URL generator
-- [ ] Implement Copy to Clipboard summary action
+- [x] Implement checkout modal (Company/Producer name, event date, contact info)
+- [x] Implement WhatsApp pre-formatted URL generator
+- [x] Implement Mailto URL generator
+- [x] Implement Copy to Clipboard summary action
 
 ### Phase 6: Verification & QA
-- [ ] Test price and compound discount calculations in automated Node assertions
-- [ ] Verify zero cross-linking between `index.html` and `cotizador.html`
-- [ ] Test bilingual switcher (ES/EN) across all views and dynamic strings
-- [ ] Test mobile responsiveness, touch swipe on carousels, and GitHub Pages compatibility
+- [x] Test price and compound discount calculations in automated Node assertions
+- [x] Verify zero cross-linking between `index.html` and `cotizador.html`
+- [x] Test bilingual switcher (ES/EN) across all views and dynamic strings
+- [x] Test mobile responsiveness, touch swipe on carousels, and GitHub Pages compatibility
 
 ### Phase 7: Visual Local Editor & Deploy Companion (EDITOR.md)
-- [ ] Implement `editor.html` standalone visual interface with Dark Tech-Studio styling
-- [ ] Implement File System Access API integration (`showDirectoryPicker` & `showOpenFilePicker`)
-- [ ] Implement form binders for games, add-ons, tools, campaigns, and promo rules
-- [ ] Implement live quoting & promo calculation simulator inside the editor
-- [ ] Implement image file picker & drag-and-drop auto-copy into `assets/images/`
-- [ ] Implement 1-Click `publicar.bat` script in repository root for GitHub Pages
+- [x] Implement `editor.html` standalone visual interface with Dark Tech-Studio styling
+- [x] Implement File System Access API integration (`showDirectoryPicker` & `showOpenFilePicker`)
+- [x] Implement form binders for games, add-ons, tools, campaigns, and promo rules
+- [x] Implement live quoting & promo calculation simulator inside the editor
+- [x] Implement image file picker & drag-and-drop auto-copy into `assets/images/`
+- [x] Implement 1-Click `publicar.bat` script in repository root for GitHub Pages
+
+### Phase 8: Editorial Upgrades & Catalog Polish
+- [x] Split game catalog editor into two distinct subsections (*Juegos Clásicos* & *Juegos A Medida*) with instant category switcher
+- [x] Fix contact button spacing and localization (`contactUs` -> "Contactanos" / "Contact Us")
+- [x] Add smart promo tag interpolation (`[days]`, `[games]`, `[discount]`) with bilingual label fields in editor
+- [x] Add Studio Logo field and upload support in editor with dynamic renderer integration
+- [x] Support multiple games in the Campaigns category across showcase, cotizador, seccion, and editor
+- [x] Implement dark holographic blueprint fallback (`assets/images/concept-blueprint.svg`) and `💡 Concepto / En Desarrollo` badge for unimaged prototype games
+
 

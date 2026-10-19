@@ -1,0 +1,182 @@
+/**
+ * Corpfolio Studio — Responsive Stylesheet
+ * Tablet & Mobile Breakpoints
+ */
+
+@media (max-width: 1024px) {
+  .hero-title {
+    font-size: 36px;
+  }
+
+  .split-showcase-grid {
+    gap: 24px;
+  }
+
+  .addons-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .vertical-item-card {
+    grid-template-columns: 340px 1fr;
+  }
+
+  .custom-template-card {
+    grid-template-columns: 360px 1fr;
+  }
+
+  .b2b-spec-matrix {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .site-header .header-inner {
+    height: 64px;
+  }
+
+  .brand-logo {
+    height: 32px;
+  }
+
+  .hero-section {
+    padding: 40px 0 24px;
+  }
+
+  .hero-title {
+    font-size: 28px;
+    letter-spacing: -0.5px;
+  }
+
+  .hero-subtitle {
+    font-size: 15px;
+    margin-bottom: 24px;
+  }
+
+  .promo-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px;
+    margin-bottom: 36px;
+  }
+
+  .promo-pills {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .promo-pill {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Split columns stack to 1 column */
+  .split-showcase-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    margin-bottom: 40px;
+  }
+
+  .showcase-column-card {
+    padding: 20px;
+  }
+
+  /* Agregados grid stacks to 1 column */
+  .addons-grid-4 {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .addons-showcase-box {
+    padding: 20px;
+  }
+
+  /* Herramientas grid stacks */
+  .tools-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* Campaign card stacks */
+  .campaign-card {
+    grid-template-columns: 1fr;
+  }
+
+  .campaign-info {
+    padding: 24px;
+  }
+
+  .campaign-media {
+    min-height: 220px;
+  }
+
+  /* Vertical items in seccion.html stack */
+  .vertical-item-card,
+  .custom-template-card {
+    grid-template-columns: 1fr;
+  }
+
+  .template-impl-pane {
+    border-right: none;
+    border-bottom: 1px solid var(--border-subtle);
+    padding: 20px;
+  }
+
+  .template-spec-pane {
+    padding: 20px;
+  }
+
+  .vertical-media-column {
+    min-height: 220px;
+  }
+
+  .vertical-content-column {
+    padding: 20px;
+  }
+
+  .vertical-item-title {
+    font-size: 20px;
+  }
+
+  .vertical-pricing-box {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .vertical-pricing-box .btn {
+    width: 100%;
+  }
+
+  /* Floating cart bar on mobile */
+  .cart-floating-bar {
+    width: calc(100% - 32px);
+    bottom: 16px;
+    padding: 10px 16px;
+  }
+
+  .cart-drawer {
+    max-width: 100%;
+  }
+
+  /* Footer on mobile */
+  .site-footer {
+    padding: 40px 0 24px;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-actions {
+    width: 100%;
+  }
+
+  .footer-actions .btn {
+    flex: 1;
+  }
+}

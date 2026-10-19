@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0B0F19" />
+      <stop offset="50%" stop-color="#111827" />
+      <stop offset="100%" stop-color="#161E31" />
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#0B0F19" stop-opacity="0" />
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255, 255, 255, 0.04)" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <rect width="800" height="500" fill="url(#grid)"/>
+  <circle cx="400" cy="220" r="280" fill="url(#glow)"/>
+
+  <!-- Device Frame Outline -->
+  <rect x="70" y="50" width="660" height="400" rx="16" fill="rgba(17, 24, 39, 0.75)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.5"/>
+  <rect x="70" y="50" width="660" height="400" rx="16" fill="none" stroke="#F59E0B" stroke-opacity="0.25" stroke-width="3"/>
+
+  <!-- Top bar of the simulated device -->
+  <rect x="70" y="50" width="660" height="42" rx="16" fill="rgba(11, 15, 25, 0.85)"/>
+  <circle cx="95" cy="71" r="5" fill="#EF4444" opacity="0.8"/>
+  <circle cx="112" cy="71" r="5" fill="#F59E0B" opacity="0.8"/>
+  <circle cx="129" cy="71" r="5" fill="#10B981" opacity="0.8"/>
+  <text x="400" y="76" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="12" text-anchor="middle" font-weight="600" letter-spacing="1">GAMETELIER INTERACTIVE</text>
+
+  <!-- Icon Graphic -->
+  <g transform="translate(400, 210) scale(1.1)">
+    
+      <path d="M -60 20 L -20 20 L -20 -30 L 30 -30 L 30 10 L 60 10" fill="none" stroke="#F59E0B" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="60" cy="10" r="10" fill="#FFFFFF"/>
+    
+  </g>
+
+  <!-- Titles -->
+  <text x="400" y="360" fill="#F8FAFC" font-family="system-ui, sans-serif" font-size="28" font-weight="800" text-anchor="middle" letter-spacing="-0.5">SNAKE AIRLINES</text>
+  <text x="400" y="390" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="14" font-weight="500" text-anchor="middle" letter-spacing="0.5">Vuelos Comerciales & Escalas Arcade</text>
+
+  <!-- Status Pill -->
+  <rect x="330" y="415" width="140" height="24" rx="12" fill="#F59E0B" fill-opacity="0.15" stroke="#F59E0B" stroke-opacity="0.4"/>
+  <circle cx="345" cy="427" r="4" fill="#F59E0B"/>
+  <text x="405" y="431" fill="#F8FAFC" font-family="system-ui, sans-serif" font-size="11" font-weight="700" text-anchor="middle" letter-spacing="1">EVENT-READY</text>
+</svg>

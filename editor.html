@@ -1,0 +1,1850 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Editor Local de Catálogo — Corpfolio Studio</title>
+  <meta name="description" content="Editor visual tipo planilla sin credenciales ni tokens para actualizar juegos, plantillas a medida, precios, promociones e imágenes de Corpfolio Studio." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo/logo.svg" />
+
+  <!-- Base Styles -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+
+  <style>
+    /* Strict Box-Sizing Reset to Prevent Any Input Overflow */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    .editor-layout {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .editor-container {
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 32px 24px 80px;
+    }
+
+    .editor-sticky-header {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      background: var(--bg-surface);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+    }
+
+    .editor-topbar {
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .folder-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      font-size: 13px;
+      font-weight: 600;
+      background: rgba(245, 158, 11, 0.15);
+      color: #FBBF24;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .folder-status-badge.connected {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34D399;
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+
+    .editor-tabs {
+      display: flex;
+      gap: 4px;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0 24px;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 14px 18px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: var(--transition-fast);
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover {
+      color: var(--text-primary);
+    }
+
+    .tab-btn.active {
+      color: var(--accent-indigo);
+      border-bottom-color: var(--accent-indigo);
+    }
+
+    .editor-panel {
+      display: none;
+    }
+
+    .editor-panel.active {
+      display: block;
+    }
+
+    .editor-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 28px;
+    }
+
+    /* ==========================================================================
+       Excel-Like Multi-Row Merged-Cell Spreadsheet Layout
+       ========================================================================== */
+    .sheet-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .sheet-entry-block {
+      background: var(--bg-surface);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 64px 220px minmax(260px, 1.25fr) minmax(210px, 0.85fr) minmax(300px, 1.3fr);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+      transition: var(--transition-fast);
+    }
+
+    .sheet-entry-block:hover {
+      border-color: rgba(99, 102, 241, 0.45);
+    }
+
+    .sheet-entry-block.a-medida-block:hover {
+      border-color: rgba(6, 182, 212, 0.5);
+    }
+
+    .sheet-cell {
+      padding: 12px 14px;
+      border-right: 1px solid rgba(255, 255, 255, 0.07);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .sheet-cell:last-child {
+      border-right: none;
+    }
+
+    .sheet-cell-header {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Merged Column 1: Order (#, Up, Down, Delete) */
+    .sheet-cell-order {
+      grid-column: 1;
+      grid-row: 1 / span 3;
+      background: rgba(11, 15, 25, 0.55);
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 6px;
+      text-align: center;
+    }
+
+    .order-index-badge {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--text-accent);
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      border-radius: var(--radius-sm);
+      padding: 3px 8px;
+    }
+
+    .order-btn-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      width: 100%;
+      align-items: center;
+    }
+
+    .icon-action-btn {
+      width: 36px;
+      height: 30px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-card);
+      color: var(--text-primary);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      transition: var(--transition-fast);
+    }
+
+    .icon-action-btn:hover:not(:disabled) {
+      border-color: var(--accent-indigo);
+      background: rgba(99, 102, 241, 0.15);
+    }
+
+    .icon-action-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .icon-action-btn.danger {
+      color: var(--accent-rose);
+      border-color: rgba(244, 63, 94, 0.3);
+    }
+
+    .icon-action-btn.danger:hover {
+      background: rgba(244, 63, 94, 0.15);
+      border-color: var(--accent-rose);
+    }
+
+    /* Merged Column 2: Image Preview & Upload */
+    .sheet-cell-media {
+      grid-column: 2;
+      grid-row: 1 / span 3;
+      background: rgba(11, 15, 25, 0.3);
+      justify-content: space-between;
+    }
+
+    .sheet-thumb-box {
+      width: 100%;
+      height: 112px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      position: relative;
+    }
+
+    .sheet-thumb-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Multi-Row Description Cell (Row 2 & Row 3, Columns 3 & 4) */
+    .sheet-cell-desc {
+      grid-column: 3 / span 2;
+      grid-row: 2 / span 2;
+      background: rgba(255, 255, 255, 0.01);
+    }
+
+    .desc-dual-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .desc-dual-grid textarea {
+      width: 100%;
+      height: 100%;
+      min-height: 96px;
+      resize: vertical;
+      line-height: 1.45;
+      font-size: 13px;
+    }
+
+    /* Row 2 & Row 3, Column 5: Highlights & Tags */
+    .sheet-cell-highlights {
+      grid-column: 5;
+      grid-row: 2;
+    }
+
+    .sheet-cell-tags {
+      grid-column: 5;
+      grid-row: 3;
+    }
+
+    /* Row 4 (Custom Game Template Extension: B2B Matrix + Implementations Sub-table) */
+    .sheet-cell-template-ext {
+      grid-column: 1 / -1;
+      background: rgba(6, 182, 212, 0.04);
+      border-top: 2px solid rgba(6, 182, 212, 0.25);
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .b2b-editor-matrix {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      background: rgba(11, 15, 25, 0.55);
+      border: 1px solid rgba(6, 182, 212, 0.25);
+      border-radius: var(--radius-md);
+      padding: 12px;
+    }
+
+    .impl-subtable-box {
+      background: rgba(11, 15, 25, 0.65);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .impl-subrow {
+      display: grid;
+      grid-template-columns: 50px 180px 1fr 1fr;
+      gap: 12px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 10px;
+      align-items: center;
+    }
+
+    .dual-input-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .pricing-mini-grid {
+      display: grid;
+      grid-template-columns: 76px 1fr 110px;
+      gap: 6px;
+      align-items: end;
+      min-width: 0;
+    }
+
+    .form-input {
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+      padding: 7px 10px;
+      font-size: 12px;
+    }
+
+    .dropzone-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 10px;
+      background: rgba(99, 102, 241, 0.1);
+      border: 1px dashed rgba(99, 102, 241, 0.4);
+      border-radius: var(--radius-sm);
+      color: var(--text-accent);
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .dropzone-label:hover {
+      background: rgba(99, 102, 241, 0.2);
+    }
+
+    .toggle-pill-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 5px 8px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      font-size: 11px;
+    }
+
+    .switch-input {
+      appearance: none;
+      width: 34px;
+      height: 18px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-full);
+      position: relative;
+      cursor: pointer;
+      outline: none;
+      transition: var(--transition-fast);
+      flex-shrink: 0;
+    }
+
+    .switch-input::before {
+      content: "";
+      position: absolute;
+      top: 1px;
+      left: 2px;
+      width: 14px;
+      height: 14px;
+      border-radius: var(--radius-full);
+      background: var(--text-muted);
+      transition: var(--transition-fast);
+    }
+
+    .switch-input:checked {
+      background: var(--accent-emerald);
+      border-color: var(--accent-emerald);
+    }
+
+    .switch-input:checked::before {
+      transform: translateX(14px);
+      background: #FFFFFF;
+    }
+
+    .switch-input:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    /* Save Toast */
+    .save-toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #064E3B;
+      color: #A7F3D0;
+      border: 1px solid #10B981;
+      padding: 16px 24px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: var(--transition-normal);
+      z-index: 200;
+    }
+
+    .save-toast.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    @media (max-width: 1180px) {
+      .sheet-entry-block {
+        grid-template-columns: 56px 190px 1fr 1fr;
+      }
+      .sheet-cell-highlights,
+      .sheet-cell-tags {
+        grid-column: 3 / span 2;
+        grid-row: auto;
+      }
+      .b2b-editor-matrix {
+        grid-template-columns: 1fr;
+      }
+      .impl-subrow {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="editor-layout">
+
+  <div class="editor-sticky-header">
+    <!-- Top Bar -->
+    <header class="editor-topbar">
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <a href="index.html" target="_blank" title="Ver Showcase">
+          <img src="assets/images/logo/logo.svg" alt="Corpfolio Studio" style="height: 32px;" />
+        </a>
+        <span style="font-weight: 800; font-size: 16px; color: var(--text-accent);">Editor de Catálogo (Vista Planilla)</span>
+        <span id="folder-status" class="folder-status-badge">🟡 Modo Navegador</span>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+        <button type="button" class="btn btn-outline btn-sm" id="btn-open-folder">
+          📁 Conectar Carpeta del Proyecto
+        </button>
+
+        <button type="button" class="btn btn-primary" id="btn-save-changes">
+          💾 Guardar Cambios
+        </button>
+
+        <button type="button" class="btn btn-outline btn-sm" id="btn-download-catalog">
+          ⬇️ Descargar catalog.js
+        </button>
+
+        <div style="border-left: 1px solid var(--border-subtle); height: 28px; margin: 0 4px;"></div>
+
+        <a href="cotizador.html" target="_blank" class="btn btn-outline btn-sm">
+          Ver Cotizador ↗
+        </a>
+        <a href="index.html" target="_blank" class="btn btn-outline btn-sm">
+          Ver Showcase ↗
+        </a>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs (Always Visible) -->
+    <nav class="editor-tabs">
+      <button type="button" class="tab-btn active" data-tab="tab-games">🎮 Catálogo de Juegos</button>
+      <button type="button" class="tab-btn" data-tab="tab-addons">⚡ Agregados (Add-Ons)</button>
+      <button type="button" class="tab-btn" data-tab="tab-tools">🛠️ Herramientas & Campañas</button>
+      <button type="button" class="tab-btn" data-tab="tab-promos">💰 Precios y Promociones</button>
+      <button type="button" class="tab-btn" data-tab="tab-studio">🏢 Estudio y Contacto</button>
+      <button type="button" class="tab-btn" data-tab="tab-simulator">🧮 Simulador de Cotización</button>
+    </nav>
+  </div>
+
+  <!-- Editor Content Panels -->
+  <main class="editor-container">
+
+    <!-- Tab 1: Games Catalog (Divided into Clásicos & A Medida Spreadsheet Blocks) -->
+    <section class="editor-panel active" id="tab-games">
+      <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 12px;">
+        <div>
+          <h3 class="section-title">Catálogo de Juegos (Planilla Multi-Fila)</h3>
+          <p class="section-desc" style="margin-bottom: 0;">Reordena con ⬆️⬇️, edita descripciones multilínea, highlights, tags y configura plantillas A Medida con sus casos de marca.</p>
+        </div>
+        <div style="font-size: 12px; color: var(--text-muted); background: var(--bg-card); padding: 8px 14px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+          💡 <strong>Regla de Showcase:</strong> Solo las entradas con imagen pueden aparecer en el Showcase de la página principal.
+        </div>
+      </div>
+
+      <!-- Subsection 1: Clásicos -->
+      <div class="editor-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 14px; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <h4 style="font-size: 20px; font-weight: 800; color: #818CF8;">🕹️ Juegos Clásicos</h4>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 2px;">Dinámicas familiares y adictivas listas para personalizar con el branding del cliente.</p>
+          </div>
+          <button type="button" class="btn btn-primary btn-sm" onclick="addNewGame('clasicos')">
+            + Agregar Juego Clásico
+          </button>
+        </div>
+        <div class="sheet-list" id="clasicos-editor-container"></div>
+      </div>
+
+      <!-- Subsection 2: A Medida (Templates + Brand Implementations) -->
+      <div class="editor-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 14px; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <h4 style="font-size: 20px; font-weight: 800; color: #38BDF8;">✨ Juegos A Medida (Plantillas + Implementaciones de Marca)</h4>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 2px;">Cada fila es una Mecánica/Plantilla Base con su matriz B2B y su sub-tabla de casos reales implementados.</p>
+          </div>
+          <button type="button" class="btn btn-primary btn-sm" onclick="addNewGame('aMedida')">
+            + Agregar Plantilla A Medida
+          </button>
+        </div>
+        <div class="sheet-list" id="amedida-editor-container"></div>
+      </div>
+    </section>
+
+    <!-- Tab 2: Addons -->
+    <section class="editor-panel" id="tab-addons">
+      <div class="editor-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 14px; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <h3 class="section-title" style="margin-bottom: 4px;">⚡ Agregados para Juegos (Add-Ons)</h3>
+            <p class="section-desc" style="margin-bottom: 0;">Módulos adicionales que se asignan por juego. Puedes agregar, reordenar, eliminar y editar sus descripciones y highlights.</p>
+          </div>
+          <button type="button" class="btn btn-primary btn-sm" onclick="addNewCategoryItem('agregados')">
+            + Agregar Nuevo Agregado
+          </button>
+        </div>
+
+        <div class="sheet-list" id="addons-editor-container"></div>
+      </div>
+    </section>
+
+    <!-- Tab 3: Tools & Campaigns -->
+    <section class="editor-panel" id="tab-tools">
+      <div class="editor-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 14px; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <h3 class="section-title" style="margin-bottom: 4px;">🛠️ Herramientas de Evento (Ruleta, Sorteador)</h3>
+            <p class="section-desc" style="margin-bottom: 0;">Módulos independientes para escenarios, stands y sorteos en vivo.</p>
+          </div>
+          <button type="button" class="btn btn-primary btn-sm" onclick="addNewCategoryItem('herramientas')">
+            + Agregar Herramienta
+          </button>
+        </div>
+        <div class="sheet-list" id="tools-editor-container"></div>
+      </div>
+
+      <div class="editor-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 14px; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <h3 class="section-title" style="margin-bottom: 4px;">🌟 Juegos como Campaña</h3>
+            <p class="section-desc" style="margin-bottom: 0;">Soluciones interactivas educativas, sustentables y publicitarias de mediano/largo plazo.</p>
+          </div>
+          <button type="button" class="btn btn-success btn-sm" onclick="addNewCategoryItem('campanas')">
+            + Agregar Campaña
+          </button>
+        </div>
+        <div class="sheet-list" id="campaigns-editor-container"></div>
+      </div>
+    </section>
+
+    <!-- Tab 4: Promo Rules & Global Pricing -->
+    <section class="editor-panel" id="tab-promos">
+      <div class="editor-card" style="margin-bottom: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
+          <div>
+            <h3 class="section-title">💰 Parámetros Globales de Precios</h3>
+            <p class="section-desc">Define las variables de cotización automatizada. Los precios de juegos, agregados y herramientas se calculan a partir de las horas estimadas.</p>
+          </div>
+          <span class="badge" style="background: rgba(16,185,129,0.15); color: #34D399; border: 1px solid rgba(16,185,129,0.3); font-size: 13px; padding: 6px 12px;">
+            ✓ Fórmula Dinámica Activa
+          </span>
+        </div>
+
+        <div style="background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.25); border-radius: var(--radius-md); padding: 12px 16px; font-size: 13px; color: #6EE7B7; margin-bottom: 20px;">
+          🧮 <strong>Fórmula de cálculo:</strong> <code>Precio ($ ARS) = (Horas × Multiplicador × Tarifa Hora USD × Cotización Dólar) + (Precio Base solo si es Juego)</code>.
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px;">
+          <div class="form-group">
+            <label class="form-label">🎮 Precio Base por Juego ($ ARS)</label>
+            <input type="number" id="pricing-game-base-price" class="form-input" min="0" step="1000" oninput="updatePricingConfig('gameBasePrice', Number(this.value))" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">⏱️ Precio por Hora ($ USD)</label>
+            <input type="number" id="pricing-hourly-usd" class="form-input" min="0" step="1" oninput="updatePricingConfig('hourlyRateUsd', Number(this.value))" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">💵 Cotización Dólar ($ ARS)</label>
+            <input type="number" id="pricing-usd-to-ars" class="form-input" min="0" step="10" oninput="updatePricingConfig('usdToArsRate', Number(this.value))" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">⚡ Multiplicador de Tiempo</label>
+            <input type="number" id="pricing-time-multiplier" class="form-input" min="0.1" step="0.1" oninput="updatePricingConfig('timeMultiplier', Number(this.value))" />
+          </div>
+        </div>
+      </div>
+
+      <div class="editor-card">
+        <h3 class="section-title">Reglas de Promociones y Descuentos</h3>
+        <p class="section-desc">Configura los umbrales de días y cantidad de juegos para la aplicación automática de descuentos.</p>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+          <div style="grid-column: span 2; background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.3); border-radius: var(--radius-md); padding: 12px 16px; font-size: 13px; color: var(--text-accent);">
+            💡 <strong>Etiquetas inteligentes:</strong> Usa <code>[days]</code>, <code>[games]</code> y <code>[discount]</code> para insertar automáticamente los valores configurados.
+          </div>
+
+          <div style="background: var(--bg-surface); padding: 20px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+            <h4 style="font-size: 16px; margin-bottom: 12px; color: #34D399;">📅 Promo por Duración (Días)</h4>
+            <div class="form-group" style="margin-bottom: 12px;">
+              <label class="form-label">Días mínimos para activar</label>
+              <input type="number" id="promo-days-min" class="form-input" min="1" />
+            </div>
+            <div class="form-group" style="margin-bottom: 12px;">
+              <label class="form-label">Porcentaje de descuento (%)</label>
+              <input type="number" id="promo-days-pct" class="form-input" min="0" max="100" />
+            </div>
+            <div class="form-group" style="margin-bottom: 8px;">
+              <label class="form-label">Texto de la etiqueta (ES)</label>
+              <input type="text" id="promo-days-label-es" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Texto de la etiqueta (EN)</label>
+              <input type="text" id="promo-days-label-en" class="form-input" />
+            </div>
+          </div>
+
+          <div style="background: var(--bg-surface); padding: 20px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+            <h4 style="font-size: 16px; margin-bottom: 12px; color: #38BDF8;">🎮 Promo por Cantidad de Juegos</h4>
+            <div class="form-group" style="margin-bottom: 12px;">
+              <label class="form-label">Cantidad mínima de juegos</label>
+              <input type="number" id="promo-games-min" class="form-input" min="1" />
+            </div>
+            <div class="form-group" style="margin-bottom: 12px;">
+              <label class="form-label">Porcentaje de descuento (%)</label>
+              <input type="number" id="promo-games-pct" class="form-input" min="0" max="100" />
+            </div>
+            <div class="form-group" style="margin-bottom: 8px;">
+              <label class="form-label">Texto de la etiqueta (ES)</label>
+              <input type="text" id="promo-games-label-es" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Texto de la etiqueta (EN)</label>
+              <input type="text" id="promo-games-label-en" class="form-input" />
+            </div>
+          </div>
+
+          <div class="form-group" style="grid-column: span 2;">
+            <label class="form-label">Aclaración / Disclaimer Legal (Español)</label>
+            <input type="text" id="promo-disclaimer-es" class="form-input" />
+          </div>
+          <div class="form-group" style="grid-column: span 2;">
+            <label class="form-label">Aclaración / Disclaimer Legal (English)</label>
+            <input type="text" id="promo-disclaimer-en" class="form-input" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 5: Studio Info -->
+    <section class="editor-panel" id="tab-studio">
+      <div class="editor-card">
+        <h3 class="section-title">Información del Estudio</h3>
+        <p class="section-desc">Datos generales del estudio y canales oficiales de contacto.</p>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <div class="form-group">
+            <label class="form-label">Nombre del Estudio</label>
+            <input type="text" id="studio-name" class="form-input" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">WhatsApp (Formato internacional sin +)</label>
+            <input type="text" id="studio-whatsapp" class="form-input" />
+          </div>
+
+          <div class="form-group" style="grid-column: span 2;">
+            <label class="form-label">Logo del Estudio (Ruta / Archivo)</label>
+            <div style="display: flex; align-items: center; gap: 16px;">
+              <div style="width: 140px; height: 50px; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 6px; display: flex; align-items: center; justify-content: center;">
+                <img id="studio-logo-prev" src="assets/images/logo/logo.svg" alt="Logo Preview" style="max-height: 38px; max-width: 100%; object-fit: contain;" onerror="this.src='assets/images/logo/logo.svg';" />
+              </div>
+              <div style="flex: 1;">
+                <input type="text" id="studio-logo" class="form-input" onchange="document.getElementById('studio-logo-prev').src = this.value" />
+                <label class="dropzone-label" style="margin-top: 6px;">
+                  📁 Elegir archivo de logo
+                  <input type="file" accept="image/*" style="display: none;" onchange="handleLogoPick(this)" />
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" style="grid-column: span 2;">
+            <label class="form-label">Email de Contacto</label>
+            <input type="email" id="studio-email" class="form-input" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Tagline (Español)</label>
+            <input type="text" id="studio-tagline-es" class="form-input" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Tagline (English)</label>
+            <input type="text" id="studio-tagline-en" class="form-input" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Título Hero (Español)</label>
+            <input type="text" id="studio-hero-title-es" class="form-input" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Título Hero (English)</label>
+            <input type="text" id="studio-hero-title-en" class="form-input" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Subtítulo Hero (Español)</label>
+            <textarea id="studio-hero-sub-es" class="form-input" rows="3"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Subtítulo Hero (English)</label>
+            <textarea id="studio-hero-sub-en" class="form-input" rows="3"></textarea>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 6: Live Quoting Simulator -->
+    <section class="editor-panel" id="tab-simulator">
+      <div class="editor-card">
+        <h3 class="section-title">Simulador de Cotizaciones en Vivo</h3>
+        <p class="section-desc">Verifica exactamente cómo impactan los días, add-ons y descuentos secuenciales en una cotización real.</p>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px;">
+          <div>
+            <h4 style="font-size: 16px; margin-bottom: 16px;">Selecciona juegos para la prueba:</h4>
+            <div id="sim-games-checklist" style="display: flex; flex-direction: column; gap: 10px;"></div>
+
+            <div style="margin-top: 24px;">
+              <label class="form-label" style="margin-bottom: 8px;">Días de duración del evento:</label>
+              <div style="display: flex; align-items: center; gap: 16px;">
+                <input type="range" id="sim-days-range" min="1" max="10" value="1" style="flex: 1;" />
+                <span id="sim-days-text" style="font-size: 20px; font-weight: 800; min-width: 40px;">1d</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="background: var(--bg-surface); padding: 24px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+            <h4 style="font-size: 16px; margin-bottom: 16px;">Desglose Matemático Calculado:</h4>
+            <div id="sim-breakdown-output"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Save Toast Notification -->
+  <div class="save-toast" id="save-toast">
+    <span>✓ ¡Cambios guardados con éxito!</span>
+    <span style="font-size: 12px; font-weight: normal; opacity: 0.9;">Ejecuta 'publicar.bat' para subirlos a GitHub.</span>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/js/data/catalog.js"></script>
+  <script src="assets/js/modules/cart.js"></script>
+
+  <script>
+    // State initialization
+    let catalogState = JSON.parse(JSON.stringify(window.CORPFOLIO_CATALOG || {}));
+    if (!catalogState.pricingConfig) {
+      catalogState.pricingConfig = {
+        hourlyRateUsd: 15,
+        usdToArsRate: 1520,
+        timeMultiplier: 1.5,
+        gameBasePrice: 455900
+      };
+    }
+
+    let directoryHandle = null;
+    let catalogFileHandle = null;
+
+    function escAttr(str) {
+      return String(str ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/"/g, "&quot;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+    }
+
+    function escHtml(str) {
+      return String(str ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+    }
+
+    function getPricingConfig() {
+      return catalogState.pricingConfig || {
+        hourlyRateUsd: 15,
+        usdToArsRate: 1520,
+        timeMultiplier: 1.5,
+        gameBasePrice: 455900
+      };
+    }
+
+    function calculateItemPrice(hours, isGame = false) {
+      const cfg = getPricingConfig();
+      const h = Math.max(0, Number(hours) || 0);
+      const mult = Number(cfg.timeMultiplier) || 1.0;
+      const hrUsd = Number(cfg.hourlyRateUsd) || 0;
+      const usdArs = Number(cfg.usdToArsRate) || 0;
+      const base = isGame ? (Number(cfg.gameBasePrice) || 0) : 0;
+      return Math.round((h * mult * hrUsd * usdArs) + base);
+    }
+
+    function formatPriceNum(val) {
+      return Math.round(Number(val) || 0).toLocaleString("es-AR");
+    }
+
+    function itemHasValidImage(item) {
+      if (item.image && String(item.image).trim() !== "") return true;
+      if (Array.isArray(item.implementations)) {
+        return item.implementations.some(im => im && im.image && String(im.image).trim() !== "");
+      }
+      return false;
+    }
+
+    window.updatePricingConfig = function(key, val) {
+      if (!catalogState.pricingConfig) catalogState.pricingConfig = {};
+      catalogState.pricingConfig[key] = Math.max(0, Number(val) || 0);
+      for (const catKey of ["clasicos", "aMedida"]) {
+        (catalogState.categories[catKey]?.items || []).forEach(g => {
+          const calc = calculateItemPrice(g.hours, true);
+          g.dailyPrice = (Number(g.priceOverride) > 0) ? Number(g.priceOverride) : calc;
+        });
+      }
+      (catalogState.categories.agregados?.items || []).forEach(a => {
+        const calc = calculateItemPrice(a.hours, false);
+        a.dailyPrice = (Number(a.priceOverride) > 0) ? Number(a.priceOverride) : calc;
+      });
+      (catalogState.categories.herramientas?.items || []).forEach(t => {
+        const calc = calculateItemPrice(t.hours, false);
+        t.dailyPrice = (Number(t.priceOverride) > 0) ? Number(t.priceOverride) : calc;
+      });
+
+      renderAllCategorySheets();
+      renderSimulator();
+    };
+
+    function getCategoryItems(catKey) {
+      if (!catalogState.categories[catKey]) {
+        catalogState.categories[catKey] = { id: catKey, items: [] };
+      }
+      if (!Array.isArray(catalogState.categories[catKey].items)) {
+        catalogState.categories[catKey].items = [];
+      }
+      return catalogState.categories[catKey].items;
+    }
+
+    function findItemInCat(catKey, itemId) {
+      return getCategoryItems(catKey).find(i => i.id === itemId) || null;
+    }
+
+    // Reorder item Up (-1) or Down (+1)
+    window.moveCategoryItem = function(catKey, idx, delta) {
+      const arr = getCategoryItems(catKey);
+      const targetIdx = idx + delta;
+      if (targetIdx < 0 || targetIdx >= arr.length) return;
+      const [moved] = arr.splice(idx, 1);
+      arr.splice(targetIdx, 0, moved);
+      renderAllCategorySheets();
+      renderSimulator();
+    };
+
+    // Delete item from any category
+    window.deleteCategoryItem = function(catKey, itemId) {
+      if (!confirm("¿Seguro que deseas eliminar esta entrada del catálogo?")) return;
+      const arr = getCategoryItems(catKey);
+      catalogState.categories[catKey].items = arr.filter(i => i.id !== itemId);
+      renderAllCategorySheets();
+      renderSimulator();
+    };
+
+    // Move game between Clásicos and A Medida
+    window.changeGameCategory = function(itemId, newCat) {
+      let found = null;
+      for (const ck of ["clasicos", "aMedida"]) {
+        const arr = getCategoryItems(ck);
+        const idx = arr.findIndex(g => g.id === itemId);
+        if (idx !== -1) {
+          found = arr.splice(idx, 1)[0];
+          break;
+        }
+      }
+      if (!found) return;
+      found.category = newCat;
+      if (newCat === "aMedida") {
+        if (!found.templateSpecs) {
+          found.templateSpecs = {
+            players: { es: "1 a 4 Jugadores", en: "1 to 4 Players" },
+            mechanic: { es: "Mecánica interactiva táctil", en: "Interactive touch mechanic" },
+            b2bGoal: { es: "Atracción y activación de marca", en: "Crowd attraction & brand activation" }
+          };
+        }
+        if (!Array.isArray(found.implementations) || found.implementations.length === 0) {
+          found.implementations = [
+            {
+              id: "impl-" + found.id,
+              title: { es: found.title?.es || "Caso de Marca", en: found.title?.en || "Brand Case" },
+              client: { es: "Caso Corporativo", en: "Corporate Case" },
+              image: found.image || "",
+              summary: { es: found.description?.es || "", en: found.description?.en || "" },
+              eventNote: { es: "Personalizable 100% para stands y eventos.", en: "100% customizable for booths and events." }
+            }
+          ];
+        }
+      }
+      getCategoryItems(newCat).push(found);
+      renderAllCategorySheets();
+      renderSimulator();
+    };
+
+    // Generic nested field updater
+    window.updateItemField = function(catKey, itemId, path, val, shouldRerender = false) {
+      const item = findItemInCat(catKey, itemId);
+      if (!item) return;
+
+      const parts = path.split(".");
+      let curr = item;
+      for (let i = 0; i < parts.length - 1; i++) {
+        if (!curr[parts[i]] || typeof curr[parts[i]] !== "object") {
+          curr[parts[i]] = {};
+        }
+        curr = curr[parts[i]];
+      }
+      curr[parts[parts.length - 1]] = val;
+
+      // Enforce image guardrail on showcase
+      if (!itemHasValidImage(item)) {
+        item.showcase = false;
+      }
+
+      if (shouldRerender) {
+        renderAllCategorySheets();
+      }
+      renderSimulator();
+    };
+
+    // Parse multiline or comma-separated list into array
+    window.updateItemListField = function(catKey, itemId, fieldKey, langKey, rawText) {
+      const item = findItemInCat(catKey, itemId);
+      if (!item) return;
+      if (!item[fieldKey]) item[fieldKey] = { es: [], en: [] };
+      const separator = rawText.includes("\n") ? /\r?\n/ : ",";
+      item[fieldKey][langKey] = rawText
+        .split(separator)
+        .map(s => s.trim())
+        .filter(Boolean);
+    };
+
+    window.handleSheetHoursChange = function(catKey, itemId, hoursVal) {
+      const item = findItemInCat(catKey, itemId);
+      if (!item) return;
+      item.hours = Math.max(0, Number(hoursVal) || 0);
+      const isGame = catKey === "clasicos" || catKey === "aMedida";
+      const calc = calculateItemPrice(item.hours, isGame);
+      const override = Number(item.priceOverride) || 0;
+      item.dailyPrice = override > 0 ? override : calc;
+
+      const calcEl = document.getElementById(`calc-display-${catKey}-${itemId}`);
+      if (calcEl) calcEl.textContent = "$" + formatPriceNum(calc);
+      const effEl = document.getElementById(`eff-price-${catKey}-${itemId}`);
+      if (effEl) effEl.textContent = "Final: $" + formatPriceNum(item.dailyPrice) + "/d";
+      renderSimulator();
+    };
+
+    window.handleSheetOverrideChange = function(catKey, itemId, overrideVal) {
+      const item = findItemInCat(catKey, itemId);
+      if (!item) return;
+      item.priceOverride = Math.max(0, Number(overrideVal) || 0);
+      const isGame = catKey === "clasicos" || catKey === "aMedida";
+      const calc = calculateItemPrice(item.hours, isGame);
+      item.dailyPrice = item.priceOverride > 0 ? item.priceOverride : calc;
+
+      const statusEl = document.getElementById(`price-status-${catKey}-${itemId}`);
+      if (statusEl) {
+        if (item.priceOverride > 0) {
+          statusEl.textContent = "⚡ Override";
+          statusEl.style.color = "#F59E0B";
+        } else {
+          statusEl.textContent = "💡 Calculado";
+          statusEl.style.color = "#34D399";
+        }
+      }
+      const effEl = document.getElementById(`eff-price-${catKey}-${itemId}`);
+      if (effEl) effEl.textContent = "Final: $" + formatPriceNum(item.dailyPrice) + "/d";
+      renderSimulator();
+    };
+
+    // Custom Game Brand Implementations CRUD
+    window.addImplementation = function(itemId) {
+      const item = findItemInCat("aMedida", itemId);
+      if (!item) return;
+      if (!Array.isArray(item.implementations)) item.implementations = [];
+      const newIdx = item.implementations.length + 1;
+      item.implementations.push({
+        id: `${item.id}-impl-${Date.now().toString().slice(-4)}`,
+        title: { es: `Caso de Marca #${newIdx}`, en: `Brand Case #${newIdx}` },
+        client: { es: "Cliente / Activación", en: "Client / Activation" },
+        image: item.image || "",
+        summary: { es: "Resumen de cómo se implementó la mecánica para este cliente.", en: "Summary of how the mechanic was implemented for this client." },
+        eventNote: { es: "Ideal para stands y activaciones de alto flujo.", en: "Ideal for high-traffic booths and activations." }
+      });
+      renderAllCategorySheets();
+    };
+
+    window.moveImplementation = function(itemId, implIdx, delta) {
+      const item = findItemInCat("aMedida", itemId);
+      if (!item || !Array.isArray(item.implementations)) return;
+      const target = implIdx + delta;
+      if (target < 0 || target >= item.implementations.length) return;
+      const [moved] = item.implementations.splice(implIdx, 1);
+      item.implementations.splice(target, 0, moved);
+      renderAllCategorySheets();
+    };
+
+    window.deleteImplementation = function(itemId, implIdx) {
+      const item = findItemInCat("aMedida", itemId);
+      if (!item || !Array.isArray(item.implementations)) return;
+      if (!confirm("¿Eliminar este caso de implementación?")) return;
+      item.implementations.splice(implIdx, 1);
+      if (!itemHasValidImage(item)) item.showcase = false;
+      renderAllCategorySheets();
+    };
+
+    window.updateImplField = function(itemId, implIdx, path, val, shouldRerender = false) {
+      const item = findItemInCat("aMedida", itemId);
+      if (!item || !Array.isArray(item.implementations) || !item.implementations[implIdx]) return;
+      const impl = item.implementations[implIdx];
+      const parts = path.split(".");
+      let curr = impl;
+      for (let i = 0; i < parts.length - 1; i++) {
+        if (!curr[parts[i]] || typeof curr[parts[i]] !== "object") curr[parts[i]] = {};
+        curr = curr[parts[i]];
+      }
+      curr[parts[parts.length - 1]] = val;
+
+      // Sync template fallback image if empty and implementation has image
+      if (path === "image" && val && (!item.image || !item.image.trim())) {
+        item.image = val;
+      }
+      if (!itemHasValidImage(item)) {
+        item.showcase = false;
+      }
+      if (shouldRerender) renderAllCategorySheets();
+    };
+
+    // Build Multi-Row Merged-Cell Spreadsheet Block for any item
+    function renderSheetEntryBlock(catKey, item, idx, totalCount) {
+      const isGame = catKey === "clasicos" || catKey === "aMedida";
+      const isCustom = catKey === "aMedida";
+      const isCampaign = catKey === "campanas";
+      const folderMap = {
+        clasicos: "games",
+        aMedida: "games",
+        agregados: "addons",
+        herramientas: "tools",
+        campanas: "campaigns"
+      };
+      const imgFolder = folderMap[catKey] || "games";
+
+      const hasImg = itemHasValidImage(item);
+      const isConcept = item.isConcept || !hasImg;
+      const previewImg = (item.image && item.image.trim())
+        ? item.image
+        : (Array.isArray(item.implementations) && item.implementations.find(im => im.image && im.image.trim())?.image) || "assets/images/concept-blueprint.svg";
+
+      const isVisible = item.visible !== false;
+      const isShowcase = hasImg && (item.showcase !== false);
+
+      const calcPrice = isCampaign ? 0 : calculateItemPrice(item.hours ?? (isGame ? 6 : 2), isGame);
+      const hasOverride = Number(item.priceOverride) > 0;
+
+      const featuresEs = Array.isArray(item.features?.es) ? item.features.es.join("\n") : "";
+      const featuresEn = Array.isArray(item.features?.en) ? item.features.en.join("\n") : "";
+      const tagsEs = Array.isArray(item.tags?.es) ? item.tags.es.join(", ") : "";
+      const tagsEn = Array.isArray(item.tags?.en) ? item.tags.en.join(", ") : "";
+
+      // Pricing Cell Content (Row 1, Column 5)
+      const pricingCellHtml = isCampaign ? `
+        <div class="sheet-cell-header">
+          <span>💬 Nota de Precio (Campaña)</span>
+        </div>
+        <div class="dual-input-row">
+          <div>
+            <label class="form-label" style="font-size: 10px;">Nota (ES)</label>
+            <input type="text" class="form-input" value="${escAttr(item.priceNote?.es || 'Precio a convenir')}" onchange="updateItemField('${catKey}', '${item.id}', 'priceNote.es', this.value)" />
+          </div>
+          <div>
+            <label class="form-label" style="font-size: 10px;">Note (EN)</label>
+            <input type="text" class="form-input" value="${escAttr(item.priceNote?.en || 'Custom quote on request')}" onchange="updateItemField('${catKey}', '${item.id}', 'priceNote.en', this.value)" />
+          </div>
+        </div>
+      ` : `
+        <div class="sheet-cell-header">
+          <span>💰 Tarifa Diaria ${isGame ? '(+Base)' : ''}</span>
+          <span id="price-status-${catKey}-${item.id}" style="color: ${hasOverride ? '#F59E0B' : '#34D399'};">
+            ${hasOverride ? '⚡ Override' : '💡 Calculado'}
+          </span>
+        </div>
+        <div class="pricing-mini-grid">
+          <div>
+            <label class="form-label" style="font-size: 10px;">⏱️ Horas</label>
+            <input type="number" step="0.5" min="0" class="form-input" value="${item.hours ?? 0}" oninput="handleSheetHoursChange('${catKey}', '${item.id}', this.value)" />
+          </div>
+          <div>
+            <label class="form-label" style="font-size: 10px;">🧮 Calculado</label>
+            <div class="form-input" id="calc-display-${catKey}-${item.id}" style="font-weight: 700; color: #34D399; background: rgba(16,185,129,0.06); border-color: rgba(16,185,129,0.25);">
+              $${formatPriceNum(calcPrice)}
+            </div>
+          </div>
+          <div>
+            <label class="form-label" style="font-size: 10px;" title="Si es mayor a 0, reemplaza al calculado">⚡ Override ($)</label>
+            <input type="number" step="1000" min="0" class="form-input" value="${item.priceOverride || 0}" oninput="handleSheetOverrideChange('${catKey}', '${item.id}', this.value)" />
+          </div>
+        </div>
+        <div id="eff-price-${catKey}-${item.id}" style="font-size: 11px; font-weight: 700; color: var(--text-secondary); text-align: right;">
+          Final: $${formatPriceNum(item.dailyPrice)}/d
+        </div>
+      `;
+
+      // Row 4: Custom Game Template Extension (B2B Spec Matrix + Brand Implementations Sub-Table)
+      let customTemplateExtHtml = "";
+      if (isCustom) {
+        const specs = item.templateSpecs || {};
+        const impls = Array.isArray(item.implementations) ? item.implementations : [];
+
+        const implRowsHtml = impls.map((im, imIdx) => `
+          <div class="impl-subrow">
+            <!-- Order / Delete -->
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+              <span style="font-size: 10px; font-weight: 800; color: #38BDF8;">Caso #${imIdx + 1}</span>
+              <button type="button" class="icon-action-btn" style="width: 28px; height: 24px; font-size: 11px;" ${imIdx === 0 ? 'disabled' : ''} onclick="moveImplementation('${item.id}', ${imIdx}, -1)" title="Subir caso">⬆️</button>
+              <button type="button" class="icon-action-btn" style="width: 28px; height: 24px; font-size: 11px;" ${imIdx === impls.length - 1 ? 'disabled' : ''} onclick="moveImplementation('${item.id}', ${imIdx}, 1)" title="Bajar caso">⬇️</button>
+              <button type="button" class="icon-action-btn danger" style="width: 28px; height: 24px; font-size: 11px;" onclick="deleteImplementation('${item.id}', ${imIdx})" title="Eliminar caso">🗑️</button>
+            </div>
+
+            <!-- Case Image -->
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <div style="width: 100%; height: 68px; border-radius: 4px; overflow: hidden; background: #0B0F19; border: 1px solid var(--border-subtle);">
+                <img src="${escAttr(im.image || 'assets/images/concept-blueprint.svg')}" alt="" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null; this.src='assets/images/concept-blueprint.svg';" />
+              </div>
+              <input type="text" class="form-input" style="font-size: 11px; padding: 4px 6px;" value="${escAttr(im.image || '')}" placeholder="assets/images/games/..." onchange="updateImplField('${item.id}', ${imIdx}, 'image', this.value, true)" />
+              <label class="dropzone-label" style="padding: 4px 6px; font-size: 10px;">
+                📁 Subir imagen
+                <input type="file" accept="image/*" style="display: none;" onchange="handleImplImagePick('${item.id}', ${imIdx}, this)" />
+              </label>
+            </div>
+
+            <!-- Case Title -->
+            <div style="display: flex; flex-direction: column; gap: 6px; min-width: 0;">
+              <label class="form-label" style="font-size: 10px;">🎮 Nombre de la Pestaña / Implementación (ES / EN)</label>
+              <div class="dual-input-row">
+                <input type="text" class="form-input" value="${escAttr(im.title?.es || '')}" placeholder="Ej: ABB Drones (ES)" onchange="updateImplField('${item.id}', ${imIdx}, 'title.es', this.value)" />
+                <input type="text" class="form-input" value="${escAttr(im.title?.en || '')}" placeholder="e.g. ABB Drones (EN)" onchange="updateImplField('${item.id}', ${imIdx}, 'title.en', this.value)" />
+              </div>
+            </div>
+
+            <!-- Client Badge -->
+            <div style="display: flex; flex-direction: column; gap: 6px; min-width: 0;">
+              <label class="form-label" style="font-size: 10px;">🏷️ Cliente / Etiqueta en Imagen (ES / EN)</label>
+              <div class="dual-input-row">
+                <input type="text" class="form-input" value="${escAttr(im.client?.es || '')}" placeholder="Caso ABB — Telemetría (ES)" onchange="updateImplField('${item.id}', ${imIdx}, 'client.es', this.value)" />
+                <input type="text" class="form-input" value="${escAttr(im.client?.en || '')}" placeholder="ABB Case — Telemetry (EN)" onchange="updateImplField('${item.id}', ${imIdx}, 'client.en', this.value)" />
+              </div>
+            </div>
+          </div>
+        `).join("");
+
+        customTemplateExtHtml = `
+          <div class="sheet-cell-template-ext">
+            <!-- B2B Spec Bar (Players & Core Mechanic) -->
+            <div>
+              <div class="sheet-cell-header" style="color: #38BDF8; margin-bottom: 6px;">
+                <span>⚙️ Especificaciones de la Plantilla (Participantes y Mecánica Base)</span>
+              </div>
+              <div class="b2b-editor-matrix">
+                <div>
+                  <label class="form-label" style="font-size: 10px;">👥 Participantes (ES / EN)</label>
+                  <div class="dual-input-row">
+                    <input type="text" class="form-input" value="${escAttr(specs.players?.es || '')}" placeholder="1 a 4 Jugadores" onchange="updateItemField('aMedida', '${item.id}', 'templateSpecs.players.es', this.value)" />
+                    <input type="text" class="form-input" value="${escAttr(specs.players?.en || '')}" placeholder="1 to 4 Players" onchange="updateItemField('aMedida', '${item.id}', 'templateSpecs.players.en', this.value)" />
+                  </div>
+                </div>
+                <div>
+                  <label class="form-label" style="font-size: 10px;">🎹 Mecánica Base (ES / EN)</label>
+                  <div class="dual-input-row">
+                    <input type="text" class="form-input" value="${escAttr(specs.mechanic?.es || '')}" placeholder="Piano Tiles horizontal..." onchange="updateItemField('aMedida', '${item.id}', 'templateSpecs.mechanic.es', this.value)" />
+                    <input type="text" class="form-input" value="${escAttr(specs.mechanic?.en || '')}" placeholder="Horizontal staged Piano Tiles..." onchange="updateItemField('aMedida', '${item.id}', 'templateSpecs.mechanic.en', this.value)" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Brand Implementations Sub-Table -->
+            <div class="impl-subtable-box">
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                <span style="font-size: 12px; font-weight: 800; color: #38BDF8;">
+                  📂 Pestañas de Implementaciones Reales
+                </span>
+                <button type="button" class="btn btn-outline btn-sm" style="border-color: rgba(6,182,212,0.5); color: #38BDF8; padding: 5px 10px; font-size: 11px;" onclick="addImplementation('${item.id}')">
+                  + Agregar Caso / Implementación de Marca
+                </button>
+              </div>
+              ${implRowsHtml || `<div style="font-size: 12px; color: var(--text-muted); padding: 8px;">Sin casos específicos cargados aún. Haz clic en "+ Agregar Caso" para añadir ejemplos como ABB Drones.</div>`}
+            </div>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="sheet-entry-block ${isCustom ? 'a-medida-block' : ''}" data-item-id="${item.id}">
+          <!-- MERGED COLUMN 1: Order & Delete (Rowspan 3) -->
+          <div class="sheet-cell sheet-cell-order">
+            <span class="order-index-badge">#${idx + 1}</span>
+            <div class="order-btn-stack">
+              <button type="button" class="icon-action-btn" ${idx === 0 ? 'disabled' : ''} onclick="moveCategoryItem('${catKey}', ${idx}, -1)" title="Subir posición">⬆️</button>
+              <button type="button" class="icon-action-btn" ${idx === totalCount - 1 ? 'disabled' : ''} onclick="moveCategoryItem('${catKey}', ${idx}, 1)" title="Bajar posición">⬇️</button>
+            </div>
+            <button type="button" class="icon-action-btn danger" onclick="deleteCategoryItem('${catKey}', '${item.id}')" title="Eliminar entrada">🗑️</button>
+          </div>
+
+          <!-- MERGED COLUMN 2: Image Preview & File Picker (Rowspan 3) -->
+          <div class="sheet-cell sheet-cell-media">
+            <div class="sheet-cell-header">
+              <span>🖼️ Imagen Principal</span>
+              ${isConcept ? `<span style="color: #38BDF8;">💡 Prototipo</span>` : `<span style="color: #34D399;">✓ Activa</span>`}
+            </div>
+            <div class="sheet-thumb-box">
+              <img src="${escAttr(previewImg)}" id="img-prev-${catKey}-${item.id}" alt="" onerror="this.onerror=null; this.src='assets/images/concept-blueprint.svg';" />
+            </div>
+            <input type="text" class="form-input" value="${escAttr(item.image || '')}" placeholder="assets/images/${imgFolder}/..." onchange="updateItemField('${catKey}', '${item.id}', 'image', this.value, true)" />
+            <label class="dropzone-label">
+              📁 Subir imagen
+              <input type="file" accept="image/*" style="display: none;" onchange="handleSheetImagePick('${catKey}', '${item.id}', '${imgFolder}', this)" />
+            </label>
+            <div class="toggle-pill-row" style="border-color: rgba(6,182,212,0.25);">
+              <span style="color: #38BDF8; font-weight: 600;">💡 Idea / Prototipo</span>
+              <input type="checkbox" class="switch-input" ${item.isConcept ? 'checked' : ''} onchange="updateItemField('${catKey}', '${item.id}', 'isConcept', this.checked, true)" />
+            </div>
+          </div>
+
+          <!-- ROW 1, COL 3: Identity (Title ES/EN & Category Switcher) -->
+          <div class="sheet-cell">
+            <div class="sheet-cell-header">
+              <span>🏷️ ${isCustom ? 'Nombre de la Plantilla / Mecánica (ES / EN)' : 'Título (ES / EN)'}</span>
+              <code style="font-size: 10px; color: var(--text-muted);">${item.id}</code>
+            </div>
+            <div class="dual-input-row">
+              <input type="text" class="form-input" value="${escAttr(item.title?.es || '')}" placeholder="Título ES" onchange="updateItemField('${catKey}', '${item.id}', 'title.es', this.value)" />
+              <input type="text" class="form-input" value="${escAttr(item.title?.en || '')}" placeholder="Title EN" onchange="updateItemField('${catKey}', '${item.id}', 'title.en', this.value)" />
+            </div>
+            ${isGame ? `
+              <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 2px;">
+                <span style="font-size: 11px; color: var(--text-muted);">Categoría:</span>
+                <select class="form-input" style="width: auto; padding: 4px 8px; font-size: 11px;" onchange="changeGameCategory('${item.id}', this.value)">
+                  <option value="clasicos" ${catKey === 'clasicos' ? 'selected' : ''}>🕹️ Juegos Clásicos</option>
+                  <option value="aMedida" ${catKey === 'aMedida' ? 'selected' : ''}>✨ Juegos A Medida (Plantilla)</option>
+                </select>
+              </div>
+            ` : ''}
+          </div>
+
+          <!-- ROW 1, COL 4: Visibility & Showcase Selection -->
+          <div class="sheet-cell">
+            <div class="sheet-cell-header">
+              <span>👁️ Visibilidad & Showcase</span>
+            </div>
+            <div class="toggle-pill-row">
+              <span>👁️ Visible en Catálogo</span>
+              <input type="checkbox" class="switch-input" ${isVisible ? 'checked' : ''} onchange="updateItemField('${catKey}', '${item.id}', 'visible', this.checked, true)" />
+            </div>
+            <div class="toggle-pill-row" title="${hasImg ? 'Mostrar en el carrusel/grilla de la página de inicio' : 'Agrega una imagen para habilitar en el Showcase de inicio'}">
+              <span>🏠 En Showcase (Inicio)</span>
+              <input type="checkbox" class="switch-input" ${isShowcase ? 'checked' : ''} ${!hasImg ? 'disabled' : ''} onchange="updateItemField('${catKey}', '${item.id}', 'showcase', this.checked, true)" />
+            </div>
+            ${!hasImg ? `<span style="font-size: 10px; color: #F59E0B;">⚠️ Requiere imagen para ir al Showcase</span>` : `<span style="font-size: 10px; color: var(--text-muted);">${isShowcase ? '✓ Destacado en página principal' : 'Oculto en página principal'}</span>`}
+          </div>
+
+          <!-- ROW 1, COL 5: Pricing Engine Controls -->
+          <div class="sheet-cell">
+            ${pricingCellHtml}
+          </div>
+
+          <!-- MULTI-ROW DESCRIPTION (ROW 2 & ROW 3, COLS 3 & 4) -->
+          <div class="sheet-cell sheet-cell-desc">
+            <div class="sheet-cell-header">
+              <span>📝 Descripción Detallada Multilínea (Español / English)</span>
+              <span style="font-weight: 500; text-transform: none;">Ocupa 2 filas para lectura cómoda</span>
+            </div>
+            <div class="desc-dual-grid">
+              <textarea class="form-input" rows="4" placeholder="Descripción en Español..." onchange="updateItemField('${catKey}', '${item.id}', 'description.es', this.value)">${escHtml(item.description?.es || '')}</textarea>
+              <textarea class="form-input" rows="4" placeholder="Description in English..." onchange="updateItemField('${catKey}', '${item.id}', 'description.en', this.value)">${escHtml(item.description?.en || '')}</textarea>
+            </div>
+          </div>
+
+          <!-- ROW 2, COL 5: Highlights / Features -->
+          <div class="sheet-cell sheet-cell-highlights">
+            <div class="sheet-cell-header">
+              <span>✨ Highlights / Características (1 por línea)</span>
+            </div>
+            <div class="dual-input-row">
+              <textarea class="form-input" rows="2" placeholder="Highlight 1 (ES)&#10;Highlight 2 (ES)" onchange="updateItemListField('${catKey}', '${item.id}', 'features', 'es', this.value)">${escHtml(featuresEs)}</textarea>
+              <textarea class="form-input" rows="2" placeholder="Highlight 1 (EN)&#10;Highlight 2 (EN)" onchange="updateItemListField('${catKey}', '${item.id}', 'features', 'en', this.value)">${escHtml(featuresEn)}</textarea>
+            </div>
+          </div>
+
+          <!-- ROW 3, COL 5: Tags / Etiquetas -->
+          <div class="sheet-cell sheet-cell-tags">
+            <div class="sheet-cell-header">
+              <span>🏷️ Tags / Etiquetas (Separadas por coma)</span>
+            </div>
+            <div class="dual-input-row">
+              <input type="text" class="form-input" value="${escAttr(tagsEs)}" placeholder="Táctil, Brandeable, Ágil" onchange="updateItemListField('${catKey}', '${item.id}', 'tags', 'es', this.value)" />
+              <input type="text" class="form-input" value="${escAttr(tagsEn)}" placeholder="Touch, Brandable, Fast" onchange="updateItemListField('${catKey}', '${item.id}', 'tags', 'en', this.value)" />
+            </div>
+          </div>
+
+          ${customTemplateExtHtml}
+        </div>
+      `;
+    }
+
+    function renderCategorySheet(catKey, containerId, emptyLabel) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      const items = getCategoryItems(catKey);
+      if (items.length === 0) {
+        container.innerHTML = `<div style="padding: 24px; text-align: center; color: var(--text-muted); border: 1px dashed var(--border-subtle); border-radius: var(--radius-md);">${emptyLabel}</div>`;
+        return;
+      }
+      container.innerHTML = items.map((item, idx) => renderSheetEntryBlock(catKey, item, idx, items.length)).join("");
+    }
+
+    function renderAllCategorySheets() {
+      renderCategorySheet("clasicos", "clasicos-editor-container", "No hay juegos clásicos cargados.");
+      renderCategorySheet("aMedida", "amedida-editor-container", "No hay plantillas de juegos a medida cargadas.");
+      renderCategorySheet("agregados", "addons-editor-container", "No hay agregados cargados.");
+      renderCategorySheet("herramientas", "tools-editor-container", "No hay herramientas cargadas.");
+      renderCategorySheet("campanas", "campaigns-editor-container", "No hay campañas cargadas.");
+    }
+
+    // Add New Game (Clásico or A Medida Template)
+    window.addNewGame = function(category = "clasicos") {
+      const isCustom = category === "aMedida";
+      const promptLabel = isCustom ? "Nombre de la nueva Plantilla / Mecánica A Medida:" : "Título del nuevo Juego Clásico:";
+      const defaultTitle = isCustom ? "Nueva Mecánica Interactiva" : "Nuevo Juego Clásico";
+      const title = prompt(promptLabel, defaultTitle);
+      if (!title) return;
+      const id = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") + "-" + Date.now().toString().slice(-3);
+      const defaultHours = isCustom ? 12 : 6;
+
+      const newGame = {
+        id,
+        title: { es: title, en: title },
+        category,
+        hours: defaultHours,
+        priceOverride: 0,
+        dailyPrice: calculateItemPrice(defaultHours, true),
+        visible: true,
+        showcase: false, // False until an image is added
+        isConcept: true,
+        image: "",
+        screenshots: [],
+        description: { es: "Descripción detallada de " + title, en: "Detailed description for " + title },
+        features: {
+          es: ["Personalización visual total", "Ideal para alto flujo de público"],
+          en: ["Complete visual customization", "Ideal for high attendee throughput"]
+        },
+        tags: { es: ["Táctil", "Brandeable"], en: ["Touch", "Brandable"] }
+      };
+
+      if (isCustom) {
+        newGame.templateSpecs = {
+          players: { es: "1 a 4 Jugadores", en: "1 to 4 Players" },
+          mechanic: { es: "Mecánica interactiva táctil", en: "Interactive touch mechanic" },
+          b2bGoal: { es: "Activación de marca y engagement", en: "Brand activation & engagement" }
+        };
+        newGame.implementations = [
+          {
+            id: "impl-" + id,
+            title: { es: title + " (Caso Demo)", en: title + " (Demo Case)" },
+            client: { es: "Caso Corporativo", en: "Corporate Case" },
+            image: "",
+            summary: { es: "Implementación personalizada para stand corporativo.", en: "Custom implementation for corporate booth." },
+            eventNote: { es: "Adaptable a productos o servicios de la marca.", en: "Adaptable to brand products or services." }
+          }
+        ];
+      }
+
+      getCategoryItems(category).push(newGame);
+      renderAllCategorySheets();
+      renderSimulator();
+    };
+
+    // Add New Add-On, Tool, or Campaign
+    window.addNewCategoryItem = function(catKey) {
+      const labels = {
+        agregados: "Título del nuevo Agregado (Add-On):",
+        herramientas: "Título de la nueva Herramienta:",
+        campanas: "Título de la nueva Campaña:"
+      };
+      const title = prompt(labels[catKey] || "Título:", "Nuevo Módulo");
+      if (!title) return;
+      const id = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") + "-" + Date.now().toString().slice(-3);
+
+      const newItem = {
+        id,
+        title: { es: title, en: title },
+        visible: true,
+        showcase: false, // False until image is uploaded
+        isConcept: true,
+        image: "",
+        screenshots: [],
+        description: { es: "Descripción de " + title, en: "Description for " + title },
+        features: {
+          es: ["100% configurable", "Integración inmediata"],
+          en: ["100% configurable", "Instant integration"]
+        },
+        tags: { es: ["Evento", "Interactivo"], en: ["Event", "Interactive"] }
+      };
+
+      if (catKey === "campanas") {
+        newItem.priceNote = { es: "Precio a convenir", en: "Custom quote on request" };
+      } else {
+        const defaultHours = catKey === "agregados" ? 1.5 : 5;
+        newItem.hours = defaultHours;
+        newItem.priceOverride = 0;
+        newItem.dailyPrice = calculateItemPrice(defaultHours, false);
+      }
+
+      getCategoryItems(catKey).push(newItem);
+      renderAllCategorySheets();
+      renderSimulator();
+    };
+
+    // Image Picker for Sheet Entries
+    window.handleSheetImagePick = async function(catKey, itemId, folderName, inputEl) {
+      const file = inputEl.files?.[0];
+      if (!file) return;
+      const targetPath = `assets/images/${folderName}/${file.name}`;
+
+      if (directoryHandle) {
+        try {
+          const assetsDir = await directoryHandle.getDirectoryHandle("assets");
+          const imagesDir = await assetsDir.getDirectoryHandle("images");
+          const targetDir = await imagesDir.getDirectoryHandle(folderName, { create: true });
+          const fileHandle = await targetDir.getFileHandle(file.name, { create: true });
+          const writable = await fileHandle.createWritable();
+          await writable.write(file);
+          await writable.close();
+        } catch (e) {
+          console.warn("Could not write image directly to folder", e);
+        }
+      }
+
+      const item = findItemInCat(catKey, itemId);
+      if (item) {
+        item.image = targetPath;
+        item.isConcept = false;
+        item.showcase = true;
+      }
+      renderAllCategorySheets();
+    };
+
+    // Image Picker for Custom Game Implementations
+    window.handleImplImagePick = async function(itemId, implIdx, inputEl) {
+      const file = inputEl.files?.[0];
+      if (!file) return;
+      const targetPath = `assets/images/games/${file.name}`;
+
+      if (directoryHandle) {
+        try {
+          const assetsDir = await directoryHandle.getDirectoryHandle("assets");
+          const imagesDir = await assetsDir.getDirectoryHandle("images");
+          const targetDir = await imagesDir.getDirectoryHandle("games", { create: true });
+          const fileHandle = await targetDir.getFileHandle(file.name, { create: true });
+          const writable = await fileHandle.createWritable();
+          await writable.write(file);
+          await writable.close();
+        } catch (e) {
+          console.warn("Could not write implementation image to folder", e);
+        }
+      }
+
+      updateImplField(itemId, implIdx, "image", targetPath, true);
+    };
+
+    // Studio Logo Picker
+    window.handleLogoPick = async function(inputEl) {
+      const file = inputEl.files?.[0];
+      if (!file) return;
+      const targetPath = `assets/images/logo/${file.name}`;
+
+      if (directoryHandle) {
+        try {
+          const assetsDir = await directoryHandle.getDirectoryHandle("assets");
+          const imagesDir = await assetsDir.getDirectoryHandle("images");
+          const targetDir = await imagesDir.getDirectoryHandle("logo", { create: true });
+          const fileHandle = await targetDir.getFileHandle(file.name, { create: true });
+          const writable = await fileHandle.createWritable();
+          await writable.write(file);
+          await writable.close();
+        } catch (e) {
+          console.warn("Could not write logo to folder", e);
+        }
+      }
+
+      document.getElementById("studio-logo").value = targetPath;
+      document.getElementById("studio-logo-prev").src = URL.createObjectURL(file);
+      catalogState.studioInfo.logo = targetPath;
+    };
+
+    // Elements
+    const folderStatus = document.getElementById("folder-status");
+    const btnOpenFolder = document.getElementById("btn-open-folder");
+    const btnSaveChanges = document.getElementById("btn-save-changes");
+    const btnDownloadCatalog = document.getElementById("btn-download-catalog");
+    const saveToast = document.getElementById("save-toast");
+
+    // Tab Navigation
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+        document.querySelectorAll(".editor-panel").forEach(p => p.classList.remove("active"));
+        btn.classList.add("active");
+        const panel = document.getElementById(btn.getAttribute("data-tab"));
+        if (panel) panel.classList.add("active");
+      });
+    });
+
+    function populateFormFields() {
+      const s = catalogState.studioInfo || {};
+      const p = catalogState.promotions || {};
+
+      document.getElementById("studio-name").value = s.name || "";
+      document.getElementById("studio-whatsapp").value = s.whatsapp || "";
+      document.getElementById("studio-email").value = s.email || "";
+      document.getElementById("studio-logo").value = s.logo || "assets/images/logo/logo.svg";
+      document.getElementById("studio-logo-prev").src = s.logo || "assets/images/logo/logo.svg";
+
+      document.getElementById("studio-tagline-es").value = s.tagline?.es || "";
+      document.getElementById("studio-tagline-en").value = s.tagline?.en || "";
+      document.getElementById("studio-hero-title-es").value = s.heroTitle?.es || "";
+      document.getElementById("studio-hero-title-en").value = s.heroTitle?.en || "";
+      document.getElementById("studio-hero-sub-es").value = s.heroSubtitle?.es || "";
+      document.getElementById("studio-hero-sub-en").value = s.heroSubtitle?.en || "";
+
+      document.getElementById("promo-days-min").value = p.daysRule?.minDays || 3;
+      document.getElementById("promo-days-pct").value = p.daysRule?.discountPercent || 50;
+      document.getElementById("promo-days-label-es").value = p.daysRule?.label?.es || "";
+      document.getElementById("promo-days-label-en").value = p.daysRule?.label?.en || "";
+
+      document.getElementById("promo-games-min").value = p.gamesRule?.minGames || 4;
+      document.getElementById("promo-games-pct").value = p.gamesRule?.discountPercent || 20;
+      document.getElementById("promo-games-label-es").value = p.gamesRule?.label?.es || "";
+      document.getElementById("promo-games-label-en").value = p.gamesRule?.label?.en || "";
+
+      document.getElementById("promo-disclaimer-es").value = p.disclaimer?.es || "";
+      document.getElementById("promo-disclaimer-en").value = p.disclaimer?.en || "";
+
+      const pr = catalogState.pricingConfig || {};
+      document.getElementById("pricing-game-base-price").value = pr.gameBasePrice ?? 455900;
+      document.getElementById("pricing-hourly-usd").value = pr.hourlyRateUsd ?? 15;
+      document.getElementById("pricing-usd-to-ars").value = pr.usdToArsRate ?? 1520;
+      document.getElementById("pricing-time-multiplier").value = pr.timeMultiplier ?? 1.5;
+
+      renderAllCategorySheets();
+      renderSimulator();
+    }
+
+    // Quoting Simulator
+    let simSelectedGames = new Set(["memotest", "simon-dice"]);
+    let simDays = 1;
+
+    function renderSimulator() {
+      const listContainer = document.getElementById("sim-games-checklist");
+      const breakdown = document.getElementById("sim-breakdown-output");
+      if (!listContainer || !breakdown) return;
+
+      const games = [
+        ...getCategoryItems("clasicos"),
+        ...getCategoryItems("aMedida")
+      ];
+
+      listContainer.innerHTML = games.map(g => `
+        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 14px;">
+          <input type="checkbox" ${simSelectedGames.has(g.id) ? "checked" : ""} onchange="toggleSimGame('${g.id}', this.checked)" />
+          <span>${escHtml(g.title?.es || g.id)} (<strong>$${formatPriceNum(g.dailyPrice)}/d</strong>)</span>
+        </label>
+      `).join("");
+
+      let gross = 0;
+      games.filter(g => simSelectedGames.has(g.id)).forEach(g => {
+        gross += g.dailyPrice * simDays;
+      });
+
+      const pDays = catalogState.promotions?.daysRule || { minDays: 3, discountPercent: 50 };
+      const pGames = catalogState.promotions?.gamesRule || { minGames: 4, discountPercent: 20 };
+
+      const qualDays = simDays >= pDays.minDays;
+      const daysDisc = qualDays ? (gross * (pDays.discountPercent / 100)) : 0;
+      const subAfterDays = gross - daysDisc;
+
+      const qualGames = simSelectedGames.size >= pGames.minGames;
+      const gamesDisc = qualGames ? (subAfterDays * (pGames.discountPercent / 100)) : 0;
+      const finalTot = subAfterDays - gamesDisc;
+
+      function formatSmart(text, rule) {
+        if (!text) return "";
+        return text
+          .replace(/\[days\]/g, rule?.minDays != null ? rule.minDays : "")
+          .replace(/\[games\]/g, rule?.minGames != null ? rule.minGames : "")
+          .replace(/\[discount\]/g, rule?.discountPercent != null ? rule.discountPercent : "");
+      }
+
+      const daysLabel = formatSmart(pDays.label?.es || `Promo [days]+ días (${pDays.discountPercent}% OFF)`, pDays);
+      const gamesLabel = formatSmart(pGames.label?.es || `Promo [games]+ juegos (${pGames.discountPercent}% OFF)`, pGames);
+
+      breakdown.innerHTML = `
+        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+          <span>Juegos seleccionados:</span>
+          <strong>${simSelectedGames.size} juegos</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+          <span>Duración calculada:</span>
+          <strong>${simDays} ${simDays === 1 ? "día" : "días"}</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 12px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px;">
+          <span>Subtotal Bruto:</span>
+          <strong>$${formatPriceNum(gross)}</strong>
+        </div>
+
+        <div style="color: ${qualDays ? "#34D399" : "var(--text-muted)"}; display: flex; justify-content: space-between; margin-bottom: 6px;">
+          <span>${qualDays ? "✓" : "○"} ${escHtml(daysLabel)}:</span>
+          <span>-$${formatPriceNum(daysDisc)}</span>
+        </div>
+
+        <div style="color: ${qualGames ? "#34D399" : "var(--text-muted)"}; display: flex; justify-content: space-between; margin-bottom: 12px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px;">
+          <span>${qualGames ? "✓" : "○"} ${escHtml(gamesLabel)}:</span>
+          <span>-$${formatPriceNum(gamesDisc)}</span>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; font-size: 20px; font-weight: 800; color: #34D399; margin-top: 14px;">
+          <span>Total Estimado:</span>
+          <span>$${formatPriceNum(finalTot)}</span>
+        </div>
+      `;
+    }
+
+    window.toggleSimGame = function(id, checked) {
+      if (checked) simSelectedGames.add(id);
+      else simSelectedGames.delete(id);
+      renderSimulator();
+    };
+
+    document.getElementById("sim-days-range")?.addEventListener("input", (e) => {
+      simDays = parseInt(e.target.value) || 1;
+      document.getElementById("sim-days-text").textContent = `${simDays}d`;
+      renderSimulator();
+    });
+
+    // File System Access API
+    btnOpenFolder?.addEventListener("click", async () => {
+      try {
+        if (!window.showDirectoryPicker) {
+          alert("Tu navegador no soporta el selector de carpetas. Puedes editar y hacer clic en 'Descargar catalog.js'.");
+          return;
+        }
+        directoryHandle = await window.showDirectoryPicker();
+        folderStatus.textContent = `🟢 Conectado: ${directoryHandle.name}`;
+        folderStatus.classList.add("connected");
+
+        const assetsDir = await directoryHandle.getDirectoryHandle("assets");
+        const jsDir = await assetsDir.getDirectoryHandle("js");
+        const dataDir = await jsDir.getDirectoryHandle("data");
+        catalogFileHandle = await dataDir.getFileHandle("catalog.js");
+
+        alert("¡Carpeta del proyecto conectada exitosamente!");
+      } catch (e) {
+        if (e.name !== "AbortError") {
+          console.error(e);
+          alert("No se pudo conectar la carpeta: " + e.message);
+        }
+      }
+    });
+
+    function serializeCatalog() {
+      catalogState.studioInfo.name = document.getElementById("studio-name").value;
+      catalogState.studioInfo.logo = document.getElementById("studio-logo").value || "assets/images/logo/logo.svg";
+      catalogState.studioInfo.whatsapp = document.getElementById("studio-whatsapp").value;
+      catalogState.studioInfo.email = document.getElementById("studio-email").value;
+      catalogState.studioInfo.tagline.es = document.getElementById("studio-tagline-es").value;
+      catalogState.studioInfo.tagline.en = document.getElementById("studio-tagline-en").value;
+      catalogState.studioInfo.heroTitle.es = document.getElementById("studio-hero-title-es").value;
+      catalogState.studioInfo.heroTitle.en = document.getElementById("studio-hero-title-en").value;
+      catalogState.studioInfo.heroSubtitle.es = document.getElementById("studio-hero-sub-es").value;
+      catalogState.studioInfo.heroSubtitle.en = document.getElementById("studio-hero-sub-en").value;
+
+      catalogState.promotions.daysRule.minDays = Number(document.getElementById("promo-days-min").value);
+      catalogState.promotions.daysRule.discountPercent = Number(document.getElementById("promo-days-pct").value);
+      if (!catalogState.promotions.daysRule.label) catalogState.promotions.daysRule.label = {};
+      catalogState.promotions.daysRule.label.es = document.getElementById("promo-days-label-es").value;
+      catalogState.promotions.daysRule.label.en = document.getElementById("promo-days-label-en").value;
+
+      catalogState.promotions.gamesRule.minGames = Number(document.getElementById("promo-games-min").value);
+      catalogState.promotions.gamesRule.discountPercent = Number(document.getElementById("promo-games-pct").value);
+      if (!catalogState.promotions.gamesRule.label) catalogState.promotions.gamesRule.label = {};
+      catalogState.promotions.gamesRule.label.es = document.getElementById("promo-games-label-es").value;
+      catalogState.promotions.gamesRule.label.en = document.getElementById("promo-games-label-en").value;
+
+      catalogState.promotions.disclaimer.es = document.getElementById("promo-disclaimer-es").value;
+      catalogState.promotions.disclaimer.en = document.getElementById("promo-disclaimer-en").value;
+
+      if (!catalogState.pricingConfig) catalogState.pricingConfig = {};
+      catalogState.pricingConfig.gameBasePrice = Number(document.getElementById("pricing-game-base-price").value) || 0;
+      catalogState.pricingConfig.hourlyRateUsd = Number(document.getElementById("pricing-hourly-usd").value) || 0;
+      catalogState.pricingConfig.usdToArsRate = Number(document.getElementById("pricing-usd-to-ars").value) || 0;
+      catalogState.pricingConfig.timeMultiplier = Number(document.getElementById("pricing-time-multiplier").value) || 1.0;
+
+      return `/**
+ * Corpfolio Studio — Catalog & Configuration Data
+ * Generated via Visual Local Editor (editor.html)
+ */
+
+const CORPFOLIO_CATALOG = ${JSON.stringify(catalogState, null, 2)};
+
+if (typeof window !== "undefined") {
+  window.CORPFOLIO_CATALOG = CORPFOLIO_CATALOG;
+}
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = CORPFOLIO_CATALOG;
+}
+`;
+    }
+
+    btnSaveChanges?.addEventListener("click", async () => {
+      const code = serializeCatalog();
+      if (catalogFileHandle) {
+        try {
+          const writable = await catalogFileHandle.createWritable();
+          await writable.write(code);
+          await writable.close();
+          showToast();
+          return;
+        } catch (e) {
+          console.warn("Direct save error", e);
+        }
+      }
+      downloadCode(code);
+      showToast();
+    });
+
+    btnDownloadCatalog?.addEventListener("click", () => {
+      const code = serializeCatalog();
+      downloadCode(code);
+      showToast();
+    });
+
+    function downloadCode(code) {
+      const blob = new Blob([code], { type: "application/javascript" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "catalog.js";
+      a.click();
+    }
+
+    function showToast() {
+      saveToast.classList.add("visible");
+      setTimeout(() => {
+        saveToast.classList.remove("visible");
+      }, 4500);
+    }
+
+    // Initialize
+    populateFormFields();
+  </script>
+</body>
+</html>
