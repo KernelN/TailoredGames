@@ -28,7 +28,7 @@
   <circle cx="95" cy="71" r="5" fill="#EF4444" opacity="0.8"/>
   <circle cx="112" cy="71" r="5" fill="#F59E0B" opacity="0.8"/>
   <circle cx="129" cy="71" r="5" fill="#10B981" opacity="0.8"/>
-  <text x="400" y="76" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="12" text-anchor="middle" font-weight="600" letter-spacing="1">GAMETELIER INTERACTIVE</text>
+  <text x="400" y="76" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="12" text-anchor="middle" font-weight="600" letter-spacing="1">HERRAMIENTA DE EVENTO — SORTEADOR DE ESCENARIO</text>
 
   <!-- Icon Graphic -->
   <g transform="translate(400, 210) scale(1.1)">

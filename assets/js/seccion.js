@@ -121,33 +121,40 @@ document.addEventListener("DOMContentLoaded", () => {
     const itemFeatures = (t(item.features) || []).map(f => `<li>${f}</li>`).join("");
     const specs = item.templateSpecs || {};
 
-    const impls = (Array.isArray(item.implementations) && item.implementations.length > 0)
-      ? item.implementations
-      : [
-          {
-            id: `${item.id}-default`,
-            title: item.title,
-            client: { es: "Implementación de Marca", en: "Brand Implementation" },
-            image: item.image || ""
-          }
-        ];
+    const impls = Array.isArray(item.implementations) ? item.implementations : [];
+    const templateImg = (item.image && item.image.trim() !== "") ? item.image : "assets/images/concept-blueprint.svg";
+    const templateIsConcept = item.isConcept || !item.image || !item.image.trim();
 
-    const firstImpl = impls[0];
-    const rawImg = (firstImpl.image && firstImpl.image.trim() !== "") ? firstImpl.image : (item.image || "");
-    const isConcept = item.isConcept || !rawImg || !rawImg.trim();
-    const imgSrc = isConcept ? "assets/images/concept-blueprint.svg" : rawImg;
+    // Tab 0: Base Template
+    const templateTabHtml = `
+      <button type="button" class="impl-tab-btn active"
+        data-role="impl-tab"
+        data-tab-type="template"
+        data-title="${(t(item.title) || '').replace(/"/g, '&quot;')}"
+        data-desc="${(t(item.description) || '').replace(/"/g, '&quot;')}"
+        data-img="${templateImg.replace(/"/g, '&quot;')}"
+        data-badge="${(ui('baseTemplateBadge') || '⚙️ Mecánica Base').replace(/"/g, '&quot;')}"
+        data-concept="${templateIsConcept ? '1' : '0'}">
+        ${ui("baseTemplateTab") || "⚙️ Plantilla Base"}
+      </button>
+    `;
 
-    const tabsHtml = impls.map((im, idx) => {
-      const imRawImg = (im.image && im.image.trim() !== "") ? im.image : (item.image || "");
-      const imIsConcept = item.isConcept || !imRawImg || !imRawImg.trim();
-      const imImgSrc = imIsConcept ? "assets/images/concept-blueprint.svg" : imRawImg;
+    // Case tabs
+    const caseTabsHtml = impls.map((im) => {
+      const imImg = (im.image && im.image.trim() !== "") ? im.image : templateImg;
+      const imIsConcept = item.isConcept || !imImg || !imImg.trim();
+      const imBadge = t(im.client) ? `🏷️ ${t(im.client)}` : `🏷️ ${t(im.title)}`;
+      const imDesc = t(im.summary) || t(item.description);
       return `
-        <button type="button" class="impl-tab-btn ${idx === 0 ? 'active' : ''}"
-          data-impl-idx="${idx}"
-          data-impl-client="${t(im.client || im.title).replace(/"/g, '&quot;')}"
-          data-impl-img="${imImgSrc.replace(/"/g, '&quot;')}"
-          data-impl-concept="${imIsConcept ? '1' : '0'}">
-          🎮 ${t(im.title)}
+        <button type="button" class="impl-tab-btn"
+          data-role="impl-tab"
+          data-tab-type="case"
+          data-title="${(t(im.title) || '').replace(/"/g, '&quot;')}"
+          data-desc="${(imDesc || '').replace(/"/g, '&quot;')}"
+          data-img="${imImg.replace(/"/g, '&quot;')}"
+          data-badge="${imBadge.replace(/"/g, '&quot;')}"
+          data-concept="${imIsConcept ? '1' : '0'}">
+          🏷️ ${t(im.title)}
         </button>
       `;
     }).join("");
@@ -157,20 +164,21 @@ document.addEventListener("DOMContentLoaded", () => {
         <!-- LEFT PANE: Implementation Tabs + Screenshot Only -->
         <div class="template-impl-pane">
           <div class="impl-tab-list">
-            ${tabsHtml}
+            ${templateTabHtml}
+            ${caseTabsHtml}
           </div>
 
           <div class="impl-preview-frame">
-            <span class="slide-client-badge" data-role="impl-client-badge">🏷️ ${t(firstImpl.client || firstImpl.title)}</span>
-            <span class="badge" data-role="impl-concept-badge" style="position: absolute; top: 12px; right: 12px; z-index: 6; background: rgba(6,182,212,0.3); color: #38BDF8; border: 1px solid rgba(6,182,212,0.6); backdrop-filter: blur(8px); ${isConcept ? '' : 'display: none;'}">${ui("conceptBadge")}</span>
-            <img src="${imgSrc}" data-role="impl-img" alt="${t(firstImpl.title)}" loading="lazy" onerror="this.onerror=null; this.src='assets/images/concept-blueprint.svg';" />
+            <span class="slide-client-badge" data-role="impl-client-badge">${ui("baseTemplateBadge") || "⚙️ Mecánica Base"}</span>
+            <span class="badge" data-role="impl-concept-badge" style="position: absolute; top: 12px; right: 12px; z-index: 6; background: rgba(6,182,212,0.3); color: #38BDF8; border: 1px solid rgba(6,182,212,0.6); backdrop-filter: blur(8px); ${templateIsConcept ? '' : 'display: none;'}">${ui("conceptBadge")}</span>
+            <img src="${templateImg}" data-role="impl-img" alt="${t(item.title)}" loading="lazy" onerror="this.onerror=null; this.src='assets/images/concept-blueprint.svg';" />
           </div>
         </div>
 
         <!-- RIGHT PANE: Compact Template Specs, 1 Description, Short Highlights & Quoting -->
         <div class="template-spec-pane">
           <div class="vertical-header-row" style="align-items: center;">
-            <h2 class="vertical-item-title">${t(item.title)}</h2>
+            <h2 class="vertical-item-title" data-role="card-title">${t(item.title)}</h2>
             ${headerTags ? `<div style="display: flex; gap: 6px; flex-wrap: wrap;">${headerTags}</div>` : ''}
           </div>
 
@@ -179,7 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
             ${t(specs.mechanic) ? `<span class="b2b-inline-pill mechanic">🎹 ${t(specs.mechanic)}</span>` : ''}
           </div>
 
-          <p class="vertical-desc" style="margin-bottom: 14px;">${t(item.description)}</p>
+          <p class="vertical-desc" data-role="card-desc" style="margin-bottom: 14px;">${t(item.description)}</p>
 
           ${itemFeatures ? `
             <ul class="vertical-features" style="margin-bottom: 16px;">
@@ -234,7 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const headerTags = (t(item.tags) || []).slice(0, 2).map(tag => `<span class="tag-pill">${tag}</span>`).join("");
         const itemFeatures = (t(item.features) || []).map(f => `<li>${f}</li>`).join("");
         const isConcept = item.isConcept || !item.image || !item.image.trim();
-        const imgSrc = isConcept ? 'assets/images/concept-blueprint.svg' : item.image;
+        const imgSrc = (!item.image || !item.image.trim()) ? 'assets/images/concept-blueprint.svg' : item.image;
 
         return `
           <article class="vertical-item-card" id="${item.id}">
@@ -286,6 +294,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Bind implementation tabs in Streamlined Custom Game cards
     document.querySelectorAll("[data-template-card]").forEach(card => {
       const imgEl = card.querySelector('[data-role="impl-img"]');
+      const titleEl = card.querySelector('[data-role="card-title"]');
+      const descEl = card.querySelector('[data-role="card-desc"]');
       const clientBadgeEl = card.querySelector('[data-role="impl-client-badge"]');
       const conceptBadgeEl = card.querySelector('[data-role="impl-concept-badge"]');
 
@@ -294,12 +304,16 @@ document.addEventListener("DOMContentLoaded", () => {
           card.querySelectorAll(".impl-tab-btn").forEach(b => b.classList.remove("active"));
           btn.classList.add("active");
 
-          const imClient = btn.getAttribute("data-impl-client") || "";
-          const imImg = btn.getAttribute("data-impl-img") || "assets/images/concept-blueprint.svg";
-          const imConcept = btn.getAttribute("data-impl-concept") === "1";
+          const title = btn.getAttribute("data-title") || "";
+          const desc = btn.getAttribute("data-desc") || "";
+          const imBadge = btn.getAttribute("data-badge") || "";
+          const imImg = btn.getAttribute("data-img") || "assets/images/concept-blueprint.svg";
+          const imConcept = btn.getAttribute("data-concept") === "1";
 
+          if (titleEl && title) titleEl.textContent = title;
+          if (descEl && desc) descEl.textContent = desc;
           if (imgEl) imgEl.src = imImg;
-          if (clientBadgeEl) clientBadgeEl.textContent = `🏷️ ${imClient}`;
+          if (clientBadgeEl) clientBadgeEl.textContent = imBadge;
           if (conceptBadgeEl) conceptBadgeEl.style.display = imConcept ? "" : "none";
         });
       });

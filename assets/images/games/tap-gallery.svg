@@ -1,50 +1,314 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0B0F19" />
-      <stop offset="50%" stop-color="#111827" />
-      <stop offset="100%" stop-color="#161E31" />
+    <!-- ==========================================
+         1. ENVIRONMENT & LIGHTING (DARK TECH-STUDIO)
+         ========================================== -->
+    <linearGradient id="wallBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#060A12" />
+      <stop offset="55%" stop-color="#0D1526" />
+      <stop offset="100%" stop-color="#162238" />
     </linearGradient>
-    <radialGradient id="glow" cx="50%" cy="40%" r="50%">
-      <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.3" />
-      <stop offset="100%" stop-color="#0B0F19" stop-opacity="0" />
+
+    <!-- Stage Spotlight Cones -->
+    <radialGradient id="spotCenter" cx="50%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#6366F1" stop-opacity="0.22" />
+      <stop offset="100%" stop-color="#060A12" stop-opacity="0" />
     </radialGradient>
-    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255, 255, 255, 0.04)" stroke-width="1"/>
-    </pattern>
+    <radialGradient id="spotLeft" cx="20%" cy="40%" r="45%">
+      <stop offset="0%" stop-color="#06B6D4" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#060A12" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="spotRight" cx="80%" cy="40%" r="45%">
+      <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#060A12" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Stage Barrier Gradients -->
+    <linearGradient id="barrierGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B" />
+      <stop offset="30%" stop-color="#111827" />
+      <stop offset="100%" stop-color="#090E1A" />
+    </linearGradient>
+
+    <!-- Target Gold Gradient -->
+    <linearGradient id="targetGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE047" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+    <!-- Target Cyan Gradient -->
+    <linearGradient id="targetCyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#67E8F9" />
+      <stop offset="100%" stop-color="#0284C7" />
+    </linearGradient>
+    <!-- Penalty Red Gradient -->
+    <linearGradient id="penaltyRed" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F43F5E" />
+      <stop offset="100%" stop-color="#9F1239" />
+    </linearGradient>
+
+    <!-- Shadows & Neon Glow Filters -->
+    <filter id="dropShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="6" stdDeviation="4.5" flood-color="#000000" flood-opacity="0.6" />
+    </filter>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.45" />
+    </filter>
+    <filter id="neonGlow" x="-35%" y="-35%" width="170%" height="170%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter id="redAlertGlow" x="-35%" y="-35%" width="170%" height="170%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- ========================================================
+         REUSABLE GALLERY PROPS (TARGETS, DECOYS, OBSTACLES)
+         ======================================================== -->
+
+    <!-- A. POP-UP BULLSEYE TARGET (High Value +150) -->
+    <g id="target-bullseye" filter="url(#dropShadow)">
+      <!-- Outer Metal Hinge / Pop Stem -->
+      <rect x="-3" y="14" width="6" height="24" fill="#334155" stroke="#1E293B" stroke-width="1" />
+      <circle cx="0" cy="38" r="4" fill="#475569" />
+      <!-- Outer Target Ring (Cyan) -->
+      <circle cx="0" cy="0" r="22" fill="#0F172A" stroke="#06B6D4" stroke-width="3" filter="url(#neonGlow)" />
+      <!-- White Ring -->
+      <circle cx="0" cy="0" r="16" fill="none" stroke="#F8FAFC" stroke-width="2.5" />
+      <!-- Cyan Middle Ring -->
+      <circle cx="0" cy="0" r="11" fill="#0284C7" stroke="#38BDF8" stroke-width="1.5" />
+      <!-- Gold Center Bullseye Pip -->
+      <circle cx="0" cy="0" r="5" fill="#FBBF24" stroke="#FEF08A" stroke-width="1.2" />
+      <!-- Crosshairs -->
+      <line x1="-25" y1="0" x2="-18" y2="0" stroke="#06B6D4" stroke-width="2" />
+      <line x1="18" y1="0" x2="25" y2="0" stroke="#06B6D4" stroke-width="2" />
+      <line x1="0" y1="-25" x2="0" y2="-18" stroke="#06B6D4" stroke-width="2" />
+      <line x1="0" y1="18" x2="0" y2="25" stroke="#06B6D4" stroke-width="2" />
+    </g>
+
+    <!-- B. GOLD BONUS STAR TARGET (Rare Fast Target +300) -->
+    <g id="target-star" filter="url(#dropShadow)">
+      <rect x="-3" y="14" width="6" height="24" fill="#78350F" stroke="#451A03" stroke-width="1" />
+      <circle cx="0" cy="38" r="4" fill="#B45309" />
+      <!-- Outer Gold Ring -->
+      <circle cx="0" cy="0" r="24" fill="#1C1917" stroke="#F59E0B" stroke-width="3" filter="url(#neonGlow)" />
+      <circle cx="0" cy="0" r="18" fill="#78350F" stroke="#FBBF24" stroke-width="1.5" />
+      <!-- Golden Star Crest -->
+      <polygon points="0,-12 3.6,-3.6 12,-2.4 6,3.6 7.6,12 0,7.6 -7.6,12 -6,3.6 -12,-2.4 -3.6,-3.6" fill="#FDE047" stroke="#FEF08A" stroke-width="1" />
+      <!-- Sparkles -->
+      <circle cx="-16" cy="-16" r="1.5" fill="#FEF08A" />
+      <circle cx="16" cy="14" r="1.5" fill="#FEF08A" />
+    </g>
+
+    <!-- C. DECOY HAZARD BOMB (PENALTY -50 — DO NOT TAP!) -->
+    <g id="decoy-bomb" filter="url(#dropShadow)">
+      <rect x="-3" y="14" width="6" height="24" fill="#4C0519" stroke="#2B040F" stroke-width="1" />
+      <!-- Hazard Diamond Plate Behind -->
+      <polygon points="0,-26 26,0 0,26 -26,0" fill="#450A0A" stroke="#EF4444" stroke-width="2.5" filter="url(#redAlertGlow)" />
+      <!-- Skull / Warning Icon -->
+      <circle cx="0" cy="-3" r="10" fill="#F8FAFC" />
+      <rect x="-6" y="3" width="12" height="7" rx="1.5" fill="#F8FAFC" />
+      <!-- Skull Eye Sockets -->
+      <circle cx="-4" cy="-4" r="2.8" fill="#7F1D1D" />
+      <circle cx="4" cy="-4" r="2.8" fill="#7F1D1D" />
+      <!-- Teeth Slits -->
+      <line x1="-3" y1="5" x2="-3" y2="9" stroke="#7F1D1D" stroke-width="1.2" />
+      <line x1="0" y1="5" x2="0" y2="9" stroke="#7F1D1D" stroke-width="1.2" />
+      <line x1="3" y1="5" x2="3" y2="9" stroke="#7F1D1D" stroke-width="1.2" />
+      <!-- Floating Red Warning Cross -->
+      <line x1="-18" y1="-18" x2="-12" y2="-12" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" />
+      <line x1="-12" y1="-18" x2="-18" y2="-12" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" />
+    </g>
+
+    <!-- D. CUTE PEEKING ROBOT MASCOT (Sneaking Up From Behind Barrier) -->
+    <g id="mascot-peek" filter="url(#dropShadow)">
+      <!-- Robot Head -->
+      <rect x="-18" y="-20" width="36" height="28" rx="10" fill="#10B981" stroke="#34D399" stroke-width="2" />
+      <!-- Visor -->
+      <rect x="-12" y="-14" width="24" height="12" rx="4" fill="#064E3B" />
+      <!-- Blinking Digital Eyes -->
+      <circle cx="-6" cy="-8" r="2.5" fill="#6EE7B7" />
+      <circle cx="6" cy="-8" r="2.5" fill="#6EE7B7" />
+      <!-- Top Antenna -->
+      <line x1="0" y1="-20" x2="0" y2="-27" stroke="#34D399" stroke-width="2" />
+      <circle cx="0" cy="-28" r="3" fill="#FBBF24" filter="url(#neonGlow)" />
+      <!-- Two Little Robot Hands Gripping Barrier -->
+      <rect x="-22" y="4" width="8" height="6" rx="2.5" fill="#047857" stroke="#34D399" stroke-width="1" />
+      <rect x="14" y="4" width="8" height="6" rx="2.5" fill="#047857" stroke="#34D399" stroke-width="1" />
+    </g>
   </defs>
 
-  <!-- Background -->
-  <rect width="800" height="500" fill="url(#bg)"/>
-  <rect width="800" height="500" fill="url(#grid)"/>
-  <circle cx="400" cy="220" r="280" fill="url(#glow)"/>
+  <!-- ==========================================
+       STAGE BACKGROUND (GALLERY INTERIOR)
+       ========================================== -->
+  <rect width="800" height="500" fill="url(#wallBg)" />
+  <rect width="800" height="500" fill="url(#spotCenter)" />
+  <rect width="800" height="500" fill="url(#spotLeft)" />
+  <rect width="800" height="500" fill="url(#spotRight)" />
 
-  <!-- Device Frame Outline -->
-  <rect x="70" y="50" width="660" height="400" rx="16" fill="rgba(17, 24, 39, 0.75)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.5"/>
-  <rect x="70" y="50" width="660" height="400" rx="16" fill="none" stroke="#8B5CF6" stroke-opacity="0.25" stroke-width="3"/>
-
-  <!-- Top bar of the simulated device -->
-  <rect x="70" y="50" width="660" height="42" rx="16" fill="rgba(11, 15, 25, 0.85)"/>
-  <circle cx="95" cy="71" r="5" fill="#EF4444" opacity="0.8"/>
-  <circle cx="112" cy="71" r="5" fill="#F59E0B" opacity="0.8"/>
-  <circle cx="129" cy="71" r="5" fill="#10B981" opacity="0.8"/>
-  <text x="400" y="76" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="12" text-anchor="middle" font-weight="600" letter-spacing="1">GAMETELIER INTERACTIVE</text>
-
-  <!-- Icon Graphic -->
-  <g transform="translate(400, 210) scale(1.1)">
-    
-      <circle cx="0" cy="-20" r="45" fill="none" stroke="#8B5CF6" stroke-width="4"/>
-      <circle cx="0" cy="-20" r="28" fill="none" stroke="#8B5CF6" stroke-width="3"/>
-      <circle cx="0" cy="-20" r="12" fill="#EF4444"/>
-    
+  <!-- Background Architecture: High-Tech Carnival Gallery Arches -->
+  <g opacity="0.15">
+    <path d="M 60,260 C 60,110 240,110 240,260" fill="none" stroke="#6366F1" stroke-width="2" />
+    <path d="M 320,260 C 320,110 480,110 480,260" fill="none" stroke="#6366F1" stroke-width="2" />
+    <path d="M 560,260 C 560,110 740,110 740,260" fill="none" stroke="#6366F1" stroke-width="2" />
+    <!-- Horizontal Structural Track Lines -->
+    <line x1="0" y1="180" x2="800" y2="180" stroke="#38BDF8" stroke-width="1" stroke-dasharray="8 8" />
+    <line x1="0" y1="260" x2="800" y2="260" stroke="#38BDF8" stroke-width="1" />
   </g>
 
-  <!-- Titles -->
-  <text x="400" y="360" fill="#F8FAFC" font-family="system-ui, sans-serif" font-size="28" font-weight="800" text-anchor="middle" letter-spacing="-0.5">TAP GALLERY</text>
-  <text x="400" y="390" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="14" font-weight="500" text-anchor="middle" letter-spacing="0.5">Tiro al Blanco Táctil & Ritmo</text>
+  <!-- ========================================================
+       TIER 3 (BACKGROUND TRACK — HIGH/FAST RUNNER TARGETS)
+       ======================================================== -->
+  <g id="tier-3-track">
+    <!-- Steel Overhead Rail -->
+    <rect x="40" y="130" width="720" height="10" rx="3" fill="#0F172A" stroke="#1E293B" stroke-width="1.5" />
+    <line x1="40" y1="135" x2="760" y2="135" stroke="#38BDF8" stroke-width="2" opacity="0.6" />
 
-  <!-- Status Pill -->
-  <rect x="330" y="415" width="140" height="24" rx="12" fill="#8B5CF6" fill-opacity="0.15" stroke="#8B5CF6" stroke-opacity="0.4"/>
-  <circle cx="345" cy="427" r="4" fill="#8B5CF6"/>
-  <text x="405" y="431" fill="#F8FAFC" font-family="system-ui, sans-serif" font-size="11" font-weight="700" text-anchor="middle" letter-spacing="1">EVENT-READY</text>
+    <!-- Runner Target 1: Gold Star Dashing Right with Speed Trail -->
+    <g transform="translate(480, 130)">
+      <!-- Motion Speed Lines -->
+      <line x1="-50" y1="0" x2="-28" y2="0" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round" opacity="0.8" />
+      <line x1="-40" y1="-8" x2="-22" y2="-8" stroke="#FBBF24" stroke-width="1.8" stroke-linecap="round" opacity="0.6" />
+      <line x1="-45" y1="8" x2="-25" y2="8" stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round" opacity="0.6" />
+      <use href="#target-star" />
+      <!-- Speed Tag Pill -->
+      <rect x="28" y="-10" width="48" height="18" rx="5" fill="#78350F" stroke="#FBBF24" stroke-width="1" />
+      <text x="52" y="3" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="9" font-weight="900" fill="#FEF08A" text-anchor="middle">+300 FAST</text>
+    </g>
+
+    <!-- Background Target 2: Standard Bullseye hanging on left -->
+    <g transform="translate(160, 130)">
+      <use href="#target-bullseye" />
+    </g>
+  </g>
+
+  <!-- ========================================================
+       TIER 2 (MID-GROUND — MOVING CARRIERS & POP-UPS)
+       ======================================================== -->
+  <!-- Mid-Ground Shelf / Cover Structure -->
+  <g id="tier-2-shelf">
+    <!-- Support Crates & Partitions -->
+    <rect x="120" y="220" width="100" height="60" rx="6" fill="#111827" stroke="#1E293B" stroke-width="2" />
+    <line x1="120" y1="220" x2="220" y2="280" stroke="#1E293B" stroke-width="1.5" />
+    
+    <rect x="350" y="210" width="110" height="70" rx="6" fill="#111827" stroke="#1E293B" stroke-width="2" />
+    <line x1="350" y1="210" x2="460" y2="280" stroke="#1E293B" stroke-width="1.5" />
+
+    <rect x="580" y="220" width="100" height="60" rx="6" fill="#111827" stroke="#1E293B" stroke-width="2" />
+    <line x1="580" y1="220" x2="680" y2="280" stroke="#1E293B" stroke-width="1.5" />
+
+    <!-- Pop-up Target 1 (Peeking from behind Left Crate): Cute Robot Mascot! -->
+    <g transform="translate(170, 218)">
+      <use href="#mascot-peek" />
+      <!-- Crosshairs Targeted onto it -->
+      <circle cx="0" cy="-6" r="16" fill="none" stroke="#34D399" stroke-width="1.5" stroke-dasharray="4 3" filter="url(#neonGlow)" />
+    </g>
+
+    <!-- Pop-up Target 2 (Right Crate): DECOY HAZARD BOMB! (Don't Tap!) -->
+    <g transform="translate(630, 218)">
+      <use href="#decoy-bomb" />
+      <!-- Red Warning Floating Badge -->
+      <g transform="translate(0, -38)" filter="url(#redAlertGlow)">
+        <rect x="-36" y="-10" width="72" height="20" rx="6" fill="#450A0A" stroke="#EF4444" stroke-width="1.5" />
+        <text x="0" y="4" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="9.5" font-weight="900" fill="#FCA5A5" text-anchor="middle">DON'T TAP!</text>
+      </g>
+    </g>
+
+    <!-- Pop-up Target 3 (Center): BEING TAPPED RIGHT NOW WITH COMBO FX! -->
+    <g transform="translate(405, 205)">
+      <!-- Active Tap Impact Ripples -->
+      <circle cx="0" cy="0" r="38" fill="none" stroke="#38BDF8" stroke-width="2" opacity="0.4" />
+      <circle cx="0" cy="0" r="30" fill="none" stroke="#67E8F9" stroke-width="2.5" opacity="0.7" />
+      <circle cx="0" cy="0" r="22" fill="rgba(56, 189, 248, 0.2)" stroke="#38BDF8" stroke-width="3" filter="url(#neonGlow)" />
+      
+      <!-- Bullseye Target under crosshair -->
+      <use href="#target-bullseye" />
+
+      <!-- Tap Reticle Crosshair -->
+      <circle cx="0" cy="0" r="12" fill="none" stroke="#FFFFFF" stroke-width="2" />
+      <circle cx="0" cy="0" r="3" fill="#FFFFFF" />
+      <line x1="-18" y1="0" x2="-14" y2="0" stroke="#FFFFFF" stroke-width="2.5" />
+      <line x1="14" y1="0" x2="18" y2="0" stroke="#FFFFFF" stroke-width="2.5" />
+      <line x1="0" y1="-18" x2="0" y2="-14" stroke="#FFFFFF" stroke-width="2.5" />
+      <line x1="0" y1="14" x2="0" y2="18" stroke="#FFFFFF" stroke-width="2.5" />
+
+      <!-- Floating Score Explosion (+250 HIT!) -->
+      <g transform="translate(0, -42)" filter="url(#neonGlow)">
+        <rect x="-38" y="-12" width="76" height="24" rx="12" fill="#083344" stroke="#38BDF8" stroke-width="2" />
+        <text x="0" y="5" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="900" fill="#E0F2FE" text-anchor="middle">+250 HIT!</text>
+      </g>
+      <!-- Spark Particles -->
+      <circle cx="-22" cy="-20" r="2" fill="#FDE047" />
+      <circle cx="24" cy="-18" r="2.5" fill="#FDE047" />
+      <circle cx="18" cy="22" r="1.8" fill="#FDE047" />
+    </g>
+  </g>
+
+  <!-- ========================================================
+       TIER 1 (FOREGROUND GALLERY COUNTER & LOWER POP-UPS)
+       ======================================================== -->
+  <!-- Heavy Front Barrier Counter -->
+  <g id="tier-1-counter" filter="url(#dropShadow)">
+    <!-- Base Counter Structure -->
+    <polygon points="0,380 800,380 800,500 0,500" fill="url(#barrierGrad)" stroke="#1E293B" stroke-width="2" />
+    <!-- Front Beveled Lip with Neon Rail -->
+    <line x1="0" y1="382" x2="800" y2="382" stroke="#6366F1" stroke-width="3.5" filter="url(#neonGlow)" />
+    <!-- Metal Rivets along Counter -->
+    <g fill="#475569" opacity="0.8">
+      <circle cx="50" cy="398" r="3" />
+      <circle cx="200" cy="398" r="3" />
+      <circle cx="350" cy="398" r="3" />
+      <circle cx="500" cy="398" r="3" />
+      <circle cx="650" cy="398" r="3" />
+      <circle cx="750" cy="398" r="3" />
+    </g>
+  </g>
+
+  <!-- Pop-Up Targets popping right over the front counter lip -->
+  <g transform="translate(260, 375)">
+    <use href="#target-bullseye" />
+  </g>
+  <g transform="translate(540, 375)">
+    <use href="#target-bullseye" />
+  </g>
+
+  <!-- ========================================================
+       TOP HUD: WIDE PROGRESS BAR & GAMEPLAY METRICS CAPSULE
+       ======================================================== -->
+  <g id="top-hud" transform="translate(400, 34)" filter="url(#dropShadow)">
+    <!-- Main Capsule Container -->
+    <rect x="-300" y="-18" width="600" height="42" rx="21" fill="#0F172A" fill-opacity="0.94" stroke="#1E293B" stroke-width="1.5" />
+
+    <!-- Left: Stage Indicator -->
+    <g transform="translate(-230, 3)">
+      <circle cx="-16" cy="0" r="4.5" fill="#10B981" filter="url(#neonGlow)" />
+      <text x="-5" y="4" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="800" fill="#E2E8F0" letter-spacing="0.5">GALLERY MODE</text>
+    </g>
+
+    <!-- Center: Wide Level Progress Bar (Time Remaining Gauge) -->
+    <g transform="translate(-70, 3)">
+      <!-- Track Background -->
+      <rect x="0" y="-7" width="160" height="14" rx="7" fill="#1E293B" stroke="#334155" stroke-width="1" />
+      <!-- Filled Gradient Progress (70% Completed) -->
+      <rect x="2" y="-5" width="112" height="10" rx="5" fill="#6366F1" />
+      <rect x="2" y="-5" width="112" height="10" rx="5" fill="url(#targetCyan)" opacity="0.8" />
+      <!-- Timer Label -->
+      <text x="175" y="4" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="800" fill="#38BDF8">00:18</text>
+    </g>
+
+    <!-- Right: Combo Streak & Score -->
+    <g transform="translate(160, 3)">
+      <!-- Combo Capsule -->
+      <rect x="-24" y="-10" width="56" height="20" rx="10" fill="#10B981" fill-opacity="0.2" stroke="#10B981" stroke-width="1" />
+      <text x="4" y="4" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10.5" font-weight="900" fill="#34D399" text-anchor="middle">x12 COMBO</text>
+      <!-- Score -->
+      <text x="82" y="4" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="13.5" font-weight="900" fill="#F8FAFC" text-anchor="middle" letter-spacing="1">28,450</text>
+    </g>
+  </g>
 </svg>

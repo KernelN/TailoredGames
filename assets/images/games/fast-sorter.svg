@@ -1,0 +1,552 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <!-- ==========================================
+         1. ENVIRONMENT & LIGHTING (LANE RUSH MATCH)
+         ========================================== -->
+    <linearGradient id="wallBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#060A12" />
+      <stop offset="55%" stop-color="#0D1526" />
+      <stop offset="100%" stop-color="#162238" />
+    </linearGradient>
+
+    <radialGradient id="spotlightLeft" cx="22%" cy="20%" r="55%">
+      <stop offset="0%" stop-color="#06B6D4" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#060A12" stop-opacity="0" />
+    </radialGradient>
+
+    <radialGradient id="spotlightRight" cx="78%" cy="20%" r="55%">
+      <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#060A12" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- ==========================================
+         2. BELTS, PATTERNS & SUITS
+         ========================================== -->
+    <linearGradient id="beltSurface" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="25%" stop-color="#1E293B" />
+      <stop offset="80%" stop-color="#141E30" />
+      <stop offset="100%" stop-color="#0B111E" />
+    </linearGradient>
+
+    <!-- Tread Rib Texture Pattern -->
+    <pattern id="beltTreadRibs" width="16" height="60" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="2" x2="0" y2="58" stroke="rgba(255, 255, 255, 0.03)" stroke-width="1.5" />
+      <line x1="8" y1="2" x2="8" y2="58" stroke="rgba(0, 0, 0, 0.3)" stroke-width="1.5" />
+    </pattern>
+
+    <!-- Suit Gradients (Lane Rush Characters) -->
+    <linearGradient id="p1Suit" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#22D3EE" />
+      <stop offset="100%" stop-color="#0284C7" />
+    </linearGradient>
+    <linearGradient id="p2Suit" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FBBF24" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+
+    <!-- Liquid Vat Gradients -->
+    <linearGradient id="vatHerbGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#34D399" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+    <linearGradient id="vatCitrusGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FBBF24" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+    <linearGradient id="vatCoconutGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="100%" stop-color="#0284C7" />
+    </linearGradient>
+    <linearGradient id="vatFloralGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FB7185" />
+      <stop offset="100%" stop-color="#E11D48" />
+    </linearGradient>
+
+    <!-- Shadows & Neon Glow Filters -->
+    <filter id="dropShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="6" stdDeviation="4.5" flood-color="#000000" flood-opacity="0.6" />
+    </filter>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.45" />
+    </filter>
+    <filter id="neonGlow" x="-35%" y="-35%" width="170%" height="170%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- ========================================================
+         3. BOLD, ICONIC & CARTOONISH BOTANICAL PROPS (INSTANT READ)
+         ======================================================== -->
+
+    <!-- A. ICONIC CARTOON CITRUS WHEEL (Bold, Bright, Unmistakable Orange) -->
+    <g id="prop-citrus" filter="url(#dropShadow)">
+      <!-- Ground Shadow -->
+      <ellipse cx="0" cy="18" rx="20" ry="6.5" fill="rgba(0,0,0,0.4)" />
+      <!-- Bold Orange Rind -->
+      <circle cx="0" cy="0" r="19" fill="#EA580C" stroke="#9A3412" stroke-width="2.5" />
+      <!-- Bright Vibrant Inner Rind -->
+      <circle cx="0" cy="0" r="17.5" fill="#F97316" />
+      <!-- White Pith Ring -->
+      <circle cx="0" cy="0" r="14.5" fill="#FFFBEB" />
+      <!-- Bold Pulp Wedge Segments (6 Cartoon Rays) -->
+      <g fill="#F97316" stroke="#FFFBEB" stroke-width="1.8">
+        <path d="M 0,0 L -6,-12 A 13,13 0 0,1 6,-12 Z" />
+        <path d="M 0,0 L 7,-11 A 13,13 0 0,1 13,-2 Z" />
+        <path d="M 0,0 L 13,0 A 13,13 0 0,1 7,11 Z" />
+        <path d="M 0,0 L 5,12 A 13,13 0 0,1 -6,12 Z" />
+        <path d="M 0,0 L -7,11 A 13,13 0 0,1 -13,0 Z" />
+        <path d="M 0,0 L -13,-2 A 13,13 0 0,1 -7,-11 Z" />
+      </g>
+      <!-- Center Core Pip -->
+      <circle cx="0" cy="0" r="3" fill="#FFFBEB" />
+      <!-- Juicy Cartoon Gloss Highlights -->
+      <path d="M -11,-11 C -6,-15 6,-15 11,-11" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" opacity="0.85" />
+      <circle cx="-5" cy="-6" r="1.5" fill="#FEF08A" />
+      <circle cx="6" cy="-4" r="1.2" fill="#FEF08A" />
+    </g>
+
+    <!-- B. ICONIC CARTOON COCONUT HALF (Chunky Husk, White Meat, Aqua Water) -->
+    <g id="prop-coconut" filter="url(#dropShadow)">
+      <!-- Ground Shadow -->
+      <ellipse cx="0" cy="18" rx="22" ry="7" fill="rgba(0,0,0,0.4)" />
+      <!-- Dark Chocolate Shell Bowl -->
+      <path d="M -20,3 C -20,20 20,20 20,3 C 20,-3 15,-6 0,-6 C -15,-6 -20,-3 -20,3 Z" fill="#451A03" stroke="#292524" stroke-width="2.5" />
+      <!-- Cartoon Shell Fiber Texture Notches -->
+      <path d="M -16,6 Q -10,14 0,14 Q 10,14 16,6" fill="none" stroke="#78350F" stroke-width="2" />
+      <!-- Chunky Pristine White Coconut Meat Rim -->
+      <ellipse cx="0" cy="2" rx="19" ry="8.5" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="2" />
+      <!-- Clear Vibrant Tropical Aqua Water Pool -->
+      <ellipse cx="0" cy="3.5" rx="13.5" ry="5.5" fill="#06B6D4" stroke="#0891B2" stroke-width="1.2" />
+      <!-- Cartoon Water Gloss Shine -->
+      <ellipse cx="-4" cy="2.5" rx="5" ry="1.8" fill="#FFFFFF" opacity="0.9" />
+      <circle cx="5" cy="4" r="1.5" fill="#FFFFFF" opacity="0.8" />
+      <!-- Cute Palm Sprout Leaf attached on the side -->
+      <path d="M -16,-2 C -22,-8 -24,-2 -17,2 Z" fill="#10B981" stroke="#059669" stroke-width="1" />
+    </g>
+
+    <!-- C. ICONIC CARTOON BOTANICAL HERB / MINT (Plump Twin Leaves with Dewdrop) -->
+    <g id="prop-aloe" filter="url(#dropShadow)">
+      <!-- Ground Shadow -->
+      <ellipse cx="0" cy="18" rx="20" ry="6.5" fill="rgba(0,0,0,0.4)" />
+      <!-- Little Green Stem -->
+      <path d="M 0,10 L 0,17" stroke="#047857" stroke-width="3" stroke-linecap="round" />
+      
+      <!-- Left Plump Leaf -->
+      <path d="M 0,11 C -8,11 -18,4 -21,-5 C -18,-15 -6,-10 0,6 Z" fill="#059669" stroke="#064E3B" stroke-width="2" />
+      <path d="M -1,-1 C -8,-7 -14,-7 -17,-5" fill="none" stroke="#34D399" stroke-width="2" stroke-linecap="round" />
+
+      <!-- Right Main Vibrant Leaf (Bigger & Higher) -->
+      <path d="M -1,10 C 6,10 17,2 21,-9 C 17,-22 4,-16 -1,6 Z" fill="#10B981" stroke="#047857" stroke-width="2" />
+      <path d="M 2,1 C 8,-6 14,-8 17,-9" fill="none" stroke="#A7F3D0" stroke-width="2.5" stroke-linecap="round" />
+      <!-- Sunny Side Highlight -->
+      <ellipse cx="9" cy="-6" rx="5" ry="2" fill="#34D399" opacity="0.6" transform="rotate(-30 9 -6)" />
+
+      <!-- Big Cute Cartoon Water Dewdrop -->
+      <circle cx="11" cy="-8" r="3" fill="#E0F2FE" stroke="#38BDF8" stroke-width="0.8" />
+      <circle cx="10" cy="-9" r="1.2" fill="#FFFFFF" />
+    </g>
+
+    <!-- D. ICONIC CARTOON 5-PETAL FLOWER BLOOM (Vibrant Pink with Sunny Yellow Center) -->
+    <g id="prop-floral" filter="url(#dropShadow)">
+      <!-- Ground Shadow -->
+      <ellipse cx="0" cy="18" rx="20" ry="6.5" fill="rgba(0,0,0,0.4)" />
+      <!-- Cute Green Leaf Tucked Behind -->
+      <path d="M -14,6 C -20,12 -12,18 -4,12 Z" fill="#10B981" stroke="#059669" stroke-width="1.2" />
+
+      <!-- 5 Bold Cartoon Petals (Vibrant Rose/Pink) -->
+      <g fill="#FB7185" stroke="#E11D48" stroke-width="2" stroke-linejoin="round">
+        <!-- Top Petal -->
+        <circle cx="0" cy="-11" r="8" />
+        <!-- Top-Right Petal -->
+        <circle cx="10" cy="-4" r="8" />
+        <!-- Bottom-Right Petal -->
+        <circle cx="7" cy="8" r="8" />
+        <!-- Bottom-Left Petal -->
+        <circle cx="-7" cy="8" r="8" />
+        <!-- Top-Left Petal -->
+        <circle cx="-10" cy="-4" r="8" />
+      </g>
+      <!-- Petal Inner Shading Ring -->
+      <circle cx="0" cy="0" r="10" fill="#F43F5E" />
+
+      <!-- Big Sunny Yellow Cartoon Center Core -->
+      <circle cx="0" cy="0" r="7.5" fill="#FBBF24" stroke="#D97706" stroke-width="1.8" />
+      <!-- Cute Cartoon Pollen Dots -->
+      <circle cx="-2.5" cy="-2.5" r="1.2" fill="#FEF08A" />
+      <circle cx="2" cy="-2" r="1.2" fill="#FEF08A" />
+      <circle cx="0" cy="2.5" r="1.2" fill="#FEF08A" />
+      <!-- Highlight Glint -->
+      <circle cx="-2" cy="-3.5" r="0.8" fill="#FFFFFF" />
+    </g>
+  </defs>
+
+  <!-- ==========================================
+       ENVIRONMENT: SLEEK DARK TECH-STUDIO LAB
+       ========================================== -->
+  <rect width="800" height="500" fill="url(#wallBg)" />
+
+  <!-- Subtle Overhead Spotlights -->
+  <rect width="800" height="500" fill="url(#spotlightLeft)" />
+  <rect width="800" height="500" fill="url(#spotlightRight)" />
+
+  <!-- Studio Floor & Minimalist Structural Grid (Lane Rush Style) -->
+  <g opacity="0.12">
+    <line x1="0" y1="260" x2="800" y2="260" stroke="#38BDF8" stroke-width="1" />
+    <line x1="0" y1="330" x2="800" y2="330" stroke="#38BDF8" stroke-width="1.2" />
+    <line x1="0" y1="410" x2="800" y2="410" stroke="#38BDF8" stroke-width="1.5" />
+    <!-- Vertical Wall Mullions -->
+    <line x1="160" y1="0" x2="160" y2="260" stroke="#38BDF8" stroke-width="1.2" />
+    <line x1="400" y1="0" x2="400" y2="260" stroke="#38BDF8" stroke-width="1.2" stroke-dasharray="6 6" />
+    <line x1="640" y1="0" x2="640" y2="260" stroke="#F59E0B" stroke-width="1.2" />
+  </g>
+
+  <!-- ========================================================
+       LEFT CONVEYOR BELT (Descending to Player 1 - Cyan Track)
+       ======================================================== -->
+  <g id="conveyor-left">
+    <!-- Outer Metal Side Fascia with Bevel -->
+    <polygon points="0,150 170,270 170,290 0,170" fill="#0B1324" stroke="#1E293B" stroke-width="1.5" />
+    <!-- Belt Bed Surface -->
+    <polygon points="0,100 190,235 170,270 0,135" fill="url(#beltSurface)" stroke="#334155" stroke-width="1.5" />
+    <polygon points="0,100 190,235 170,270 0,135" fill="url(#beltTreadRibs)" opacity="0.4" />
+
+    <!-- Cyan Neon Guide Rails -->
+    <line x1="0" y1="100" x2="190" y2="235" stroke="#06B6D4" stroke-width="3.5" filter="url(#neonGlow)" />
+    <line x1="0" y1="135" x2="170" y2="270" stroke="#0284C7" stroke-width="2.5" />
+
+    <!-- Conveyor Chevrons (Down-Right Direction) -->
+    <g stroke="#38BDF8" stroke-width="2" fill="none" opacity="0.4" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20,130 35,140 25,148" />
+      <polyline points="75,170 90,180 80,188" />
+      <polyline points="130,210 145,220 135,228" />
+    </g>
+
+    <!-- Belt Item 1 (Top): Iconic Cartoon Mint / Herb Leaves -->
+    <g transform="translate(50, 140) scale(1.15)">
+      <use href="#prop-aloe" />
+    </g>
+
+    <!-- Belt Item 2 (Mid): Iconic Cartoon Orange Wheel (Needs Transfer to P2!) -->
+    <g transform="translate(125, 205) scale(1.15)">
+      <!-- Amber Alert Ring around Orange indicating it belongs to partner -->
+      <ellipse cx="0" cy="6" rx="28" ry="14" fill="none" stroke="#F59E0B" stroke-width="2" stroke-dasharray="5 3" filter="url(#neonGlow)" />
+      <use href="#prop-citrus" />
+    </g>
+  </g>
+
+  <!-- ========================================================
+       RIGHT CONVEYOR BELT (Descending to Player 2 - Amber Track)
+       ======================================================== -->
+  <g id="conveyor-right">
+    <!-- Outer Metal Side Fascia with Bevel -->
+    <polygon points="800,150 630,270 630,290 800,170" fill="#0B1324" stroke="#1E293B" stroke-width="1.5" />
+    <!-- Belt Bed Surface -->
+    <polygon points="800,100 610,235 630,270 800,135" fill="url(#beltSurface)" stroke="#334155" stroke-width="1.5" />
+    <polygon points="800,100 610,235 630,270 800,135" fill="url(#beltTreadRibs)" opacity="0.4" />
+
+    <!-- Amber Neon Guide Rails -->
+    <line x1="800" y1="100" x2="610" y2="235" stroke="#F59E0B" stroke-width="3.5" filter="url(#neonGlow)" />
+    <line x1="800" y1="135" x2="630" y2="270" stroke="#D97706" stroke-width="2.5" />
+
+    <!-- Conveyor Chevrons (Down-Left Direction) -->
+    <g stroke="#FBBF24" stroke-width="2" fill="none" opacity="0.4" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="780,130 765,140 775,148" />
+      <polyline points="725,170 710,180 720,188" />
+      <polyline points="670,210 655,220 665,228" />
+    </g>
+
+    <!-- Belt Item 3 (Top): Iconic Cartoon Pink Flower Bloom -->
+    <g transform="translate(750, 140) scale(1.15)">
+      <use href="#prop-floral" />
+    </g>
+
+    <!-- Belt Item 4 (Mid): Iconic Cartoon Coconut Half -->
+    <g transform="translate(675, 205) scale(1.15)">
+      <use href="#prop-coconut" />
+    </g>
+  </g>
+
+  <!-- ========================================================
+       CENTRAL ELEVATED 2.5D TABLE PLATFORM (Charcoal Slate)
+       ======================================================== -->
+  <g id="center-platform" filter="url(#dropShadow)">
+    <!-- Platform Front Beveled Wall -->
+    <polygon points="210,385 590,385 590,405 210,405" fill="#0B111E" stroke="#1E293B" stroke-width="1.5" />
+    <line x1="220" y1="395" x2="580" y2="395" stroke="#6366F1" stroke-width="2" filter="url(#neonGlow)" opacity="0.8" />
+
+    <!-- Platform Top Slab (2.5D Isometric Charcoal Surface) -->
+    <polygon points="240,150 560,150 590,385 210,385" fill="#111827" stroke="#334155" stroke-width="2" />
+    <polygon points="248,158 552,158 580,378 220,378" fill="#0F172A" stroke="#1E293B" stroke-width="1" />
+
+    <!-- Center Cross Alignment Traces -->
+    <line x1="400" y1="165" x2="400" y2="370" stroke="#1E293B" stroke-width="2" stroke-dasharray="6 6" />
+    <line x1="235" y1="265" x2="565" y2="265" stroke="#1E293B" stroke-width="2" stroke-dasharray="6 6" />
+  </g>
+
+  <!-- ========================================================
+       THE 4 COLOR-CODED EXTRACTION VATS (2x2 Grid)
+       ======================================================== -->
+
+  <!-- 1. TOP-LEFT VAT: Botanical Herbs / Aloe (Emerald) -->
+  <g id="vat-emerald" transform="translate(300, 160)" filter="url(#softShadow)">
+    <!-- Base Socket -->
+    <rect x="-36" y="55" width="72" height="12" rx="3" fill="#064E3B" stroke="#059669" stroke-width="1.2" />
+    <!-- Glass Cylinder Body -->
+    <rect x="-30" y="0" width="60" height="60" rx="8" fill="#064E3B" fill-opacity="0.3" stroke="#10B981" stroke-width="2" />
+    <!-- Glowing Fluid Level (85% Full) -->
+    <rect x="-27" y="12" width="54" height="45" rx="5" fill="url(#vatHerbGrad)" opacity="0.9" />
+    <!-- Bubbles -->
+    <circle cx="-10" cy="30" r="2.5" fill="#A7F3D0" />
+    <circle cx="12" cy="40" r="2" fill="#FFFFFF" opacity="0.8" />
+    <!-- Top Funnel Rim -->
+    <ellipse cx="0" cy="0" rx="32" ry="8" fill="#1E293B" stroke="#10B981" stroke-width="1.8" />
+    <ellipse cx="0" cy="0" rx="24" ry="5" fill="#022C22" />
+    <!-- Plaque Badge (Iconic Cartoon Herb) -->
+    <g transform="translate(0, 52)">
+      <rect x="-22" y="-10" width="44" height="20" rx="4" fill="#0F172A" stroke="#34D399" stroke-width="1.2" />
+      <g transform="translate(0, 0) scale(0.38)">
+        <use href="#prop-aloe" />
+      </g>
+    </g>
+    <!-- Floating Direct Score Pop -->
+    <g transform="translate(0, -22)" filter="url(#softShadow)">
+      <rect x="-24" y="-10" width="48" height="18" rx="9" fill="#064E3B" stroke="#34D399" stroke-width="1.2" />
+      <text x="0" y="3" fill="#6EE7B7" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="900" text-anchor="middle">+150</text>
+    </g>
+  </g>
+
+  <!-- 2. TOP-RIGHT VAT: Vitamin C Citrus (Amber / Gold) -->
+  <g id="vat-amber" transform="translate(500, 160)" filter="url(#softShadow)">
+    <!-- Base Socket -->
+    <rect x="-36" y="55" width="72" height="12" rx="3" fill="#78350F" stroke="#D97706" stroke-width="1.2" />
+    <!-- Glass Cylinder Body -->
+    <rect x="-30" y="0" width="60" height="60" rx="8" fill="#78350F" fill-opacity="0.3" stroke="#F59E0B" stroke-width="2" />
+    <!-- Glowing Fluid Level (90% Full - Target of Combo!) -->
+    <rect x="-27" y="6" width="54" height="51" rx="5" fill="url(#vatCitrusGrad)" opacity="0.9" />
+    <!-- Bubbles -->
+    <circle cx="-8" cy="25" r="2.5" fill="#FEF3C7" />
+    <circle cx="10" cy="38" r="2" fill="#FFFFFF" opacity="0.8" />
+    <!-- Top Funnel Rim -->
+    <ellipse cx="0" cy="0" rx="32" ry="8" fill="#1E293B" stroke="#F59E0B" stroke-width="1.8" />
+    <ellipse cx="0" cy="0" rx="24" ry="5" fill="#451A03" />
+    <!-- Plaque Badge (Iconic Cartoon Citrus) -->
+    <g transform="translate(0, 52)">
+      <rect x="-22" y="-10" width="44" height="20" rx="4" fill="#0F172A" stroke="#FBBF24" stroke-width="1.2" />
+      <g transform="translate(0, 0) scale(0.38)">
+        <use href="#prop-citrus" />
+      </g>
+    </g>
+    <!-- Floating Assist Combo Pop -->
+    <g transform="translate(0, -24)" filter="url(#neonGlow)">
+      <rect x="-38" y="-11" width="76" height="20" rx="10" fill="#78350F" stroke="#FBBF24" stroke-width="1.5" />
+      <text x="0" y="3" fill="#FEF08A" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="900" text-anchor="middle">+300 COMBO</text>
+    </g>
+  </g>
+
+  <!-- 3. BOTTOM-LEFT VAT: Hydra-Coconut Moisture (Cyan) -->
+  <g id="vat-cyan" transform="translate(300, 270)" filter="url(#softShadow)">
+    <!-- Base Socket -->
+    <rect x="-36" y="55" width="72" height="12" rx="3" fill="#083344" stroke="#0891B2" stroke-width="1.2" />
+    <!-- Glass Cylinder Body -->
+    <rect x="-30" y="0" width="60" height="60" rx="8" fill="#083344" fill-opacity="0.3" stroke="#06B6D4" stroke-width="2" />
+    <!-- Glowing Fluid Level (65% Full) -->
+    <rect x="-27" y="22" width="54" height="35" rx="5" fill="url(#vatCoconutGrad)" opacity="0.9" />
+    <!-- Bubbles -->
+    <circle cx="-10" cy="38" r="2.5" fill="#E0F2FE" />
+    <circle cx="12" cy="48" r="2" fill="#FFFFFF" opacity="0.8" />
+    <!-- Top Funnel Rim -->
+    <ellipse cx="0" cy="0" rx="32" ry="8" fill="#1E293B" stroke="#06B6D4" stroke-width="1.8" />
+    <ellipse cx="0" cy="0" rx="24" ry="5" fill="#082F49" />
+    <!-- Plaque Badge (Iconic Cartoon Coconut) -->
+    <g transform="translate(0, 52)">
+      <rect x="-22" y="-10" width="44" height="20" rx="4" fill="#0F172A" stroke="#38BDF8" stroke-width="1.2" />
+      <g transform="translate(0, 0) scale(0.38)">
+        <use href="#prop-coconut" />
+      </g>
+    </g>
+    <!-- Active Sort Target: Iconic Cartoon Coconut dropping in from above -->
+    <g transform="translate(0, -20) scale(0.8)">
+      <use href="#prop-coconut" />
+      <ellipse cx="0" cy="18" rx="20" ry="5" fill="none" stroke="#67E8F9" stroke-width="1.5" opacity="0.8" />
+    </g>
+  </g>
+
+  <!-- 4. BOTTOM-RIGHT VAT: Floral Radiance Essence (Rose) -->
+  <g id="vat-rose" transform="translate(500, 270)" filter="url(#softShadow)">
+    <!-- Base Socket -->
+    <rect x="-36" y="55" width="72" height="12" rx="3" fill="#4C0519" stroke="#BE123C" stroke-width="1.2" />
+    <!-- Glass Cylinder Body -->
+    <rect x="-30" y="0" width="60" height="60" rx="8" fill="#4C0519" fill-opacity="0.3" stroke="#F43F5E" stroke-width="2" />
+    <!-- Glowing Fluid Level (70% Full) -->
+    <rect x="-27" y="18" width="54" height="39" rx="5" fill="url(#vatFloralGrad)" opacity="0.9" />
+    <!-- Bubbles -->
+    <circle cx="-8" cy="35" r="2.5" fill="#FFE4E6" />
+    <circle cx="10" cy="46" r="2" fill="#FFFFFF" opacity="0.8" />
+    <!-- Top Funnel Rim -->
+    <ellipse cx="0" cy="0" rx="32" ry="8" fill="#1E293B" stroke="#F43F5E" stroke-width="1.8" />
+    <ellipse cx="0" cy="0" rx="24" ry="5" fill="#2B040F" />
+    <!-- Plaque Badge (Iconic Cartoon Flower) -->
+    <g transform="translate(0, 52)">
+      <rect x="-22" y="-10" width="44" height="20" rx="4" fill="#0F172A" stroke="#FB7185" stroke-width="1.2" />
+      <g transform="translate(0, 0) scale(0.38)">
+        <use href="#prop-floral" />
+      </g>
+    </g>
+  </g>
+
+  <!-- ========================================================
+       PNEUMATIC HAND-OFF TUBE & ACTIVE COOPERATIVE PASS
+       ======================================================== -->
+  <g id="handoff-tube" filter="url(#dropShadow)">
+    <!-- Tube Mounting Stems -->
+    <rect x="212" y="355" width="10" height="35" fill="#1E293B" />
+    <rect x="578" y="355" width="10" height="35" fill="#1E293B" />
+
+    <!-- Glass Vacuum Tube Arch -->
+    <path d="M 210,360 Q 400,430 590,360" fill="none" stroke="#0F172A" stroke-width="22" stroke-linecap="round" />
+    <path d="M 210,360 Q 400,430 590,360" fill="none" stroke="#1E293B" stroke-width="18" stroke-linecap="round" />
+    <path d="M 210,360 Q 400,430 590,360" fill="none" stroke="#38BDF8" stroke-width="10" stroke-linecap="round" opacity="0.3" />
+    <path d="M 210,358 Q 400,426 590,358" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.5" />
+
+    <!-- Metallic Compression Collars -->
+    <rect x="270" y="374" width="8" height="20" rx="2" fill="#475569" transform="rotate(-12 274 384)" />
+    <rect x="396" y="386" width="8" height="20" rx="2" fill="#475569" />
+    <rect x="522" y="374" width="8" height="20" rx="2" fill="#475569" transform="rotate(12 526 384)" />
+
+    <!-- Left Send Pad (Cyan P1 Button) -->
+    <g transform="translate(205, 360)">
+      <circle cx="0" cy="0" r="18" fill="#0284C7" stroke="#38BDF8" stroke-width="2" filter="url(#neonGlow)" />
+      <path d="M -6,0 L 4,0 M 0,-4 L 5,0 L 0,4" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+    </g>
+
+    <!-- Right Receive Pad (Amber P2 Port) -->
+    <g transform="translate(595, 360)">
+      <circle cx="0" cy="0" r="18" fill="#D97706" stroke="#F59E0B" stroke-width="2" filter="url(#neonGlow)" />
+      <circle cx="0" cy="0" r="8" fill="none" stroke="#FEF3C7" stroke-width="2" />
+      <circle cx="0" cy="0" r="3" fill="#FEF3C7" />
+    </g>
+
+    <!-- Active In-Transit Orange Wheel Flying in Tube from P1 to P2 -->
+    <g transform="translate(425, 396) scale(0.95)">
+      <!-- Speed Motion Lines -->
+      <line x1="-40" y1="-2" x2="-18" y2="-1" stroke="#F59E0B" stroke-width="3" stroke-linecap="round" opacity="0.8" />
+      <line x1="-50" y1="-5" x2="-22" y2="-3" stroke="#FBBF24" stroke-width="2" stroke-linecap="round" opacity="0.6" />
+      <line x1="-35" y1="3" x2="-15" y2="2" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" opacity="0.7" />
+      <!-- Flying Cartoon Orange -->
+      <g transform="rotate(15)">
+        <use href="#prop-citrus" />
+      </g>
+    </g>
+  </g>
+
+  <!-- ========================================================
+       PLAYER 1: OPERATOR 1 (CYAN SUIT - LANE RUSH MATCH)
+       ======================================================== -->
+  <g transform="translate(160, 275)" filter="url(#dropShadow)">
+    <!-- Ground Touch Ring (Cyan P1) -->
+    <ellipse cx="0" cy="30" rx="26" ry="11" fill="rgba(6, 182, 212, 0.28)" stroke="#06B6D4" stroke-width="2" />
+
+    <!-- 3D Shaded Rounded Torso (Cyan Operator Suit) -->
+    <rect x="-16" y="-6" width="32" height="32" rx="12" fill="url(#p1Suit)" stroke="#67E8F9" stroke-width="1.8" />
+    <!-- Chest Sorting Badge -->
+    <rect x="-8" y="2" width="16" height="12" rx="3" fill="#083344" stroke="#67E8F9" stroke-width="1.2" />
+    <circle cx="0" cy="8" r="3" fill="#38BDF8" />
+
+    <!-- Head (Rounded Robot/Worker Head facing right toward sorting hub) -->
+    <rect x="-18" y="-34" width="36" height="28" rx="13" fill="#F8FAFC" stroke="#06B6D4" stroke-width="2" />
+    <!-- Dark Visor Looking Right with Gloss Reflection -->
+    <rect x="-4" y="-28" width="22" height="14" rx="6" fill="#0F172A" stroke="#334155" stroke-width="1" />
+    <path d="M -1,-26 L 5,-26 L 1,-17 L -3,-17 Z" fill="rgba(255, 255, 255, 0.15)" />
+    <!-- Glowing Friendly Eyes in Visor -->
+    <circle cx="2" cy="-21" r="2.5" fill="#38BDF8" />
+    <circle cx="10" cy="-21" r="2.5" fill="#38BDF8" />
+
+    <!-- Cap Dome on Top (Cyan with Brim) -->
+    <path d="M -19,-26 C -19,-40 19,-40 19,-26 Z" fill="url(#p1Suit)" stroke="#67E8F9" stroke-width="1.2" />
+    <rect x="-22" y="-27" width="44" height="4" rx="2" fill="#38BDF8" />
+
+    <!-- Left Arm: Reaching towards Left Conveyor Belt -->
+    <path d="M -10,6 L -36,0" stroke="url(#p1Suit)" stroke-width="9" stroke-linecap="round" />
+    <circle cx="-38" cy="0" r="6" fill="#F8FAFC" stroke="#06B6D4" stroke-width="1.5" />
+
+    <!-- Right Arm: Pressing the Hand-Off Send Button / Dropping Coconut -->
+    <path d="M 10,6 L 38,18" stroke="url(#p1Suit)" stroke-width="9" stroke-linecap="round" />
+    <circle cx="40" cy="20" r="6" fill="#F8FAFC" stroke="#06B6D4" stroke-width="1.5" />
+
+    <!-- Trajectory Dash Line from P1 to Bottom-Left Coconut Vat -->
+    <path d="M 42,16 Q 80,10 110,-2" fill="none" stroke="#06B6D4" stroke-width="2" stroke-dasharray="4 4" opacity="0.8" />
+  </g>
+
+  <!-- ========================================================
+       PLAYER 2: OPERATOR 2 (AMBER SUIT - LANE RUSH MATCH)
+       ======================================================== -->
+  <g transform="translate(640, 275)" filter="url(#dropShadow)">
+    <!-- Ground Touch Ring (Amber P2) -->
+    <ellipse cx="0" cy="30" rx="26" ry="11" fill="rgba(245, 158, 11, 0.28)" stroke="#F59E0B" stroke-width="2" />
+
+    <!-- 3D Shaded Rounded Torso (Amber Operator Suit) -->
+    <rect x="-16" y="-6" width="32" height="32" rx="12" fill="url(#p2Suit)" stroke="#FDE68A" stroke-width="1.8" />
+    <!-- Chest Sorting Badge -->
+    <rect x="-8" y="2" width="16" height="12" rx="3" fill="#451A03" stroke="#FDE68A" stroke-width="1.2" />
+    <circle cx="0" cy="8" r="3" fill="#FBBF24" />
+
+    <!-- Head (Rounded Robot/Worker Head facing left toward sorting hub) -->
+    <rect x="-18" y="-34" width="36" height="28" rx="13" fill="#F8FAFC" stroke="#F59E0B" stroke-width="2" />
+    <!-- Dark Visor Looking Left with Gloss Reflection -->
+    <rect x="-18" y="-28" width="22" height="14" rx="6" fill="#0F172A" stroke="#334155" stroke-width="1" />
+    <path d="M -15,-26 L -9,-26 L -13,-17 L -17,-17 Z" fill="rgba(255, 255, 255, 0.15)" />
+    <!-- Glowing Friendly Eyes in Visor -->
+    <circle cx="-11" cy="-21" r="2.5" fill="#FBBF24" />
+    <circle cx="-3" cy="-21" r="2.5" fill="#FBBF24" />
+
+    <!-- Cap Dome on Top (Amber with Brim) -->
+    <path d="M -19,-26 C -19,-40 19,-40 19,-26 Z" fill="url(#p2Suit)" stroke="#FDE68A" stroke-width="1.2" />
+    <rect x="-22" y="-27" width="44" height="4" rx="2" fill="#FBBF24" />
+
+    <!-- Left Arm: Reaching out to Catch the Hand-Off Item from Tube Exit -->
+    <path d="M -10,6 L -38,18" stroke="url(#p2Suit)" stroke-width="9" stroke-linecap="round" />
+    <circle cx="-40" cy="20" r="6" fill="#F8FAFC" stroke="#F59E0B" stroke-width="1.5" />
+
+    <!-- Right Arm: Reaching towards Right Conveyor / Vats -->
+    <path d="M 10,6 L 36,0" stroke="url(#p2Suit)" stroke-width="9" stroke-linecap="round" />
+    <circle cx="38" cy="0" r="6" fill="#F8FAFC" stroke="#F59E0B" stroke-width="1.5" />
+
+    <!-- Trajectory Dash Line from Catch to Top-Right Amber Vat -->
+    <path d="M -40,16 Q -85,-10 -115,-45" fill="none" stroke="#F59E0B" stroke-width="2" stroke-dasharray="4 4" opacity="0.8" />
+  </g>
+
+  <!-- ========================================================
+       TOP HUD CAPSULE (EXACT LANE RUSH MATCH)
+       ======================================================== -->
+  <g id="top-hud" transform="translate(400, 36)" filter="url(#dropShadow)">
+    <!-- Pill Container -->
+    <rect x="-240" y="-18" width="480" height="36" rx="18" fill="#0F172A" fill-opacity="0.94" stroke="#1E293B" stroke-width="1.5" />
+
+    <!-- Left: Stage Indicator -->
+    <g transform="translate(-180, 0)">
+      <polygon points="-28,-5 -22,0 -28,5" fill="#10B981" filter="url(#neonGlow)" />
+      <text x="-16" y="4" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="800" fill="#E2E8F0" letter-spacing="0.5">EXTRACTION LAB</text>
+    </g>
+
+    <!-- Center: Timer & Multiplier -->
+    <g transform="translate(0, 0)">
+      <!-- Divider -->
+      <line x1="-50" y1="-10" x2="-50" y2="10" stroke="#334155" stroke-width="1" />
+      <text x="-25" y="4" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="800" fill="#38BDF8" text-anchor="middle">01:14</text>
+      <!-- Multiplier Capsule -->
+      <rect x="5" y="-10" width="48" height="20" rx="10" fill="#10B981" fill-opacity="0.2" stroke="#10B981" stroke-width="1" />
+      <text x="29" y="4" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10.5" font-weight="900" fill="#34D399" text-anchor="middle">3x COMBO</text>
+      <!-- Divider -->
+      <line x1="62" y1="-10" x2="62" y2="10" stroke="#334155" stroke-width="1" />
+    </g>
+
+    <!-- Right: Score Display -->
+    <g transform="translate(170, 0)">
+      <text x="0" y="4" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="13.5" font-weight="900" fill="#F8FAFC" text-anchor="middle" letter-spacing="1">18,450</text>
+    </g>
+  </g>
+</svg>

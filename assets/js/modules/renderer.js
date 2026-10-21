@@ -46,9 +46,75 @@ window.CorpfolioRenderer = (function () {
     hasValidShowcaseImage,
 
     /**
+     * Synchronizes browser tab icon (<link rel="icon">) with studioInfo.favicon
+     */
+    syncFavicon() {
+      if (typeof document === "undefined") return;
+      const favSrc = catalog()?.studioInfo?.favicon || "assets/images/logo/logo.svg";
+      let link = document.querySelector("link[rel*='icon']");
+      if (!link) {
+        link = document.createElement("link");
+        link.rel = "icon";
+        document.head.appendChild(link);
+      }
+      link.href = favSrc;
+      if (favSrc.endsWith(".svg")) {
+        link.type = "image/svg+xml";
+      } else if (favSrc.endsWith(".png")) {
+        link.type = "image/png";
+      } else if (favSrc.endsWith(".ico")) {
+        link.type = "image/x-icon";
+      }
+    },
+
+    /**
+     * Renders Hero Section with Full-Scale Logo, Mission Title, and Tagline
+     */
+    renderHero(containerId, activeMode = "showcase") {
+      const el = document.getElementById(containerId);
+      if (!el) return;
+
+      const studio = catalog()?.studioInfo || {};
+      const logoSrc = studio.logo || "assets/images/logo/logo-full-cleanish.png";
+
+      const title = t(studio.heroTitle) || "Juegos a Medida";
+      const subtitle = t(studio.heroSubtitle) || "Videojuegos y dinámicas táctiles diseñadas desde cero a tu medida, pensadas para captar la atención de tu público y potenciar tus eventos.";
+
+      if (activeMode === "cotizador") {
+        el.innerHTML = `
+          <section class="hero-section">
+            <div class="hero-logo-wrapper">
+              <img src="${logoSrc}" alt="${studio.name || 'Gametelier Studio'}" class="hero-brand-logo" onerror="this.onerror=null; this.src='assets/images/logo/logo.svg';" />
+            </div>
+            <div class="hero-badge">${ui("heroBadgeShowcase")}</div>
+            <h1 class="hero-title">${title}</h1>
+            <p class="hero-subtitle">${subtitle}</p>
+            <div style="display: flex; justify-content: center; margin-top: 20px;">
+              <div class="hero-quote-pill" style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px; border-radius: var(--radius-full); background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); color: #34D399; font-size: 14px; font-weight: 600; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                ${ui("heroQuotePill")}
+              </div>
+            </div>
+          </section>
+        `;
+      } else {
+        el.innerHTML = `
+          <section class="hero-section">
+            <div class="hero-logo-wrapper">
+              <img src="${logoSrc}" alt="${studio.name || 'Gametelier Studio'}" class="hero-brand-logo" onerror="this.onerror=null; this.src='assets/images/logo/logo.svg';" />
+            </div>
+            <div class="hero-badge">${ui("heroBadgeShowcase")}</div>
+            <h1 class="hero-title">${title}</h1>
+            <p class="hero-subtitle">${subtitle}</p>
+          </section>
+        `;
+      }
+    },
+
+    /**
      * Renders Top Navigation Bar with Logo, Optional Sticky Back-to-Catalog Link, and Language Switcher
      */
     renderHeader(containerId, activeMode = "showcase", showBackToCatalog = false) {
+      this.syncFavicon();
       const el = document.getElementById(containerId);
       if (!el) return;
 
@@ -152,7 +218,7 @@ window.CorpfolioRenderer = (function () {
             ? activeImpl.image
             : (game.image || "");
           const isConcept = game.isConcept || !rawImg || !rawImg.trim();
-          const imgSrc = isConcept ? 'assets/images/concept-blueprint.svg' : rawImg;
+          const imgSrc = (!rawImg || !rawImg.trim()) ? 'assets/images/concept-blueprint.svg' : rawImg;
 
           const clientLabel = activeImpl && activeImpl.client ? t(activeImpl.client) : "";
 

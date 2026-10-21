@@ -1,0 +1,294 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <!-- ==========================================
+         1. ENVIRONMENT & LIGHTING (DARK TECH-STUDIO)
+         ========================================== -->
+    <linearGradient id="wallBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#060A12" />
+      <stop offset="55%" stop-color="#0D1526" />
+      <stop offset="100%" stop-color="#162238" />
+    </linearGradient>
+
+    <!-- Lane Floor Gradients -->
+    <linearGradient id="laneGrass" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#064E3B" />
+      <stop offset="50%" stop-color="#047857" />
+      <stop offset="100%" stop-color="#064E3B" />
+    </linearGradient>
+    <linearGradient id="laneRoad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="50%" stop-color="#1E293B" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+    <linearGradient id="laneWater" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#083344" />
+      <stop offset="50%" stop-color="#0369A1" />
+      <stop offset="100%" stop-color="#083344" />
+    </linearGradient>
+
+    <!-- Character & Prop Gradients (Lane Rush Match) -->
+    <linearGradient id="charSuit" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#22D3EE" />
+      <stop offset="100%" stop-color="#0284C7" />
+    </linearGradient>
+    <linearGradient id="carOrange" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FB923C" />
+      <stop offset="100%" stop-color="#C2410C" />
+    </linearGradient>
+    <linearGradient id="carPurple" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#A855F7" />
+      <stop offset="100%" stop-color="#6B21A8" />
+    </linearGradient>
+
+    <!-- Shadows & Glow Filters -->
+    <filter id="dropShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="6" stdDeviation="4.5" flood-color="#000000" flood-opacity="0.6" />
+    </filter>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.45" />
+    </filter>
+    <filter id="neonGlow" x="-35%" y="-35%" width="170%" height="170%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- ========================================================
+         REUSABLE 2.5D PROPS (VEHICLES, RAFTS, CHARACTER)
+         ======================================================== -->
+    <!-- 1. Vertical Cyber Car (Moving Top -> Down) -->
+    <g id="cyber-car-down" filter="url(#dropShadow)">
+      <!-- Car Body -->
+      <rect x="-18" y="-32" width="36" height="64" rx="8" fill="url(#carOrange)" stroke="#7C2D12" stroke-width="2" />
+      <!-- Roof / Windshield -->
+      <rect x="-13" y="-12" width="26" height="26" rx="4" fill="#0F172A" stroke="#334155" stroke-width="1.2" />
+      <!-- Front Windshield -->
+      <path d="M -11,14 L 11,14 L 8,24 L -8,24 Z" fill="#38BDF8" opacity="0.85" />
+      <!-- Headlights Glowing Down -->
+      <circle cx="-10" cy="30" r="3" fill="#FEF08A" filter="url(#neonGlow)" />
+      <circle cx="10" cy="30" r="3" fill="#FEF08A" filter="url(#neonGlow)" />
+      <!-- Rear Tail Lights -->
+      <rect x="-12" y="-31" width="6" height="3" rx="1" fill="#EF4444" />
+      <rect x="6" y="-31" width="6" height="3" rx="1" fill="#EF4444" />
+    </g>
+
+    <!-- 2. Vertical Cyber Car (Moving Bottom -> Up) -->
+    <g id="cyber-car-up" filter="url(#dropShadow)">
+      <rect x="-18" y="-32" width="36" height="64" rx="8" fill="url(#carPurple)" stroke="#581C87" stroke-width="2" />
+      <rect x="-13" y="-14" width="26" height="26" rx="4" fill="#0F172A" stroke="#334155" stroke-width="1.2" />
+      <!-- Front Windshield (Facing Up) -->
+      <path d="M -11,-14 L 11,-14 L 8,-24 L -8,-24 Z" fill="#38BDF8" opacity="0.85" />
+      <!-- Headlights Glowing Up -->
+      <circle cx="-10" cy="-30" r="3" fill="#FEF08A" filter="url(#neonGlow)" />
+      <circle cx="10" cy="-30" r="3" fill="#FEF08A" filter="url(#neonGlow)" />
+      <!-- Rear Lights -->
+      <rect x="-12" y="28" width="6" height="3" rx="1" fill="#EF4444" />
+      <rect x="6" y="28" width="6" height="3" rx="1" fill="#EF4444" />
+    </g>
+
+    <!-- 3. Floating Energy Raft / Platform (Vertical River) -->
+    <g id="energy-raft" filter="url(#dropShadow)">
+      <rect x="-24" y="-38" width="48" height="76" rx="10" fill="#0F172A" stroke="#06B6D4" stroke-width="2" />
+      <!-- Neon Tread Ribs -->
+      <line x1="-18" y1="-20" x2="18" y2="-20" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" />
+      <line x1="-18" y1="0" x2="18" y2="0" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" />
+      <line x1="-18" y1="20" x2="18" y2="20" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" />
+      <!-- Safe Pad Glow Center -->
+      <circle cx="0" cy="0" r="8" fill="#0891B2" stroke="#67E8F9" stroke-width="1.5" />
+      <circle cx="0" cy="0" r="3" fill="#FFFFFF" />
+    </g>
+
+    <!-- 4. Hero Jumper Character (Lane Rush Style Cute Robot) -->
+    <g id="hero-jumper" filter="url(#dropShadow)">
+      <!-- Ground Shadow -->
+      <ellipse cx="0" cy="18" rx="18" ry="7" fill="rgba(0,0,0,0.5)" />
+      <!-- Rounded Torso -->
+      <rect x="-13" y="-10" width="26" height="26" rx="9" fill="url(#charSuit)" stroke="#67E8F9" stroke-width="1.8" />
+      <circle cx="0" cy="3" r="3" fill="#38BDF8" />
+      <!-- Head -->
+      <rect x="-15" y="-30" width="30" height="22" rx="10" fill="#F8FAFC" stroke="#06B6D4" stroke-width="1.8" />
+      <rect x="-12" y="-25" width="24" height="12" rx="5" fill="#0F172A" />
+      <!-- Eyes Facing Right (Direction of Advance!) -->
+      <circle cx="0" cy="-19" r="2.2" fill="#38BDF8" />
+      <circle cx="7" cy="-19" r="2.2" fill="#38BDF8" />
+      <!-- Cap Brim -->
+      <path d="M -16,-23 C -16,-34 16,-34 16,-23 Z" fill="url(#charSuit)" stroke="#67E8F9" stroke-width="1" />
+      <rect x="-18" y="-24" width="36" height="3" rx="1.5" fill="#38BDF8" />
+      <!-- Legs in mid-hop pose -->
+      <rect x="-9" y="14" width="6" height="7" rx="2" fill="#0F172A" />
+      <rect x="3" y="14" width="6" height="7" rx="2" fill="#0F172A" />
+    </g>
+  </defs>
+
+  <!-- ==========================================
+       BACKGROUND & STAGE
+       ========================================== -->
+  <rect width="800" height="500" fill="url(#wallBg)" />
+
+  <!-- ========================================================
+       VERTICAL LANES RUNNING TOP-TO-BOTTOM SIDE-BY-SIDE
+       (Character hops horizontally from LEFT to RIGHT!)
+       ======================================================== -->
+  <g id="vertical-lanes" transform="translate(60, 65)">
+    <!-- LANE 0: Start Platform (Safe Zone Left) -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="80" height="400" rx="4" fill="url(#laneGrass)" stroke="#065F46" stroke-width="2" />
+      <line x1="78" y1="0" x2="78" y2="400" stroke="#10B981" stroke-width="2.5" filter="url(#neonGlow)" />
+      <!-- Grass Decals -->
+      <circle cx="35" cy="120" r="4" fill="#34D399" opacity="0.6" />
+      <circle cx="45" cy="240" r="4" fill="#34D399" opacity="0.6" />
+      <circle cx="30" cy="340" r="4" fill="#34D399" opacity="0.6" />
+    </g>
+
+    <!-- LANE 1: Cyber Highway 1 (Vertical Traffic: Top -> Down) -->
+    <g transform="translate(85, 0)">
+      <rect x="0" y="0" width="95" height="400" rx="4" fill="url(#laneRoad)" stroke="#1E293B" stroke-width="2" />
+      <!-- Road Dashed Center Strip (Vertical) -->
+      <g stroke="#38BDF8" stroke-width="2" stroke-linecap="round" stroke-dasharray="16 16" opacity="0.4">
+        <line x1="47" y1="0" x2="47" y2="400" />
+      </g>
+      <!-- Moving Cyber Cars -->
+      <use href="#cyber-car-down" x="47" y="90" />
+      <use href="#cyber-car-down" x="47" y="310" />
+      <!-- Motion Speed Lines on Lane 1 -->
+      <line x1="47" y1="130" x2="47" y2="155" stroke="#FB923C" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 4" opacity="0.6" />
+    </g>
+
+    <!-- LANE 2: Laser Hazard Grid Lane (Vertical Pulsing Barriers) -->
+    <g transform="translate(185, 0)">
+      <rect x="0" y="0" width="80" height="400" rx="4" fill="#111827" stroke="#1E293B" stroke-width="2" />
+      <!-- Vertical Hazard Boundary Beams -->
+      <line x1="40" y1="0" x2="40" y2="400" stroke="#475569" stroke-width="1.5" stroke-dasharray="6 6" />
+      <!-- Active Laser Barriers in Lane 2 -->
+      <g transform="translate(40, 110)">
+        <rect x="-35" y="-6" width="70" height="12" rx="3" fill="#450A0A" stroke="#EF4444" stroke-width="2" filter="url(#neonGlow)" />
+        <line x1="-30" y1="0" x2="30" y2="0" stroke="#FCA5A5" stroke-width="2" />
+      </g>
+      <g transform="translate(40, 320)">
+        <rect x="-35" y="-6" width="70" height="12" rx="3" fill="#450A0A" stroke="#EF4444" stroke-width="2" filter="url(#neonGlow)" />
+        <line x1="-30" y1="0" x2="30" y2="0" stroke="#FCA5A5" stroke-width="2" />
+      </g>
+    </g>
+
+    <!-- LANE 3: Plasma Energy River (Vertical Moving Rafts: Bottom -> Up) -->
+    <g transform="translate(270, 0)">
+      <rect x="0" y="0" width="115" height="400" rx="4" fill="url(#laneWater)" stroke="#0284C7" stroke-width="2" />
+      <!-- Water Currents Flowing Vertically -->
+      <g stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="24 16" opacity="0.5">
+        <line x1="25" y1="0" x2="25" y2="400" />
+        <line x1="60" y1="0" x2="60" y2="400" />
+        <line x1="90" y1="0" x2="90" y2="400" />
+      </g>
+      <!-- Floating Energy Rafts -->
+      <use href="#energy-raft" x="60" y="70" />
+      <!-- Raft currently carrying the character / target of hop! -->
+      <g id="active-raft">
+        <use href="#energy-raft" x="60" y="215" />
+      </g>
+      <use href="#energy-raft" x="60" y="360" />
+    </g>
+
+    <!-- LANE 4: Cyber Highway 2 (Vertical Traffic: Bottom -> Up) -->
+    <g transform="translate(390, 0)">
+      <rect x="0" y="0" width="95" height="400" rx="4" fill="url(#laneRoad)" stroke="#1E293B" stroke-width="2" />
+      <g stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-dasharray="16 16" opacity="0.4">
+        <line x1="47" y1="0" x2="47" y2="400" />
+      </g>
+      <!-- Moving Cyber Cars (Purple) -->
+      <use href="#cyber-car-up" x="47" y="140" />
+      <use href="#cyber-car-up" x="47" y="340" />
+    </g>
+
+    <!-- LANE 5: Second Cyber Highway (Vertical Traffic: Top -> Down) -->
+    <g transform="translate(490, 0)">
+      <rect x="0" y="0" width="95" height="400" rx="4" fill="url(#laneRoad)" stroke="#1E293B" stroke-width="2" />
+      <g stroke="#38BDF8" stroke-width="2" stroke-linecap="round" stroke-dasharray="16 16" opacity="0.4">
+        <line x1="47" y1="0" x2="47" y2="400" />
+      </g>
+      <use href="#cyber-car-down" x="47" y="220" />
+    </g>
+
+    <!-- LANE 6: Finish / Goal Platform (Safe Zone Right) -->
+    <g transform="translate(590, 0)">
+      <rect x="0" y="0" width="90" height="400" rx="4" fill="url(#laneGrass)" stroke="#065F46" stroke-width="2" />
+      <line x1="2" y1="0" x2="2" y2="400" stroke="#10B981" stroke-width="2.5" filter="url(#neonGlow)" />
+      <!-- Golden Trophy / Goal Marker -->
+      <g transform="translate(45, 200)" filter="url(#dropShadow)">
+        <polygon points="0,-16 14,-8 14,8 0,16 -14,8 -14,-8" fill="#F59E0B" stroke="#FEF08A" stroke-width="2" filter="url(#neonGlow)" />
+        <polygon points="0,-8 6,-4 6,4 0,8 -6,4 -6,-4" fill="#FFFFFF" />
+        <text x="0" y="34" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="9.5" font-weight="900" fill="#34D399" text-anchor="middle">GOAL</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ========================================================
+       ACTIVE HORIZONTAL HOPPING ACTION (LEFT -> RIGHT)
+       ======================================================== -->
+  <!-- Previous Position (on Lane 2 Safe Slot x=225, y=280) -->
+  <g transform="translate(225, 280)" opacity="0.4">
+    <ellipse cx="0" cy="18" rx="14" ry="6" fill="#38BDF8" />
+  </g>
+
+  <!-- Horizontal Curved Hop Trajectory Arc (Left -> Right!) -->
+  <path d="M 225,270 Q 275,200 330,280" fill="none" stroke="#38BDF8" stroke-width="3" stroke-linecap="round" stroke-dasharray="5 5" filter="url(#neonGlow)" />
+  <polygon points="332,277 325,270 335,268" fill="#38BDF8" />
+
+  <!-- Active Character Landing on Raft in Lane 3 (x=330, y=275) -->
+  <g transform="translate(330, 275)">
+    <!-- Landing Impact Ripple Ring -->
+    <ellipse cx="0" cy="18" rx="26" ry="10" fill="none" stroke="#67E8F9" stroke-width="2" filter="url(#neonGlow)" />
+    <!-- Character Model -->
+    <use href="#hero-jumper" />
+
+    <!-- Floating Hop Score (+50 HOP!) -->
+    <g transform="translate(0, -42)" filter="url(#neonGlow)">
+      <rect x="-26" y="-10" width="52" height="20" rx="10" fill="#083344" stroke="#38BDF8" stroke-width="1.5" />
+      <text x="0" y="4" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="900" fill="#E0F2FE" text-anchor="middle">+50</text>
+    </g>
+  </g>
+
+  <!-- ========================================================
+       SUBTLE TOUCH CONTROLS (SCREEN EDGES)
+       ======================================================== -->
+  <!-- Left Edge: Tap Left Indicator -->
+  <g transform="translate(25, 250)">
+    <rect x="-15" y="-40" width="30" height="80" rx="15" fill="rgba(15, 23, 42, 0.6)" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1" />
+    <path d="M 4,-12 L -4,0 L 4,12" fill="none" stroke="#94A3B8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+
+  <!-- Right Edge: Tap Right Indicator (Glowing as next jump direction!) -->
+  <g transform="translate(775, 250)">
+    <rect x="-15" y="-40" width="30" height="80" rx="15" fill="rgba(6, 182, 212, 0.2)" stroke="#06B6D4" stroke-width="1.5" filter="url(#neonGlow)" />
+    <path d="M -4,-12 L 4,0 L -4,12" fill="none" stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+
+  <!-- ========================================================
+       TOP HUD: DISTANCE, STREAK & SCORE CAPSULE
+       ======================================================== -->
+  <g id="top-hud" transform="translate(400, 34)" filter="url(#dropShadow)">
+    <rect x="-260" y="-18" width="520" height="38" rx="19" fill="#0F172A" fill-opacity="0.94" stroke="#1E293B" stroke-width="1.5" />
+
+    <!-- Left: Stage Indicator -->
+    <g transform="translate(-190, 2)">
+      <circle cx="-12" cy="0" r="4.5" fill="#10B981" filter="url(#neonGlow)" />
+      <text x="0" y="4" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="800" fill="#E2E8F0" letter-spacing="0.5">CROSSY ROAD</text>
+    </g>
+
+    <!-- Center: Distance Progress / Timer -->
+    <g transform="translate(0, 2)">
+      <line x1="-50" y1="-10" x2="-50" y2="10" stroke="#334155" stroke-width="1" />
+      <rect x="-35" y="-9" width="70" height="18" rx="9" fill="#0284C7" fill-opacity="0.25" stroke="#0284C7" stroke-width="1" />
+      <text x="0" y="4" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10.5" font-weight="900" fill="#38BDF8" text-anchor="middle">42m / 80m</text>
+      <line x1="50" y1="-10" x2="50" y2="10" stroke="#334155" stroke-width="1" />
+    </g>
+
+    <!-- Right: Combo & Score -->
+    <g transform="translate(160, 2)">
+      <rect x="-20" y="-9" width="46" height="18" rx="9" fill="#10B981" fill-opacity="0.2" stroke="#10B981" stroke-width="1" />
+      <text x="3" y="4" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10.5" font-weight="900" fill="#34D399" text-anchor="middle">x6 HOP</text>
+      <text x="65" y="4" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="13.5" font-weight="900" fill="#F8FAFC" text-anchor="middle" letter-spacing="1">3,850</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,313 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <!-- ==========================================
+         1. ENVIRONMENT & LIGHTING (DARK TECH-STUDIO)
+         ========================================== -->
+    <linearGradient id="arenaBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#060A12" />
+      <stop offset="50%" stop-color="#0B1324" />
+      <stop offset="100%" stop-color="#080D1A" />
+    </linearGradient>
+
+    <!-- Floor Isometric / Cyber Grid -->
+    <pattern id="arenaGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255, 255, 255, 0.04)" stroke-width="1" />
+      <circle cx="0" cy="0" r="1.5" fill="rgba(255, 255, 255, 0.08)" />
+    </pattern>
+
+    <!-- Multi-Color Ambient Spotlights -->
+    <radialGradient id="spotEmerald" cx="25%" cy="30%" r="50%">
+      <stop offset="0%" stop-color="#10B981" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#060A12" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="spotCyan" cx="75%" cy="35%" r="50%">
+      <stop offset="0%" stop-color="#06B6D4" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#060A12" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="spotAmber" cx="50%" cy="75%" r="50%">
+      <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#060A12" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Glow Filters -->
+    <filter id="neonGlow" x="-35%" y="-35%" width="170%" height="170%">
+      <feGaussianBlur stdDeviation="4.5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter id="trailGlowEmerald" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter id="trailGlowCyan" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter id="trailGlowAmber" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter id="dropShadow" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#000000" flood-opacity="0.6" />
+    </filter>
+
+    <!-- ========================================================
+         REUSABLE THEMED COLLECTIBLE ITEMS
+         ======================================================== -->
+    <!-- 1. Emerald Data Prism -->
+    <g id="item-emerald" filter="url(#dropShadow)">
+      <polygon points="0,-14 12,-4 0,14 -12,-4" fill="#059669" stroke="#34D399" stroke-width="2" filter="url(#neonGlow)" />
+      <polygon points="0,-10 8,-3 0,10 -8,-3" fill="#10B981" />
+      <polygon points="0,-6 4,-2 0,6 -4,-2" fill="#A7F3D0" />
+    </g>
+
+    <!-- 2. Cyan Plasma Orb -->
+    <g id="item-cyan" filter="url(#dropShadow)">
+      <circle cx="0" cy="0" r="13" fill="#0284C7" stroke="#38BDF8" stroke-width="2" filter="url(#neonGlow)" />
+      <circle cx="0" cy="0" r="9" fill="#06B6D4" />
+      <!-- Orbital Ring -->
+      <ellipse cx="0" cy="0" rx="18" ry="6" fill="none" stroke="#67E8F9" stroke-width="1.5" transform="rotate(-20)" />
+      <circle cx="-3" cy="-3" r="3" fill="#FFFFFF" opacity="0.9" />
+    </g>
+
+    <!-- 3. Amber Solar Star -->
+    <g id="item-amber" filter="url(#dropShadow)">
+      <circle cx="0" cy="0" r="14" fill="#78350F" stroke="#F59E0B" stroke-width="2" filter="url(#neonGlow)" />
+      <polygon points="0,-11 3.5,-3.5 11,-2.5 5.5,3.5 7,11 0,7 -7,11 -5.5,3.5 -11,-2.5 -3.5,-3.5" fill="#FDE047" stroke="#FEF08A" stroke-width="1" />
+    </g>
+
+    <!-- 4. Hazard Barrier Block (Obstacle Snakes Must Avoid!) -->
+    <g id="hazard-pillar" filter="url(#dropShadow)">
+      <!-- Pillar Base Box -->
+      <rect x="-18" y="-18" width="36" height="36" rx="6" fill="#111827" stroke="#334155" stroke-width="2" />
+      <!-- Hazard Stripes -->
+      <path d="M -12,-16 L -16,-12 M -6,-16 L -16,-6 M 4,-16 L -16,4 M 14,-16 L -16,14 M 16,-6 L -6,16 M 16,4 L 4,16" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" />
+      <circle cx="0" cy="0" r="6" fill="#1F2937" stroke="#EF4444" stroke-width="1.5" />
+      <circle cx="0" cy="0" r="2.5" fill="#EF4444" filter="url(#neonGlow)" />
+    </g>
+  </defs>
+
+  <!-- ==========================================
+       ARENA BASE & LIGHTING
+       ========================================== -->
+  <rect width="800" height="500" fill="url(#arenaBg)" />
+  <rect width="800" height="500" fill="url(#arenaGrid)" />
+  <rect width="800" height="500" fill="url(#spotEmerald)" />
+  <rect width="800" height="500" fill="url(#spotCyan)" />
+  <rect width="800" height="500" fill="url(#spotAmber)" />
+
+  <!-- Arena Outer Neon Bumper Perimeter -->
+  <rect x="30" y="68" width="740" height="402" rx="16" fill="rgba(15, 23, 42, 0.45)" stroke="#1E293B" stroke-width="2" />
+  <rect x="32" y="70" width="736" height="398" rx="14" fill="none" stroke="rgba(255, 255, 255, 0.05)" stroke-width="1.5" />
+  <!-- Corner Tech Accent Brackets -->
+  <path d="M 40,95 L 40,80 L 55,80" fill="none" stroke="#6366F1" stroke-width="3" stroke-linecap="round" />
+  <path d="M 760,95 L 760,80 L 745,80" fill="none" stroke="#6366F1" stroke-width="3" stroke-linecap="round" />
+  <path d="M 40,445 L 40,460 L 55,460" fill="none" stroke="#6366F1" stroke-width="3" stroke-linecap="round" />
+  <path d="M 760,445 L 760,460 L 745,460" fill="none" stroke="#6366F1" stroke-width="3" stroke-linecap="round" />
+
+  <!-- Fixed Arena Hazard Pillars / Obstacles (Snakes weave around these!) -->
+  <use href="#hazard-pillar" x="270" y="190" />
+  <use href="#hazard-pillar" x="530" y="320" />
+  <use href="#hazard-pillar" x="380" y="380" />
+
+  <!-- ========================================================
+       SCATTERED THEMED COLLECTIBLE ITEMS IN ARENA
+       ======================================================== -->
+  <!-- Emerald Items -->
+  <use href="#item-emerald" x="120" y="130" />
+  <use href="#item-emerald" x="220" y="270" />
+  <use href="#item-emerald" x="380" y="130" />
+  <use href="#item-emerald" x="460" y="220" />
+
+  <!-- Cyan Items -->
+  <use href="#item-cyan" x="660" y="140" />
+  <use href="#item-cyan" x="580" y="230" />
+  <use href="#item-cyan" x="420" y="290" />
+  <use href="#item-cyan" x="680" y="370" />
+
+  <!-- Amber Items -->
+  <use href="#item-amber" x="150" y="390" />
+  <use href="#item-amber" x="240" y="440" />
+  <use href="#item-amber" x="480" y="430" />
+  <use href="#item-amber" x="200" y="180" />
+
+  <!-- ========================================================
+       1. EMERALD STREAM (DRAWN TRAJECTORY + SEGMENTED SNAKE)
+       ======================================================== -->
+  <g id="stream-emerald">
+    <!-- Drawn Glowing Trajectory Path (Laser curve on arena floor - NO FINGERS!) -->
+    <path d="M 80,100 C 140,110 180,240 280,220 C 370,200 410,120 480,140 C 530,155 560,185 570,210" 
+          fill="none" stroke="rgba(16, 185, 129, 0.15)" stroke-width="18" stroke-linecap="round" />
+    <path d="M 80,100 C 140,110 180,240 280,220 C 370,200 410,120 480,140 C 530,155 560,185 570,210" 
+          fill="none" stroke="#10B981" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="8 6" filter="url(#trailGlowEmerald)" />
+
+    <!-- Trajectory Lead Pulse (Where the path is actively projecting forward) -->
+    <circle cx="570" cy="210" r="7" fill="#10B981" filter="url(#neonGlow)" />
+    <circle cx="570" cy="210" r="3" fill="#FFFFFF" />
+
+    <!-- SEGMENTED EMERALD SNAKE COLLECTOR BODY (Gliding along its trail) -->
+    <!-- Tail Segments (Decreasing size) -->
+    <circle cx="160" cy="180" r="7" fill="#047857" stroke="#10B981" stroke-width="1.5" />
+    <circle cx="190" cy="225" r="8.5" fill="#059669" stroke="#10B981" stroke-width="1.8" />
+    <circle cx="230" cy="235" r="10" fill="#059669" stroke="#34D399" stroke-width="2" />
+    <circle cx="270" cy="220" r="11" fill="#10B981" stroke="#34D399" stroke-width="2" />
+    <circle cx="310" cy="195" r="12" fill="#10B981" stroke="#6EE7B7" stroke-width="2" />
+    <circle cx="355" cy="165" r="13" fill="#10B981" stroke="#6EE7B7" stroke-width="2.2" />
+    <circle cx="400" cy="135" r="14" fill="#34D399" stroke="#A7F3D0" stroke-width="2.5" />
+
+    <!-- Snake Head: Sleek High-Tech Cyber Serpent Head -->
+    <g transform="translate(440, 130) rotate(15)" filter="url(#dropShadow)">
+      <!-- Head Shield -->
+      <polygon points="18,0 -8,-14 -14,-10 -6,0 -14,10 -8,14" fill="#064E3B" stroke="#34D399" stroke-width="2.5" />
+      <polygon points="12,0 -4,-9 -2,0 -4,9" fill="#10B981" />
+      <!-- Glowing Eyes -->
+      <circle cx="4" cy="-5" r="2.5" fill="#FEF08A" filter="url(#neonGlow)" />
+      <circle cx="4" cy="5" r="2.5" fill="#FEF08A" filter="url(#neonGlow)" />
+      <!-- Energy Crown -->
+      <line x1="16" y1="0" x2="24" y2="0" stroke="#A7F3D0" stroke-width="2" stroke-linecap="round" />
+    </g>
+
+    <!-- Collection Impact: Emerald Snake eating an emerald item (+100) -->
+    <g transform="translate(380, 130)" filter="url(#neonGlow)">
+      <circle cx="0" cy="0" r="22" fill="none" stroke="#34D399" stroke-width="2" opacity="0.7" />
+      <rect x="-22" y="-28" width="44" height="18" rx="9" fill="#064E3B" stroke="#34D399" stroke-width="1.2" />
+      <text x="0" y="-15" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10.5" font-weight="900" fill="#A7F3D0" text-anchor="middle">+100</text>
+    </g>
+  </g>
+
+  <!-- ========================================================
+       2. CYAN STREAM (DRAWN TRAJECTORY + SEGMENTED SNAKE)
+       ======================================================== -->
+  <g id="stream-cyan">
+    <!-- Drawn Glowing Trajectory Path (Curving across the top-right and center) -->
+    <path d="M 720,110 C 650,110 610,210 520,240 C 440,265 430,350 360,340 C 310,330 280,310 260,290" 
+          fill="none" stroke="rgba(6, 182, 212, 0.15)" stroke-width="18" stroke-linecap="round" />
+    <path d="M 720,110 C 650,110 610,210 520,240 C 440,265 430,350 360,340 C 310,330 280,310 260,290" 
+          fill="none" stroke="#06B6D4" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="8 6" filter="url(#trailGlowCyan)" />
+
+    <!-- Trajectory Lead Pulse -->
+    <circle cx="260" cy="290" r="7" fill="#06B6D4" filter="url(#neonGlow)" />
+    <circle cx="260" cy="290" r="3" fill="#FFFFFF" />
+
+    <!-- SEGMENTED CYAN SNAKE COLLECTOR BODY -->
+    <!-- Tail Segments -->
+    <circle cx="680" cy="120" r="7" fill="#0369A1" stroke="#06B6D4" stroke-width="1.5" />
+    <circle cx="645" cy="150" r="8.5" fill="#0284C7" stroke="#06B6D4" stroke-width="1.8" />
+    <circle cx="605" cy="195" r="10" fill="#0284C7" stroke="#38BDF8" stroke-width="2" />
+    <circle cx="560" cy="230" r="11.5" fill="#06B6D4" stroke="#38BDF8" stroke-width="2" />
+    <circle cx="510" cy="245" r="12.5" fill="#06B6D4" stroke="#67E8F9" stroke-width="2.2" />
+    <circle cx="460" cy="275" r="13.5" fill="#06B6D4" stroke="#67E8F9" stroke-width="2.5" />
+    <circle cx="420" cy="310" r="14.5" fill="#38BDF8" stroke="#E0F2FE" stroke-width="2.5" />
+
+    <!-- Snake Head: Sleek Cyan Plasma Viper Head -->
+    <g transform="translate(375, 338) rotate(190)" filter="url(#dropShadow)">
+      <!-- Head Shield -->
+      <polygon points="18,0 -8,-14 -14,-10 -6,0 -14,10 -8,14" fill="#082F49" stroke="#38BDF8" stroke-width="2.5" />
+      <polygon points="12,0 -4,-9 -2,0 -4,9" fill="#06B6D4" />
+      <!-- Glowing Eyes -->
+      <circle cx="4" cy="-5" r="2.5" fill="#E0F2FE" filter="url(#neonGlow)" />
+      <circle cx="4" cy="5" r="2.5" fill="#E0F2FE" filter="url(#neonGlow)" />
+      <!-- Antennas -->
+      <line x1="16" y1="-2" x2="23" y2="-5" stroke="#67E8F9" stroke-width="2" stroke-linecap="round" />
+      <line x1="16" y1="2" x2="23" y2="5" stroke="#67E8F9" stroke-width="2" stroke-linecap="round" />
+    </g>
+
+    <!-- Collection Impact: Cyan Snake collecting plasma orb (+150) -->
+    <g transform="translate(420, 290)" filter="url(#neonGlow)">
+      <circle cx="0" cy="0" r="24" fill="none" stroke="#38BDF8" stroke-width="2" opacity="0.8" />
+      <rect x="-22" y="-28" width="44" height="18" rx="9" fill="#083344" stroke="#38BDF8" stroke-width="1.2" />
+      <text x="0" y="-15" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10.5" font-weight="900" fill="#E0F2FE" text-anchor="middle">+150</text>
+    </g>
+  </g>
+
+  <!-- ========================================================
+       3. AMBER STREAM (DRAWN TRAJECTORY + SEGMENTED SNAKE)
+       ======================================================== -->
+  <g id="stream-amber">
+    <!-- Drawn Glowing Trajectory Path (Weaving across lower sector) -->
+    <path d="M 90,340 C 160,340 210,430 310,430 C 420,430 460,380 550,400 C 630,420 670,390 710,340" 
+          fill="none" stroke="rgba(245, 158, 11, 0.15)" stroke-width="18" stroke-linecap="round" />
+    <path d="M 90,340 C 160,340 210,430 310,430 C 420,430 460,380 550,400 C 630,420 670,390 710,340" 
+          fill="none" stroke="#F59E0B" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="8 6" filter="url(#trailGlowAmber)" />
+
+    <!-- Trajectory Lead Pulse -->
+    <circle cx="710" cy="340" r="7" fill="#F59E0B" filter="url(#neonGlow)" />
+    <circle cx="710" cy="340" r="3" fill="#FFFFFF" />
+
+    <!-- SEGMENTED AMBER SNAKE COLLECTOR BODY -->
+    <!-- Tail Segments -->
+    <circle cx="120" cy="350" r="7" fill="#78350F" stroke="#F59E0B" stroke-width="1.5" />
+    <circle cx="160" cy="380" r="8.5" fill="#B45309" stroke="#F59E0B" stroke-width="1.8" />
+    <circle cx="210" cy="425" r="10" fill="#D97706" stroke="#FBBF24" stroke-width="2" />
+    <circle cx="260" cy="435" r="11.5" fill="#D97706" stroke="#FBBF24" stroke-width="2" />
+    <circle cx="310" cy="430" r="12.5" fill="#F59E0B" stroke="#FDE68A" stroke-width="2.2" />
+    <circle cx="365" cy="415" r="13.5" fill="#F59E0B" stroke="#FDE68A" stroke-width="2.5" />
+    <circle cx="420" cy="395" r="14.5" fill="#FBBF24" stroke="#FEF08A" stroke-width="2.5" />
+
+    <!-- Snake Head: Radiant Solar Dragon Head -->
+    <g transform="translate(470, 390) rotate(10)" filter="url(#dropShadow)">
+      <!-- Head Shield -->
+      <polygon points="18,0 -8,-14 -14,-10 -6,0 -14,10 -8,14" fill="#451A03" stroke="#FBBF24" stroke-width="2.5" />
+      <polygon points="12,0 -4,-9 -2,0 -4,9" fill="#F59E0B" />
+      <!-- Glowing Eyes -->
+      <circle cx="4" cy="-5" r="2.5" fill="#FEF08A" filter="url(#neonGlow)" />
+      <circle cx="4" cy="5" r="2.5" fill="#FEF08A" filter="url(#neonGlow)" />
+      <!-- Solar Horns -->
+      <polygon points="-8,-12 -16,-20 -10,-10" fill="#FDE047" />
+      <polygon points="-8,12 -16,20 -10,10" fill="#FDE047" />
+    </g>
+
+    <!-- Collection Impact: Amber Snake collecting Solar Star (+250 BONUS) -->
+    <g transform="translate(240, 440)" filter="url(#neonGlow)">
+      <circle cx="0" cy="0" r="24" fill="none" stroke="#FBBF24" stroke-width="2" opacity="0.8" />
+      <rect x="-30" y="-28" width="60" height="18" rx="9" fill="#78350F" stroke="#FBBF24" stroke-width="1.2" />
+      <text x="0" y="-15" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10.5" font-weight="900" fill="#FEF08A" text-anchor="middle">+250 STAR</text>
+    </g>
+  </g>
+
+  <!-- ========================================================
+       TOP HUD: MULTI-COLLECTOR SYNCHRONIZATION STATUS
+       ======================================================== -->
+  <g id="top-hud" transform="translate(400, 34)" filter="url(#dropShadow)">
+    <!-- Main Capsule Container -->
+    <rect x="-310" y="-18" width="620" height="38" rx="19" fill="#0F172A" fill-opacity="0.94" stroke="#1E293B" stroke-width="1.5" />
+
+    <!-- Left: 3 Stream Counters -->
+    <g transform="translate(-230, 2)">
+      <!-- Emerald -->
+      <circle cx="-50" cy="0" r="4.5" fill="#10B981" filter="url(#neonGlow)" />
+      <text x="-38" y="4" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="800" fill="#6EE7B7">14</text>
+      <!-- Cyan -->
+      <circle cx="-10" cy="0" r="4.5" fill="#06B6D4" filter="url(#neonGlow)" />
+      <text x="2" y="4" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="800" fill="#67E8F9">18</text>
+      <!-- Amber -->
+      <circle cx="30" cy="0" r="4.5" fill="#F59E0B" filter="url(#neonGlow)" />
+      <text x="42" y="4" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="800" fill="#FDE68A">12</text>
+    </g>
+
+    <!-- Center: Synchronization Rate Gauge -->
+    <g transform="translate(10, 2)">
+      <line x1="-50" y1="-10" x2="-50" y2="10" stroke="#334155" stroke-width="1" />
+      <rect x="-36" y="-9" width="72" height="18" rx="9" fill="#10B981" fill-opacity="0.2" stroke="#10B981" stroke-width="1" />
+      <text x="0" y="4" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10.5" font-weight="900" fill="#34D399" text-anchor="middle">SYNC 98%</text>
+      <line x1="50" y1="-10" x2="50" y2="10" stroke="#334155" stroke-width="1" />
+    </g>
+
+    <!-- Right: Timer & Total Score -->
+    <g transform="translate(190, 2)">
+      <text x="-40" y="4" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="800" fill="#94A3B8" text-anchor="middle">00:32</text>
+      <text x="35" y="4" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="13.5" font-weight="900" fill="#F8FAFC" text-anchor="middle" letter-spacing="1">18,650</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,501 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <!-- ==========================================
+         1. ENVIRONMENT & LIGHTING (DARK TECH-STUDIO)
+         ========================================== -->
+    <linearGradient id="wallBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#060A12" />
+      <stop offset="55%" stop-color="#0D1526" />
+      <stop offset="100%" stop-color="#162238" />
+    </linearGradient>
+
+    <radialGradient id="spotlightLeft" cx="20%" cy="20%" r="55%">
+      <stop offset="0%" stop-color="#06B6D4" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#060A12" stop-opacity="0" />
+    </radialGradient>
+
+    <radialGradient id="spotlightRight" cx="80%" cy="20%" r="55%">
+      <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#060A12" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- ==========================================
+         2. BELTS, METALS & SUIT GRADIENTS
+         ========================================== -->
+    <linearGradient id="beltBed" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="25%" stop-color="#1E293B" />
+      <stop offset="80%" stop-color="#141E30" />
+      <stop offset="100%" stop-color="#0B111E" />
+    </linearGradient>
+
+    <!-- Tread Rib Texture Pattern -->
+    <pattern id="beltTreads" width="14" height="40" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="2" x2="0" y2="38" stroke="rgba(255, 255, 255, 0.03)" stroke-width="1.2" />
+      <line x1="7" y1="2" x2="7" y2="38" stroke="rgba(0, 0, 0, 0.3)" stroke-width="1.2" />
+    </pattern>
+
+    <!-- Machine Metal Surface -->
+    <linearGradient id="machineMetal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#334155" />
+      <stop offset="50%" stop-color="#1E293B" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+
+    <!-- Suit Gradients (Lane Rush Characters) -->
+    <linearGradient id="p1Suit" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#22D3EE" />
+      <stop offset="100%" stop-color="#0284C7" />
+    </linearGradient>
+    <linearGradient id="p2Suit" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FBBF24" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+
+    <!-- Shadows & Neon Glow Filters -->
+    <filter id="dropShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="6" stdDeviation="4.5" flood-color="#000000" flood-opacity="0.6" />
+    </filter>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.45" />
+    </filter>
+    <filter id="neonGlow" x="-35%" y="-35%" width="170%" height="170%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- ========================================================
+         3. ICONIC CARTOONISH AEROSPACE COMPONENTS (INSTANT READ)
+         ======================================================== -->
+
+    <!-- A. ROVER WHEEL / TREAD (Bold, Rugged Tire with Cyan Hubcap) -->
+    <g id="comp-wheel" filter="url(#dropShadow)">
+      <ellipse cx="0" cy="14" rx="16" ry="5.5" fill="rgba(0,0,0,0.4)" />
+      <!-- Outer Black Rugged Rubber Tire with Deep Tread Notches -->
+      <circle cx="0" cy="0" r="16" fill="#1E293B" stroke="#0F172A" stroke-width="2.5" />
+      <!-- Tire Tread Teeth (Gear-style) -->
+      <path d="M -4,-16 L 4,-16 M 16,-4 L 16,4 M -4,16 L 4,16 M -16,-4 L -16,4" stroke="#0F172A" stroke-width="3" stroke-linecap="round" />
+      <!-- Inner Steel Rim -->
+      <circle cx="0" cy="0" r="11" fill="#475569" stroke="#64748B" stroke-width="1.2" />
+      <!-- High-Tech Cyan Hubcap Center -->
+      <circle cx="0" cy="0" r="6" fill="#06B6D4" stroke="#38BDF8" stroke-width="1.2" />
+      <!-- 4 Golden Lug Nuts -->
+      <circle cx="-3" cy="-3" r="1" fill="#FBBF24" />
+      <circle cx="3" cy="-3" r="1" fill="#FBBF24" />
+      <circle cx="-3" cy="3" r="1" fill="#FBBF24" />
+      <circle cx="3" cy="3" r="1" fill="#FBBF24" />
+      <!-- Gloss Highlight -->
+      <path d="M -9,-9 C -5,-13 5,-13 9,-9" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" opacity="0.8" />
+    </g>
+
+    <!-- B. SOLAR WING PANEL (Crystalline Blue Grid with Golden Frame) -->
+    <g id="comp-solar" filter="url(#dropShadow)">
+      <ellipse cx="0" cy="14" rx="18" ry="5.5" fill="rgba(0,0,0,0.4)" />
+      <!-- Outer Golden Metal Frame -->
+      <rect x="-18" y="-12" width="36" height="24" rx="3" fill="#B45309" stroke="#F59E0B" stroke-width="2" />
+      <!-- Inner Photovoltaic Blue Cell Grid (4 Cells) -->
+      <rect x="-15" y="-9" width="13" height="8" fill="#0284C7" stroke="#38BDF8" stroke-width="1" />
+      <rect x="2" y="-9" width="13" height="8" fill="#0369A1" stroke="#38BDF8" stroke-width="1" />
+      <rect x="-15" y="1" width="13" height="8" fill="#0369A1" stroke="#38BDF8" stroke-width="1" />
+      <rect x="2" y="1" width="13" height="8" fill="#0284C7" stroke="#38BDF8" stroke-width="1" />
+      <!-- Golden Energy Bolt Icon in Center -->
+      <polygon points="0,-6 -4,0 -1,0 -2,6 3,-1 0,-1" fill="#FBBF24" stroke="#FEF08A" stroke-width="0.8" />
+      <!-- Gloss Glaze -->
+      <line x1="-14" y1="-7" x2="-2" y2="-7" stroke="#FFFFFF" stroke-width="1.2" stroke-linecap="round" opacity="0.8" />
+    </g>
+
+    <!-- C. SENSOR RADAR DOME (Glossy Scanning Sphere with Antenna) -->
+    <g id="comp-sensor" filter="url(#dropShadow)">
+      <ellipse cx="0" cy="14" rx="16" ry="5.5" fill="rgba(0,0,0,0.4)" />
+      <!-- Chrome Mounting Pedestal Base -->
+      <rect x="-10" y="4" width="20" height="7" rx="2" fill="#475569" stroke="#334155" stroke-width="1.5" />
+      <!-- Translucent Glowing Sensor Dome (Magenta / Rose) -->
+      <circle cx="0" cy="-2" r="14" fill="#E11D48" stroke="#FB7185" stroke-width="2" />
+      <circle cx="0" cy="-2" r="11" fill="#F43F5E" />
+      <!-- Inner Glowing Radar Scanner Target Wave -->
+      <circle cx="0" cy="-2" r="6" fill="none" stroke="#FEF08A" stroke-width="1.5" />
+      <circle cx="0" cy="-2" r="2" fill="#FEF08A" />
+      <!-- Tiny Top Antenna Mast -->
+      <line x1="0" y1="-16" x2="0" y2="-21" stroke="#64748B" stroke-width="2" stroke-linecap="round" />
+      <circle cx="0" cy="-22" r="2.5" fill="#38BDF8" filter="url(#neonGlow)" />
+      <!-- Gloss Highlight Glint -->
+      <path d="M -7,-9 C -4,-12 4,-12 7,-9" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.85" />
+    </g>
+
+    <!-- D. PLASMA THRUSTER ENGINE (Rocket Nozzle with Glowing Exhaust) -->
+    <g id="comp-thruster" filter="url(#dropShadow)">
+      <ellipse cx="0" cy="14" rx="16" ry="5.5" fill="rgba(0,0,0,0.4)" />
+      <!-- Steel Nozzle Housing -->
+      <polygon points="-8,-14 8,-14 12,2 -12,2" fill="#334155" stroke="#1E293B" stroke-width="2" />
+      <!-- Exhaust Flare Lip -->
+      <ellipse cx="0" cy="2" rx="12" ry="4" fill="#0F172A" stroke="#64748B" stroke-width="1.5" />
+      <!-- Glowing Cyan/Orange Plasma Flame Core -->
+      <polygon points="-8,4 8,4 0,16" fill="#F59E0B" filter="url(#neonGlow)" />
+      <polygon points="-5,4 5,4 0,12" fill="#FEF08A" />
+      <!-- Heat Warning Ring -->
+      <line x1="-10" y1="-4" x2="10" y2="-4" stroke="#F97316" stroke-width="1.5" />
+    </g>
+  </defs>
+
+  <!-- ==========================================
+       ENVIRONMENT: HIGH-TECH ROVER HANGAR
+       ========================================== -->
+  <rect width="800" height="500" fill="url(#wallBg)" />
+  <rect width="800" height="500" fill="url(#spotlightLeft)" />
+  <rect width="800" height="500" fill="url(#spotlightRight)" />
+
+  <!-- Studio Floor & Minimalist Structural Grid (Lane Rush Style) -->
+  <g opacity="0.12">
+    <line x1="0" y1="260" x2="800" y2="260" stroke="#38BDF8" stroke-width="1" />
+    <line x1="0" y1="340" x2="800" y2="340" stroke="#38BDF8" stroke-width="1.2" />
+    <line x1="0" y1="420" x2="800" y2="420" stroke="#38BDF8" stroke-width="1.5" />
+    <line x1="130" y1="0" x2="130" y2="260" stroke="#38BDF8" stroke-width="1.2" />
+    <line x1="680" y1="0" x2="680" y2="260" stroke="#F59E0B" stroke-width="1.2" />
+  </g>
+
+  <!-- ========================================================
+       1. FAR LEFT: VERTICAL INCOMING CONVEYOR (Raw Scrap/Parts)
+       ======================================================== -->
+  <g id="incoming-conveyor">
+    <!-- Conveyor Frame -->
+    <rect x="25" y="60" width="70" height="390" rx="6" fill="#0B1324" stroke="#1E293B" stroke-width="2" />
+    <!-- Rubber Belt Surface -->
+    <rect x="30" y="65" width="60" height="380" rx="4" fill="url(#beltBed)" />
+    <!-- Tread Lines Moving Down -->
+    <g stroke="rgba(255, 255, 255, 0.05)" stroke-width="1.5">
+      <line x1="32" y1="90" x2="88" y2="90" />
+      <line x1="32" y1="130" x2="88" y2="130" />
+      <line x1="32" y1="170" x2="88" y2="170" />
+      <line x1="32" y1="210" x2="88" y2="210" />
+      <line x1="32" y1="250" x2="88" y2="250" />
+      <line x1="32" y1="290" x2="88" y2="290" />
+      <line x1="32" y1="330" x2="88" y2="330" />
+      <line x1="32" y1="370" x2="88" y2="370" />
+      <line x1="32" y1="410" x2="88" y2="410" />
+    </g>
+    <!-- Cyan Neon Guide Rails on Incoming Belt -->
+    <line x1="30" y1="65" x2="30" y2="445" stroke="#06B6D4" stroke-width="2.5" filter="url(#neonGlow)" />
+    <line x1="90" y1="65" x2="90" y2="445" stroke="#06B6D4" stroke-width="2.5" filter="url(#neonGlow)" />
+
+    <!-- Incoming Items on Vertical Belt -->
+    <g transform="translate(60, 115) scale(0.95)">
+      <use href="#comp-wheel" />
+    </g>
+    <g transform="translate(60, 220) scale(0.95)">
+      <use href="#comp-solar" />
+    </g>
+    <g transform="translate(60, 325) scale(0.95)">
+      <use href="#comp-sensor" />
+    </g>
+    <g transform="translate(60, 410) scale(0.95)">
+      <use href="#comp-thruster" />
+    </g>
+  </g>
+
+  <!-- ========================================================
+       2. CENTER: 3 HORIZONTAL PROCESSING TRACKS & PREP MACHINES
+       ======================================================== -->
+
+  <!-- TRACK 1 (TOP — RED / CHASSIS WELDING) -->
+  <g id="track-1" transform="translate(220, 110)">
+    <!-- Horizontal Belt Bed -->
+    <rect x="0" y="0" width="360" height="52" rx="8" fill="url(#beltBed)" stroke="#E11D48" stroke-width="2" />
+    <rect x="0" y="0" width="360" height="52" rx="8" fill="url(#beltTreads)" opacity="0.35" />
+    <!-- Red Neon Top/Bottom Rails -->
+    <line x1="0" y1="2" x2="360" y2="2" stroke="#F43F5E" stroke-width="2" filter="url(#neonGlow)" />
+    <line x1="0" y1="50" x2="360" y2="50" stroke="#F43F5E" stroke-width="2" filter="url(#neonGlow)" />
+
+    <!-- Input Raw Item entering from left: Rover Wheel -->
+    <g transform="translate(50, 26) scale(0.9)">
+      <use href="#comp-wheel" />
+    </g>
+
+    <!-- Center Machine 1: Laser Chassis Welder -->
+    <g transform="translate(180, 26)" filter="url(#dropShadow)">
+      <!-- Machine Housing Box -->
+      <rect x="-42" y="-36" width="84" height="72" rx="10" fill="url(#machineMetal)" stroke="#E11D48" stroke-width="2" />
+      <!-- Machine Top Status Window -->
+      <rect x="-32" y="-28" width="64" height="24" rx="4" fill="#0F172A" stroke="#334155" stroke-width="1" />
+      <!-- Welding Laser Sparks & Status -->
+      <line x1="-12" y1="-16" x2="12" y2="-16" stroke="#FB7185" stroke-width="2" />
+      <circle cx="0" cy="-16" r="3" fill="#FFE4E6" filter="url(#neonGlow)" />
+      <!-- Laser Sparkles -->
+      <polygon points="0,-16 -4,-22 0,-26 4,-22" fill="#FBBF24" />
+      <polygon points="0,-16 -8,-14 -12,-16 -8,-18" fill="#FBBF24" />
+      <!-- Front Processing Chute Opening -->
+      <rect x="-30" y="2" width="60" height="26" rx="4" fill="#050811" stroke="#E11D48" stroke-width="1.2" />
+      <text x="0" y="20" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="9" font-weight="900" fill="#FDA4AF" text-anchor="middle" letter-spacing="0.5">WELDING</text>
+    </g>
+
+    <!-- Output Processed Item exiting on right: Welded Armored Wheel -->
+    <g transform="translate(310, 26) scale(0.9)">
+      <use href="#comp-wheel" />
+      <!-- Sparkle of completion -->
+      <circle cx="12" cy="-10" r="2" fill="#FBBF24" filter="url(#neonGlow)" />
+    </g>
+  </g>
+
+  <!-- TRACK 2 (MIDDLE — YELLOW / AVIONICS & SENSORS) -->
+  <g id="track-2" transform="translate(220, 215)">
+    <!-- Horizontal Belt Bed -->
+    <rect x="0" y="0" width="360" height="52" rx="8" fill="url(#beltBed)" stroke="#D97706" stroke-width="2" />
+    <rect x="0" y="0" width="360" height="52" rx="8" fill="url(#beltTreads)" opacity="0.35" />
+    <!-- Yellow Neon Top/Bottom Rails -->
+    <line x1="0" y1="2" x2="360" y2="2" stroke="#FBBF24" stroke-width="2" filter="url(#neonGlow)" />
+    <line x1="0" y1="50" x2="360" y2="50" stroke="#FBBF24" stroke-width="2" filter="url(#neonGlow)" />
+
+    <!-- Input Raw Item entering from left: Solar Wing -->
+    <g transform="translate(50, 26) scale(0.9)">
+      <use href="#comp-solar" />
+    </g>
+
+    <!-- Center Machine 2: Laser Calibration Scanner -->
+    <g transform="translate(180, 26)" filter="url(#dropShadow)">
+      <!-- Machine Housing Box -->
+      <rect x="-42" y="-36" width="84" height="72" rx="10" fill="url(#machineMetal)" stroke="#F59E0B" stroke-width="2" />
+      <!-- Machine Top Status Window -->
+      <rect x="-32" y="-28" width="64" height="24" rx="4" fill="#0F172A" stroke="#334155" stroke-width="1" />
+      <!-- Scanning Radar Grid Wave -->
+      <line x1="-24" y1="-16" x2="24" y2="-16" stroke="#FBBF24" stroke-width="1.5" stroke-dasharray="4 2" />
+      <circle cx="-6" cy="-16" r="3.5" fill="#FEF08A" filter="url(#neonGlow)" />
+      <!-- Front Processing Chute Opening -->
+      <rect x="-30" y="2" width="60" height="26" rx="4" fill="#050811" stroke="#F59E0B" stroke-width="1.2" />
+      <text x="0" y="20" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="9" font-weight="900" fill="#FEF08A" text-anchor="middle" letter-spacing="0.5">CALIBRATING</text>
+    </g>
+
+    <!-- Output Processed Item exiting on right: Calibrated Solar Array -->
+    <g transform="translate(310, 26) scale(0.9)">
+      <use href="#comp-solar" />
+      <!-- Energy Aura ring -->
+      <circle cx="0" cy="0" r="18" fill="none" stroke="#FBBF24" stroke-width="1.2" stroke-dasharray="3 3" opacity="0.8" />
+    </g>
+  </g>
+
+  <!-- TRACK 3 (BOTTOM — CYAN / PROPULSION & SENSORS) -->
+  <g id="track-3" transform="translate(220, 320)">
+    <!-- Horizontal Belt Bed -->
+    <rect x="0" y="0" width="360" height="52" rx="8" fill="url(#beltBed)" stroke="#0284C7" stroke-width="2" />
+    <rect x="0" y="0" width="360" height="52" rx="8" fill="url(#beltTreads)" opacity="0.35" />
+    <!-- Cyan Neon Top/Bottom Rails -->
+    <line x1="0" y1="2" x2="360" y2="2" stroke="#38BDF8" stroke-width="2" filter="url(#neonGlow)" />
+    <line x1="0" y1="50" x2="360" y2="50" stroke="#38BDF8" stroke-width="2" filter="url(#neonGlow)" />
+
+    <!-- Input Raw Item entering from left: Sensor Dome -->
+    <g transform="translate(50, 26) scale(0.9)">
+      <use href="#comp-sensor" />
+    </g>
+
+    <!-- Center Machine 3: Plasma Infusion Chamber -->
+    <g transform="translate(180, 26)" filter="url(#dropShadow)">
+      <!-- Machine Housing Box -->
+      <rect x="-42" y="-36" width="84" height="72" rx="10" fill="url(#machineMetal)" stroke="#06B6D4" stroke-width="2" />
+      <!-- Machine Top Status Window -->
+      <rect x="-32" y="-28" width="64" height="24" rx="4" fill="#0F172A" stroke="#334155" stroke-width="1" />
+      <!-- Plasma Coils / Energy Line -->
+      <line x1="-20" y1="-16" x2="20" y2="-16" stroke="#38BDF8" stroke-width="2.5" />
+      <circle cx="8" cy="-16" r="3" fill="#E0F2FE" filter="url(#neonGlow)" />
+      <!-- Front Processing Chute Opening -->
+      <rect x="-30" y="2" width="60" height="26" rx="4" fill="#050811" stroke="#06B6D4" stroke-width="1.2" />
+      <text x="0" y="20" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="9" font-weight="900" fill="#67E8F9" text-anchor="middle" letter-spacing="0.5">CHARGING</text>
+    </g>
+
+    <!-- Output Processed Item exiting on right: Active Plasma Thruster -->
+    <g transform="translate(310, 26) scale(0.9)">
+      <use href="#comp-thruster" />
+    </g>
+  </g>
+
+  <!-- ========================================================
+       3. PLAYER 1 (LEFT OPERATOR — CYAN SUIT — LANE RUSH STYLE)
+       ======================================================== -->
+  <g transform="translate(155, 240)" filter="url(#dropShadow)">
+    <!-- Ground Touch Ring (Cyan P1) -->
+    <ellipse cx="0" cy="30" rx="26" ry="11" fill="rgba(6, 182, 212, 0.28)" stroke="#06B6D4" stroke-width="2" />
+
+    <!-- 3D Shaded Rounded Torso (Cyan Operator Suit) -->
+    <rect x="-16" y="-6" width="32" height="32" rx="12" fill="url(#p1Suit)" stroke="#67E8F9" stroke-width="1.8" />
+    <!-- Chest Badge: Track Router Icon -->
+    <rect x="-8" y="2" width="16" height="12" rx="3" fill="#083344" stroke="#67E8F9" stroke-width="1.2" />
+    <polygon points="-4,8 0,5 4,8" fill="#38BDF8" />
+
+    <!-- Head (Rounded Robot/Worker Head facing right toward horizontal tracks) -->
+    <rect x="-18" y="-34" width="36" height="28" rx="13" fill="#F8FAFC" stroke="#06B6D4" stroke-width="2" />
+    <!-- Dark Visor Looking Right with Gloss Reflection -->
+    <rect x="-4" y="-28" width="22" height="14" rx="6" fill="#0F172A" stroke="#334155" stroke-width="1" />
+    <path d="M -1,-26 L 5,-26 L 1,-17 L -3,-17 Z" fill="rgba(255, 255, 255, 0.15)" />
+    <!-- Glowing Friendly Eyes in Visor -->
+    <circle cx="2" cy="-21" r="2.5" fill="#38BDF8" />
+    <circle cx="10" cy="-21" r="2.5" fill="#38BDF8" />
+
+    <!-- Cap Dome on Top (Cyan with Brim) -->
+    <path d="M -19,-26 C -19,-40 19,-40 19,-26 Z" fill="url(#p1Suit)" stroke="#67E8F9" stroke-width="1.2" />
+    <rect x="-22" y="-27" width="44" height="4" rx="2" fill="#38BDF8" />
+
+    <!-- Left Arm: Grabbing incoming raw part from left vertical belt -->
+    <path d="M -10,6 L -36,-8" stroke="url(#p1Suit)" stroke-width="9" stroke-linecap="round" />
+    <circle cx="-38" cy="-8" r="6" fill="#F8FAFC" stroke="#06B6D4" stroke-width="1.5" />
+
+    <!-- Right Arm: Routing part into Track 1 / Track 2 -->
+    <path d="M 10,6 L 38,-12" stroke="url(#p1Suit)" stroke-width="9" stroke-linecap="round" />
+    <circle cx="40" cy="-12" r="6" fill="#F8FAFC" stroke="#06B6D4" stroke-width="1.5" />
+
+    <!-- Trajectory dash indicating routing from incoming belt into Track 1 -->
+    <path d="M -40,-8 Q 0,-60 65,-95" fill="none" stroke="#06B6D4" stroke-width="2" stroke-dasharray="4 4" opacity="0.85" />
+  </g>
+
+  <!-- ========================================================
+       4. PLAYER 2 (RIGHT OPERATOR — AMBER SUIT — LANE RUSH STYLE)
+       ======================================================== -->
+  <g transform="translate(625, 240)" filter="url(#dropShadow)">
+    <!-- Ground Touch Ring (Amber P2) -->
+    <ellipse cx="0" cy="30" rx="26" ry="11" fill="rgba(245, 158, 11, 0.28)" stroke="#F59E0B" stroke-width="2" />
+
+    <!-- 3D Shaded Rounded Torso (Amber Operator Suit) -->
+    <rect x="-16" y="-6" width="32" height="32" rx="12" fill="url(#p2Suit)" stroke="#FDE68A" stroke-width="1.8" />
+    <!-- Chest Badge: Assembly Hammer / Wrench Icon -->
+    <rect x="-8" y="2" width="16" height="12" rx="3" fill="#451A03" stroke="#FDE68A" stroke-width="1.2" />
+    <circle cx="0" cy="8" r="3" fill="#FBBF24" />
+
+    <!-- Head (Rounded Robot/Worker Head facing left toward processed items) -->
+    <rect x="-18" y="-34" width="36" height="28" rx="13" fill="#F8FAFC" stroke="#F59E0B" stroke-width="2" />
+    <!-- Dark Visor Looking Left with Gloss Reflection -->
+    <rect x="-18" y="-28" width="22" height="14" rx="6" fill="#0F172A" stroke="#334155" stroke-width="1" />
+    <path d="M -15,-26 L -9,-26 L -13,-17 L -17,-17 Z" fill="rgba(255, 255, 255, 0.15)" />
+    <!-- Glowing Friendly Eyes in Visor -->
+    <circle cx="-11" cy="-21" r="2.5" fill="#FBBF24" />
+    <circle cx="-3" cy="-21" r="2.5" fill="#FBBF24" />
+
+    <!-- Cap Dome on Top (Amber with Brim) -->
+    <path d="M -19,-26 C -19,-40 19,-40 19,-26 Z" fill="url(#p2Suit)" stroke="#FDE68A" stroke-width="1.2" />
+    <rect x="-22" y="-27" width="44" height="4" rx="2" fill="#FBBF24" />
+
+    <!-- Left Arm: Grabbing processed component from Track 2 -->
+    <path d="M -10,6 L -38,-2" stroke="url(#p2Suit)" stroke-width="9" stroke-linecap="round" />
+    <circle cx="-40" cy="-2" r="6" fill="#F8FAFC" stroke="#F59E0B" stroke-width="1.5" />
+
+    <!-- Right Arm: Depositing component into Crate 2 -->
+    <path d="M 10,6 L 36,-6" stroke="url(#p2Suit)" stroke-width="9" stroke-linecap="round" />
+    <circle cx="38" cy="-6" r="6" fill="#F8FAFC" stroke="#F59E0B" stroke-width="1.5" />
+
+    <!-- Trajectory dash indicating placement into Crate 2 -->
+    <path d="M -38,-2 Q 0,-30 45,0" fill="none" stroke="#F59E0B" stroke-width="2" stroke-dasharray="4 4" opacity="0.85" />
+  </g>
+
+  <!-- ========================================================
+       5. FAR RIGHT: 3 OUTPUT BLUEPRINT CRATES / ASSEMBLY BINS
+       ======================================================== -->
+
+  <!-- OUTPUT CRATE 1 (TOP) — Blueprint: [Wheel + Solar + Sensor] -->
+  <g id="crate-1" transform="translate(730, 110)" filter="url(#dropShadow)">
+    <!-- Crate Exterior Container Body -->
+    <rect x="-42" y="-14" width="84" height="80" rx="8" fill="#111827" stroke="#1E293B" stroke-width="2" />
+    <!-- Dark Inner Crate Hopper -->
+    <ellipse cx="0" cy="-14" rx="38" ry="10" fill="#0A0E1A" stroke="#38BDF8" stroke-width="1.5" />
+
+    <!-- Front Blueprint Display Screen -->
+    <rect x="-34" y="6" width="68" height="52" rx="5" fill="#0F172A" stroke="#334155" stroke-width="1.2" />
+    <!-- Top Progress Pill (2/3 Filled) -->
+    <rect x="-20" y="10" width="40" height="12" rx="4" fill="#0284C7" />
+    <text x="0" y="19" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="8.5" font-weight="900" fill="#FFFFFF" text-anchor="middle">2 / 3</text>
+
+    <!-- 3 Blueprint Recipe Slots (Wheel, Solar, Sensor) -->
+    <g transform="translate(0, 38)">
+      <!-- Slot 1: Wheel (Checked) -->
+      <rect x="-28" y="-12" width="16" height="20" rx="3" fill="#064E3B" stroke="#10B981" stroke-width="1" />
+      <circle cx="-20" cy="-2" r="5" fill="#10B981" />
+      <!-- Slot 2: Solar (Checked) -->
+      <rect x="-8" y="-12" width="16" height="20" rx="3" fill="#064E3B" stroke="#10B981" stroke-width="1" />
+      <rect x="-6" y="-6" width="12" height="8" fill="#10B981" rx="1" />
+      <!-- Slot 3: Sensor (Empty / Waiting) -->
+      <rect x="12" y="-12" width="16" height="20" rx="3" fill="#1E293B" stroke="#64748B" stroke-width="1" stroke-dasharray="2 2" />
+      <circle cx="20" cy="-2" r="4" fill="none" stroke="#64748B" stroke-width="1" />
+    </g>
+  </g>
+
+  <!-- OUTPUT CRATE 2 (MIDDLE) — 3/3 COMPLETE! Blueprint: [Solar + Wheel + Thruster] -->
+  <g id="crate-2" transform="translate(730, 215)" filter="url(#dropShadow)">
+    <!-- Crate Exterior Container Body (Glowing with success!) -->
+    <rect x="-42" y="-14" width="84" height="80" rx="8" fill="#111827" stroke="#10B981" stroke-width="2" filter="url(#neonGlow)" />
+    <!-- Dark Inner Crate Hopper -->
+    <ellipse cx="0" cy="-14" rx="38" ry="10" fill="#064E3B" stroke="#34D399" stroke-width="1.8" />
+
+    <!-- Front Blueprint Display Screen -->
+    <rect x="-34" y="6" width="68" height="52" rx="5" fill="#064E3B" stroke="#34D399" stroke-width="1.2" />
+    <!-- Top Progress Pill (3/3 COMPLETE!) -->
+    <rect x="-28" y="10" width="56" height="13" rx="4" fill="#10B981" />
+    <text x="0" y="20" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="8.5" font-weight="900" fill="#FFFFFF" text-anchor="middle">COMPLETE!</text>
+
+    <!-- 3 Blueprint Recipe Slots (All 3 Filled with green checkmarks!) -->
+    <g transform="translate(0, 38)">
+      <rect x="-28" y="-12" width="16" height="20" rx="3" fill="#059669" stroke="#6EE7B7" stroke-width="1" />
+      <path d="M -24,-2 L -21,1 L -16,-5" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+      <rect x="-8" y="-12" width="16" height="20" rx="3" fill="#059669" stroke="#6EE7B7" stroke-width="1" />
+      <path d="M -4,-2 L -1,1 L 4,-5" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+      <rect x="12" y="-12" width="16" height="20" rx="3" fill="#059669" stroke="#6EE7B7" stroke-width="1" />
+      <path d="M 16,-2 L 19,1 L 24,-5" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" />
+    </g>
+
+    <!-- Floating Score Pop Badge (+500 ASSEMBLED!) -->
+    <g transform="translate(-10, -32)" filter="url(#neonGlow)">
+      <rect x="-32" y="-11" width="64" height="22" rx="11" fill="#064E3B" stroke="#34D399" stroke-width="1.5" />
+      <text x="0" y="4" fill="#6EE7B7" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11.5" font-weight="900" text-anchor="middle">+500</text>
+    </g>
+  </g>
+
+  <!-- OUTPUT CRATE 3 (BOTTOM) — Blueprint: [Thruster + Solar + Thruster] -->
+  <g id="crate-3" transform="translate(730, 320)" filter="url(#dropShadow)">
+    <!-- Crate Exterior Container Body -->
+    <rect x="-42" y="-14" width="84" height="80" rx="8" fill="#111827" stroke="#1E293B" stroke-width="2" />
+    <!-- Dark Inner Crate Hopper -->
+    <ellipse cx="0" cy="-14" rx="38" ry="10" fill="#0A0E1A" stroke="#38BDF8" stroke-width="1.5" />
+
+    <!-- Front Blueprint Display Screen -->
+    <rect x="-34" y="6" width="68" height="52" rx="5" fill="#0F172A" stroke="#334155" stroke-width="1.2" />
+    <!-- Top Progress Pill (1/3 Filled) -->
+    <rect x="-20" y="10" width="40" height="12" rx="4" fill="#1E293B" stroke="#64748B" stroke-width="1" />
+    <text x="0" y="19" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="8.5" font-weight="900" fill="#94A3B8" text-anchor="middle">1 / 3</text>
+
+    <!-- 3 Blueprint Recipe Slots -->
+    <g transform="translate(0, 38)">
+      <!-- Slot 1: Thruster (Checked) -->
+      <rect x="-28" y="-12" width="16" height="20" rx="3" fill="#064E3B" stroke="#10B981" stroke-width="1" />
+      <polygon points="-20,-5 -23,1 -17,1" fill="#10B981" />
+      <!-- Slot 2: Solar (Waiting) -->
+      <rect x="-8" y="-12" width="16" height="20" rx="3" fill="#1E293B" stroke="#64748B" stroke-width="1" stroke-dasharray="2 2" />
+      <!-- Slot 3: Thruster (Waiting) -->
+      <rect x="12" y="-12" width="16" height="20" rx="3" fill="#1E293B" stroke="#64748B" stroke-width="1" stroke-dasharray="2 2" />
+    </g>
+  </g>
+
+  <!-- ========================================================
+       TOP HUD CAPSULE (EXACT LANE RUSH MATCH)
+       ======================================================== -->
+  <g id="top-hud" transform="translate(400, 36)" filter="url(#dropShadow)">
+    <!-- Pill Container -->
+    <rect x="-240" y="-18" width="480" height="36" rx="18" fill="#0F172A" fill-opacity="0.94" stroke="#1E293B" stroke-width="1.5" />
+
+    <!-- Left: Stage Indicator -->
+    <g transform="translate(-180, 0)">
+      <polygon points="-28,-5 -22,0 -28,5" fill="#10B981" filter="url(#neonGlow)" />
+      <text x="-16" y="4" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="800" fill="#E2E8F0" letter-spacing="0.5">ROVER HANGAR</text>
+    </g>
+
+    <!-- Center: Timer & Multiplier -->
+    <g transform="translate(0, 0)">
+      <line x1="-50" y1="-10" x2="-50" y2="10" stroke="#334155" stroke-width="1" />
+      <text x="-25" y="4" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="800" fill="#38BDF8" text-anchor="middle">00:48</text>
+      <!-- Multiplier Capsule -->
+      <rect x="5" y="-10" width="48" height="20" rx="10" fill="#10B981" fill-opacity="0.2" stroke="#10B981" stroke-width="1" />
+      <text x="29" y="4" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10.5" font-weight="900" fill="#34D399" text-anchor="middle">4x COMBO</text>
+      <line x1="62" y1="-10" x2="62" y2="10" stroke="#334155" stroke-width="1" />
+    </g>
+
+    <!-- Right: Score Display -->
+    <g transform="translate(170, 0)">
+      <text x="0" y="4" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="13.5" font-weight="900" fill="#F8FAFC" text-anchor="middle" letter-spacing="1">24,500</text>
+    </g>
+  </g>
+</svg>

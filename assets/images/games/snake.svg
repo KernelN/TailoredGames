@@ -1,49 +1,136 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0B0F19" />
-      <stop offset="50%" stop-color="#111827" />
-      <stop offset="100%" stop-color="#161E31" />
+      <stop offset="0%" stop-color="#080C14" />
+      <stop offset="60%" stop-color="#0B0F19" />
+      <stop offset="100%" stop-color="#111827" />
     </linearGradient>
-    <radialGradient id="glow" cx="50%" cy="40%" r="50%">
-      <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.3" />
-      <stop offset="100%" stop-color="#0B0F19" stop-opacity="0" />
-    </radialGradient>
-    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255, 255, 255, 0.04)" stroke-width="1"/>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="rgba(255, 255, 255, 0.04)" stroke-width="1" />
     </pattern>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#06B6D4" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#080C14" stop-opacity="0" />
+    </radialGradient>
+    <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3.5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
   </defs>
 
   <!-- Background -->
-  <rect width="800" height="500" fill="url(#bg)"/>
-  <rect width="800" height="500" fill="url(#grid)"/>
-  <circle cx="400" cy="220" r="280" fill="url(#glow)"/>
+  <rect width="800" height="500" fill="url(#bg)" />
+  <rect width="800" height="500" fill="url(#grid)" />
+  <rect width="800" height="500" fill="url(#glow)" />
 
-  <!-- Device Frame Outline -->
-  <rect x="70" y="50" width="660" height="400" rx="16" fill="rgba(17, 24, 39, 0.75)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.5"/>
-  <rect x="70" y="50" width="660" height="400" rx="16" fill="none" stroke="#F59E0B" stroke-opacity="0.25" stroke-width="3"/>
+  <!-- Screen Bezel -->
+  <rect x="24" y="20" width="752" height="460" rx="14" fill="none" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1.5" />
 
-  <!-- Top bar of the simulated device -->
-  <rect x="70" y="50" width="660" height="42" rx="16" fill="rgba(11, 15, 25, 0.85)"/>
-  <circle cx="95" cy="71" r="5" fill="#EF4444" opacity="0.8"/>
-  <circle cx="112" cy="71" r="5" fill="#F59E0B" opacity="0.8"/>
-  <circle cx="129" cy="71" r="5" fill="#10B981" opacity="0.8"/>
-  <text x="400" y="76" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="12" text-anchor="middle" font-weight="600" letter-spacing="1">GAMETELIER INTERACTIVE</text>
+  <!-- In-Game Playing Arena Border -->
+  <rect x="60" y="70" width="680" height="360" rx="8" fill="rgba(11, 15, 25, 0.6)" stroke="rgba(6, 182, 212, 0.25)" stroke-width="1.5" />
 
-  <!-- Icon Graphic -->
-  <g transform="translate(400, 210) scale(1.1)">
-    
-      <path d="M -60 20 L -20 20 L -20 -30 L 30 -30 L 30 10 L 60 10" fill="none" stroke="#F59E0B" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
-      <circle cx="60" cy="10" r="10" fill="#FFFFFF"/>
-    
+  <!-- MINIMALIST IN-GAME HUD -->
+  <g transform="translate(60, 36)">
+    <!-- Score Pill -->
+    <rect x="0" y="0" width="120" height="26" rx="13" fill="rgba(6, 182, 212, 0.12)" stroke="rgba(6, 182, 212, 0.3)" stroke-width="1" />
+    <circle cx="13" cy="13" r="3.5" fill="#06B6D4" />
+    <text x="24" y="17" fill="#67E8F9" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="700">SCORE</text>
+    <text x="75" y="17" fill="#F8FAFC" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="800">4,850</text>
+
+    <!-- Length Counter -->
+    <g transform="translate(560, 0)">
+      <rect x="0" y="0" width="120" height="26" rx="13" fill="rgba(16, 185, 129, 0.12)" stroke="rgba(16, 185, 129, 0.3)" stroke-width="1" />
+      <circle cx="13" cy="13" r="3.5" fill="#10B981" />
+      <text x="24" y="17" fill="#6EE7B7" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="700">LENGTH</text>
+      <text x="82" y="17" fill="#F8FAFC" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="800">28</text>
+    </g>
   </g>
 
-  <!-- Titles -->
-  <text x="400" y="360" fill="#F8FAFC" font-family="system-ui, sans-serif" font-size="28" font-weight="800" text-anchor="middle" letter-spacing="-0.5">SNAKE AIRLINES</text>
-  <text x="400" y="390" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="14" font-weight="500" text-anchor="middle" letter-spacing="0.5">Vuelos Comerciales & Escalas Arcade</text>
+  <!-- SNAKE BODY SEGMENTS (Grid Aligned, 24px increments) -->
+  <g transform="translate(60, 70)">
+    <!-- Trail Glow Path -->
+    <path d="M 120 180 L 264 180 L 264 108 L 432 108 L 432 252 L 312 252 L 312 300 L 480 300" 
+          fill="none" stroke="rgba(6, 182, 212, 0.2)" stroke-width="26" stroke-linecap="round" stroke-linejoin="round" />
 
-  <!-- Status Pill -->
-  <rect x="330" y="415" width="140" height="24" rx="12" fill="#F59E0B" fill-opacity="0.15" stroke="#F59E0B" stroke-opacity="0.4"/>
-  <circle cx="345" cy="427" r="4" fill="#F59E0B"/>
-  <text x="405" y="431" fill="#F8FAFC" font-family="system-ui, sans-serif" font-size="11" font-weight="700" text-anchor="middle" letter-spacing="1">EVENT-READY</text>
+    <!-- Tail & Body Segments -->
+    <!-- Tail Tip -->
+    <rect x="108" y="168" width="24" height="24" rx="12" fill="#0E7490" />
+    <rect x="132" y="168" width="24" height="24" rx="6" fill="#06B6D4" opacity="0.8" />
+    <rect x="156" y="168" width="24" height="24" rx="6" fill="#06B6D4" opacity="0.85" />
+    <rect x="180" y="168" width="24" height="24" rx="6" fill="#06B6D4" opacity="0.9" />
+    <rect x="204" y="168" width="24" height="24" rx="6" fill="#06B6D4" />
+    <rect x="228" y="168" width="24" height="24" rx="6" fill="#06B6D4" />
+    <!-- Corner Up -->
+    <rect x="252" y="168" width="24" height="24" rx="6" fill="#06B6D4" />
+    <rect x="252" y="144" width="24" height="24" rx="6" fill="#06B6D4" />
+    <rect x="252" y="120" width="24" height="24" rx="6" fill="#06B6D4" />
+    <!-- Corner Right -->
+    <rect x="252" y="96" width="24" height="24" rx="6" fill="#06B6D4" />
+    <rect x="276" y="96" width="24" height="24" rx="6" fill="#06B6D4" />
+    <rect x="300" y="96" width="24" height="24" rx="6" fill="#06B6D4" />
+    <rect x="324" y="96" width="24" height="24" rx="6" fill="#06B6D4" />
+    <rect x="348" y="96" width="24" height="24" rx="6" fill="#06B6D4" />
+    <rect x="372" y="96" width="24" height="24" rx="6" fill="#06B6D4" />
+    <rect x="396" y="96" width="24" height="24" rx="6" fill="#06B6D4" />
+    <!-- Corner Down -->
+    <rect x="420" y="96" width="24" height="24" rx="6" fill="#06B6D4" />
+    <rect x="420" y="120" width="24" height="24" rx="6" fill="#06B6D4" />
+    <rect x="420" y="144" width="24" height="24" rx="6" fill="#06B6D4" />
+    <rect x="420" y="168" width="24" height="24" rx="6" fill="#06B6D4" />
+    <rect x="420" y="192" width="24" height="24" rx="6" fill="#06B6D4" />
+    <rect x="420" y="216" width="24" height="24" rx="6" fill="#06B6D4" />
+    <rect x="420" y="240" width="24" height="24" rx="6" fill="#06B6D4" />
+    <!-- Corner Left -->
+    <rect x="396" y="240" width="24" height="24" rx="6" fill="#06B6D4" />
+    <rect x="372" y="240" width="24" height="24" rx="6" fill="#06B6D4" />
+    <rect x="348" y="240" width="24" height="24" rx="6" fill="#06B6D4" />
+    <rect x="324" y="240" width="24" height="24" rx="6" fill="#06B6D4" />
+    <rect x="300" y="240" width="24" height="24" rx="6" fill="#06B6D4" />
+    <!-- Corner Down -->
+    <rect x="300" y="264" width="24" height="24" rx="6" fill="#06B6D4" />
+    <rect x="300" y="288" width="24" height="24" rx="6" fill="#06B6D4" />
+    <!-- Corner Right -->
+    <rect x="324" y="288" width="24" height="24" rx="6" fill="#22D3EE" />
+    <rect x="348" y="288" width="24" height="24" rx="6" fill="#22D3EE" />
+    <rect x="372" y="288" width="24" height="24" rx="6" fill="#22D3EE" />
+    <rect x="396" y="288" width="24" height="24" rx="6" fill="#22D3EE" />
+    <rect x="420" y="288" width="24" height="24" rx="6" fill="#22D3EE" />
+    <rect x="444" y="288" width="24" height="24" rx="6" fill="#22D3EE" />
+    <rect x="468" y="288" width="24" height="24" rx="6" fill="#22D3EE" />
+
+    <!-- Head (Leading East) with glow and eye lights -->
+    <g transform="translate(492, 288)" filter="url(#neonGlow)">
+      <rect x="0" y="0" width="26" height="24" rx="6" fill="#38BDF8" stroke="#FFFFFF" stroke-width="1.5" />
+      <circle cx="16" cy="6" r="2.5" fill="#FFFFFF" />
+      <circle cx="16" cy="18" r="2.5" fill="#FFFFFF" />
+    </g>
+
+    <!-- COLLECTIBLE ENERGY FOOD ORBS -->
+    <!-- Emerald Orb 1 -->
+    <g transform="translate(564, 288)" filter="url(#neonGlow)">
+      <circle cx="12" cy="12" r="10" fill="#10B981" />
+      <circle cx="12" cy="12" r="4" fill="#FFFFFF" />
+      <circle cx="12" cy="12" r="16" fill="none" stroke="#10B981" stroke-width="1.5" opacity="0.6" stroke-dasharray="3 3" />
+    </g>
+    <!-- Amber Bonus Orb 2 -->
+    <g transform="translate(180, 240)">
+      <circle cx="12" cy="12" r="9" fill="#F59E0B" />
+      <circle cx="12" cy="12" r="3.5" fill="#FFFFFF" />
+    </g>
+    <!-- Cyan Minor Orb 3 -->
+    <g transform="translate(516, 120)">
+      <circle cx="12" cy="12" r="8" fill="#06B6D4" />
+      <circle cx="12" cy="12" r="3" fill="#FFFFFF" />
+    </g>
+  </g>
+
+  <!-- Bottom Discrete Footer: Touch Mode Indicator -->
+  <g transform="translate(400, 452)">
+    <rect x="-65" y="-12" width="130" height="24" rx="12" fill="rgba(17, 24, 39, 0.6)" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1" />
+    <circle cx="-48" cy="0" r="3.5" fill="#06B6D4" />
+    <text x="4" y="4" fill="#94A3B8" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="700" text-anchor="middle" letter-spacing="1">ARCADE GRID</text>
+  </g>
 </svg>

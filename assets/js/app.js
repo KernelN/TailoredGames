@@ -9,10 +9,13 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderAll() {
     if (!renderer) return;
 
-    // 1. Navigation Header
+    // 1. Navigation Header & Favicon
     renderer.renderHeader("header-mount", mode);
 
-    // 2. Promotional Banner
+    // 2. Hero Section
+    renderer.renderHero("hero-mount", mode);
+
+    // 3. Promotional Banner
     renderer.renderPromoBanner("promo-mount");
 
     // 3. Split Columns (Clásicos & A Medida Carousels)

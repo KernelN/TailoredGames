@@ -1,49 +1,103 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0B0F19" />
-      <stop offset="50%" stop-color="#111827" />
-      <stop offset="100%" stop-color="#161E31" />
+      <stop offset="0%" stop-color="#080C14" />
+      <stop offset="60%" stop-color="#0B0F19" />
+      <stop offset="100%" stop-color="#111827" />
     </linearGradient>
-    <radialGradient id="glow" cx="50%" cy="40%" r="50%">
-      <stop offset="0%" stop-color="#10B981" stop-opacity="0.3" />
-      <stop offset="100%" stop-color="#0B0F19" stop-opacity="0" />
-    </radialGradient>
-    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255, 255, 255, 0.04)" stroke-width="1"/>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="rgba(255, 255, 255, 0.03)" stroke-width="1" />
     </pattern>
+    <radialGradient id="stageGlow" cx="50%" cy="45%" r="55%">
+      <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.15" />
+      <stop offset="60%" stop-color="#6366F1" stop-opacity="0.1" />
+      <stop offset="100%" stop-color="#080C14" stop-opacity="0" />
+    </radialGradient>
+    <filter id="goldGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
   </defs>
 
   <!-- Background -->
-  <rect width="800" height="500" fill="url(#bg)"/>
-  <rect width="800" height="500" fill="url(#grid)"/>
-  <circle cx="400" cy="220" r="280" fill="url(#glow)"/>
+  <rect width="800" height="500" fill="url(#bg)" />
+  <rect width="800" height="500" fill="url(#grid)" />
+  <rect width="800" height="500" fill="url(#stageGlow)" />
 
-  <!-- Device Frame Outline -->
-  <rect x="70" y="50" width="660" height="400" rx="16" fill="rgba(17, 24, 39, 0.75)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.5"/>
-  <rect x="70" y="50" width="660" height="400" rx="16" fill="none" stroke="#10B981" stroke-opacity="0.25" stroke-width="3"/>
+  <!-- Screen Bezel -->
+  <rect x="24" y="20" width="752" height="460" rx="14" fill="none" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1.5" />
 
-  <!-- Top bar of the simulated device -->
-  <rect x="70" y="50" width="660" height="42" rx="16" fill="rgba(11, 15, 25, 0.85)"/>
-  <circle cx="95" cy="71" r="5" fill="#EF4444" opacity="0.8"/>
-  <circle cx="112" cy="71" r="5" fill="#F59E0B" opacity="0.8"/>
-  <circle cx="129" cy="71" r="5" fill="#10B981" opacity="0.8"/>
-  <text x="400" y="76" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="12" text-anchor="middle" font-weight="600" letter-spacing="1">GAMETELIER INTERACTIVE</text>
+  <!-- In-Tool Interface Area -->
+  <rect x="50" y="60" width="700" height="380" rx="10" fill="rgba(11, 15, 25, 0.6)" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1" />
 
-  <!-- Icon Graphic -->
-  <g transform="translate(400, 210) scale(1.1)">
-    
-      <rect x="-60" y="-55" width="120" height="75" rx="8" fill="#1E293B" stroke="#10B981" stroke-width="2"/>
-      <text x="0" y="-3" fill="#10B981" font-size="32" font-weight="900" text-anchor="middle"># 0 4 2</text>
-    
+  <!-- MINIMALIST APPLICATION TOP BAR -->
+  <g transform="translate(50, 60)">
+    <rect x="0" y="0" width="700" height="40" rx="10" fill="rgba(17, 24, 39, 0.85)" />
+    <!-- Window dots -->
+    <circle cx="24" cy="20" r="4.5" fill="#EF4444" opacity="0.7" />
+    <circle cx="38" cy="20" r="4.5" fill="#F59E0B" opacity="0.7" />
+    <circle cx="52" cy="20" r="4.5" fill="#10B981" opacity="0.7" />
+    <!-- Tool Name -->
+    <text x="350" y="24" fill="#94A3B8" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="700" text-anchor="middle" letter-spacing="1">SORTEADOR DE ESCENARIO — PANTALLA GIGANTE</text>
+    <!-- Stage Ready Pill -->
+    <rect x="590" y="9" width="94" height="22" rx="11" fill="rgba(245, 158, 11, 0.15)" stroke="rgba(245, 158, 11, 0.4)" stroke-width="1" />
+    <circle cx="603" cy="20" r="3" fill="#F59E0B" />
+    <text x="643" y="23.5" fill="#FCD34D" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="9" font-weight="800" text-anchor="middle">STAGE MODE</text>
   </g>
 
-  <!-- Titles -->
-  <text x="400" y="360" fill="#F8FAFC" font-family="system-ui, sans-serif" font-size="28" font-weight="800" text-anchor="middle" letter-spacing="-0.5">SORTEADOR EN PANTALLA</text>
-  <text x="400" y="390" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="14" font-weight="500" text-anchor="middle" letter-spacing="0.5">Animación y Conteo Regresivo para Escenario</text>
+  <!-- MAIN STAGE DISPLAY SCREEN -->
+  <g transform="translate(100, 120)">
+    <!-- Digital Stage Backdrop Frame -->
+    <rect x="0" y="0" width="600" height="290" rx="12" fill="rgba(17, 24, 39, 0.75)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1.5" />
 
-  <!-- Status Pill -->
-  <rect x="330" y="415" width="140" height="24" rx="12" fill="#10B981" fill-opacity="0.15" stroke="#10B981" stroke-opacity="0.4"/>
-  <circle cx="345" cy="427" r="4" fill="#10B981"/>
-  <text x="405" y="431" fill="#F8FAFC" font-family="system-ui, sans-serif" font-size="11" font-weight="700" text-anchor="middle" letter-spacing="1">EVENT-READY</text>
+    <!-- Event Title Header -->
+    <g transform="translate(300, 36)">
+      <text x="0" y="0" fill="#94A3B8" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="700" text-anchor="middle" letter-spacing="2">GRAN SORTEO ANUAL • PREMIO MAYOR</text>
+    </g>
+
+    <!-- Slot Drum / Winner Card Box -->
+    <g transform="translate(50, 58)">
+      <rect x="0" y="0" width="500" height="136" rx="10" fill="#0B0F19" stroke="rgba(245, 158, 11, 0.5)" stroke-width="2" filter="url(#goldGlow)" />
+
+      <!-- Digital Numbers / Rolling Slot Animation (Ghost rows) -->
+      <g opacity="0.25">
+        <text x="250" y="28" fill="#94A3B8" font-family="'Plus Jakarta Sans', monospace, sans-serif" font-size="18" font-weight="700" text-anchor="middle">#0480 — MARTÍN D'ALESSIO</text>
+      </g>
+      <g opacity="0.25">
+        <text x="250" y="126" fill="#94A3B8" font-family="'Plus Jakarta Sans', monospace, sans-serif" font-size="18" font-weight="700" text-anchor="middle">#0482 — SOFÍA BENÍTEZ</text>
+      </g>
+
+      <!-- Center Active Highlighted Winner -->
+      <rect x="16" y="42" width="468" height="52" rx="8" fill="rgba(245, 158, 11, 0.12)" stroke="#F59E0B" stroke-width="1.5" />
+      
+      <!-- Winner Ticket & Name -->
+      <text x="36" y="74" fill="#F59E0B" font-family="'Plus Jakarta Sans', monospace, sans-serif" font-size="20" font-weight="800">#0481</text>
+      <text x="130" y="74" fill="#FFFFFF" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="18" font-weight="800">LUCÍA SERRANO</text>
+      <text x="460" y="74" fill="#34D399" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="800" text-anchor="end">¡GANADOR! ✓</text>
+    </g>
+
+    <!-- Bottom Controls & Stats Bar inside Stage Screen -->
+    <g transform="translate(50, 216)">
+      <!-- Left: Participants Count -->
+      <rect x="0" y="0" width="160" height="42" rx="8" fill="rgba(255, 255, 255, 0.04)" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1" />
+      <text x="16" y="18" fill="#94A3B8" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="9" font-weight="600">Total participantes</text>
+      <text x="16" y="34" fill="#F8FAFC" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="13" font-weight="800">1,248 personas</text>
+
+      <!-- Center: Action Draw Button -->
+      <g transform="translate(180, 0)">
+        <rect x="0" y="0" width="160" height="42" rx="8" fill="#6366F1" />
+        <text x="80" y="26" fill="#FFFFFF" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="800" text-anchor="middle" letter-spacing="1">SORTEAR AHORA</text>
+      </g>
+
+      <!-- Right: Animation Preset -->
+      <g transform="translate(360, 0)">
+        <rect x="0" y="0" width="140" height="42" rx="8" fill="rgba(255, 255, 255, 0.04)" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1" />
+        <text x="16" y="18" fill="#94A3B8" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="9" font-weight="600">Efecto / Timer</text>
+        <text x="16" y="34" fill="#67E8F9" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="800">Conteo 5s + FX</text>
+      </g>
+    </g>
+  </g>
 </svg>

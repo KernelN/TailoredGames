@@ -1,0 +1,549 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <!-- 1. ENVIRONMENT & LIGHTING GRADIENTS -->
+    <linearGradient id="wallBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#060A12" />
+      <stop offset="55%" stop-color="#0D1526" />
+      <stop offset="100%" stop-color="#162238" />
+    </linearGradient>
+
+    <linearGradient id="windowGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1E3A8A" stop-opacity="0.45" />
+      <stop offset="100%" stop-color="#38BDF8" stop-opacity="0.18" />
+    </linearGradient>
+
+    <radialGradient id="spotlightLeft" cx="25%" cy="0%" r="55%">
+      <stop offset="0%" stop-color="#10B981" stop-opacity="0.16" />
+      <stop offset="100%" stop-color="#060A12" stop-opacity="0" />
+    </radialGradient>
+
+    <radialGradient id="spotlightRight" cx="75%" cy="0%" r="55%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.16" />
+      <stop offset="100%" stop-color="#060A12" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- 2. CONVEYOR BELT LANE GRADIENTS & PATTERNS -->
+    <linearGradient id="beltSurfaceEven" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="18%" stop-color="#172236" />
+      <stop offset="82%" stop-color="#131C2E" />
+      <stop offset="100%" stop-color="#090E1A" />
+    </linearGradient>
+
+    <linearGradient id="beltSurfaceOdd" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#131C2E" />
+      <stop offset="18%" stop-color="#1C2942" />
+      <stop offset="82%" stop-color="#162035" />
+      <stop offset="100%" stop-color="#0B111E" />
+    </linearGradient>
+
+    <!-- Subtle Conveyor Belt Rib Texture -->
+    <pattern id="beltTread" width="20" height="80" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="4" x2="0" y2="76" stroke="rgba(255, 255, 255, 0.025)" stroke-width="1.5" />
+      <line x1="10" y1="4" x2="10" y2="76" stroke="rgba(0, 0, 0, 0.25)" stroke-width="1.5" />
+    </pattern>
+
+    <!-- Sector Tints (Right = P1 Cyan, Left = P2 Emerald) -->
+    <linearGradient id="rightP1Zone" x1="100%" y1="0%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#06B6D4" stop-opacity="0.13" />
+      <stop offset="75%" stop-color="#06B6D4" stop-opacity="0.03" />
+      <stop offset="100%" stop-color="#06B6D4" stop-opacity="0" />
+    </linearGradient>
+    <linearGradient id="leftP2Zone" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10B981" stop-opacity="0.13" />
+      <stop offset="75%" stop-color="#10B981" stop-opacity="0.03" />
+      <stop offset="100%" stop-color="#10B981" stop-opacity="0" />
+    </linearGradient>
+
+    <!-- 3. CARDBOARD & OBJECT SHADING GRADIENTS -->
+    <linearGradient id="cardboardFront" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#EA9A28" />
+      <stop offset="100%" stop-color="#B86B11" />
+    </linearGradient>
+    <linearGradient id="cardboardTop" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F6B44B" />
+      <stop offset="100%" stop-color="#E08E24" />
+    </linearGradient>
+    <linearGradient id="cardboardFlap" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBBF24" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+
+    <!-- HUD & Avatar Gradients -->
+    <linearGradient id="hudGlass" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B" stop-opacity="0.92" />
+      <stop offset="100%" stop-color="#0F172A" stop-opacity="0.96" />
+    </linearGradient>
+    <linearGradient id="progGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6366F1" />
+      <stop offset="50%" stop-color="#06B6D4" />
+      <stop offset="100%" stop-color="#10B981" />
+    </linearGradient>
+    <linearGradient id="p1Suit" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#22D3EE" />
+      <stop offset="100%" stop-color="#0284C7" />
+    </linearGradient>
+    <linearGradient id="p2Suit" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#34D399" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+    <linearGradient id="brandCrestGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366F1" />
+      <stop offset="100%" stop-color="#312E81" />
+    </linearGradient>
+
+    <!-- Shadows & Glow Filters -->
+    <filter id="dropShadow" x="-25%" y="-25%" width="150%" height="155%">
+      <feDropShadow dx="0" dy="6" stdDeviation="4.5" flood-color="#000000" flood-opacity="0.6" />
+    </filter>
+    <filter id="softShadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="3" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.45" />
+    </filter>
+    <filter id="neonGlow" x="-35%" y="-35%" width="170%" height="170%">
+      <feGaussianBlur stdDeviation="4.5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Reusable Left-Moving Conveyor Chevrons (Shows Right -> Left motion) -->
+    <g id="laneChevrons">
+      <g opacity="0.16" stroke="#67E8F9" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="465,-9 454,0 465,9" />
+        <polyline points="478,-9 467,0 478,9" />
+        <polyline points="635,-9 624,0 635,9" />
+        <polyline points="648,-9 637,0 648,9" />
+      </g>
+      <g opacity="0.16" stroke="#6EE7B7" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="85,-9 74,0 85,9" />
+        <polyline points="98,-9 87,0 98,9" />
+        <polyline points="245,-9 234,0 245,9" />
+        <polyline points="258,-9 247,0 258,9" />
+      </g>
+    </g>
+
+    <!-- BRAND LOGO STICKER EMBLEM (Die-cut sticker look with shield & golden star) -->
+    <g id="brand-logo-badge">
+      <!-- White Die-Cut Sticker Outline -->
+      <rect x="-15" y="-12.5" width="30" height="25" rx="7" fill="#FFFFFF" />
+      <!-- Indigo Shield Body -->
+      <rect x="-13" y="-10.5" width="26" height="21" rx="5.5" fill="url(#brandCrestGrad)" />
+      <!-- Inner Subtle Border -->
+      <rect x="-11" y="-8.5" width="22" height="17" rx="4" fill="none" stroke="rgba(255, 255, 255, 0.25)" stroke-width="1" />
+      <!-- Golden Star / Crown Emblem -->
+      <polygon points="0,-7.5 2.6,-2.2 8.2,-1.6 4,2 5.2,7.4 0,4.5 -5.2,7.4 -4,2 -8.2,-1.6 -2.6,-2.2" fill="#FBBF24" stroke="#FDE68A" stroke-width="0.6" />
+    </g>
+
+    <!-- STATE 0: 2.5D OPEN CARDBOARD BOX (Detailed corrugated flaps + packed items inside) -->
+    <g id="box-open" filter="url(#dropShadow)">
+      <!-- Ground Contact Shadow -->
+      <ellipse cx="0" cy="24" rx="30" ry="8" fill="rgba(0,0,0,0.4)" />
+      <!-- Back Open Flap standing up -->
+      <polygon points="-21,-18 -16,-31 16,-31 21,-18" fill="#92400E" stroke="#78350F" stroke-width="1.2" stroke-linejoin="round" />
+      <!-- Left Open Flap sticking out at angle (\) with corrugated edge -->
+      <polygon points="-27,-6 -45,-20 -36,-31 -19,-18" fill="url(#cardboardFlap)" stroke="#78350F" stroke-width="1.2" stroke-linejoin="round" />
+      <line x1="-42" y1="-21" x2="-35" y2="-29" stroke="#FEF3C7" stroke-width="1" opacity="0.5" />
+      <!-- Right Open Flap sticking out at angle (/) with corrugated edge -->
+      <polygon points="27,-6 45,-20 36,-31 19,-18" fill="url(#cardboardFlap)" stroke="#78350F" stroke-width="1.2" stroke-linejoin="round" />
+      <line x1="42" y1="-21" x2="35" y2="-29" stroke="#FEF3C7" stroke-width="1" opacity="0.5" />
+
+      <!-- Dark Open Box Interior Cavity -->
+      <polygon points="-27,-6 -19,-18 19,-18 27,-6" fill="#3B1604" stroke="#78350F" stroke-width="1.2" />
+
+      <!-- Visible Packed Items Inside Box (Blue Tech Box + Rose Gift Item + Bubble Wrap) -->
+      <ellipse cx="0" cy="-9" rx="19" ry="5" fill="#FEF3C7" opacity="0.25" />
+      <!-- Item 1: Cyan Product Box -->
+      <rect x="-16" y="-17" width="15" height="11" rx="2.5" fill="#0284C7" stroke="#7DD3FC" stroke-width="1" />
+      <rect x="-13" y="-15" width="9" height="3" rx="1" fill="#E0F2FE" opacity="0.8" />
+      <!-- Item 2: Gold/Rose Product Bottle/Box -->
+      <rect x="1" y="-16" width="14" height="10" rx="2.5" fill="#E11D48" stroke="#FDA4AF" stroke-width="1" />
+      <circle cx="8" cy="-11" r="2.5" fill="#FDE047" />
+
+      <!-- Box Front Wall (3D Shaded Cardboard Face) -->
+      <rect x="-27" y="-6" width="54" height="30" rx="2.5" fill="url(#cardboardFront)" stroke="#78350F" stroke-width="1.2" />
+      <!-- Bottom Darker Edge Bevel -->
+      <rect x="-26" y="20" width="52" height="3.5" fill="#92400E" opacity="0.6" />
+      <!-- Small Shipping Handling Icons on Lower Left -->
+      <rect x="-22" y="12" width="12" height="6" rx="1" fill="rgba(120, 53, 15, 0.35)" />
+      <line x1="-19" y1="15" x2="-13" y2="15" stroke="#FEF3C7" stroke-width="1.2" opacity="0.6" />
+
+      <!-- Front Open Flap hanging forward with drop shadow on front wall -->
+      <polygon points="-27,-5 27,-5 23,8 -23,8" fill="rgba(0,0,0,0.28)" />
+      <polygon points="-27,-6 27,-6 22,5 -22,5" fill="url(#cardboardFlap)" stroke="#78350F" stroke-width="1.2" stroke-linejoin="round" />
+      <line x1="-21" y1="3.5" x2="21" y2="3.5" stroke="#FEF3C7" stroke-width="1" opacity="0.45" />
+    </g>
+
+    <!-- STATE 1: CLOSED CARDBOARD BOX (Neatly folded shut & taped by Player 1) -->
+    <g id="box-closed" filter="url(#dropShadow)">
+      <!-- Ground Contact Shadow -->
+      <ellipse cx="0" cy="24" rx="30" ry="8" fill="rgba(0,0,0,0.4)" />
+      <!-- Closed Top Lid Plane (Trapezoid) -->
+      <polygon points="-27,-6 -19,-20 19,-20 27,-6" fill="url(#cardboardTop)" stroke="#78350F" stroke-width="1.2" stroke-linejoin="round" />
+      <!-- Top Specular Highlight Along Front Crease -->
+      <line x1="-25" y1="-6" x2="25" y2="-6" stroke="#FEF3C7" stroke-width="1.2" opacity="0.6" />
+      <!-- Horizontal Flap Meeting Seam -->
+      <line x1="-23" y1="-13" x2="23" y2="-13" stroke="#92400E" stroke-width="1.2" />
+      <!-- Center Packing Tape Strip (Top + Front Overhang) -->
+      <polygon points="-4,-20 4,-20 4.5,-6 -4.5,-6" fill="#FEF3C7" opacity="0.9" />
+      <line x1="0" y1="-20" x2="0" y2="-6" stroke="#D97706" stroke-width="1" opacity="0.4" />
+
+      <!-- Box Front Wall -->
+      <rect x="-27" y="-6" width="54" height="30" rx="2.5" fill="url(#cardboardFront)" stroke="#78350F" stroke-width="1.2" />
+      <rect x="-26" y="20" width="52" height="3.5" fill="#92400E" opacity="0.6" />
+      <!-- Front Tape Overhang Tab with serrated edge -->
+      <polygon points="-4.5,-6 4.5,-6 4.5,4 2,2.5 0,4 -2,2.5 -4.5,4" fill="#FEF3C7" opacity="0.9" />
+      <!-- Small Barcode Patch on Lower Left -->
+      <rect x="-22" y="12" width="13" height="7" rx="1" fill="#FEF3C7" opacity="0.75" />
+      <line x1="-19" y1="13.5" x2="-19" y2="17.5" stroke="#451A03" stroke-width="1.2" />
+      <line x1="-16" y1="13.5" x2="-16" y2="17.5" stroke="#451A03" stroke-width="1.8" />
+      <line x1="-12.5" y1="13.5" x2="-12.5" y2="17.5" stroke="#451A03" stroke-width="1.2" />
+    </g>
+
+    <!-- STATE 2: BRAND-STAMPED CARDBOARD BOX (Completed by Player 2 with Brand Logo Sticker & Sparkles) -->
+    <g id="box-branded" filter="url(#dropShadow)">
+      <!-- Glowing Emerald Completion Ring -->
+      <ellipse cx="0" cy="11" rx="39" ry="18" fill="rgba(16, 185, 129, 0.24)" stroke="#10B981" stroke-width="2" filter="url(#neonGlow)" />
+      <!-- Base Closed Box -->
+      <use href="#box-closed" />
+      <!-- Stamped Brand Logo Crest Centered on the Box -->
+      <g transform="translate(3, 8)">
+        <use href="#brand-logo-badge" />
+      </g>
+      <!-- Completion Sparkles (✦) -->
+      <path d="M -28,-18 L -25,-18 M -26.5,-19.5 L -26.5,-16.5" stroke="#FDE047" stroke-width="2" stroke-linecap="round" />
+      <path d="M 29,-16 L 33,-16 M 31,-18 L 31,-14" stroke="#34D399" stroke-width="2" stroke-linecap="round" />
+    </g>
+
+    <!-- OBSTACLE: 3D SHADED HAZARD CONE -->
+    <g id="hazard-cone" filter="url(#dropShadow)">
+      <!-- Red Warning Ground Pulse -->
+      <ellipse cx="0" cy="13" rx="25" ry="11" fill="rgba(239, 68, 68, 0.22)" stroke="rgba(239, 68, 68, 0.45)" stroke-width="1" />
+      <!-- Heavy Rubber Base Shadow & Thickness -->
+      <polygon points="-21,11 0,2 21,11 0,20" fill="#991B1B" />
+      <polygon points="-21,9 0,0 21,9 0,18" fill="#EF4444" stroke="#7F1D1D" stroke-width="1" />
+      <!-- Cone Body -->
+      <polygon points="-14,10 -4,-20 4,-20 14,10" fill="#F97316" stroke="#9A3412" stroke-width="1.2" stroke-linejoin="round" />
+      <!-- Left Specular Highlight on Cone -->
+      <polygon points="-11,9 -3,-19 0,-19 -6,9" fill="#FB923C" opacity="0.6" />
+      <!-- White Reflective Stripes -->
+      <polygon points="-10.5,1 -7.5,-8 7.5,-8 10.5,1" fill="#F8FAFC" />
+      <polygon points="-6.2,-12 -4.2,-18 4.2,-18 6.2,-12" fill="#F8FAFC" />
+    </g>
+  </defs>
+
+  <!-- ========================================================================= -->
+  <!-- 1. TOP BACKGROUND: FULFILLMENT HUB INTERIOR & VOLUMETRIC LIGHTING (0..176) -->
+  <!-- ========================================================================= -->
+  <rect width="800" height="176" fill="url(#wallBg)" />
+  <rect width="800" height="176" fill="url(#spotlightLeft)" />
+  <rect width="800" height="176" fill="url(#spotlightRight)" />
+
+  <!-- Overhead Ceiling Trusses -->
+  <g stroke="rgba(255, 255, 255, 0.05)" stroke-width="2">
+    <line x1="0" y1="18" x2="800" y2="18" />
+    <line x1="60" y1="0" x2="90" y2="18" />
+    <line x1="120" y1="0" x2="90" y2="18" />
+    <line x1="680" y1="0" x2="710" y2="18" />
+    <line x1="740" y1="0" x2="710" y2="18" />
+  </g>
+
+  <!-- Left & Right Background Warehouse Storage Racks (Adds rich B2B logistics context) -->
+  <!-- Left Rack -->
+  <g transform="translate(28, 52)" opacity="0.55">
+    <rect x="0" y="0" width="110" height="114" fill="none" stroke="#334155" stroke-width="3" />
+    <line x1="0" y1="38" x2="110" y2="38" stroke="#334155" stroke-width="3" />
+    <line x1="0" y1="76" x2="110" y2="76" stroke="#334155" stroke-width="3" />
+    <!-- Mini Pallet Boxes on Left Rack -->
+    <rect x="10" y="14" width="24" height="22" rx="2" fill="#92400E" />
+    <rect x="38" y="18" width="20" height="18" rx="2" fill="#B45309" />
+    <rect x="70" y="12" width="28" height="24" rx="2" fill="#78350F" />
+    <rect x="12" y="52" width="28" height="22" rx="2" fill="#B45309" />
+    <rect x="46" y="54" width="24" height="20" rx="2" fill="#92400E" />
+    <rect x="76" y="50" width="22" height="24" rx="2" fill="#B45309" />
+    <rect x="16" y="90" width="32" height="22" rx="2" fill="#78350F" />
+    <rect x="56" y="88" width="36" height="24" rx="2" fill="#92400E" />
+  </g>
+
+  <!-- Right Rack -->
+  <g transform="translate(662, 52)" opacity="0.55">
+    <rect x="0" y="0" width="110" height="114" fill="none" stroke="#334155" stroke-width="3" />
+    <line x1="0" y1="38" x2="110" y2="38" stroke="#334155" stroke-width="3" />
+    <line x1="0" y1="76" x2="110" y2="76" stroke="#334155" stroke-width="3" />
+    <!-- Mini Pallet Boxes on Right Rack -->
+    <rect x="12" y="12" width="28" height="24" rx="2" fill="#78350F" />
+    <rect x="48" y="16" width="22" height="20" rx="2" fill="#B45309" />
+    <rect x="76" y="14" width="24" height="22" rx="2" fill="#92400E" />
+    <rect x="10" y="50" width="24" height="24" rx="2" fill="#B45309" />
+    <rect x="40" y="54" width="26" height="20" rx="2" fill="#92400E" />
+    <rect x="72" y="52" width="28" height="22" rx="2" fill="#B45309" />
+    <rect x="14" y="88" width="36" height="24" rx="2" fill="#92400E" />
+    <rect x="58" y="90" width="32" height="22" rx="2" fill="#78350F" />
+  </g>
+
+  <!-- Panoramic Industrial Clerestory Windows Behind HUD -->
+  <g transform="translate(170, 96)">
+    <rect x="0" y="0" width="135" height="50" rx="4" fill="url(#windowGlow)" stroke="#334155" stroke-width="2" />
+    <line x1="45" y1="0" x2="45" y2="50" stroke="#334155" stroke-width="1.5" />
+    <line x1="90" y1="0" x2="90" y2="50" stroke="#334155" stroke-width="1.5" />
+
+    <rect x="162" y="0" width="136" height="50" rx="4" fill="url(#windowGlow)" stroke="#334155" stroke-width="2" />
+    <line x1="207" y1="0" x2="207" y2="50" stroke="#334155" stroke-width="1.5" />
+    <line x1="252" y1="0" x2="252" y2="50" stroke="#334155" stroke-width="1.5" />
+
+    <rect x="325" y="0" width="135" height="50" rx="4" fill="url(#windowGlow)" stroke="#334155" stroke-width="2" />
+    <line x1="370" y1="0" x2="370" y2="50" stroke="#334155" stroke-width="1.5" />
+    <line x1="415" y1="0" x2="415" y2="50" stroke="#334155" stroke-width="1.5" />
+  </g>
+
+  <!-- Raised Horizon Catwalk & Metallic Safety Curb (y: 158..178) -->
+  <g id="horizon-curb">
+    <!-- Safety Railing along catwalk -->
+    <line x1="0" y1="154" x2="800" y2="154" stroke="#475569" stroke-width="2" />
+    <g stroke="#334155" stroke-width="2">
+      <line x1="50" y1="154" x2="50" y2="166" />
+      <line x1="150" y1="154" x2="150" y2="166" />
+      <line x1="250" y1="154" x2="250" y2="166" />
+      <line x1="350" y1="154" x2="350" y2="166" />
+      <line x1="450" y1="154" x2="450" y2="166" />
+      <line x1="550" y1="154" x2="550" y2="166" />
+      <line x1="650" y1="154" x2="650" y2="166" />
+      <line x1="750" y1="154" x2="750" y2="166" />
+    </g>
+    <!-- Metallic Curb Bevel -->
+    <rect x="0" y="166" width="800" height="12" fill="#1E293B" stroke="#0F172A" stroke-width="1" />
+    <line x1="0" y1="167" x2="800" y2="167" stroke="rgba(255, 255, 255, 0.15)" stroke-width="1" />
+    <!-- Subtle Emerald (Left) & Cyan (Right) LED Strip along horizon curb -->
+    <line x1="0" y1="177" x2="396" y2="177" stroke="#10B981" stroke-width="2" stroke-opacity="0.7" />
+    <line x1="404" y1="177" x2="800" y2="177" stroke="#06B6D4" stroke-width="2" stroke-opacity="0.7" />
+  </g>
+
+  <!-- DARK TECH-STUDIO HUD (Sleek Glassmorphism Capsule Dock) -->
+  <g transform="translate(400, 48)" filter="url(#dropShadow)">
+    <!-- Outer Glass HUD Dock -->
+    <rect x="-236" y="-32" width="472" height="64" rx="32" fill="url(#hudGlass)" stroke="rgba(148, 163, 184, 0.28)" stroke-width="1.5" />
+    <!-- Top Inner Glass Rim Highlight -->
+    <path d="M -204,-30.5 L 204,-30.5" stroke="rgba(255, 255, 255, 0.22)" stroke-width="1" />
+
+    <!-- Left: Score Counter Badge -->
+    <g transform="translate(-220, -20)">
+      <rect x="0" y="0" width="142" height="40" rx="20" fill="rgba(99, 102, 241, 0.2)" stroke="#6366F1" stroke-width="1.5" />
+      <circle cx="21" cy="20" r="11" fill="#4F46E5" stroke="#818CF8" stroke-width="1" />
+      <polygon points="21,13 23.2,17.5 28,18.2 24.5,21.5 25.4,26.2 21,23.8 16.6,26.2 17.5,21.5 14,18.2 18.8,17.5" fill="#FBBF24" />
+      <text x="86" y="26" fill="#F8FAFC" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="16.5" font-weight="900" text-anchor="middle" letter-spacing="0.5">145,000</text>
+    </g>
+
+    <!-- Center: Sleek Rounded Progress Track + Timer -->
+    <g transform="translate(0, 0)">
+      <text x="0" y="-7" fill="#E2E8F0" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12.5" font-weight="800" text-anchor="middle" letter-spacing="1.5">00:38</text>
+      <rect x="-62" y="4" width="124" height="10" rx="5" fill="#090D16" stroke="rgba(255, 255, 255, 0.16)" stroke-width="1" />
+      <rect x="-61" y="5" width="86" height="8" rx="4" fill="url(#progGrad)" />
+      <circle cx="25" cy="9" r="6.5" fill="#10B981" stroke="#FFFFFF" stroke-width="2" />
+    </g>
+
+    <!-- Right: Streak Multiplier Pill -->
+    <g transform="translate(100, -20)">
+      <rect x="0" y="0" width="120" height="40" rx="20" fill="rgba(16, 185, 129, 0.18)" stroke="#10B981" stroke-width="1.5" />
+      <circle cx="24" cy="20" r="5.5" fill="#10B981" />
+      <circle cx="24" cy="20" r="9" fill="none" stroke="#34D399" stroke-width="1" opacity="0.5" />
+      <text x="72" y="26" fill="#34D399" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="18" font-weight="900" text-anchor="middle" letter-spacing="0.5">x24</text>
+    </g>
+  </g>
+
+  <!-- ========================================================================= -->
+  <!-- 2. FOUR HORIZONTAL CONVEYOR LANES (y: 178 to 500, 80px per lane)          -->
+  <!-- ========================================================================= -->
+  <g id="conveyor-lanes">
+    <!-- Belt Surfaces -->
+    <rect x="0" y="178" width="800" height="80" fill="url(#beltSurfaceEven)" />
+    <rect x="0" y="258" width="800" height="80" fill="url(#beltSurfaceOdd)" />
+    <rect x="0" y="338" width="800" height="80" fill="url(#beltSurfaceEven)" />
+    <rect x="0" y="418" width="800" height="82" fill="url(#beltSurfaceOdd)" />
+
+    <!-- Belt Tread Ribbing Texture -->
+    <rect x="0" y="178" width="800" height="322" fill="url(#beltTread)" />
+
+    <!-- Subtle Left (P2 Emerald) & Right (P1 Cyan) Sector Lighting -->
+    <rect x="0" y="178" width="400" height="322" fill="url(#leftP2Zone)" />
+    <rect x="400" y="178" width="400" height="322" fill="url(#rightP1Zone)" />
+
+    <!-- Left-Pointing Motion Chevrons inside each lane -->
+    <use href="#laneChevrons" x="0" y="218" />
+    <use href="#laneChevrons" x="0" y="298" />
+    <use href="#laneChevrons" x="0" y="378" />
+    <use href="#laneChevrons" x="0" y="458" />
+
+    <!-- Metallic Conveyor Lane Divider Rails (at y = 258, 338, 418) -->
+    <g id="lane-rails">
+      <rect x="0" y="255" width="800" height="6" fill="#0F172A" />
+      <line x1="0" y1="258" x2="800" y2="258" stroke="#475569" stroke-width="1.5" stroke-dasharray="14 8" />
+
+      <rect x="0" y="335" width="800" height="6" fill="#0F172A" />
+      <line x1="0" y1="338" x2="800" y2="338" stroke="#475569" stroke-width="1.5" stroke-dasharray="14 8" />
+
+      <rect x="0" y="415" width="800" height="6" fill="#0F172A" />
+      <line x1="0" y1="418" x2="800" y2="418" stroke="#475569" stroke-width="1.5" stroke-dasharray="14 8" />
+    </g>
+  </g>
+
+  <!-- ========================================================================= -->
+  <!-- 3. GAMEPLAY OBJECTS & CHARACTER AVATARS ACROSS THE 4 LANES                -->
+  <!-- ========================================================================= -->
+
+  <!-- ================= LANE 1 (y = 218) ================= -->
+  <!-- Right Sector (P1): Hazard Cone Obstacle -->
+  <use href="#hazard-cone" x="690" y="218" />
+
+  <!-- Right Sector (P1): Box already closed by P1, gliding left toward center gate -->
+  <g transform="translate(472, 218)">
+    <use href="#box-closed" />
+    <!-- Subtle motion speed lines trailing right -->
+    <line x1="34" y1="-2" x2="62" y2="-2" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" stroke-dasharray="5 4" opacity="0.55" />
+    <line x1="34" y1="8" x2="52" y2="8" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="4 4" opacity="0.4" />
+  </g>
+
+  <!-- Left Sector (P2): PLAYER 2 AVATAR stamping the Brand Logo onto a closed box! -->
+  <g transform="translate(195, 218)">
+    <!-- The Branded Box -->
+    <use href="#box-branded" />
+
+    <!-- PLAYER 2 AVATAR (Standing right next to the box at x=+58, stamping the Brand Logo) -->
+    <g transform="translate(58, -4)" filter="url(#dropShadow)">
+      <!-- Avatar Ground Ring (Emerald P2) -->
+      <ellipse cx="0" cy="25" rx="24" ry="10" fill="rgba(16, 185, 129, 0.28)" stroke="#10B981" stroke-width="2" />
+      <!-- Back Arm -->
+      <path d="M 11,0 L 23,9" stroke="#047857" stroke-width="7.5" stroke-linecap="round" />
+      <circle cx="24" cy="10" r="5" fill="#F8FAFC" stroke="#10B981" stroke-width="1.2" />
+      <!-- 3D Shaded Rounded Torso (Emerald Suit) -->
+      <rect x="-15" y="-8" width="30" height="29" rx="11" fill="url(#p2Suit)" stroke="#6EE7B7" stroke-width="1.8" />
+      <!-- Chest Emblem: Mini Brand Star Logo on P2's chest -->
+      <g transform="translate(0, 6) scale(0.56)">
+        <use href="#brand-logo-badge" />
+      </g>
+      <!-- Head (Rounded Robot/Worker Head facing left) -->
+      <rect x="-17" y="-33" width="34" height="26" rx="12" fill="#F8FAFC" stroke="#10B981" stroke-width="2" />
+      <!-- Dark Visor Looking Left with Gloss Reflection -->
+      <rect x="-15" y="-27" width="20" height="13" rx="5.5" fill="#0F172A" stroke="#334155" stroke-width="1" />
+      <path d="M -12,-25 L -6,-25 L -10,-16 L -14,-16 Z" fill="rgba(255, 255, 255, 0.12)" />
+      <!-- Glowing Happy Eyes in Visor -->
+      <circle cx="-10" cy="-20.5" r="2.4" fill="#34D399" />
+      <circle cx="-2.5" cy="-20.5" r="2.4" fill="#34D399" />
+      <!-- Hardhat / Cap Dome on Top (Emerald with Ridge & Visor Brim) -->
+      <path d="M -18,-26 C -18,-39 18,-39 18,-26 Z" fill="url(#p2Suit)" stroke="#6EE7B7" stroke-width="1.2" />
+      <path d="M -6,-35 C 0,-37 6,-35 6,-35" fill="none" stroke="#A7F3D0" stroke-width="2" stroke-linecap="round" />
+      <rect x="-21" y="-27" width="42" height="4" rx="2" fill="#34D399" />
+      <!-- Front Arm reaching out to press the Brand Logo Stamp onto the box -->
+      <path d="M -8,3 L -36,-3" stroke="url(#p2Suit)" stroke-width="8.5" stroke-linecap="round" />
+      <!-- Brand Stamp Tool in P2's gloved hand -->
+      <rect x="-50" y="-8" width="16" height="9" rx="2.5" fill="#4F46E5" stroke="#FBBF24" stroke-width="1.5" />
+      <circle cx="-36" cy="-3" r="5.5" fill="#F8FAFC" stroke="#10B981" stroke-width="1.5" />
+    </g>
+
+    <!-- Floating Score Pop Badge -->
+    <g transform="translate(-8, -32)" filter="url(#softShadow)">
+      <rect x="-24" y="-12" width="48" height="20" rx="10" fill="#064E3B" stroke="#34D399" stroke-width="1.5" />
+      <text x="0" y="2" fill="#6EE7B7" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="900" text-anchor="middle">+500</text>
+    </g>
+  </g>
+
+  <!-- ================= LANE 2 (y = 298) ================= -->
+  <!-- Right Sector (P1): Fresh Open Box with angled flaps entering from far right -->
+  <use href="#box-open" x="735" y="298" />
+
+  <!-- Right Sector (P1): PLAYER 1 AVATAR folding the open box flaps shut with both hands! -->
+  <g transform="translate(530, 298)">
+    <!-- Cyan Touch/Activation Ring under box -->
+    <ellipse cx="0" cy="11" rx="39" ry="18" fill="rgba(56, 189, 248, 0.25)" stroke="#38BDF8" stroke-width="2" filter="url(#neonGlow)" />
+    <!-- Box being folded shut -->
+    <use href="#box-closed" />
+
+    <!-- Clear Curved Flap-Folding Motion Arrows (\ -> _ <- /) -->
+    <path d="M -37,-22 C -33,-33 -17,-33 -10,-22" fill="none" stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round" />
+    <polygon points="-9,-19 -15,-22 -9,-25" fill="#38BDF8" />
+    <path d="M 37,-22 C 33,-33 17,-33 10,-22" fill="none" stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round" />
+    <polygon points="9,-19 15,-22 9,-25" fill="#38BDF8" />
+    <!-- Action Sparkle -->
+    <path d="M 0,-29 L 0,-23 M -3,-26 L 3,-26" stroke="#7DD3FC" stroke-width="2" stroke-linecap="round" />
+
+    <!-- PLAYER 1 AVATAR (Standing right next to the box at x=+58, both hands pressing the box flaps shut) -->
+    <g transform="translate(58, -4)" filter="url(#dropShadow)">
+      <!-- Avatar Ground Ring (Cyan P1) -->
+      <ellipse cx="0" cy="25" rx="24" ry="10" fill="rgba(6, 182, 212, 0.28)" stroke="#06B6D4" stroke-width="2" />
+      <!-- 3D Shaded Rounded Torso (Cyan Suit) -->
+      <rect x="-15" y="-8" width="30" height="29" rx="11" fill="url(#p1Suit)" stroke="#67E8F9" stroke-width="1.8" />
+      <!-- Chest Emblem: Closed Box Icon on P1's chest -->
+      <rect x="-7.5" y="0" width="15" height="11" rx="2" fill="#083344" stroke="#67E8F9" stroke-width="1.3" />
+      <line x1="-7.5" y1="5" x2="7.5" y2="5" stroke="#67E8F9" stroke-width="1.3" />
+      <line x1="0" y1="0" x2="0" y2="5" stroke="#FDE047" stroke-width="1.5" />
+      <!-- Head (Rounded Robot/Worker Head facing left) -->
+      <rect x="-17" y="-33" width="34" height="26" rx="12" fill="#F8FAFC" stroke="#06B6D4" stroke-width="2" />
+      <!-- Dark Visor Looking Left with Gloss Reflection -->
+      <rect x="-15" y="-27" width="20" height="13" rx="5.5" fill="#0F172A" stroke="#334155" stroke-width="1" />
+      <path d="M -12,-25 L -6,-25 L -10,-16 L -14,-16 Z" fill="rgba(255, 255, 255, 0.12)" />
+      <!-- Glowing Cyan Eyes in Visor -->
+      <circle cx="-10" cy="-20.5" r="2.4" fill="#38BDF8" />
+      <circle cx="-2.5" cy="-20.5" r="2.4" fill="#38BDF8" />
+      <!-- Cap / Hardhat (Cyan with Highlight Ridge) -->
+      <path d="M -18,-26 C -18,-39 18,-39 18,-26 Z" fill="url(#p1Suit)" stroke="#67E8F9" stroke-width="1.2" />
+      <path d="M -6,-35 C 0,-37 6,-35 6,-35" fill="none" stroke="#CFFAFE" stroke-width="2" stroke-linecap="round" />
+      <rect x="-21" y="-27" width="42" height="4" rx="2" fill="#22D3EE" />
+      <!-- Upper Hand & Lower Hand both reaching left onto the top of the box to fold the flaps down! -->
+      <path d="M -10,-2 L -39,-14" stroke="#0284C7" stroke-width="7.5" stroke-linecap="round" />
+      <circle cx="-41" cy="-15" r="5" fill="#F8FAFC" stroke="#06B6D4" stroke-width="1.5" />
+      <path d="M -8,5 L -35,-6" stroke="url(#p1Suit)" stroke-width="8" stroke-linecap="round" />
+      <circle cx="-37" cy="-7" r="5.5" fill="#F8FAFC" stroke="#06B6D4" stroke-width="1.5" />
+    </g>
+  </g>
+
+  <!-- Left Sector (P2): Hazard Cone Obstacle in Lane 2 -->
+  <use href="#hazard-cone" x="115" y="298" />
+
+  <!-- ================= LANE 3 (y = 378) ================= -->
+  <!-- Right Sector (P1): Open Box with flaps wide open waiting for P1 -->
+  <use href="#box-open" x="640" y="378" />
+
+  <!-- Left Sector (P2): WASTED / UNCLOSED OPEN BOX (P1 missed it, so it crossed the divider with flaps still open & Red X!) -->
+  <g transform="translate(285, 378)" opacity="0.68">
+    <use href="#box-open" />
+    <!-- Red X Badge over the open interior showing P2 cannot put a brand sticker on an open box -->
+    <circle cx="0" cy="-12" r="15" fill="rgba(15, 23, 42, 0.9)" stroke="#EF4444" stroke-width="2.2" />
+    <line x1="-6" y1="-18" x2="6" y2="-6" stroke="#EF4444" stroke-width="2.8" stroke-linecap="round" />
+    <line x1="6" y1="-18" x2="-6" y2="-6" stroke="#EF4444" stroke-width="2.8" stroke-linecap="round" />
+  </g>
+
+  <!-- ================= LANE 4 (y = 458) ================= -->
+  <!-- Right Sector (P1): Hazard Cone Obstacle -->
+  <use href="#hazard-cone" x="495" y="458" />
+
+  <!-- Left Sector (P2): Closed Box that crossed the divider, glowing & ready for P2 to stamp the Brand Logo! -->
+  <g transform="translate(335, 458)">
+    <ellipse cx="0" cy="11" rx="35" ry="16" fill="rgba(56, 189, 248, 0.18)" stroke="#38BDF8" stroke-width="1.5" stroke-dasharray="4 3" />
+    <use href="#box-closed" />
+  </g>
+
+  <!-- Left Sector (P2): Already Branded Box exiting off the left edge -->
+  <use href="#box-branded" x="95" y="458" />
+
+  <!-- ========================================================================= -->
+  <!-- 4. CENTER VERTICAL LASER GATE DIVIDER (Separating Right P1 & Left P2)      -->
+  <!-- ========================================================================= -->
+  <g id="center-laser-gate">
+    <!-- Outer Laser Glow -->
+    <line x1="400" y1="178" x2="400" y2="500" stroke="rgba(56, 189, 248, 0.28)" stroke-width="10" />
+    <!-- Core Laser Line -->
+    <line x1="400" y1="178" x2="400" y2="500" stroke="#E0F2FE" stroke-width="2.5" stroke-dasharray="12 7" />
+    <!-- Lane Intersection Nodes along Center Gate -->
+    <circle cx="400" cy="258" r="4" fill="#38BDF8" stroke="#0F172A" stroke-width="1.5" />
+    <circle cx="400" cy="338" r="4" fill="#38BDF8" stroke="#0F172A" stroke-width="1.5" />
+    <circle cx="400" cy="418" r="4" fill="#38BDF8" stroke="#0F172A" stroke-width="1.5" />
+    <!-- Top & Bottom Metallic Laser Gate Emitter Pylons -->
+    <g transform="translate(400, 176)" filter="url(#softShadow)">
+      <rect x="-12" y="-6" width="24" height="12" rx="4" fill="#334155" stroke="#94A3B8" stroke-width="1" />
+      <circle cx="0" cy="0" r="4" fill="#38BDF8" />
+    </g>
+    <g transform="translate(400, 494)" filter="url(#softShadow)">
+      <rect x="-12" y="-6" width="24" height="12" rx="4" fill="#334155" stroke="#94A3B8" stroke-width="1" />
+      <circle cx="0" cy="0" r="4" fill="#38BDF8" />
+    </g>
+  </g>
+</svg>

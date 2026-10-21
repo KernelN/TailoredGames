@@ -12,6 +12,34 @@
       es: "Estudio Interactivo B2B",
       en: "B2B Interactive Studio"
     },
+    heroBadgeShowcase: {
+      es: "⚡ Experiencias B2B & Eventos Corporativos",
+      en: "⚡ B2B Experiences & Corporate Events"
+    },
+    heroBadgeCotizador: {
+      es: "💼 Cotizador Interactivo para Productoras & HR",
+      en: "💼 Interactive Quoting for Producers & HR"
+    },
+    heroTitleCotizador: {
+      es: "Arma el presupuesto digital para tu evento",
+      en: "Build your digital event quote"
+    },
+    heroSubtitleCotizador: {
+      es: "Selecciona los juegos, la duración y los agregados. Los descuentos del 50% por 3+ días y 20% por 4+ juegos se aplican automáticamente sobre tu cotización.",
+      en: "Select games, duration, and add-ons. 50% discounts for 3+ days and 20% for 4+ games are automatically applied to your quote."
+    },
+    heroQuotePill: {
+      es: "💼 Cotizador en vivo: calcula tu presupuesto con descuentos automáticos por días y cantidad.",
+      en: "💼 Live Quoting: calculate your formal budget with automatic duration and quantity discounts."
+    },
+    baseTemplateTab: {
+      es: "⚙️ Plantilla Base",
+      en: "⚙️ Base Template"
+    },
+    baseTemplateBadge: {
+      es: "⚙️ Mecánica Base",
+      en: "⚙️ Base Mechanic"
+    },
     days: {
       es: "días",
       en: "days"

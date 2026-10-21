@@ -748,6 +748,22 @@
           </div>
 
           <div class="form-group" style="grid-column: span 2;">
+            <label class="form-label">Ícono de Pestaña / Favicon (Ruta / Archivo)</label>
+            <div style="display: flex; align-items: center; gap: 16px;">
+              <div style="width: 50px; height: 50px; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 6px; display: flex; align-items: center; justify-content: center;">
+                <img id="studio-favicon-prev" src="assets/images/logo/logo.svg" alt="Favicon Preview" style="max-height: 32px; max-width: 32px; object-fit: contain;" onerror="this.src='assets/images/logo/logo.svg';" />
+              </div>
+              <div style="flex: 1;">
+                <input type="text" id="studio-favicon" class="form-input" onchange="document.getElementById('studio-favicon-prev').src = this.value; syncEditorFavicon(this.value);" />
+                <label class="dropzone-label" style="margin-top: 6px;">
+                  📁 Elegir archivo de favicon / ícono
+                  <input type="file" accept="image/*,.ico" style="display: none;" onchange="handleFaviconPick(this)" />
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" style="grid-column: span 2;">
             <label class="form-label">Email de Contacto</label>
             <input type="email" id="studio-email" class="form-input" />
           </div>
@@ -1222,8 +1238,8 @@
             <div style="display: flex; flex-direction: column; gap: 6px; min-width: 0;">
               <label class="form-label" style="font-size: 10px;">🎮 Nombre de la Pestaña / Implementación (ES / EN)</label>
               <div class="dual-input-row">
-                <input type="text" class="form-input" value="${escAttr(im.title?.es || '')}" placeholder="Ej: ABB Drones (ES)" onchange="updateImplField('${item.id}', ${imIdx}, 'title.es', this.value)" />
-                <input type="text" class="form-input" value="${escAttr(im.title?.en || '')}" placeholder="e.g. ABB Drones (EN)" onchange="updateImplField('${item.id}', ${imIdx}, 'title.en', this.value)" />
+                <input type="text" class="form-input" value="${escAttr(im.title?.es || '')}" placeholder="Ej: Drones Reforestadores (ES)" onchange="updateImplField('${item.id}', ${imIdx}, 'title.es', this.value)" />
+                <input type="text" class="form-input" value="${escAttr(im.title?.en || '')}" placeholder="e.g. Reforestation Drones (EN)" onchange="updateImplField('${item.id}', ${imIdx}, 'title.en', this.value)" />
               </div>
             </div>
 
@@ -1231,8 +1247,8 @@
             <div style="display: flex; flex-direction: column; gap: 6px; min-width: 0;">
               <label class="form-label" style="font-size: 10px;">🏷️ Cliente / Etiqueta en Imagen (ES / EN)</label>
               <div class="dual-input-row">
-                <input type="text" class="form-input" value="${escAttr(im.client?.es || '')}" placeholder="Caso ABB — Telemetría (ES)" onchange="updateImplField('${item.id}', ${imIdx}, 'client.es', this.value)" />
-                <input type="text" class="form-input" value="${escAttr(im.client?.en || '')}" placeholder="ABB Case — Telemetry (EN)" onchange="updateImplField('${item.id}', ${imIdx}, 'client.en', this.value)" />
+                <input type="text" class="form-input" value="${escAttr(im.client?.es || '')}" placeholder="Caso de Éxito — Reforestación (ES)" onchange="updateImplField('${item.id}', ${imIdx}, 'client.es', this.value)" />
+                <input type="text" class="form-input" value="${escAttr(im.client?.en || '')}" placeholder="Success Case — Reforestation (EN)" onchange="updateImplField('${item.id}', ${imIdx}, 'client.en', this.value)" />
               </div>
             </div>
           </div>
@@ -1256,8 +1272,8 @@
                 <div>
                   <label class="form-label" style="font-size: 10px;">🎹 Mecánica Base (ES / EN)</label>
                   <div class="dual-input-row">
-                    <input type="text" class="form-input" value="${escAttr(specs.mechanic?.es || '')}" placeholder="Piano Tiles horizontal..." onchange="updateItemField('aMedida', '${item.id}', 'templateSpecs.mechanic.es', this.value)" />
-                    <input type="text" class="form-input" value="${escAttr(specs.mechanic?.en || '')}" placeholder="Horizontal staged Piano Tiles..." onchange="updateItemField('aMedida', '${item.id}', 'templateSpecs.mechanic.en', this.value)" />
+                    <input type="text" class="form-input" value="${escAttr(specs.mechanic?.es || '')}" placeholder="Reflejos táctiles por carriles..." onchange="updateItemField('aMedida', '${item.id}', 'templateSpecs.mechanic.es', this.value)" />
+                    <input type="text" class="form-input" value="${escAttr(specs.mechanic?.en || '')}" placeholder="Synchronized lane touch reflexes..." onchange="updateItemField('aMedida', '${item.id}', 'templateSpecs.mechanic.en', this.value)" />
                   </div>
                 </div>
               </div>
@@ -1273,7 +1289,7 @@
                   + Agregar Caso / Implementación de Marca
                 </button>
               </div>
-              ${implRowsHtml || `<div style="font-size: 12px; color: var(--text-muted); padding: 8px;">Sin casos específicos cargados aún. Haz clic en "+ Agregar Caso" para añadir ejemplos como ABB Drones.</div>`}
+              ${implRowsHtml || `<div style="font-size: 12px; color: var(--text-muted); padding: 8px;">Sin casos específicos cargados aún. Haz clic en "+ Agregar Caso" para añadir casos de éxito de marcas.</div>`}
             </div>
           </div>
         `;
@@ -1582,6 +1598,45 @@
       catalogState.studioInfo.logo = targetPath;
     };
 
+    window.syncEditorFavicon = function(favPath) {
+      const src = favPath || catalogState.studioInfo?.favicon || "assets/images/logo/logo.svg";
+      let link = document.querySelector("link[rel*='icon']");
+      if (!link) {
+        link = document.createElement("link");
+        link.rel = "icon";
+        document.head.appendChild(link);
+      }
+      link.href = src;
+      if (src.endsWith(".svg")) link.type = "image/svg+xml";
+      else if (src.endsWith(".png")) link.type = "image/png";
+      else if (src.endsWith(".ico")) link.type = "image/x-icon";
+    };
+
+    window.handleFaviconPick = async function(inputEl) {
+      const file = inputEl.files?.[0];
+      if (!file) return;
+      const targetPath = `assets/images/logo/${file.name}`;
+
+      if (directoryHandle) {
+        try {
+          const assetsDir = await directoryHandle.getDirectoryHandle("assets");
+          const imagesDir = await assetsDir.getDirectoryHandle("images");
+          const targetDir = await imagesDir.getDirectoryHandle("logo", { create: true });
+          const fileHandle = await targetDir.getFileHandle(file.name, { create: true });
+          const writable = await fileHandle.createWritable();
+          await writable.write(file);
+          await writable.close();
+        } catch (e) {
+          console.warn("Could not write favicon to folder", e);
+        }
+      }
+
+      document.getElementById("studio-favicon").value = targetPath;
+      document.getElementById("studio-favicon-prev").src = URL.createObjectURL(file);
+      catalogState.studioInfo.favicon = targetPath;
+      syncEditorFavicon(targetPath);
+    };
+
     // Elements
     const folderStatus = document.getElementById("folder-status");
     const btnOpenFolder = document.getElementById("btn-open-folder");
@@ -1609,6 +1664,9 @@
       document.getElementById("studio-email").value = s.email || "";
       document.getElementById("studio-logo").value = s.logo || "assets/images/logo/logo.svg";
       document.getElementById("studio-logo-prev").src = s.logo || "assets/images/logo/logo.svg";
+      document.getElementById("studio-favicon").value = s.favicon || "assets/images/logo/logo.svg";
+      document.getElementById("studio-favicon-prev").src = s.favicon || "assets/images/logo/logo.svg";
+      syncEditorFavicon(s.favicon);
 
       document.getElementById("studio-tagline-es").value = s.tagline?.es || "";
       document.getElementById("studio-tagline-en").value = s.tagline?.en || "";
@@ -1759,6 +1817,8 @@
     function serializeCatalog() {
       catalogState.studioInfo.name = document.getElementById("studio-name").value;
       catalogState.studioInfo.logo = document.getElementById("studio-logo").value || "assets/images/logo/logo.svg";
+      catalogState.studioInfo.favicon = document.getElementById("studio-favicon").value || "assets/images/logo/logo.svg";
+      syncEditorFavicon(catalogState.studioInfo.favicon);
       catalogState.studioInfo.whatsapp = document.getElementById("studio-whatsapp").value;
       catalogState.studioInfo.email = document.getElementById("studio-email").value;
       catalogState.studioInfo.tagline.es = document.getElementById("studio-tagline-es").value;

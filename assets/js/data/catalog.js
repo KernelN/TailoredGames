@@ -5,21 +5,22 @@
 
 const CORPFOLIO_CATALOG = {
   "studioInfo": {
-    "name": "Tailored Games",
-    "logo": "assets/images/logo/logo.svg",
+    "name": "Gametelier Studio",
+    "logo": "assets/images/logo/logo-full-cleanish.png",
+    "favicon": "assets/images/logo/logo.svg",
     "tagline": {
-      "es": "Experiencias lúdicas e interactivas para eventos corporativos y activaciones de marca.",
-      "en": "Interactive play experiences for corporate events and brand activations."
+      "es": "Videojuegos y dinámicas táctiles diseñadas desde cero a tu medida, pensadas para captar la atención de tu público y potenciar tus eventos.",
+      "en": "Video games and touch experiences designed from scratch tailored to you, crafted to captivate your audience and empower your events."
     },
     "heroTitle": {
-      "es": "Juegos interactivos para tus eventos corporativos",
-      "en": "Interactive games for your corporate events"
+      "es": "Juegos a Medida",
+      "en": "Custom Games"
     },
     "heroSubtitle": {
-      "es": "Llevamos entretenimiento digital de alta gama a stands, activaciones de marca, jornadas de integración y fiestas corporativas.",
-      "en": "We bring high-end digital entertainment to brand activations, corporate booths, team building, and company celebrations."
+      "es": "Videojuegos y dinámicas táctiles diseñadas desde cero a tu medida, pensadas para captar la atención de tu público y potenciar tus eventos.",
+      "en": "Video games and touch experiences designed from scratch tailored to you, crafted to captivate your audience and empower your events."
     },
-    "whatsapp": "549124112975",
+    "whatsapp": "541124992975",
     "email": "contacto@corpfolio.com"
   },
   "promotions": {
@@ -66,7 +67,7 @@ const CORPFOLIO_CATALOG = {
           "dailyPrice": 712400,
           "visible": true,
           "showcase": true,
-          "image": "assets/images/games/memotest.svg",
+          "image": "assets/images/games/memotest.png",
           "screenshots": [
             "assets/images/games/memotest.svg",
             "assets/images/games/memotest-detail.svg"
@@ -112,37 +113,37 @@ const CORPFOLIO_CATALOG = {
           "dailyPrice": 729500,
           "visible": true,
           "showcase": true,
-          "image": "assets/images/games/simon.svg",
+          "image": "assets/images/games/simon.png",
           "screenshots": [
             "assets/images/games/simon.svg",
             "assets/images/games/simon-detail.svg"
           ],
           "description": {
-            "es": "Secuencia de luces y sonidos táctiles donde los participantes ponen a prueba sus reflejos y memoria audiovisual.",
-            "en": "Dynamic sequence of lights and sounds challenging participants' audiovisual reflexes and memory."
+            "es": "Secuencia de luces y sonidos táctiles donde los participantes ponen a prueba su memoria visual y auditiva.",
+            "en": "Light and sound sequence challenge testing visual and auditory memory under pressure."
           },
           "features": {
             "es": [
-              "Ritmo creciente de dificultad",
-              "Feedback sonoro inmersivo",
-              "Pulsadores táctiles gigantes"
+              "Secuencias con ritmo ascendente",
+              "Efectos visuales y sonoros reactivos",
+              "Partidas cortas y atrapantes"
             ],
             "en": [
-              "Increasing speed & difficulty",
-              "Immersive audio feedback",
-              "Giant tactile buttons"
+              "Progressive rhythm sequences",
+              "Reactive audio & visual FX",
+              "Short, engaging gameplay"
             ]
           },
           "tags": {
             "es": [
-              "Luces",
-              "Reflejos",
-              "Sonido"
+              "Memoria",
+              "Sonido",
+              "Luces"
             ],
             "en": [
-              "Lights",
-              "Reflexes",
-              "Sound"
+              "Memory",
+              "Audio",
+              "Lights"
             ]
           },
           "hours": 8,
@@ -158,7 +159,7 @@ const CORPFOLIO_CATALOG = {
           "dailyPrice": 661100,
           "visible": true,
           "showcase": true,
-          "image": "assets/images/games/trivia.svg",
+          "image": "assets/images/games/trivia.png",
           "screenshots": [
             "assets/images/games/trivia.svg",
             "assets/images/games/trivia-detail.svg"
@@ -203,65 +204,68 @@ const CORPFOLIO_CATALOG = {
         "en": "Custom Games"
       },
       "subtitle": {
-        "es": "Mecánicas base probadas y personalizables con casos reales de marcas líderes para stands y activaciones B2B.",
-        "en": "Proven, customizable base mechanics backed by real brand implementations for B2B booths and activations."
+        "es": "Mecánicas base probadas y personalizables con casos reales para stands y activaciones B2B.",
+        "en": "Proven, customizable base mechanics backed by real implementations for B2B booths and activations."
       },
       "items": [
         {
           "id": "abb-drones",
           "title": {
-            "es": "Secuencia Táctil en Cadena (Team Chain Tap)",
-            "en": "Team Chain Tap Sequence"
+            "es": "Desafío en Carriles",
+            "en": "Lane Rush"
           },
           "category": "aMedida",
           "dailyPrice": 1174100,
           "visible": true,
           "showcase": true,
-          "image": "",
+          "isConcept": false,
+          "image": "assets/images/games/lane-rush.svg",
           "screenshots": [
-            "assets/images/games/abb-drones.png",
-            "assets/images/games/abb-drones-detail.svg"
+            "assets/images/games/lane-rush.svg",
+            "assets/images/games/abb-drones.png"
           ],
           "description": {
-            "es": "Mecánica colaborativa o individual estilo Piano Tiles horizontal por etapas: los jugadores deben tocar puntos del terreno en secuencia coordinada para mantener la cadena activa y sumar velocidad.",
-            "en": "Collaborative or solo horizontal staged Piano Tiles mechanic: players tap terrain nodes in a coordinated chain sequence to maintain momentum and score."
+            "es": "Un juego de reflejos y coordinación en pantalla táctil donde dos participantes juegan codo a codo. Cada uno toca los objetivos que avanzan por su carril en el momento justo para mantener el ritmo, sumar puntos y lograr la mejor racha de equipo.",
+            "en": "A fast-paced touch reflex game where two players team up side by side. Each player taps targets speeding down their lane with perfect timing to build streak combos, spark laughter, and test team coordination."
           },
           "templateSpecs": {
             "players": {
-              "es": "1 a 4 Jugadores (Cooperativo / Turnos)",
-              "en": "1 to 4 Players (Co-op / Turns)"
+              "es": "2 Jugadores (Cooperativo)",
+              "en": "2 Players (Co-op)"
             },
             "mechanic": {
-              "es": "Piano Tiles horizontal por etapas en cadena",
-              "en": "Horizontal staged chain Piano Tiles"
+              "es": "Reflejos táctiles por carriles sincronizados",
+              "en": "Synchronized lane touch reflexes"
             },
             "b2bGoal": {
-              "es": "Team Building, coordinación y alto flujo en stand",
-              "en": "Team building, coordination & high booth throughput"
+              "es": "Coordinación, trabajo en equipo y alta atracción de público",
+              "en": "Teamwork, coordination & high crowd attraction"
             }
           },
           "features": {
             "es": [
-              "Soporte multi-touch para juego en equipo",
-              "Terreno, vehículos y nodos 100% tematizables",
-              "Ritmo progresivo ideal para atraer público al stand"
+              "Trabajo en equipo sin castigo: el mapa siempre reverdece",
+              "Soporte multi-touch con respuesta inmediata",
+              "Gráficos y elementos 100% personalizables con la marca"
             ],
             "en": [
-              "Multi-touch support for team play",
-              "100% customizable terrain, vehicles & nodes",
-              "Progressive pacing ideal for crowd attraction"
+              "Encouraging co-op loop: the world only gets greener",
+              "Multi-touch support with instant responsiveness",
+              "100% brandable visuals and terrain elements"
             ]
           },
           "tags": {
             "es": [
-              "Trabajo en Equipo",
+              "Cooperativo",
               "Multi-Touch",
-              "Secuencia"
+              "Reflejos",
+              "Pantalla Gigante"
             ],
             "en": [
-              "Teamwork",
+              "Co-op",
               "Multi-Touch",
-              "Sequence"
+              "Reflexes",
+              "Large Screen"
             ]
           },
           "implementations": [
@@ -272,207 +276,527 @@ const CORPFOLIO_CATALOG = {
                 "en": "Reforestation Drones"
               },
               "client": {
-                "es": "Caso ABB — Drones y Ecología",
-                "en": "ABB Case — Drone Telemetry"
+                "es": "Caso de Éxito — Reforestación Interactiva",
+                "en": "Success Case — Interactive Reforestation"
               },
               "image": "assets/images/games/abb-drones.png",
               "summary": {
-                "es": "Los participantes trazan rutas de vuelo tocando nodos energéticos en cadena sobre el terreno para guiar drones industriales de ABB.",
-                "en": "Participants trace flight paths by tapping energy nodes in a coordinated chain across the terrain to guide ABB industrial drones."
+                "es": "Dos participantes comandan drones virtuales en pantalla táctil coordinando disparos de semillas y agua para hacer florecer un bosque, con recuento final de árboles plantados.",
+                "en": "Two players pilot touchscreen virtual drones coordinating seed and water drops to make a forest bloom, concluding with a tree-planting impact count."
               },
               "eventNote": {
-                "es": "Ideal para mostrar cobertura logística, redes eléctricas o trabajo sincronizado entre áreas.",
-                "en": "Ideal for showcasing logistics coverage, power grids, or synchronized cross-team operations."
+                "es": "Excelente para stands de sustentabilidad, jornadas de integración familiar y eventos corporativos con foco colaborativo.",
+                "en": "Perfect for sustainability booths, family day activations, and team-building corporate events."
               }
             }
           ],
           "hours": 21,
-          "priceOverride": 0,
-          "isConcept": false
+          "priceOverride": 0
         },
         {
           "id": "abb-brazos",
           "title": {
-            "es": "Clasificación Rápida y Automatización (Sorting Arms)",
-            "en": "Fast Sorting & Automation (Sorting Arms)"
+            "es": "Clasificador Veloz",
+            "en": "Fast Sorter"
           },
           "category": "aMedida",
           "dailyPrice": 1071500,
           "visible": true,
           "showcase": true,
-          "image": "assets/images/games/abb-brazos.png",
+          "isConcept": false,
+          "image": "assets/images/games/fast-sorter.svg",
           "screenshots": [
-            "assets/images/games/abb-brazos.png",
-            "assets/images/games/abb-brazos-detail.svg"
+            "assets/images/games/fast-sorter.svg",
+            "assets/images/games/fast-sorter.png",
+            "assets/images/games/abb-brazos.png"
           ],
           "description": {
-            "es": "Dinámica de clasificación veloz por carriles donde los jugadores operan brazos o selectores táctiles para derivar elementos hacia su contenedor correcto antes de que termine el tiempo.",
-            "en": "Fast-paced lane sorting mechanic where players operate touch arms or diverters to route items into the right container before time runs out."
+            "es": "Un dinámico juego táctil de clasificación rápida. Los participantes deben atrapar elementos que circulan a toda velocidad y enviarlos al contenedor correcto antes de que caigan, pudiendo pasarse ítems entre compañeros para multiplicar el puntaje.",
+            "en": "An exhilarating quick-sorting touch game. Players catch fast-moving items along the line and drop them into the matching goal before time runs out, passing special items to their teammate to boost team multipliers."
           },
           "templateSpecs": {
             "players": {
-              "es": "1 a 2 Jugadores",
-              "en": "1 to 2 Players"
+              "es": "1 o 2 Jugadores (Cooperativo o Duelo)",
+              "en": "1 or 2 Players (Co-op or Duel)"
             },
             "mechanic": {
-              "es": "Clasificación táctil por carriles contra reloj",
-              "en": "Timed lane-sorting touch mechanic"
+              "es": "Agarre táctil, derivación por cintas y pases entre compañeros",
+              "en": "Touch grab, belt sorting & teammate item hand-offs"
             },
             "b2bGoal": {
-              "es": "Campañas ESG, sustentabilidad y procesos industriales",
-              "en": "ESG campaigns, sustainability & industrial processes"
+              "es": "Dinamismo en stand, agilidad mental y trabajo coordinado",
+              "en": "Booth dynamism, mental agility & coordinated teamwork"
             }
           },
           "features": {
             "es": [
-              "Enfoque ESG / Sustentabilidad y educación visual",
-              "Ítems y contenedores personalizables con productos de la marca",
-              "Penalización por error y combos por racha perfecta"
+              "Mecánica de pases colaborativos entre jugadores",
+              "Contenedores y elementos tematizables según la empresa",
+              "Racha de combos con aceleración progresiva"
             ],
             "en": [
-              "ESG / Sustainability focus & visual education",
-              "Items and bins customizable with brand products",
-              "Error penalties and streak combo multipliers"
+              "Cooperative item passing between teammates",
+              "Customizable bins and items matching company products",
+              "Streak combo multiplier with progressive speed ramp"
             ]
           },
           "tags": {
             "es": [
               "Robótica",
-              "Sustentabilidad",
-              "Clasificación"
+              "Clasificación",
+              "Cintas",
+              "Competitivo"
             ],
             "en": [
               "Robotics",
-              "Sustainability",
-              "Sorting"
+              "Sorting",
+              "Conveyors",
+              "Competitive"
             ]
           },
           "implementations": [
             {
               "id": "impl-abb-brazos",
               "title": {
-                "es": "ABB Brazos Recicladores",
-                "en": "ABB Recycling Arms"
+                "es": "Brazos Clasificadores",
+                "en": "Sorting Arms"
               },
               "client": {
-                "es": "Caso ABB — Robótica Sustentable",
-                "en": "ABB Case — Sustainable Robotics"
+                "es": "Caso de Éxito — Robótica y Reciclaje",
+                "en": "Success Case — Robotics & Recycling"
               },
               "image": "assets/images/games/abb-brazos.png",
               "summary": {
-                "es": "Los jugadores comandan brazos robóticos ABB para separar residuos reciclables en una cinta transportadora de alta velocidad.",
-                "en": "Players command ABB robotic arms to separate recyclable waste along a high-speed industrial conveyor belt."
+                "es": "Brazos robóticos virtuales en pantalla grande clasificando materiales reciclables hacia sus contenedores correspondientes a ritmo acelerado para eventos de sustentabilidad.",
+                "en": "Virtual robotic arms on a large screen sorting recyclables into correct bins at an accelerating pace for sustainability events."
               },
               "eventNote": {
-                "es": "Perfecto para comunicar automatización limpia, reciclaje o clasificación de línea de productos.",
-                "en": "Perfect for communicating clean automation, recycling initiatives, or product line sorting."
+                "es": "Ideal para comunicar innovación tecnológica, eficiencia operativa o campañas de reciclaje corporativo.",
+                "en": "Great for communicating technological innovation, operational efficiency, or corporate recycling campaigns."
               }
             }
           ],
           "hours": 18,
-          "priceOverride": 0,
-          "isConcept": true
+          "priceOverride": 0
         },
         {
-          "id": "snake-airlines",
+          "id": "abb-ensamblado-circular",
           "title": {
-            "es": "Recolección en Ruta (Custom Snake)",
-            "en": "Route Collector (Custom Snake)"
+            "es": "Ensamblado Circular",
+            "en": "Circular Assembly"
           },
           "category": "aMedida",
-          "dailyPrice": 712400,
+          "dailyPrice": 1242500,
           "visible": true,
-          "showcase": true,
-          "image": "assets/images/games/snake.svg",
+          "showcase": false,
+          "isConcept": false,
+          "image": "assets/images/games/circular-assembly.svg",
           "screenshots": [
-            "assets/images/games/snake.svg",
-            "assets/images/games/snake-detail.svg"
+            "assets/images/games/circular-assembly.svg"
           ],
           "description": {
-            "es": "El clásico arcade de recolección continua adaptado a mapas y rutas corporativas: el jugador navega recolectando hitos o pasajeros mientras su flota o cadena crece en pantalla.",
-            "en": "The classic continuous-collection arcade mechanic adapted to corporate maps and routes: players navigate collecting milestones as their fleet grows."
+            "es": "Desafío cooperativo de armado y coordinación. Mientras un participante organiza y limpia piezas que llegan por diferentes vías, el otro las combina siguiendo patrones visuales para completar modelos terminados contra reloj.",
+            "en": "A cooperative assembly challenge. One player organizes incoming components across different tracks, while their teammate combines them to build finished products before the clock runs out."
           },
           "templateSpecs": {
             "players": {
-              "es": "1 Jugador (Alta rotación)",
-              "en": "1 Player (Fast turnover)"
+              "es": "1 o 2 Jugadores (Dupla o Solitario)",
+              "en": "1 or 2 Players (Duo or Solo)"
             },
             "mechanic": {
-              "es": "Navegación y recolección creciente sin colisión",
-              "en": "Growing trail navigation & collection"
+              "es": "Clasificación, preparación y ensamblaje por patrones",
+              "en": "Sorting, prep & pattern assembly"
             },
             "b2bGoal": {
-              "es": "Turismo, logística, transporte y fidelización",
-              "en": "Travel, logistics, transport & loyalty activations"
+              "es": "Economía circular, procesos de manufactura y calidad",
+              "en": "Circular economy, manufacturing & quality control"
             }
           },
           "features": {
             "es": [
-              "Mapeo de rutas o destinos de la marca",
-              "Power-ups y coleccionables personalizados",
-              "Partidas ágiles de 45 a 90 segundos"
+              "Flujo integral de economía circular: reciclado y re-manufactura",
+              "Recetas visuales sin texto, máxima accesibilidad",
+              "Aceleración y complejidad creciente a lo largo de la partida"
             ],
             "en": [
-              "Custom brand route or destination map",
-              "Branded power-ups and collectibles",
-              "Agile 45–90 second sessions"
+              "Complete circular economy loop: recycle & remanufacture",
+              "Diegetic visual recipes without text for universal accessibility",
+              "Progressive difficulty ramp over the session"
+            ]
+          },
+          "tags": {
+            "es": [
+              "Manufactura",
+              "Economía Circular",
+              "Estrategia",
+              "Recetas"
+            ],
+            "en": [
+              "Manufacturing",
+              "Circular Economy",
+              "Strategy",
+              "Recipes"
+            ]
+          },
+          "implementations": [
+            {
+              "id": "impl-abb-ensamblado",
+              "title": {
+                "es": "Ensamblado Circular de Robots",
+                "en": "Circular Robot Assembly"
+              },
+              "client": {
+                "es": "Caso de Éxito — Economía Circular",
+                "en": "Success Case — Circular Economy"
+              },
+              "image": "assets/images/games/abb-circular-assembly.png",
+              "summary": {
+                "es": "Transformación de chatarra en robots de última generación, ideal para stands de manufactura, ingeniería y procesos circulares.",
+                "en": "Transforming scrap parts into next-generation robots, ideal for manufacturing, engineering, and circular economy booths."
+              },
+              "eventNote": {
+                "es": "Excelente para stands de ingeniería, sustentabilidad industrial y ferias técnicas.",
+                "en": "Suited for engineering booths, industrial sustainability, and technical trade shows."
+              }
+            }
+          ],
+          "hours": 23,
+          "priceOverride": 0
+        },
+        {
+          "id": "ensamblado-versus",
+          "title": {
+            "es": "Ensamblado Versus",
+            "en": "Assembly Versus"
+          },
+          "category": "aMedida",
+          "dailyPrice": 1105700,
+          "visible": true,
+          "showcase": false,
+          "isConcept": true,
+          "image": "assets/images/games/assembly-versus.svg",
+          "screenshots": [
+            "assets/images/games/assembly-versus.svg"
+          ],
+          "description": {
+            "es": "Duelo cara a cara en pantalla dividida lleno de adrenalina. Dos participantes compiten directamente por atrapar piezas que caen en una zona central neutral, intentando ganarle de mano a su rival para completar primero su objetivo.",
+            "en": "High-energy face-to-face duel on a split screen. Two players compete to grab shared components falling through a central neutral zone, racing to beat their rival to the finish line."
+          },
+          "templateSpecs": {
+            "players": {
+              "es": "2 Jugadores (Duelo Competitivo)",
+              "en": "2 Players (Competitive Duel)"
+            },
+            "mechanic": {
+              "es": "Captura de piezas en zona neutral y armado por planos",
+              "en": "Neutral zone component grab & blueprint assembly"
+            },
+            "b2bGoal": {
+              "es": "Competencia de alto impacto, adrenalina y atracción en ferias",
+              "en": "High-impact crowd attraction, adrenaline & trade show duels"
+            }
+          },
+          "features": {
+            "es": [
+              "Partidas frenéticas de 60 segundos cara a cara",
+              "Zona neutral disputada con caída acelerada por gravedad",
+              "Modelos y planos personalizables con maquinaria o productos de la marca"
+            ],
+            "en": [
+              "Fast 60-second face-to-face duels",
+              "Contested neutral zone with gravity-accelerated falling parts",
+              "Customizable blueprints featuring brand machines or products"
+            ]
+          },
+          "tags": {
+            "es": [
+              "Versus",
+              "Competitivo",
+              "Reflejos",
+              "Pantalla Dividida"
+            ],
+            "en": [
+              "Versus",
+              "Competitive",
+              "Reflexes",
+              "Split-Screen"
+            ]
+          },
+          "implementations": [],
+          "hours": 19,
+          "priceOverride": 0
+        },
+        {
+          "id": "snake",
+          "title": {
+            "es": "Snake",
+            "en": "Snake"
+          },
+          "category": "aMedida",
+          "dailyPrice": 712400,
+          "visible": true,
+          "showcase": false,
+          "isConcept": true,
+          "image": "assets/images/games/snake.svg",
+          "screenshots": [
+            "assets/images/games/snake.svg"
+          ],
+          "description": {
+            "es": "La clásica mecánica de la viborita adaptada a pantallas táctiles corporativas: navegación fluida recolectando hitos que aumentan el largo de la cadena, con recorte de longitud en caso de colisión.",
+            "en": "The classic snake mechanic reimagined for corporate touchscreens: fluid navigation collecting milestones that extend your trail, with segment trimming on collision."
+          },
+          "templateSpecs": {
+            "players": {
+              "es": "1 Jugador (Alta Rotación)",
+              "en": "1 Player (Fast Turnover)"
+            },
+            "mechanic": {
+              "es": "Navegación en cuadrícula y recolección continua",
+              "en": "Grid navigation & continuous collection"
+            },
+            "b2bGoal": {
+              "es": "Logística, rutas, redes de distribución y partidas rápidas",
+              "en": "Logistics, routes, distribution networks & agile play"
+            }
+          },
+          "features": {
+            "es": [
+              "Regla de recorte de cola en lugar de muerte instantánea para mantener la diversión",
+              "Hitos y power-ups tematizables con la marca",
+              "Partidas dinámicas de 60 a 90 segundos"
+            ],
+            "en": [
+              "Tail-trimming collision rule instead of instant game over to sustain fun",
+              "Brandable milestones and power-ups",
+              "Dynamic 60–90 second sessions"
             ]
           },
           "tags": {
             "es": [
               "Arcade",
-              "Rutas",
-              "Casual"
+              "Casual",
+              "Ágil",
+              "Personalizable"
             ],
             "en": [
               "Arcade",
-              "Routes",
-              "Casual"
+              "Casual",
+              "Fast-Paced",
+              "Customizable"
             ]
           },
-          "implementations": [
-            {
-              "id": "impl-snake-airlines",
-              "title": {
-                "es": "Snake Airlines",
-                "en": "Snake Airlines"
-              },
-              "client": {
-                "es": "Caso Aerocomercial — Rutas Aéreas",
-                "en": "Airline Case — Flight Connections"
-              },
-              "image": "assets/images/games/snake.svg",
-              "summary": {
-                "es": "Un avión comercial conecta destinos y suma pasajeros e íconos de equipaje mientras evita turbulencias y cruces de ruta.",
-                "en": "A commercial airliner connects destinations and picks up passengers while avoiding turbulence and route crossings."
-              },
-              "eventNote": {
-                "es": "Adaptable a flotas de camiones, cadenas de suministro, fibra óptica o expansión de sucursales.",
-                "en": "Adaptable to delivery fleets, supply chains, fiber-optic networks, or branch expansion."
-              }
-            }
-          ],
+          "implementations": [],
           "hours": 7.5,
+          "priceOverride": 0
+        },
+        {
+          "id": "triple-snake",
+          "title": {
+            "es": "Triple Snake",
+            "en": "Triple Snake"
+          },
+          "category": "aMedida",
+          "dailyPrice": 866300,
+          "visible": true,
+          "showcase": false,
+          "isConcept": true,
+          "image": "assets/images/games/triple-snake.svg",
+          "screenshots": [
+            "assets/images/games/triple-snake.svg"
+          ],
+          "description": {
+            "es": "Innovadora variante donde el jugador guía simultáneamente a 3 entidades mediante trazos táctiles en pantalla. Cada entidad recolecta un tipo específico de elemento y puede obtener mejoras especiales evitando choques cruzados.",
+            "en": "Innovative multi-collector mechanic where players guide 3 entities simultaneously via finger-drawing paths. Each entity gathers a specific category, unlocking upgrades while avoiding cross-collisions."
+          },
+          "templateSpecs": {
+            "players": {
+              "es": "1 o 2 Jugadores",
+              "en": "1 or 2 Players"
+            },
+            "mechanic": {
+              "es": "Trazado simultáneo de trayectorias táctiles para 3 recolectores",
+              "en": "Simultaneous finger-drawn path navigation for 3 collectors"
+            },
+            "b2bGoal": {
+              "es": "Clasificación multirubro, agilidad mental y alto engagement",
+              "en": "Multi-category sorting, mental speed & high engagement"
+            }
+          },
+          "features": {
+            "es": [
+              "Control por dibujo de trazo táctil fluido e intuitivo",
+              "3 categorías simultáneas con power-ups desbloqueables",
+              "Excelente para transmitir separación, clasificación o procesos de 3 vías"
+            ],
+            "en": [
+              "Fluid and intuitive finger-drawn gesture controls",
+              "3 simultaneous categories with unlockable upgrades",
+              "Ideal for communicating 3-way sorting, logistics or multi-stream flows"
+            ]
+          },
+          "tags": {
+            "es": [
+              "Táctil",
+              "Multitarea",
+              "Trazado",
+              "Innovador"
+            ],
+            "en": [
+              "Touch",
+              "Multitasking",
+              "Path-Drawing",
+              "Innovative"
+            ]
+          },
+          "implementations": [],
+          "hours": 12,
+          "priceOverride": 0
+        },
+        {
+          "id": "crossy",
+          "title": {
+            "es": "Crossy",
+            "en": "Crossy"
+          },
+          "category": "aMedida",
+          "dailyPrice": 797900,
+          "visible": true,
+          "showcase": false,
+          "isConcept": true,
+          "image": "assets/images/games/crossy.svg",
+          "screenshots": [
+            "assets/images/games/crossy.svg"
+          ],
+          "description": {
+            "es": "Mecánica arcade de avance continuo donde los participantes guían un personaje o vehículo tocando los lados de la pantalla para esquivar obstáculos móviles y saltar sobre plataformas flotantes para llegar al objetivo.",
+            "en": "Classic obstacle-crossing arcade mechanic where players tap the screen edges to dodge moving traffic and hop across dynamic floating platforms to reach the goal."
+          },
+          "templateSpecs": {
+            "players": {
+              "es": "1 Jugador (Partidas Dinámicas)",
+              "en": "1 Player (Dynamic Sessions)"
+            },
+            "mechanic": {
+              "es": "Cruce de carriles con timing, cálculo de saltos y plataformas móviles",
+              "en": "Lane crossing with timing, platform hops & moving obstacles"
+            },
+            "b2bGoal": {
+              "es": "Fácil aprendizaje, partidas adictivas y competencia por ranking",
+              "en": "Instant learnability, addictive gameplay & leaderboard contest"
+            }
+          },
+          "features": {
+            "es": [
+              "Controles táctiles instantáneos: un toque para avanzar y corregir dirección",
+              "Obstáculos y plataformas 100% ambientables con la identidad del cliente",
+              "Ideal para proyectar tabla de puntuación en vivo"
+            ],
+            "en": [
+              "Instant touch controls: tap to advance and adjust position",
+              "100% themeable obstacles and platforms reflecting brand assets",
+              "Perfect to pair with live stage leaderboards"
+            ]
+          },
+          "tags": {
+            "es": [
+              "Arcade",
+              "Timing",
+              "Reflejos",
+              "Adictivo"
+            ],
+            "en": [
+              "Arcade",
+              "Timing",
+              "Reflexes",
+              "Addictive"
+            ]
+          },
+          "implementations": [],
+          "hours": 10,
+          "priceOverride": 0
+        },
+        {
+          "id": "crossy-duo",
+          "title": {
+            "es": "Crossy Duo",
+            "en": "Crossy Duo"
+          },
+          "category": "aMedida",
+          "dailyPrice": 866300,
+          "visible": true,
+          "showcase": false,
+          "isConcept": true,
+          "image": "assets/images/games/crossy-duo.svg",
+          "screenshots": [
+            "assets/images/games/crossy-duo.svg"
+          ],
+          "description": {
+            "es": "Dinámica cooperativa donde dos participantes controlan al mismo personaje desde lados opuestos de la pantalla: el Jugador 1 toca a la izquierda para impulsarlo hacia la derecha, mientras que el Jugador 2 toca a la derecha para enviarlo hacia la izquierda, coordinando cada movimiento para esquivar obstáculos.",
+            "en": "Cooperative directional game where two players control a shared character from opposite sides of the screen: Player 1 taps on the left to push the character right, while Player 2 taps on the right to send it back left, coordinating every move to dodge incoming obstacles."
+          },
+          "templateSpecs": {
+            "players": {
+              "es": "2 Jugadores (Cooperativo de Coordinación)",
+              "en": "2 Players (Cooperative Coordination)"
+            },
+            "mechanic": {
+              "es": "Control direccional cruzado (J1 mueve a derecha, J2 mueve a izquierda)",
+              "en": "Cross-directional touch control (P1 moves right, P2 moves left)"
+            },
+            "b2bGoal": {
+              "es": "Trabajo en equipo, comunicación constante y activación de duplas",
+              "en": "Teamwork, constant communication & paired activations"
+            }
+          },
+          "features": {
+            "es": [
+              "Control compartido: cada jugador maneja una dirección desde su lado de la pantalla",
+              "Exige sincronización y comunicación verbal inmediata para esquivar obstáculos",
+              "Personaje, obstáculos y carriles tematizables según la industria del cliente"
+            ],
+            "en": [
+              "Shared control: each player commands one direction from their side of the screen",
+              "Demands instant synchronization and communication to dodge hazards",
+              "Customizable character, obstacles, and lanes tailored to the client's industry"
+            ]
+          },
+          "tags": {
+            "es": [
+              "Cooperativo",
+              "Carriles",
+              "Relevos",
+              "Velocidad"
+            ],
+            "en": [
+              "Co-op",
+              "Lanes",
+              "Relay",
+              "Speed"
+            ]
+          },
+          "implementations": [],
+          "hours": 12,
           "priceOverride": 0
         },
         {
           "id": "tap-gallery",
           "title": {
-            "es": "Galería de Objetivos Dinámicos (Spot & Tap)",
-            "en": "Dynamic Target Gallery (Spot & Tap)"
+            "es": "Tap Gallery",
+            "en": "Tap Gallery"
           },
           "category": "aMedida",
           "dailyPrice": 797900,
           "visible": true,
           "showcase": true,
+          "isConcept": false,
           "image": "assets/images/games/tap-gallery.svg",
           "screenshots": [
             "assets/images/games/tap-gallery.svg",
-            "assets/images/games/tap-gallery-detail.svg"
+            "assets/images/games/tap-gallery.png"
           ],
           "description": {
-            "es": "Escenario interactivo con objetivos móviles donde los participantes deben detectar y tocar elementos clave (evitando distractores) en sesiones explosivas de 60 segundos.",
-            "en": "Interactive moving-target stage where players spot and tap key brand targets (while avoiding decoys) in explosive 60-second sessions."
+            "es": "Escenario interactivo de objetivos dinámicos donde los participantes deben detectar y tocar rápidamente elementos que asoman, saltan o corren por la pantalla, sumando combos y evitando penalizaciones.",
+            "en": "Interactive moving-target stage where players spot and tap targets that peek, jump, or run across the screen, building combo streaks while avoiding decoy penalties."
           },
           "templateSpecs": {
             "players": {
@@ -480,140 +804,64 @@ const CORPFOLIO_CATALOG = {
               "en": "1 Player (Leaderboard Competition)"
             },
             "mechanic": {
-              "es": "Detección visual y toque rápido con distractores",
-              "en": "Visual spotting & rapid tap with decoys"
+              "es": "Detección visual y toque rápido con objetivos móviles y señuelos",
+              "en": "Visual spotting & rapid tap with moving targets and decoys"
             },
             "b2bGoal": {
-              "es": "Reconocimiento de producto, promociones y alto tráfico",
-              "en": "Product recognition, promos & high foot traffic"
+              "es": "Reflejos, reconocimiento de marca y alta rotación en stands",
+              "en": "Reflexes, brand recognition & high booth throughput"
             }
           },
           "features": {
             "es": [
-              "Escenarios ilustrados o fotográficos de la marca",
-              "Objetivos de distinto puntaje y penalizaciones",
-              "Ideal para combinar con Tabla de Puntuación en vivo"
+              "Comportamientos dinámicos: asomarse, saltar y huir por el escenario",
+              "Señuelos con penalización de puntaje para desafiar la atención",
+              "Sesiones cortas y explosivas de 60 segundos"
             ],
             "en": [
-              "Illustrated or photographic brand backdrops",
-              "Tiered target scores and decoy penalties",
-              "Ideal to pair with Live Leaderboard"
+              "Dynamic behaviors: peek, jump, and run across the stage",
+              "Decoy targets with point penalties to challenge focus",
+              "Short, explosive 60-second sessions"
             ]
           },
           "tags": {
             "es": [
+              "Reflejos",
               "Velocidad",
               "Competitivo",
-              "Reflejos"
+              "Arcade"
             ],
             "en": [
+              "Reflexes",
               "Speed",
               "Competitive",
-              "Reflexes"
+              "Arcade"
             ]
           },
           "implementations": [
             {
               "id": "impl-tap-gallery",
               "title": {
-                "es": "Tap Gallery Viajes",
-                "en": "Travel Tap Gallery"
+                "es": "Cacería de Brokers (GeTravel)",
+                "en": "Broker Hunt (GeTravel)"
               },
               "client": {
-                "es": "Caso Turismo — Destinos y Mascotas",
-                "en": "Travel Case — Destinations & Mascots"
+                "es": "Caso GeTravel — Activación de Viajes y Turismo",
+                "en": "GeTravel Case — Travel & Tourism Activation"
               },
-              "image": "assets/images/games/tap-gallery.svg",
+              "image": "assets/images/games/tap-gallery.png",
               "summary": {
-                "es": "Galería ambientada en un aeropuerto donde los jugadores capturan mascotas y valijas promocionales en movimiento.",
-                "en": "Airport-themed gallery where players tap moving brand mascots and promotional luggage."
+                "es": "Activación lúdica donde los participantes deben capturar a brokers fugitivos de Remax que viajan por distintos destinos del mundo gracias a GeTravel, apareciendo sorpresivamente en aeropuertos y atracciones.",
+                "en": "Playful activation where players spot and capture rogue Remax brokers travelling worldwide via GeTravel, popping up unexpectedly across international airports and iconic destinations."
               },
               "eventNote": {
-                "es": "Permite mostrar catálogos de productos nuevos haciendo que el público identifique los ítems de la marca.",
-                "en": "Great for product launches by training attendees to spot your new product line."
+                "es": "Genera momentos hilarantes y gran interacción en stands de viajes, ferias inmobiliarias y eventos corporativos.",
+                "en": "Creates hilarious crowd moments and high engagement at travel booths, real estate expos, and corporate events."
               }
             }
           ],
           "hours": 10,
           "priceOverride": 0
-        },
-        {
-          "id": "abb-ensamblado-circular",
-          "title": {
-            "es": "Ensamblado Circular Colaborativo",
-            "en": "Collaborative Circular Assembly"
-          },
-          "category": "aMedida",
-          "hours": 23,
-          "priceOverride": 0,
-          "dailyPrice": 1242500,
-          "visible": true,
-          "showcase": false,
-          "isConcept": false,
-          "image": "",
-          "screenshots": [],
-          "description": {
-            "es": "Mecánica de precisión y sincronización en anillo donde los participantes ensamblan componentes industriales en el orden exacto.",
-            "en": "Ring-based precision and timing mechanic where participants assemble industrial components in exact sequence."
-          },
-          "templateSpecs": {
-            "players": {
-              "es": "1 a 4 Jugadores",
-              "en": "1 to 4 Players"
-            },
-            "mechanic": {
-              "es": "Sincronización y encastre en anillo rotativo",
-              "en": "Rotating ring timing & assembly"
-            },
-            "b2bGoal": {
-              "es": "Procesos de calidad, manufactura e ingeniería",
-              "en": "Quality control, manufacturing & engineering"
-            }
-          },
-          "features": {
-            "es": [
-              "Visualización paso a paso del proceso productivo",
-              "Ideal para mesas táctiles o tótems verticales"
-            ],
-            "en": [
-              "Step-by-step production process visualization",
-              "Suited for touch tables or vertical kiosks"
-            ]
-          },
-          "tags": {
-            "es": [
-              "Táctil",
-              "Brandeable",
-              "Ingeniería"
-            ],
-            "en": [
-              "Touch",
-              "Brandable",
-              "Engineering"
-            ]
-          },
-          "implementations": [
-            {
-              "id": "impl-abb-ensamblado",
-              "title": {
-                "es": "ABB Ensamblado Circular",
-                "en": "ABB Circular Assembly"
-              },
-              "client": {
-                "es": "Caso ABB — Manufactura",
-                "en": "ABB Case — Manufacturing"
-              },
-              "image": "",
-              "summary": {
-                "es": "Implementación para ensamblaje interactivo de componentes industriales ABB.",
-                "en": "Interactive assembly implementation for ABB industrial components."
-              },
-              "eventNote": {
-                "es": "Ideal para ferias industriales y demostraciones técnicas de producto.",
-                "en": "Ideal for industrial expos and technical product demonstrations."
-              }
-            }
-          ]
         }
       ]
     },
@@ -648,24 +896,24 @@ const CORPFOLIO_CATALOG = {
           },
           "features": {
             "es": [
-              "Actualización instantánea vía red local",
-              "Podio animado para premiación",
-              "Branding completo en pantalla"
+              "Sincronización en vivo con todos los juegos",
+              "Diseño adaptable al branding del evento",
+              "Ideal para sorteos y entregas de premios"
             ],
             "en": [
-              "Instant local network sync",
-              "Animated awards podium",
-              "Complete on-screen branding"
+              "Real-time live sync across all games",
+              "Custom styling matching event branding",
+              "Ideal for stage raffles & awards"
             ]
           },
           "tags": {
             "es": [
               "Competencia",
-              "Tiempo Real"
+              "Pantalla Gigante"
             ],
             "en": [
               "Competition",
-              "Real-Time"
+              "Big Screen"
             ]
           },
           "hours": 0,
@@ -674,8 +922,8 @@ const CORPFOLIO_CATALOG = {
         {
           "id": "registro-usuario",
           "title": {
-            "es": "Registro de Usuario",
-            "en": "User Registration"
+            "es": "Registro de Usuario / Captura de Leads",
+            "en": "User Registration / Lead Capture"
           },
           "dailyPrice": 0,
           "visible": true,
@@ -686,17 +934,17 @@ const CORPFOLIO_CATALOG = {
             "assets/images/addons/registro-detail.svg"
           ],
           "description": {
-            "es": "Formulario previo de ingreso (nombre, email, teléfono, empresa) con exportación estructurada de base de datos para marketing.",
-            "en": "Pre-game check-in form (name, email, phone, company) with structured database export for event marketing."
+            "es": "Formulario táctil previo a la partida (nombre, email, teléfono, empresa) con teclado en pantalla y exportación de base de datos.",
+            "en": "Touchscreen pre-game form (name, email, phone, company) with on-screen virtual keyboard and structured database export."
           },
           "features": {
             "es": [
-              "Campos 100% configurables",
+              "Campos 100% personalizables",
               "Validación automática de email",
-              "Exportación a Excel / CSV al finalizar"
+              "Exportación a Excel / CSV post-evento"
             ],
             "en": [
-              "100% configurable fields",
+              "100% customizable form fields",
               "Automatic email validation",
               "Excel / CSV export post-event"
             ]
@@ -870,10 +1118,10 @@ const CORPFOLIO_CATALOG = {
       },
       "items": [
         {
-          "id": "mi-gran-paseo",
+          "id": "mi-increible-paseo",
           "title": {
-            "es": "Mi Gran Paseo",
-            "en": "Mi Gran Paseo"
+            "es": "Mi Increíble Paseo",
+            "en": "Mi Increíble Paseo"
           },
           "priceNote": {
             "es": "Precio a convenir",
@@ -881,35 +1129,39 @@ const CORPFOLIO_CATALOG = {
           },
           "visible": true,
           "showcase": true,
-          "image": "assets/images/campaigns/mi-gran-paseo.svg",
+          "image": "assets/images/campaigns/mi-increible-paseo.png",
           "screenshots": [
-            "assets/images/campaigns/mi-gran-paseo.svg",
-            "assets/images/campaigns/mi-gran-paseo-detail.svg"
+            "assets/images/campaigns/mi-increible-paseo.png",
+            "assets/images/campaigns/mi-increible-paseo-detail.png"
           ],
           "description": {
-            "es": "Campaña interactiva con enfoque educativo y de concientización ciudadana, adaptable a programas escolares, sustentabilidad corporativa o marketing de impacto social.",
-            "en": "Interactive campaign combining educational engagement with civic awareness, suited for schools, sustainability programs, or social impact marketing."
+            "es": "Serious game de simulación y gestión turística estilo Point & Click (inspirado en dinámicas como Papa's Pizzeria y Papers, Please). El jugador asume el rol de gestor turístico en San Telmo, atendiendo a diversos visitantes y diseñando recorridos personalizados que cumplan con sus expectativas culturales e históricas.",
+            "en": "Point & Click serious game and tourism simulation (inspired by titles like Papa's Pizzeria and Papers, Please). Players step into the role of a tourism manager in historic San Telmo, attending to visitors and designing custom walking tours that match their cultural and historical interests."
           },
           "features": {
             "es": [
-              "Multiplataforma (Web, Tablet y Kioscos)",
-              "Dashboard de métricas de aprendizaje",
-              "Narrativa y personajes a medida"
+              "Mapa interactivo con lugares reales e información histórica",
+              "Mecánicas accesibles estilo Point & Click con alta usabilidad",
+              "Adaptable a cualquier ciudad, programa educativo o campaña cultural"
             ],
             "en": [
-              "Cross-platform (Web, Tablet & Kiosks)",
-              "Learning analytics dashboard",
-              "Tailored storytelling and characters"
+              "Interactive map featuring real heritage landmarks and cultural trivia",
+              "Accessible Point & Click mechanics with high usability",
+              "Adaptable to any city, educational program, or cultural campaign"
             ]
           },
           "tags": {
             "es": [
-              "Educación",
-              "Multiplataforma"
+              "Simulación",
+              "Point & Click",
+              "Serious Game",
+              "Educativo"
             ],
             "en": [
-              "Education",
-              "Cross-Platform"
+              "Simulation",
+              "Point & Click",
+              "Serious Game",
+              "Educational"
             ]
           }
         }
