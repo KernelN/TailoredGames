@@ -1,5 +1,5 @@
 /**
- * Corpfolio Studio — Landing Page Controller (index.html & cotizador.html)
+ * Tailored Games — Landing Page Controller (index.html & cotizador.html)
  */
 
 document.addEventListener("DOMContentLoaded", () => {

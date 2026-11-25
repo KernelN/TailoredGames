@@ -1,5 +1,5 @@
 /**
- * Corpfolio Studio — Renderer Module
+ * Tailored Games — Renderer Module
  * Generates responsive HTML components for Showcase and Cotizador modes.
  */
 
@@ -84,7 +84,7 @@ window.CorpfolioRenderer = (function () {
         el.innerHTML = `
           <section class="hero-section">
             <div class="hero-logo-wrapper">
-              <img src="${logoSrc}" alt="${studio.name || 'Gametelier Studio'}" class="hero-brand-logo" onerror="this.onerror=null; this.src='assets/images/logo/logo.svg';" />
+              <img src="${logoSrc}" alt="${studio.name || 'Tailored Games'}" class="hero-brand-logo" onerror="this.onerror=null; this.src='assets/images/logo/logo.svg';" />
             </div>
             <div class="hero-badge">${ui("heroBadgeShowcase")}</div>
             <h1 class="hero-title">${title}</h1>
@@ -100,7 +100,7 @@ window.CorpfolioRenderer = (function () {
         el.innerHTML = `
           <section class="hero-section">
             <div class="hero-logo-wrapper">
-              <img src="${logoSrc}" alt="${studio.name || 'Gametelier Studio'}" class="hero-brand-logo" onerror="this.onerror=null; this.src='assets/images/logo/logo.svg';" />
+              <img src="${logoSrc}" alt="${studio.name || 'Tailored Games'}" class="hero-brand-logo" onerror="this.onerror=null; this.src='assets/images/logo/logo.svg';" />
             </div>
             <div class="hero-badge">${ui("heroBadgeShowcase")}</div>
             <h1 class="hero-title">${title}</h1>
@@ -126,8 +126,8 @@ window.CorpfolioRenderer = (function () {
         <header class="site-header">
           <div class="container header-inner">
             <div style="display: flex; align-items: center; gap: 16px;">
-              <a href="${homeHref}" class="brand-link" title="Corpfolio Studio">
-                <img src="${logoSrc}" alt="${catalog()?.studioInfo?.name || 'Corpfolio Studio'}" class="brand-logo" onerror="this.onerror=null; this.src='assets/images/logo/logo.svg';" />
+              <a href="${homeHref}" class="brand-link" title="${catalog()?.studioInfo?.name || 'Tailored Games'}">
+                <img src="${logoSrc}" alt="${catalog()?.studioInfo?.name || 'Tailored Games'}" class="brand-logo" onerror="this.onerror=null; this.src='assets/images/logo/logo.svg';" />
               </a>
               ${showBackToCatalog ? `
                 <a href="${homeHref}" class="header-back-link">
@@ -209,7 +209,11 @@ window.CorpfolioRenderer = (function () {
 
       function renderCarousel(category, cardClass) {
         const linkHref = `seccion.html?tipo=${category.id}&mode=${mode}`;
-        const items = filterShowcaseItems(category.items);
+        const isCustomCat = category.id === "aMedida";
+        let items = filterShowcaseItems(category.items);
+        if (isCustomCat) {
+          items = items.filter(game => Array.isArray(game.implementations) && game.implementations.length > 0);
+        }
 
         const slidesHtml = items.map((game) => {
           const impls = Array.isArray(game.implementations) ? game.implementations : [];
@@ -217,32 +221,47 @@ window.CorpfolioRenderer = (function () {
           const rawImg = (activeImpl && activeImpl.image && activeImpl.image.trim() !== "")
             ? activeImpl.image
             : (game.image || "");
-          const isConcept = game.isConcept || !rawImg || !rawImg.trim();
+          const isConcept = !isCustomCat && (game.isConcept || !rawImg || !rawImg.trim());
           const imgSrc = (!rawImg || !rawImg.trim()) ? 'assets/images/concept-blueprint.svg' : rawImg;
 
           const clientLabel = activeImpl && activeImpl.client ? t(activeImpl.client) : "";
+          const slideTitle = (isCustomCat && activeImpl && activeImpl.title) ? t(activeImpl.title) : t(game.title);
+          const slideDesc = (isCustomCat && activeImpl && activeImpl.summary) ? t(activeImpl.summary) : t(game.description);
+          const customRefUrl = activeImpl
+            ? `seccion.html?tipo=a-medida-custom&mode=${mode}&ref=${encodeURIComponent(activeImpl.id)}`
+            : `seccion.html?tipo=a-medida-custom&mode=${mode}`;
+
+          const pricePillHtml = mode === 'cotizador'
+            ? (isCustomCat
+              ? `<span class="price-pill note">${ui("estPerDay")} $${fmt(game.dailyPrice)} ${ui('perDay')}</span>`
+              : `<span class="price-pill">$${fmt(game.dailyPrice)} ${ui('perDay')}</span>`)
+            : '';
+
+          const actionBtnHtml = isCustomCat
+            ? `<a href="${customRefUrl}" class="btn ${mode === 'cotizador' ? 'btn-primary' : 'btn-outline'} btn-sm">${ui("requestSimilar")}</a>`
+            : (mode === 'cotizador'
+              ? `<button type="button" class="btn ${cart()?.hasGame(game.id) ? 'btn-success' : 'btn-primary'} btn-sm btn-add-game" data-game-id="${game.id}">
+                   ${cart()?.hasGame(game.id) ? ui("addedToQuote") : ui("addToQuote")}
+                 </button>`
+              : '');
 
           return `
           <div class="carousel-slide" data-game-id="${game.id}">
             <div class="slide-media" style="position: relative;">
               ${clientLabel ? `<span class="slide-client-badge">🏷️ ${clientLabel}</span>` : ''}
               ${isConcept ? `<span class="badge" style="position: absolute; top: 12px; ${clientLabel ? 'right: 12px;' : 'left: 12px;'} z-index: 5; background: rgba(6,182,212,0.3); color: #38BDF8; border: 1px solid rgba(6,182,212,0.6); backdrop-filter: blur(8px);">${ui("conceptBadge")}</span>` : ''}
-              <img src="${imgSrc}" alt="${t(game.title)}" loading="lazy" onerror="this.onerror=null; this.src='assets/images/concept-blueprint.svg';" />
+              <img src="${imgSrc}" alt="${slideTitle}" loading="lazy" onerror="this.onerror=null; this.src='assets/images/concept-blueprint.svg';" />
             </div>
             <div class="slide-info">
               <div class="slide-title-row">
-                <h4 class="slide-title">${t(game.title)}</h4>
-                ${mode === 'cotizador' ? `<span class="price-pill">$${fmt(game.dailyPrice)} ${ui('perDay')}</span>` : ''}
+                <h4 class="slide-title">${slideTitle}</h4>
+                ${pricePillHtml}
               </div>
-              <p class="slide-desc">${t(game.description)}</p>
+              <p class="slide-desc">${slideDesc}</p>
 
               <div class="slide-actions">
                 <a href="${linkHref}#${game.id}" class="section-link">${ui("viewAll")}</a>
-                ${mode === 'cotizador' ? `
-                  <button type="button" class="btn ${cart()?.hasGame(game.id) ? 'btn-success' : 'btn-primary'} btn-sm btn-add-game" data-game-id="${game.id}">
-                    ${cart()?.hasGame(game.id) ? ui("addedToQuote") : ui("addToQuote")}
-                  </button>
-                ` : ''}
+                ${actionBtnHtml}
               </div>
             </div>
           </div>
@@ -253,11 +272,30 @@ window.CorpfolioRenderer = (function () {
           <button type="button" class="carousel-dot ${idx === 0 ? 'active' : ''}" data-slide-index="${idx}" aria-label="Slide ${idx + 1}"></button>
         `).join('');
 
+        const badgeCountText = isCustomCat
+          ? `${items.length} ${ui("customCasesCount")}`
+          : `${items.length} ${t(category.title)}`;
+
+        const columnFooterHtml = isCustomCat
+          ? `
+            <div class="showcase-column-footer">
+              <a href="seccion.html?tipo=a-medida-custom&mode=${mode}" class="btn btn-outline btn-sm" style="border-color: rgba(6,182,212,0.45); color: #38BDF8;">
+                ${ui("requestYours")}
+              </a>
+              <a href="${linkHref}" class="section-link" style="font-size: 15px;">${ui("viewAll")}</a>
+            </div>
+          `
+          : `
+            <div style="margin-top: 16px; text-align: right;">
+              <a href="${linkHref}" class="section-link" style="font-size: 15px;">${ui("viewAll")}</a>
+            </div>
+          `;
+
         return `
           <div class="showcase-column-card ${cardClass}">
             <div class="column-header">
               <h3>${t(category.title)}</h3>
-              <span class="badge">${items.length} ${t(category.title)}</span>
+              <span class="badge">${badgeCountText}</span>
             </div>
             <p class="column-desc">${t(category.subtitle)}</p>
 
@@ -271,9 +309,7 @@ window.CorpfolioRenderer = (function () {
               ${dotsHtml}
             </div>
 
-            <div style="margin-top: 16px; text-align: right;">
-              <a href="${linkHref}" class="section-link" style="font-size: 15px;">${ui("viewAll")}</a>
-            </div>
+            ${columnFooterHtml}
           </div>
         `;
       }
@@ -649,7 +685,7 @@ window.CorpfolioRenderer = (function () {
     },
 
     /**
-     * Renders Campañas (Multiple Games Supported)
+     * Renders Juegos de Largo Alcance / Campañas (Multiple Games Supported)
      */
     renderCampaignShowcase(containerId, mode = "showcase") {
       const el = document.getElementById(containerId);
@@ -661,11 +697,13 @@ window.CorpfolioRenderer = (function () {
       if (items.length === 0) return;
 
       const linkHref = `seccion.html?tipo=campanas&mode=${mode}`;
+      const briefHref = `seccion.html?tipo=campanas-custom&mode=${mode}`;
 
       const cardsHtml = items.map(campaign => {
         const isConcept = campaign.isConcept || !campaign.image || !campaign.image.trim();
         const imgSrc = isConcept ? 'assets/images/concept-blueprint.svg' : campaign.image;
         const features = (t(campaign.features) || []).map(f => `<li>✓ ${f}</li>`).join('');
+        const refBriefHref = `${briefHref}&ref=${encodeURIComponent(campaign.id)}`;
 
         return `
           <div class="campaign-card" style="margin-bottom: 24px;">
@@ -679,9 +717,12 @@ window.CorpfolioRenderer = (function () {
               
               ${features ? `<ul style="list-style: none; font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; display: flex; flex-direction: column; gap: 4px;">${features}</ul>` : ''}
 
-              <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-top: auto;">
-                <span class="price-pill note">${t(campaign.priceNote)}</span>
-                <a href="${linkHref}#${campaign.id}" class="btn btn-outline btn-sm">${ui("viewAll")}</a>
+              <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-top: auto;">
+                ${mode === "cotizador" ? `<span class="price-pill note">${t(campaign.priceNote)}</span>` : `<span></span>`}
+                <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                  <a href="${linkHref}#${campaign.id}" class="btn btn-outline btn-sm">${ui("viewAll")}</a>
+                  <a href="${refBriefHref}" class="btn btn-primary btn-sm">✨ ${ui("requestSimilar")}</a>
+                </div>
               </div>
             </div>
 
@@ -699,7 +740,12 @@ window.CorpfolioRenderer = (function () {
               <h3 class="section-title">${t(campanas.title)}</h3>
               <p class="section-desc">${t(campanas.subtitle)}</p>
             </div>
-            <a href="${linkHref}" class="section-link">${ui("viewAll")}</a>
+            <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+              <a href="${briefHref}" class="btn btn-outline btn-sm" style="border-color: rgba(6,182,212,0.45); color: #38BDF8;">
+                ${ui("requestCampaignYours")}
+              </a>
+              <a href="${linkHref}" class="section-link">${ui("viewAll")}</a>
+            </div>
           </div>
 
           <div class="campaigns-showcase-list">
@@ -725,7 +771,7 @@ window.CorpfolioRenderer = (function () {
           <div class="container">
             <div class="footer-content">
               <div class="footer-brand">
-                <img src="${logoSrc}" alt="${studio?.name || 'Corpfolio Studio'}" style="height: 36px;" onerror="this.onerror=null; this.src='assets/images/logo/logo.svg';" />
+                <img src="${logoSrc}" alt="${studio?.name || 'Tailored Games'}" style="height: 36px;" onerror="this.onerror=null; this.src='assets/images/logo/logo.svg';" />
                 <p>${t(studio?.tagline)}</p>
               </div>
 

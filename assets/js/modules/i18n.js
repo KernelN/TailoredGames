@@ -1,5 +1,5 @@
 /**
- * Corpfolio Studio — Smart Internationalization (i18n) Module
+ * Tailored Games — Smart Internationalization (i18n) Module
  * Handles language detection, manual switching, currency formatting, and translation dispatching.
  */
 
@@ -25,7 +25,7 @@
       en: "Build your digital event quote"
     },
     heroSubtitleCotizador: {
-      es: "Selecciona los juegos, la duración y los agregados. Los descuentos del 50% por 3+ días y 20% por 4+ juegos se aplican automáticamente sobre tu cotización.",
+      es: "Selecciona los juegos, la duración y los add-ons. Los descuentos del 50% por 3+ días y 20% por 4+ juegos se aplican automáticamente sobre tu cotización.",
       en: "Select games, duration, and add-ons. 50% discounts for 3+ days and 20% for 4+ games are automatically applied to your quote."
     },
     heroQuotePill: {
@@ -81,7 +81,7 @@
       en: "No games selected yet"
     },
     emptyCartSubtitle: {
-      es: "Explora el catálogo y agrega juegos o agregados para calcular tu presupuesto con descuentos automáticos.",
+      es: "Explora el catálogo y agrega juegos o add-ons para calcular tu presupuesto con descuentos automáticos.",
       en: "Browse the catalog and add games or add-ons to calculate your quote with automatic discounts."
     },
     checkoutBtn: {
@@ -189,7 +189,7 @@
       en: "Inquire for custom quote"
     },
     addonsCount: {
-      es: "Agregados incluidos:",
+      es: "Add-ons incluidos:",
       en: "Included add-ons:"
     },
     featuresIncluded: {
@@ -213,12 +213,12 @@
       en: "+ Add Custom Game"
     },
     campaignsTitle: {
-      es: "Juegos como Campaña",
-      en: "Games as Campaigns"
+      es: "Juegos de Largo Alcance",
+      en: "Long-Term & Campaign Games"
     },
     campaignsSubtitle: {
-      es: "Soluciones lúdicas de mediano y largo plazo orientadas a educación, concientización o publicidad masiva.",
-      en: "Medium-to-long term playful solutions for education, awareness, or mass marketing campaigns."
+      es: "Videojuegos de duración extendida para capacitación interna en servidores del cliente, campañas promocionales web, educación y gamificación continua.",
+      en: "Extended-duration games built for internal employee training on client servers, public web promo campaigns, education, and ongoing gamification."
     },
     templateBadge: {
       es: "⚙️ Plantilla / Mecánica Base",
@@ -273,8 +273,8 @@
       en: "🎮 Pick Game..."
     },
     gamePickerModalTitle: {
-      es: "Seleccionar Juego para Agregado",
-      en: "Select Game for Add-On"
+      es: "Seleccionar Juego para Add-on",
+      en: "Select Game for Add-on"
     },
     gamePickerSearchPlaceholder: {
       es: "🔍 Buscar juego por nombre...",
@@ -283,6 +283,90 @@
     selectAndAssignBtn: {
       es: "+ Seleccionar y Asignar",
       en: "+ Select & Assign"
+    },
+    requestYours: {
+      es: "✨ ¡Pedí el tuyo!",
+      en: "✨ Request Yours!"
+    },
+    requestSimilar: {
+      es: "Pedir uno similar →",
+      en: "Request similar →"
+    },
+    estPerDay: {
+      es: "Est.",
+      en: "Est."
+    },
+    customCasesCount: {
+      es: "Casos de Éxito",
+      en: "Success Cases"
+    },
+    seeSuccessCase: {
+      es: "Ver caso real →",
+      en: "See real case →"
+    },
+    backToCustomGames: {
+      es: "← Volver a Casos de Éxito",
+      en: "← Back to Success Cases"
+    },
+    clearRefCase: {
+      es: "✕ Cambiar a consulta general",
+      en: "✕ Switch to general inquiry"
+    },
+    currentRefBadge: {
+      es: "✨ Caso de referencia seleccionado",
+      en: "✨ Selected reference case"
+    },
+    briefGuidelinesTitle: {
+      es: "Guía rápida para contarnos qué necesitás",
+      en: "Quick guide to brief your custom game"
+    },
+    briefOptionalNote: {
+      es: "Ningún campo es obligatorio",
+      en: "All fields are optional"
+    },
+    sendBriefWhatsApp: {
+      es: "Enviar Brief por WhatsApp",
+      en: "Send Brief via WhatsApp"
+    },
+    sendBriefEmail: {
+      es: "Enviar Brief por Email",
+      en: "Send Brief via Email"
+    },
+    copyBrief: {
+      es: "Copiar Brief",
+      en: "Copy Brief"
+    },
+    copiedBrief: {
+      es: "¡Brief copiado al portapapeles!",
+      en: "Brief copied to clipboard!"
+    },
+    useAsStartingPoint: {
+      es: "✨ Usar como punto de partida",
+      en: "✨ Use as starting point"
+    },
+    quoteBaseMechanicShort: {
+      es: "+ Cotizar mecánica base",
+      en: "+ Quote base mechanic"
+    },
+    basedOnCaseTag: {
+      es: "Caso real:",
+      en: "Real case:"
+    },
+    backToCampaigns: {
+      es: "← Volver a Juegos de Largo Alcance",
+      en: "← Back to Long-Term Games"
+    },
+    useScenarioFormat: {
+      es: "✨ Usar este formato",
+      en: "✨ Use this format"
+    },
+    requestCampaignYours: {
+      es: "✨ ¡Creá tu proyecto!",
+      en: "✨ Start Your Project!"
+    },
+    campaignCasesBadge: {
+      es: "🚀 Proyecto a Medida",
+      en: "🚀 Custom Project"
     }
   };
 

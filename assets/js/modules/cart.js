@@ -1,5 +1,5 @@
 /**
- * Corpfolio Studio — Quoting & Shopping Cart Engine
+ * Tailored Games — Quoting & Shopping Cart Engine
  * Manages cart state, duration multiplier, per-game add-ons, and compound promotions.
  */
 
@@ -296,7 +296,7 @@
         return obj[lang] || obj["es"] || obj["en"] || "";
       };
 
-      const studioName = catalog?.studioInfo?.name || "CORPFOLIO STUDIO";
+      const studioName = catalog?.studioInfo?.name || "TAILORED GAMES";
 
       const lines = [];
       lines.push("══════════════════════════════════════");
@@ -375,10 +375,10 @@
 
     generateMailtoUrl(clientInfo = {}) {
       const catalog = this.getCatalog();
-      const email = catalog?.studioInfo?.email || "contacto@corpfolio.com";
+      const email = catalog?.studioInfo?.email || "contacto@tailoredgames.com";
       const i18n = (typeof window !== "undefined") ? (window.CorpfolioI18n) : null;
       const lang = i18n ? i18n.getLang() : "es";
-      const studioName = catalog?.studioInfo?.name || "Corpfolio Studio";
+      const studioName = catalog?.studioInfo?.name || "Tailored Games";
       const subject = lang === "es" 
         ? `Solicitud de Presupuesto — ${clientInfo.companyName || studioName}` 
         : `Quote Request — ${clientInfo.companyName || studioName}`;

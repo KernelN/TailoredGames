@@ -47,7 +47,7 @@
 
   <!-- Titles -->
   <text x="400" y="360" fill="#F8FAFC" font-family="system-ui, sans-serif" font-size="28" font-weight="800" text-anchor="middle" letter-spacing="-0.5">MEMOTEST</text>
-  <text x="400" y="390" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="14" font-weight="500" text-anchor="middle" letter-spacing="0.5">Juego de Memoria Táctil & Branded Cards</text>
+  <text x="400" y="390" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="14" font-weight="500" text-anchor="middle" letter-spacing="0.5">Juego de Memoria Táctil &amp; Branded Cards</text>
 
   <!-- Status Pill -->
   <rect x="330" y="415" width="140" height="24" rx="12" fill="#6366F1" fill-opacity="0.15" stroke="#6366F1" stroke-opacity="0.4"/>

@@ -2,7 +2,7 @@ global.CORPFOLIO_CATALOG = require('./assets/js/data/catalog.js');
 const CartManager = require('./assets/js/modules/cart.js');
 
 const cart = new CartManager();
-console.log('Testing Corpfolio Dynamic Quoting Engine...');
+console.log('Testing Tailored Games Dynamic Quoting Engine...');
 
 const cat = global.CORPFOLIO_CATALOG;
 const pConfig = cat.pricingConfig;
@@ -77,9 +77,32 @@ console.assert(resolvedTemplate && resolvedTemplate.id === 'abb-drones', 'Test 7
 console.assert(resolvedTemplate.templateSpecs && resolvedTemplate.templateSpecs.players && resolvedTemplate.templateSpecs.mechanic, 'Test 7B Failed: Template should include templateSpecs');
 console.log('Test 7 Passed: Custom Game Template & Brand Implementation lookup works.');
 
-// Test 8: Showcase Image Guardrail
-const imagelessItem = cat.categories.aMedida.items.find(g => g.id === 'abb-ensamblado-circular');
-console.assert(imagelessItem && imagelessItem.showcase === false, 'Test 8 Failed: Imageless entry should have showcase: false');
-console.log('Test 8 Passed: Showcase image guardrail verified.');
+// Test 8: Showcase Image Guardrail (concept-only seed idea remains off Home showcase)
+const conceptOnlyItem = cat.categories.aMedida.items.find(g => g.id === 'snake');
+console.assert(conceptOnlyItem && conceptOnlyItem.showcase === false, 'Test 8 Failed: Concept-only entry should have showcase: false');
+console.log('Test 8 Passed: Showcase guardrail verified for concept-only item.');
 
-console.log('\n>>> ALL 8 MATHEMATICAL QUOTING & B2B TEMPLATE ASSERTIONS PASSED PERFECTLY! <<<');
+// Test 9: Custom Games Success Cases & Interactive Brief Config
+const successCaseItems = cat.categories.aMedida.items.filter(g => Array.isArray(g.implementations) && g.implementations.length > 0);
+console.assert(successCaseItems.length === 4, `Test 9A Failed: Expected 4 Success Case entries, found ${successCaseItems.length}`);
+console.assert(successCaseItems.every(g => g.showcase === true), 'Test 9B Failed: All 4 Success Cases should have showcase: true');
+
+const briefCfg = cat.customBriefConfig;
+console.assert(briefCfg && typeof briefCfg === 'object', 'Test 9C Failed: customBriefConfig missing');
+console.assert(briefCfg.inspiredHeroPrefix?.es?.includes('[case]') && briefCfg.inspiredHeroPrefix?.en?.includes('[case]'), 'Test 9D Failed: inspiredHeroPrefix must contain [case] placeholder');
+console.assert(Array.isArray(briefCfg.guidelines) && briefCfg.guidelines.length > 0, 'Test 9E Failed: customBriefConfig.guidelines must be non-empty');
+console.assert(Array.isArray(briefCfg.pillGroups) && briefCfg.pillGroups.length >= 2, 'Test 9F Failed: customBriefConfig.pillGroups must contain at least 2 pill groups');
+console.log('Test 9 Passed: 4 Success Cases and customBriefConfig validated.');
+
+// Test 10: Tailored Games Rebrand & Long-Term Games Config
+console.assert(cat.studioInfo.name === 'Tailored Games', `Test 10A Failed: Expected studioInfo.name "Tailored Games", got "${cat.studioInfo.name}"`);
+console.assert(cat.categories.campanas.title?.es === 'Juegos de Largo Alcance' && cat.categories.campanas.title?.en === 'Long-Term & Campaign Games', 'Test 10B Failed: campanas title mismatch');
+const campBriefCfg = cat.campaignBriefConfig;
+console.assert(campBriefCfg && typeof campBriefCfg === 'object', 'Test 10C Failed: campaignBriefConfig missing');
+console.assert(campBriefCfg.inspiredHeroPrefix?.es?.includes('[case]') && campBriefCfg.inspiredHeroPrefix?.en?.includes('[case]'), 'Test 10D Failed: campaign inspiredHeroPrefix must contain [case]');
+console.assert(Array.isArray(campBriefCfg.guidelines) && campBriefCfg.guidelines.length > 0, 'Test 10E Failed: campaignBriefConfig.guidelines must be non-empty');
+console.assert(Array.isArray(campBriefCfg.pillGroups) && campBriefCfg.pillGroups.length >= 4, 'Test 10F Failed: campaignBriefConfig.pillGroups must contain at least 4 pill groups');
+console.assert(Array.isArray(campBriefCfg.scenarios) && campBriefCfg.scenarios.length >= 4, 'Test 10G Failed: campaignBriefConfig.scenarios must contain at least 4 scenarios');
+console.log('Test 10 Passed: Tailored Games rebrand and campaignBriefConfig validated.');
+
+console.log('\n>>> ALL 10 MATHEMATICAL QUOTING, REBRAND & BRIEF ASSERTIONS PASSED PERFECTLY! <<<');

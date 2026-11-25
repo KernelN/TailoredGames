@@ -1,8 +1,8 @@
 @echo off
-title Corpfolio Studio - Publicar Cambios a GitHub Pages
+title Tailored Games - Publicar Cambios a GitHub Pages
 color 0B
 echo ===================================================
-echo     Corpfolio Studio - Publicador GitHub Pages
+echo     Tailored Games - Publicador GitHub Pages
 echo ===================================================
 echo.
 

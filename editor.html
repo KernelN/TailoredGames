@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Editor Local de Catálogo — Corpfolio Studio</title>
-  <meta name="description" content="Editor visual tipo planilla sin credenciales ni tokens para actualizar juegos, plantillas a medida, precios, promociones e imágenes de Corpfolio Studio." />
+  <title>Editor Local de Catálogo — Tailored Games</title>
+  <meta name="description" content="Editor visual tipo planilla sin credenciales ni tokens para actualizar juegos, plantillas a medida, precios, promociones e imágenes de Tailored Games." />
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="assets/images/logo/logo.svg" />
@@ -482,7 +482,7 @@
     <header class="editor-topbar">
       <div style="display: flex; align-items: center; gap: 16px;">
         <a href="index.html" target="_blank" title="Ver Showcase">
-          <img src="assets/images/logo/logo.svg" alt="Corpfolio Studio" style="height: 32px;" />
+          <img src="assets/images/logo/logo.svg" alt="Tailored Games" style="height: 32px;" />
         </a>
         <span style="font-weight: 800; font-size: 16px; color: var(--text-accent);">Editor de Catálogo (Vista Planilla)</span>
         <span id="folder-status" class="folder-status-badge">🟡 Modo Navegador</span>
@@ -515,10 +515,12 @@
     <!-- Navigation Tabs (Always Visible) -->
     <nav class="editor-tabs">
       <button type="button" class="tab-btn active" data-tab="tab-games">🎮 Catálogo de Juegos</button>
-      <button type="button" class="tab-btn" data-tab="tab-addons">⚡ Agregados (Add-Ons)</button>
+      <button type="button" class="tab-btn" data-tab="tab-addons">⚡ Add-ons</button>
       <button type="button" class="tab-btn" data-tab="tab-tools">🛠️ Herramientas & Campañas</button>
       <button type="button" class="tab-btn" data-tab="tab-promos">💰 Precios y Promociones</button>
       <button type="button" class="tab-btn" data-tab="tab-studio">🏢 Estudio y Contacto</button>
+      <button type="button" class="tab-btn" data-tab="tab-brief">📝 Brief "Pedí el tuyo"</button>
+      <button type="button" class="tab-btn" data-tab="tab-campaign-brief">🌐 Brief "Largo Alcance"</button>
       <button type="button" class="tab-btn" data-tab="tab-simulator">🧮 Simulador de Cotización</button>
     </nav>
   </div>
@@ -572,11 +574,11 @@
       <div class="editor-card">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 14px; flex-wrap: wrap; gap: 12px;">
           <div>
-            <h3 class="section-title" style="margin-bottom: 4px;">⚡ Agregados para Juegos (Add-Ons)</h3>
+            <h3 class="section-title" style="margin-bottom: 4px;">⚡ Add-ons</h3>
             <p class="section-desc" style="margin-bottom: 0;">Módulos adicionales que se asignan por juego. Puedes agregar, reordenar, eliminar y editar sus descripciones y highlights.</p>
           </div>
           <button type="button" class="btn btn-primary btn-sm" onclick="addNewCategoryItem('agregados')">
-            + Agregar Nuevo Agregado
+            + Agregar Nuevo Add-on
           </button>
         </div>
 
@@ -602,11 +604,11 @@
       <div class="editor-card">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 14px; flex-wrap: wrap; gap: 12px;">
           <div>
-            <h3 class="section-title" style="margin-bottom: 4px;">🌟 Juegos como Campaña</h3>
-            <p class="section-desc" style="margin-bottom: 0;">Soluciones interactivas educativas, sustentables y publicitarias de mediano/largo plazo.</p>
+            <h3 class="section-title" style="margin-bottom: 4px;">🌟 Juegos de Largo Alcance (Casos)</h3>
+            <p class="section-desc" style="margin-bottom: 0;">Soluciones de duración extendida: capacitación en servidores internos, campañas promocionales web, educación y gamificación continua.</p>
           </div>
           <button type="button" class="btn btn-success btn-sm" onclick="addNewCategoryItem('campanas')">
-            + Agregar Campaña
+            + Agregar Proyecto
           </button>
         </div>
         <div class="sheet-list" id="campaigns-editor-container"></div>
@@ -619,7 +621,7 @@
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
           <div>
             <h3 class="section-title">💰 Parámetros Globales de Precios</h3>
-            <p class="section-desc">Define las variables de cotización automatizada. Los precios de juegos, agregados y herramientas se calculan a partir de las horas estimadas.</p>
+            <p class="section-desc">Define las variables de cotización automatizada. Los precios de juegos, add-ons y herramientas se calculan a partir de las horas estimadas.</p>
           </div>
           <span class="badge" style="background: rgba(16,185,129,0.15); color: #34D399; border: 1px solid rgba(16,185,129,0.3); font-size: 13px; padding: 6px 12px;">
             ✓ Fórmula Dinámica Activa
@@ -798,6 +800,424 @@
             <textarea id="studio-hero-sub-en" class="form-input" rows="3"></textarea>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- Tab 5B: Brief "Pedí el tuyo" Configuration -->
+    <section class="editor-panel" id="tab-brief">
+      <div class="editor-card">
+        <h3 class="section-title">📝 Textos del Banner y Encabezados ("¡Pedí el tuyo!")</h3>
+        <p class="section-desc">Configura la tarjeta destacada dentro de Juegos A Medida, los títulos del formulario de brief y los textos dinámicos cuando un cliente viene desde un Caso de Éxito (usa <code>[case]</code> para insertar el nombre del caso).</p>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+          <div class="form-group">
+            <label class="form-label">Título del Banner (ES)</label>
+            <input type="text" id="brief-banner-title-es" class="form-input" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Banner Title (EN)</label>
+            <input type="text" id="brief-banner-title-en" class="form-input" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Subtítulo del Banner (ES)</label>
+            <textarea id="brief-banner-sub-es" class="form-input" rows="2"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Banner Subtitle (EN)</label>
+            <textarea id="brief-banner-sub-en" class="form-input" rows="2"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Botón CTA del Banner (ES)</label>
+            <input type="text" id="brief-banner-cta-es" class="form-input" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Banner CTA Button (EN)</label>
+            <input type="text" id="brief-banner-cta-en" class="form-input" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Título de Página General (ES)</label>
+            <input type="text" id="brief-page-title-es" class="form-input" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">General Page Title (EN)</label>
+            <input type="text" id="brief-page-title-en" class="form-input" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Subtítulo de Página General (ES)</label>
+            <textarea id="brief-page-sub-es" class="form-input" rows="2"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">General Page Subtitle (EN)</label>
+            <textarea id="brief-page-sub-en" class="form-input" rows="2"></textarea>
+          </div>
+        </div>
+
+        <div style="background: rgba(6,182,212,0.08); border: 1px solid rgba(6,182,212,0.28); border-radius: var(--radius-md); padding: 16px; margin-bottom: 20px;">
+          <h4 style="font-size: 15px; font-weight: 800; color: #38BDF8; margin-bottom: 12px;">✨ Modo "Inspirado en Caso de Éxito" (Usa <code>[case]</code>)</h4>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label class="form-label">Título Inspirado (ES)</label>
+              <input type="text" id="brief-inspired-prefix-es" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Inspired Title (EN)</label>
+              <input type="text" id="brief-inspired-prefix-en" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Subtítulo Inspirado (ES)</label>
+              <textarea id="brief-inspired-sub-es" class="form-input" rows="2"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Inspired Subtitle (EN)</label>
+              <textarea id="brief-inspired-sub-en" class="form-input" rows="2"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Etiqueta Campo Idea Inspirada (ES)</label>
+              <input type="text" id="brief-inspired-idea-label-es" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Inspired Idea Field Label (EN)</label>
+              <input type="text" id="brief-inspired-idea-label-en" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Placeholder Idea Inspirada (ES)</label>
+              <input type="text" id="brief-inspired-idea-ph-es" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Inspired Idea Placeholder (EN)</label>
+              <input type="text" id="brief-inspired-idea-ph-en" class="form-input" />
+            </div>
+          </div>
+        </div>
+
+        <h4 style="font-size: 15px; font-weight: 800; color: var(--text-primary); margin-bottom: 12px;">📋 Campos del Formulario y Grilla de Mecánicas Base</h4>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+          <div class="form-group">
+            <label class="form-label">Etiqueta Idea General (ES)</label>
+            <input type="text" id="brief-default-idea-label-es" class="form-input" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">General Idea Label (EN)</label>
+            <input type="text" id="brief-default-idea-label-en" class="form-input" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Placeholder Idea General (ES)</label>
+            <input type="text" id="brief-default-idea-ph-es" class="form-input" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">General Idea Placeholder (EN)</label>
+            <input type="text" id="brief-default-idea-ph-en" class="form-input" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Etiqueta Empresa / Rubro (ES / EN)</label>
+            <div class="dual-input-row">
+              <input type="text" id="brief-company-label-es" class="form-input" />
+              <input type="text" id="brief-company-label-en" class="form-input" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Placeholder Empresa / Rubro (ES / EN)</label>
+            <div class="dual-input-row">
+              <input type="text" id="brief-company-ph-es" class="form-input" />
+              <input type="text" id="brief-company-ph-en" class="form-input" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Etiqueta Temática (ES / EN)</label>
+            <div class="dual-input-row">
+              <input type="text" id="brief-theme-label-es" class="form-input" />
+              <input type="text" id="brief-theme-label-en" class="form-input" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Placeholder Temática (ES / EN)</label>
+            <div class="dual-input-row">
+              <input type="text" id="brief-theme-ph-es" class="form-input" />
+              <input type="text" id="brief-theme-ph-en" class="form-input" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Etiqueta Fecha / Duración (ES / EN)</label>
+            <div class="dual-input-row">
+              <input type="text" id="brief-date-label-es" class="form-input" />
+              <input type="text" id="brief-date-label-en" class="form-input" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Placeholder Fecha / Duración (ES / EN)</label>
+            <div class="dual-input-row">
+              <input type="text" id="brief-date-ph-es" class="form-input" />
+              <input type="text" id="brief-date-ph-en" class="form-input" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Título Grilla Mecánicas Base (ES / EN)</label>
+            <div class="dual-input-row">
+              <input type="text" id="brief-mech-title-es" class="form-input" />
+              <input type="text" id="brief-mech-title-en" class="form-input" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Subtítulo Mecánicas — Showcase (ES / EN)</label>
+            <div class="dual-input-row">
+              <input type="text" id="brief-mech-sub-show-es" class="form-input" />
+              <input type="text" id="brief-mech-sub-show-en" class="form-input" />
+            </div>
+          </div>
+          <div class="form-group" style="grid-column: span 2;">
+            <label class="form-label">Subtítulo Mecánicas — Cotizador (ES / EN)</label>
+            <div class="dual-input-row">
+              <input type="text" id="brief-mech-sub-cot-es" class="form-input" />
+              <input type="text" id="brief-mech-sub-cot-en" class="form-input" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="editor-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <h3 class="section-title" style="margin-bottom: 4px;">💡 Puntos de Guía para el Cliente</h3>
+            <p class="section-desc" style="margin-bottom: 0;">Lista de sugerencias mostradas arriba del formulario para ayudar al cliente a armar su pedido.</p>
+          </div>
+          <button type="button" class="btn btn-primary btn-sm" onclick="addBriefGuideline()">
+            + Agregar Guía
+          </button>
+        </div>
+        <div id="brief-guidelines-editor" style="display: flex; flex-direction: column; gap: 10px;"></div>
+      </div>
+
+      <div class="editor-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <h3 class="section-title" style="margin-bottom: 4px;">🏷️ Grupos de Pills (Público, Objetivos, etc.)</h3>
+            <p class="section-desc" style="margin-bottom: 0;">Agrega, reordena o edita los selectores rápidos tipo pill del formulario de brief.</p>
+          </div>
+          <button type="button" class="btn btn-primary btn-sm" onclick="addBriefPillGroup()">
+            + Agregar Grupo de Pills
+          </button>
+        </div>
+        <div id="brief-pillgroups-editor" style="display: flex; flex-direction: column; gap: 18px;"></div>
+      </div>
+    </section>
+
+    <!-- Tab 5C: Brief "Juegos de Largo Alcance" Configuration -->
+    <section class="editor-panel" id="tab-campaign-brief">
+      <div class="editor-card">
+        <h3 class="section-title">🌐 Textos del Banner y Encabezados ("Juegos de Largo Alcance")</h3>
+        <p class="section-desc">Configura el banner de la sección, el formulario de brief para proyectos extendidos (intranet, capacitación, web promo) y los textos dinámicos cuando un cliente parte de un caso real (usa <code>[case]</code>).</p>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+          <div class="form-group">
+            <label class="form-label">Título del Banner (ES)</label>
+            <input type="text" id="camp-brief-banner-title-es" class="form-input" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Banner Title (EN)</label>
+            <input type="text" id="camp-brief-banner-title-en" class="form-input" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Subtítulo del Banner (ES)</label>
+            <textarea id="camp-brief-banner-sub-es" class="form-input" rows="2"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Banner Subtitle (EN)</label>
+            <textarea id="camp-brief-banner-sub-en" class="form-input" rows="2"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Botón CTA del Banner (ES)</label>
+            <input type="text" id="camp-brief-banner-cta-es" class="form-input" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Banner CTA Button (EN)</label>
+            <input type="text" id="camp-brief-banner-cta-en" class="form-input" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Título de Página General (ES)</label>
+            <input type="text" id="camp-brief-page-title-es" class="form-input" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">General Page Title (EN)</label>
+            <input type="text" id="camp-brief-page-title-en" class="form-input" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Subtítulo de Página General (ES)</label>
+            <textarea id="camp-brief-page-sub-es" class="form-input" rows="2"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">General Page Subtitle (EN)</label>
+            <textarea id="camp-brief-page-sub-en" class="form-input" rows="2"></textarea>
+          </div>
+        </div>
+
+        <div style="background: rgba(6,182,212,0.08); border: 1px solid rgba(6,182,212,0.28); border-radius: var(--radius-md); padding: 16px; margin-bottom: 20px;">
+          <h4 style="font-size: 15px; font-weight: 800; color: #38BDF8; margin-bottom: 12px;">✨ Modo "Inspirado en Proyecto Real" (Usa <code>[case]</code>)</h4>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+            <div class="form-group">
+              <label class="form-label">Título Inspirado (ES)</label>
+              <input type="text" id="camp-brief-inspired-prefix-es" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Inspired Title (EN)</label>
+              <input type="text" id="camp-brief-inspired-prefix-en" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Subtítulo Inspirado (ES)</label>
+              <textarea id="camp-brief-inspired-sub-es" class="form-input" rows="2"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Inspired Subtitle (EN)</label>
+              <textarea id="camp-brief-inspired-sub-en" class="form-input" rows="2"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Etiqueta Campo Idea Inspirada (ES)</label>
+              <input type="text" id="camp-brief-inspired-idea-label-es" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Inspired Idea Field Label (EN)</label>
+              <input type="text" id="camp-brief-inspired-idea-label-en" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Placeholder Idea Inspirada (ES)</label>
+              <input type="text" id="camp-brief-inspired-idea-ph-es" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Inspired Idea Placeholder (EN)</label>
+              <input type="text" id="camp-brief-inspired-idea-ph-en" class="form-input" />
+            </div>
+          </div>
+        </div>
+
+        <h4 style="font-size: 15px; font-weight: 800; color: var(--text-primary); margin-bottom: 12px;">📋 Campos del Formulario y Grilla de Escenarios</h4>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+          <div class="form-group">
+            <label class="form-label">Etiqueta Idea General (ES)</label>
+            <input type="text" id="camp-brief-default-idea-label-es" class="form-input" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">General Idea Label (EN)</label>
+            <input type="text" id="camp-brief-default-idea-label-en" class="form-input" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Placeholder Idea General (ES)</label>
+            <input type="text" id="camp-brief-default-idea-ph-es" class="form-input" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">General Idea Placeholder (EN)</label>
+            <input type="text" id="camp-brief-default-idea-ph-en" class="form-input" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Etiqueta Empresa / Institución (ES / EN)</label>
+            <div class="dual-input-row">
+              <input type="text" id="camp-brief-company-label-es" class="form-input" />
+              <input type="text" id="camp-brief-company-label-en" class="form-input" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Placeholder Empresa / Institución (ES / EN)</label>
+            <div class="dual-input-row">
+              <input type="text" id="camp-brief-company-ph-es" class="form-input" />
+              <input type="text" id="camp-brief-company-ph-en" class="form-input" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Etiqueta Temática / Contenido (ES / EN)</label>
+            <div class="dual-input-row">
+              <input type="text" id="camp-brief-theme-label-es" class="form-input" />
+              <input type="text" id="camp-brief-theme-label-en" class="form-input" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Placeholder Temática / Contenido (ES / EN)</label>
+            <div class="dual-input-row">
+              <input type="text" id="camp-brief-theme-ph-es" class="form-input" />
+              <input type="text" id="camp-brief-theme-ph-en" class="form-input" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Etiqueta Plazo de Lanzamiento (ES / EN)</label>
+            <div class="dual-input-row">
+              <input type="text" id="camp-brief-date-label-es" class="form-input" />
+              <input type="text" id="camp-brief-date-label-en" class="form-input" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Placeholder Plazo (ES / EN)</label>
+            <div class="dual-input-row">
+              <input type="text" id="camp-brief-date-ph-es" class="form-input" />
+              <input type="text" id="camp-brief-date-ph-en" class="form-input" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Título Grilla de Escenarios (ES / EN)</label>
+            <div class="dual-input-row">
+              <input type="text" id="camp-brief-scen-title-es" class="form-input" />
+              <input type="text" id="camp-brief-scen-title-en" class="form-input" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Subtítulo Grilla de Escenarios (ES / EN)</label>
+            <div class="dual-input-row">
+              <input type="text" id="camp-brief-scen-sub-es" class="form-input" />
+              <input type="text" id="camp-brief-scen-sub-en" class="form-input" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="editor-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <h3 class="section-title" style="margin-bottom: 4px;">💡 Puntos de Guía para el Cliente</h3>
+            <p class="section-desc" style="margin-bottom: 0;">Lista de sugerencias mostradas arriba del brief de Largo Alcance.</p>
+          </div>
+          <button type="button" class="btn btn-primary btn-sm" onclick="addCampGuideline()">
+            + Agregar Guía
+          </button>
+        </div>
+        <div id="camp-brief-guidelines-editor" style="display: flex; flex-direction: column; gap: 10px;"></div>
+      </div>
+
+      <div class="editor-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <h3 class="section-title" style="margin-bottom: 4px;">🏷️ Grupos de Pills (Escenario, Alojamiento, Duración, Público)</h3>
+            <p class="section-desc" style="margin-bottom: 0;">Agrega, reordena o edita los selectores rápidos tipo pill del formulario de Largo Alcance.</p>
+          </div>
+          <button type="button" class="btn btn-primary btn-sm" onclick="addCampPillGroup()">
+            + Agregar Grupo de Pills
+          </button>
+        </div>
+        <div id="camp-brief-pillgroups-editor" style="display: flex; flex-direction: column; gap: 18px;"></div>
+      </div>
+
+      <div class="editor-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <h3 class="section-title" style="margin-bottom: 4px;">🧩 Escenarios y Formatos Posibles</h3>
+            <p class="section-desc" style="margin-bottom: 0;">Tarjetas mostradas debajo del brief (Capacitación en servidores internos, Advergames web, Serious Games, Gamificación).</p>
+          </div>
+          <button type="button" class="btn btn-primary btn-sm" onclick="addCampScenario()">
+            + Agregar Escenario
+          </button>
+        </div>
+        <div id="camp-brief-scenarios-editor" style="display: flex; flex-direction: column; gap: 14px;"></div>
       </div>
     </section>
 
@@ -1251,17 +1671,35 @@
                 <input type="text" class="form-input" value="${escAttr(im.client?.en || '')}" placeholder="Success Case — Reforestation (EN)" onchange="updateImplField('${item.id}', ${imIdx}, 'client.en', this.value)" />
               </div>
             </div>
+
+            <!-- Case Summary & Event Note -->
+            <div style="grid-column: 2 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; min-width: 0; padding-top: 4px; border-top: 1px dashed rgba(255,255,255,0.08);">
+              <div>
+                <label class="form-label" style="font-size: 10px;">📝 Historia / Resumen del Caso (ES / EN)</label>
+                <div class="dual-input-row">
+                  <textarea class="form-input" rows="2" placeholder="Resumen del caso (ES)" onchange="updateImplField('${item.id}', ${imIdx}, 'summary.es', this.value)">${escHtml(im.summary?.es || '')}</textarea>
+                  <textarea class="form-input" rows="2" placeholder="Case summary (EN)" onchange="updateImplField('${item.id}', ${imIdx}, 'summary.en', this.value)">${escHtml(im.summary?.en || '')}</textarea>
+                </div>
+              </div>
+              <div>
+                <label class="form-label" style="font-size: 10px;">💡 Nota de Aplicación en Eventos (ES / EN)</label>
+                <div class="dual-input-row">
+                  <textarea class="form-input" rows="2" placeholder="Ideal para stands de... (ES)" onchange="updateImplField('${item.id}', ${imIdx}, 'eventNote.es', this.value)">${escHtml(im.eventNote?.es || '')}</textarea>
+                  <textarea class="form-input" rows="2" placeholder="Great for booths... (EN)" onchange="updateImplField('${item.id}', ${imIdx}, 'eventNote.en', this.value)">${escHtml(im.eventNote?.en || '')}</textarea>
+                </div>
+              </div>
+            </div>
           </div>
         `).join("");
 
         customTemplateExtHtml = `
           <div class="sheet-cell-template-ext">
-            <!-- B2B Spec Bar (Players & Core Mechanic) -->
+            <!-- B2B Spec Bar (Players, Core Mechanic & B2B Goal) -->
             <div>
               <div class="sheet-cell-header" style="color: #38BDF8; margin-bottom: 6px;">
-                <span>⚙️ Especificaciones de la Plantilla (Participantes y Mecánica Base)</span>
+                <span>⚙️ Especificaciones de la Plantilla (Participantes, Mecánica Base y Objetivo B2B)</span>
               </div>
-              <div class="b2b-editor-matrix">
+              <div class="b2b-editor-matrix" style="grid-template-columns: repeat(3, 1fr);">
                 <div>
                   <label class="form-label" style="font-size: 10px;">👥 Participantes (ES / EN)</label>
                   <div class="dual-input-row">
@@ -1274,6 +1712,13 @@
                   <div class="dual-input-row">
                     <input type="text" class="form-input" value="${escAttr(specs.mechanic?.es || '')}" placeholder="Reflejos táctiles por carriles..." onchange="updateItemField('aMedida', '${item.id}', 'templateSpecs.mechanic.es', this.value)" />
                     <input type="text" class="form-input" value="${escAttr(specs.mechanic?.en || '')}" placeholder="Synchronized lane touch reflexes..." onchange="updateItemField('aMedida', '${item.id}', 'templateSpecs.mechanic.en', this.value)" />
+                  </div>
+                </div>
+                <div>
+                  <label class="form-label" style="font-size: 10px;">🎯 Objetivo B2B (ES / EN)</label>
+                  <div class="dual-input-row">
+                    <input type="text" class="form-input" value="${escAttr(specs.b2bGoal?.es || '')}" placeholder="Coordinación y atracción..." onchange="updateItemField('aMedida', '${item.id}', 'templateSpecs.b2bGoal.es', this.value)" />
+                    <input type="text" class="form-input" value="${escAttr(specs.b2bGoal?.en || '')}" placeholder="Teamwork & crowd attraction..." onchange="updateItemField('aMedida', '${item.id}', 'templateSpecs.b2bGoal.en', this.value)" />
                   </div>
                 </div>
               </div>
@@ -1422,7 +1867,7 @@
     function renderAllCategorySheets() {
       renderCategorySheet("clasicos", "clasicos-editor-container", "No hay juegos clásicos cargados.");
       renderCategorySheet("aMedida", "amedida-editor-container", "No hay plantillas de juegos a medida cargadas.");
-      renderCategorySheet("agregados", "addons-editor-container", "No hay agregados cargados.");
+      renderCategorySheet("agregados", "addons-editor-container", "No hay add-ons cargados.");
       renderCategorySheet("herramientas", "tools-editor-container", "No hay herramientas cargadas.");
       renderCategorySheet("campanas", "campaigns-editor-container", "No hay campañas cargadas.");
     }
@@ -1483,7 +1928,7 @@
     // Add New Add-On, Tool, or Campaign
     window.addNewCategoryItem = function(catKey) {
       const labels = {
-        agregados: "Título del nuevo Agregado (Add-On):",
+        agregados: "Título del nuevo Add-on:",
         herramientas: "Título de la nueva Herramienta:",
         campanas: "Título de la nueva Campaña:"
       };
@@ -1694,9 +2139,575 @@
       document.getElementById("pricing-usd-to-ars").value = pr.usdToArsRate ?? 1520;
       document.getElementById("pricing-time-multiplier").value = pr.timeMultiplier ?? 1.5;
 
+      ensureBriefConfigDefaults();
+      populateBriefFormFields();
+      ensureCampaignBriefConfigDefaults();
+      populateCampaignBriefFormFields();
       renderAllCategorySheets();
       renderSimulator();
     }
+
+    function ensureBriefConfigDefaults() {
+      if (!catalogState.customBriefConfig || typeof catalogState.customBriefConfig !== "object") {
+        catalogState.customBriefConfig = {};
+      }
+      const b = catalogState.customBriefConfig;
+      if (!b.bannerTitle) b.bannerTitle = { es: "¡Pedí el tuyo!", en: "Request Your Custom Game!" };
+      if (!b.bannerSubtitle) b.bannerSubtitle = { es: "Diseñamos videojuegos y dinámicas táctiles desde cero para tu marca, temática y público.", en: "We design interactive touch games from scratch tailored to your brand, theme, and audience." };
+      if (!b.bannerCta) b.bannerCta = { es: "Armar mi brief / Ver ideas →", en: "Start my brief / See ideas →" };
+      if (!b.pageTitle) b.pageTitle = { es: "Pedí tu Juego a Medida", en: "Request Your Custom Game" };
+      if (!b.pageSubtitle) b.pageSubtitle = { es: "Completá los puntos que ya tengas definidos (ningún campo es obligatorio) para enviarnos tu consulta en 1 clic.", en: "Fill in whatever details you already have (all fields are optional) to send your inquiry in 1 click." };
+      if (!b.inspiredHeroPrefix) b.inspiredHeroPrefix = { es: "Quiero una experiencia inspirada en [case]...", en: "I'd like an experience inspired by [case]..." };
+      if (!b.inspiredHeroSubtitle) b.inspiredHeroSubtitle = { es: "Tomamos la dinámica probada de [case] y la adaptamos 100% a tu marca.", en: "We take the proven core loop of [case] and tailor it 100% to your brand." };
+      if (!b.defaultIdeaLabel) b.defaultIdeaLabel = { es: "¿Tenés una idea en mente? (Opcional)", en: "Do you have a specific idea in mind? (Optional)" };
+      if (!b.defaultIdeaPlaceholder) b.defaultIdeaPlaceholder = { es: "Contanos brevemente qué imaginás...", en: "Briefly describe what you envision..." };
+      if (!b.inspiredIdeaLabel) b.inspiredIdeaLabel = { es: "¿Qué te gustaría adaptar, sumar o cambiar respecto a [case]?", en: "What would you like to adapt, add, or change from [case]?" };
+      if (!b.inspiredIdeaPlaceholder) b.inspiredIdeaPlaceholder = { es: "Ej: Me encantó la dinámica, pero ambientada en nuestra industria...", en: "e.g. Loved the mechanic, but themed around our industry..." };
+      if (!b.fields) {
+        b.fields = {
+          companyLabel: { es: "Empresa / Rubro", en: "Company / Industry" },
+          companyPlaceholder: { es: "Ej: Fintech, Automotriz...", en: "e.g. Fintech, Automotive..." },
+          themeLabel: { es: "Temática del Evento", en: "Event Theme" },
+          themePlaceholder: { es: "Ej: Sustentabilidad, Lanzamiento...", en: "e.g. Sustainability, Launch..." },
+          dateLabel: { es: "Fecha tentativa y duración", en: "Tentative Date & Duration" },
+          datePlaceholder: { es: "Ej: Noviembre 2026, 2 días", en: "e.g. November 2026, 2 days" }
+        };
+      }
+      if (!Array.isArray(b.guidelines)) b.guidelines = [];
+      if (!Array.isArray(b.pillGroups)) b.pillGroups = [];
+      if (!b.mechanicsSectionTitle) b.mechanicsSectionTitle = { es: "Mecánicas Base e Ideas de Referencia", en: "Base Mechanics & Reference Ideas" };
+      if (!b.mechanicsSectionSubtitleShowcase) b.mechanicsSectionSubtitleShowcase = { es: "¿Buscás inspiración? Explorá estas mecánicas probadas.", en: "Looking for inspiration? Explore these proven mechanics." };
+      if (!b.mechanicsSectionSubtitleCotizador) b.mechanicsSectionSubtitleCotizador = { es: "Explorá estas mecánicas para inspirarte, ver valores estimados por día y sumarlas a tu cotización.", en: "Explore these mechanics for inspiration, see estimated daily rates, and add them to your quote." };
+    }
+
+    function populateBriefFormFields() {
+      const b = catalogState.customBriefConfig;
+      document.getElementById("brief-banner-title-es").value = b.bannerTitle?.es || "";
+      document.getElementById("brief-banner-title-en").value = b.bannerTitle?.en || "";
+      document.getElementById("brief-banner-sub-es").value = b.bannerSubtitle?.es || "";
+      document.getElementById("brief-banner-sub-en").value = b.bannerSubtitle?.en || "";
+      document.getElementById("brief-banner-cta-es").value = b.bannerCta?.es || "";
+      document.getElementById("brief-banner-cta-en").value = b.bannerCta?.en || "";
+      document.getElementById("brief-page-title-es").value = b.pageTitle?.es || "";
+      document.getElementById("brief-page-title-en").value = b.pageTitle?.en || "";
+      document.getElementById("brief-page-sub-es").value = b.pageSubtitle?.es || "";
+      document.getElementById("brief-page-sub-en").value = b.pageSubtitle?.en || "";
+      document.getElementById("brief-inspired-prefix-es").value = b.inspiredHeroPrefix?.es || "";
+      document.getElementById("brief-inspired-prefix-en").value = b.inspiredHeroPrefix?.en || "";
+      document.getElementById("brief-inspired-sub-es").value = b.inspiredHeroSubtitle?.es || "";
+      document.getElementById("brief-inspired-sub-en").value = b.inspiredHeroSubtitle?.en || "";
+      document.getElementById("brief-inspired-idea-label-es").value = b.inspiredIdeaLabel?.es || "";
+      document.getElementById("brief-inspired-idea-label-en").value = b.inspiredIdeaLabel?.en || "";
+      document.getElementById("brief-inspired-idea-ph-es").value = b.inspiredIdeaPlaceholder?.es || "";
+      document.getElementById("brief-inspired-idea-ph-en").value = b.inspiredIdeaPlaceholder?.en || "";
+      document.getElementById("brief-default-idea-label-es").value = b.defaultIdeaLabel?.es || "";
+      document.getElementById("brief-default-idea-label-en").value = b.defaultIdeaLabel?.en || "";
+      document.getElementById("brief-default-idea-ph-es").value = b.defaultIdeaPlaceholder?.es || "";
+      document.getElementById("brief-default-idea-ph-en").value = b.defaultIdeaPlaceholder?.en || "";
+
+      document.getElementById("brief-company-label-es").value = b.fields?.companyLabel?.es || "";
+      document.getElementById("brief-company-label-en").value = b.fields?.companyLabel?.en || "";
+      document.getElementById("brief-company-ph-es").value = b.fields?.companyPlaceholder?.es || "";
+      document.getElementById("brief-company-ph-en").value = b.fields?.companyPlaceholder?.en || "";
+      document.getElementById("brief-theme-label-es").value = b.fields?.themeLabel?.es || "";
+      document.getElementById("brief-theme-label-en").value = b.fields?.themeLabel?.en || "";
+      document.getElementById("brief-theme-ph-es").value = b.fields?.themePlaceholder?.es || "";
+      document.getElementById("brief-theme-ph-en").value = b.fields?.themePlaceholder?.en || "";
+      document.getElementById("brief-date-label-es").value = b.fields?.dateLabel?.es || "";
+      document.getElementById("brief-date-label-en").value = b.fields?.dateLabel?.en || "";
+      document.getElementById("brief-date-ph-es").value = b.fields?.datePlaceholder?.es || "";
+      document.getElementById("brief-date-ph-en").value = b.fields?.datePlaceholder?.en || "";
+
+      document.getElementById("brief-mech-title-es").value = b.mechanicsSectionTitle?.es || "";
+      document.getElementById("brief-mech-title-en").value = b.mechanicsSectionTitle?.en || "";
+      document.getElementById("brief-mech-sub-show-es").value = b.mechanicsSectionSubtitleShowcase?.es || "";
+      document.getElementById("brief-mech-sub-show-en").value = b.mechanicsSectionSubtitleShowcase?.en || "";
+      document.getElementById("brief-mech-sub-cot-es").value = b.mechanicsSectionSubtitleCotizador?.es || "";
+      document.getElementById("brief-mech-sub-cot-en").value = b.mechanicsSectionSubtitleCotizador?.en || "";
+
+      renderBriefEditor();
+    }
+
+    function renderBriefEditor() {
+      ensureBriefConfigDefaults();
+      const b = catalogState.customBriefConfig;
+
+      const gContainer = document.getElementById("brief-guidelines-editor");
+      if (gContainer) {
+        if (b.guidelines.length === 0) {
+          gContainer.innerHTML = `<div style="padding: 16px; text-align: center; color: var(--text-muted); border: 1px dashed var(--border-subtle); border-radius: var(--radius-md);">Sin puntos de guía configurados.</div>`;
+        } else {
+          gContainer.innerHTML = b.guidelines.map((g, idx) => `
+            <div style="display: grid; grid-template-columns: 92px 1fr 1fr 38px; gap: 10px; align-items: center; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 10px;">
+              <div style="display: flex; gap: 4px; align-items: center;">
+                <span class="order-index-badge">#${idx + 1}</span>
+                <button type="button" class="icon-action-btn" style="width: 26px; height: 26px; font-size: 11px;" ${idx === 0 ? "disabled" : ""} onclick="moveBriefGuideline(${idx}, -1)">⬆️</button>
+                <button type="button" class="icon-action-btn" style="width: 26px; height: 26px; font-size: 11px;" ${idx === b.guidelines.length - 1 ? "disabled" : ""} onclick="moveBriefGuideline(${idx}, 1)">⬇️</button>
+              </div>
+              <input type="text" class="form-input" value="${escAttr(g.es || "")}" placeholder="Guía (ES)" onchange="updateBriefGuideline(${idx}, 'es', this.value)" />
+              <input type="text" class="form-input" value="${escAttr(g.en || "")}" placeholder="Guideline (EN)" onchange="updateBriefGuideline(${idx}, 'en', this.value)" />
+              <button type="button" class="icon-action-btn danger" onclick="deleteBriefGuideline(${idx})" title="Eliminar guía">🗑️</button>
+            </div>
+          `).join("");
+        }
+      }
+
+      const pContainer = document.getElementById("brief-pillgroups-editor");
+      if (pContainer) {
+        if (b.pillGroups.length === 0) {
+          pContainer.innerHTML = `<div style="padding: 16px; text-align: center; color: var(--text-muted); border: 1px dashed var(--border-subtle); border-radius: var(--radius-md);">Sin grupos de pills configurados.</div>`;
+        } else {
+          pContainer.innerHTML = b.pillGroups.map((group, gIdx) => {
+            const opts = Array.isArray(group.options) ? group.options : [];
+            const optsHtml = opts.map((opt, oIdx) => `
+              <div style="display: grid; grid-template-columns: 84px 1fr 1fr 34px; gap: 8px; align-items: center; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 8px;">
+                <div style="display: flex; gap: 4px; align-items: center;">
+                  <span style="font-size: 11px; font-weight: 700; color: var(--text-muted); min-width: 20px;">#${oIdx + 1}</span>
+                  <button type="button" class="icon-action-btn" style="width: 24px; height: 24px; font-size: 10px;" ${oIdx === 0 ? "disabled" : ""} onclick="moveBriefPillOption(${gIdx}, ${oIdx}, -1)">⬆️</button>
+                  <button type="button" class="icon-action-btn" style="width: 24px; height: 24px; font-size: 10px;" ${oIdx === opts.length - 1 ? "disabled" : ""} onclick="moveBriefPillOption(${gIdx}, ${oIdx}, 1)">⬇️</button>
+                </div>
+                <input type="text" class="form-input" value="${escAttr(opt.es || "")}" placeholder="Opción (ES)" onchange="updateBriefPillOption(${gIdx}, ${oIdx}, 'es', this.value)" />
+                <input type="text" class="form-input" value="${escAttr(opt.en || "")}" placeholder="Option (EN)" onchange="updateBriefPillOption(${gIdx}, ${oIdx}, 'en', this.value)" />
+                <button type="button" class="icon-action-btn danger" style="width: 32px; height: 28px;" onclick="deleteBriefPillOption(${gIdx}, ${oIdx})" title="Eliminar pill">🗑️</button>
+              </div>
+            `).join("");
+
+            return `
+              <div style="background: var(--bg-surface); border: 1px solid rgba(99,102,241,0.28); border-radius: var(--radius-md); padding: 16px;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr auto auto; gap: 12px; align-items: end; margin-bottom: 14px;">
+                  <div class="form-group">
+                    <label class="form-label" style="font-size: 11px;">Nombre del Grupo (ES)</label>
+                    <input type="text" class="form-input" value="${escAttr(group.label?.es || "")}" onchange="updateBriefPillGroup(${gIdx}, 'label.es', this.value)" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" style="font-size: 11px;">Group Label (EN)</label>
+                    <input type="text" class="form-input" value="${escAttr(group.label?.en || "")}" onchange="updateBriefPillGroup(${gIdx}, 'label.en', this.value)" />
+                  </div>
+                  <label class="toggle-pill-row" style="height: 34px; padding: 0 10px; cursor: pointer;">
+                    <span>Selección múltiple</span>
+                    <input type="checkbox" class="switch-input" ${group.multiSelect !== false ? "checked" : ""} onchange="updateBriefPillGroup(${gIdx}, 'multiSelect', this.checked)" />
+                  </label>
+                  <button type="button" class="icon-action-btn danger" onclick="deleteBriefPillGroup(${gIdx})" title="Eliminar grupo completo">🗑️</button>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                  <span style="font-size: 11px; font-weight: 700; color: var(--text-accent); text-transform: uppercase;">Pills disponibles (${opts.length})</span>
+                  <button type="button" class="btn btn-outline btn-sm" style="padding: 4px 10px; font-size: 11px;" onclick="addBriefPillOption(${gIdx})">+ Agregar Pill</button>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 6px;">
+                  ${optsHtml || `<div style="font-size: 12px; color: var(--text-muted);">Sin pills en este grupo.</div>`}
+                </div>
+              </div>
+            `;
+          }).join("");
+        }
+      }
+    }
+
+    window.addBriefGuideline = function() {
+      ensureBriefConfigDefaults();
+      catalogState.customBriefConfig.guidelines.push({
+        es: "Nuevo punto de guía para el cliente.",
+        en: "New client briefing guideline."
+      });
+      renderBriefEditor();
+    };
+    window.moveBriefGuideline = function(idx, delta) {
+      const arr = catalogState.customBriefConfig.guidelines;
+      const target = idx + delta;
+      if (target < 0 || target >= arr.length) return;
+      const [moved] = arr.splice(idx, 1);
+      arr.splice(target, 0, moved);
+      renderBriefEditor();
+    };
+    window.deleteBriefGuideline = function(idx) {
+      catalogState.customBriefConfig.guidelines.splice(idx, 1);
+      renderBriefEditor();
+    };
+    window.updateBriefGuideline = function(idx, lang, val) {
+      catalogState.customBriefConfig.guidelines[idx][lang] = val;
+    };
+
+    window.addBriefPillGroup = function() {
+      ensureBriefConfigDefaults();
+      catalogState.customBriefConfig.pillGroups.push({
+        id: "group-" + Date.now().toString().slice(-4),
+        multiSelect: true,
+        label: { es: "Nuevo Selector", en: "New Selector" },
+        options: [{ es: "Opción 1", en: "Option 1" }]
+      });
+      renderBriefEditor();
+    };
+    window.deleteBriefPillGroup = function(gIdx) {
+      if (!confirm("¿Eliminar este grupo completo de pills?")) return;
+      catalogState.customBriefConfig.pillGroups.splice(gIdx, 1);
+      renderBriefEditor();
+    };
+    window.updateBriefPillGroup = function(gIdx, path, val) {
+      const group = catalogState.customBriefConfig.pillGroups[gIdx];
+      if (!group) return;
+      if (path === "multiSelect") group.multiSelect = !!val;
+      else if (path === "label.es") { group.label = group.label || {}; group.label.es = val; }
+      else if (path === "label.en") { group.label = group.label || {}; group.label.en = val; }
+    };
+    window.addBriefPillOption = function(gIdx) {
+      const group = catalogState.customBriefConfig.pillGroups[gIdx];
+      if (!group) return;
+      if (!Array.isArray(group.options)) group.options = [];
+      group.options.push({ es: "Nueva Opción", en: "New Option" });
+      renderBriefEditor();
+    };
+    window.moveBriefPillOption = function(gIdx, oIdx, delta) {
+      const opts = catalogState.customBriefConfig.pillGroups[gIdx]?.options;
+      if (!opts) return;
+      const target = oIdx + delta;
+      if (target < 0 || target >= opts.length) return;
+      const [moved] = opts.splice(oIdx, 1);
+      opts.splice(target, 0, moved);
+      renderBriefEditor();
+    };
+    window.deleteBriefPillOption = function(gIdx, oIdx) {
+      const opts = catalogState.customBriefConfig.pillGroups[gIdx]?.options;
+      if (!opts) return;
+      opts.splice(oIdx, 1);
+      renderBriefEditor();
+    };
+    window.updateBriefPillOption = function(gIdx, oIdx, lang, val) {
+      const opt = catalogState.customBriefConfig.pillGroups[gIdx]?.options?.[oIdx];
+      if (opt) opt[lang] = val;
+    };
+
+    function ensureCampaignBriefConfigDefaults() {
+      if (!catalogState.campaignBriefConfig || typeof catalogState.campaignBriefConfig !== "object") {
+        catalogState.campaignBriefConfig = {};
+      }
+      const c = catalogState.campaignBriefConfig;
+      if (!c.bannerTitle) c.bannerTitle = { es: "¡Creá tu Juego de Largo Alcance!", en: "Build Your Long-Term Game!" };
+      if (!c.bannerSubtitle) c.bannerSubtitle = { es: "Desarrollamos experiencias interactivas de duración extendida para servidores del cliente o web pública.", en: "We build extended-duration interactive experiences for client servers or public web." };
+      if (!c.bannerCta) c.bannerCta = { es: "Armar mi brief / Ver formatos →", en: "Start my brief / See formats →" };
+      if (!c.pageTitle) c.pageTitle = { es: "Pedí tu Juego de Largo Alcance", en: "Request Your Long-Term Game" };
+      if (!c.pageSubtitle) c.pageSubtitle = { es: "Completá los datos que ya tengas (todos los campos son opcionales) para enviarnos tu consulta en 1 clic.", en: "Fill in whatever details you already have (all fields are optional) to send your inquiry in 1 click." };
+      if (!c.inspiredHeroPrefix) c.inspiredHeroPrefix = { es: "Quiero un proyecto inspirado en [case]...", en: "I'd like a project inspired by [case]..." };
+      if (!c.inspiredHeroSubtitle) c.inspiredHeroSubtitle = { es: "Tomamos la profundidad y dinámica de [case] y la diseñamos a medida para tu empresa o campaña.", en: "We take the depth and core loop of [case] and tailor it from scratch for your company or campaign." };
+      if (!c.defaultIdeaLabel) c.defaultIdeaLabel = { es: "¿Tenés un proyecto o idea en mente? (Opcional)", en: "Do you have a project or idea in mind? (Optional)" };
+      if (!c.defaultIdeaPlaceholder) c.defaultIdeaPlaceholder = { es: "Contanos brevemente qué querés lograr...", en: "Briefly describe what you want to achieve..." };
+      if (!c.inspiredIdeaLabel) c.inspiredIdeaLabel = { es: "¿Qué te gustaría adaptar, sumar o cambiar respecto a [case]?", en: "What would you like to adapt, add, or change from [case]?" };
+      if (!c.inspiredIdeaPlaceholder) c.inspiredIdeaPlaceholder = { es: "Ej: Nos gustó el formato, pero aplicado a capacitación interna...", en: "e.g. Loved the format, tailored to internal training..." };
+      if (!c.fields) {
+        c.fields = {
+          companyLabel: { es: "Empresa / Institución / Rubro", en: "Company / Organization / Industry" },
+          companyPlaceholder: { es: "Ej: Banco, Retail, Universidad...", en: "e.g. Bank, Retail, University..." },
+          themeLabel: { es: "Temática o Contenido a comunicar", en: "Theme or Content to Convey" },
+          themePlaceholder: { es: "Ej: Onboarding, Seguridad vial...", en: "e.g. Onboarding, Safety..." },
+          dateLabel: { es: "Plazo estimado de lanzamiento", en: "Target Launch Window" },
+          datePlaceholder: { es: "Ej: Q3 2026 / En 2 meses", en: "e.g. Q3 2026 / In 2 months" }
+        };
+      }
+      if (!Array.isArray(c.guidelines)) c.guidelines = [];
+      if (!Array.isArray(c.pillGroups)) c.pillGroups = [];
+      if (!c.scenariosSectionTitle) c.scenariosSectionTitle = { es: "Formatos y Escenarios Posibles", en: "Solution Formats & Scenarios" };
+      if (!c.scenariosSectionSubtitle) c.scenariosSectionSubtitle = { es: "Ejemplos de cómo empresas, marcas e instituciones despliegan juegos de largo alcance.", en: "Examples of how companies, brands, and institutions deploy long-term games." };
+      if (!Array.isArray(c.scenarios)) c.scenarios = [];
+    }
+
+    function populateCampaignBriefFormFields() {
+      const c = catalogState.campaignBriefConfig;
+      document.getElementById("camp-brief-banner-title-es").value = c.bannerTitle?.es || "";
+      document.getElementById("camp-brief-banner-title-en").value = c.bannerTitle?.en || "";
+      document.getElementById("camp-brief-banner-sub-es").value = c.bannerSubtitle?.es || "";
+      document.getElementById("camp-brief-banner-sub-en").value = c.bannerSubtitle?.en || "";
+      document.getElementById("camp-brief-banner-cta-es").value = c.bannerCta?.es || "";
+      document.getElementById("camp-brief-banner-cta-en").value = c.bannerCta?.en || "";
+      document.getElementById("camp-brief-page-title-es").value = c.pageTitle?.es || "";
+      document.getElementById("camp-brief-page-title-en").value = c.pageTitle?.en || "";
+      document.getElementById("camp-brief-page-sub-es").value = c.pageSubtitle?.es || "";
+      document.getElementById("camp-brief-page-sub-en").value = c.pageSubtitle?.en || "";
+      document.getElementById("camp-brief-inspired-prefix-es").value = c.inspiredHeroPrefix?.es || "";
+      document.getElementById("camp-brief-inspired-prefix-en").value = c.inspiredHeroPrefix?.en || "";
+      document.getElementById("camp-brief-inspired-sub-es").value = c.inspiredHeroSubtitle?.es || "";
+      document.getElementById("camp-brief-inspired-sub-en").value = c.inspiredHeroSubtitle?.en || "";
+      document.getElementById("camp-brief-inspired-idea-label-es").value = c.inspiredIdeaLabel?.es || "";
+      document.getElementById("camp-brief-inspired-idea-label-en").value = c.inspiredIdeaLabel?.en || "";
+      document.getElementById("camp-brief-inspired-idea-ph-es").value = c.inspiredIdeaPlaceholder?.es || "";
+      document.getElementById("camp-brief-inspired-idea-ph-en").value = c.inspiredIdeaPlaceholder?.en || "";
+      document.getElementById("camp-brief-default-idea-label-es").value = c.defaultIdeaLabel?.es || "";
+      document.getElementById("camp-brief-default-idea-label-en").value = c.defaultIdeaLabel?.en || "";
+      document.getElementById("camp-brief-default-idea-ph-es").value = c.defaultIdeaPlaceholder?.es || "";
+      document.getElementById("camp-brief-default-idea-ph-en").value = c.defaultIdeaPlaceholder?.en || "";
+
+      document.getElementById("camp-brief-company-label-es").value = c.fields?.companyLabel?.es || "";
+      document.getElementById("camp-brief-company-label-en").value = c.fields?.companyLabel?.en || "";
+      document.getElementById("camp-brief-company-ph-es").value = c.fields?.companyPlaceholder?.es || "";
+      document.getElementById("camp-brief-company-ph-en").value = c.fields?.companyPlaceholder?.en || "";
+      document.getElementById("camp-brief-theme-label-es").value = c.fields?.themeLabel?.es || "";
+      document.getElementById("camp-brief-theme-label-en").value = c.fields?.themeLabel?.en || "";
+      document.getElementById("camp-brief-theme-ph-es").value = c.fields?.themePlaceholder?.es || "";
+      document.getElementById("camp-brief-theme-ph-en").value = c.fields?.themePlaceholder?.en || "";
+      document.getElementById("camp-brief-date-label-es").value = c.fields?.dateLabel?.es || "";
+      document.getElementById("camp-brief-date-label-en").value = c.fields?.dateLabel?.en || "";
+      document.getElementById("camp-brief-date-ph-es").value = c.fields?.datePlaceholder?.es || "";
+      document.getElementById("camp-brief-date-ph-en").value = c.fields?.datePlaceholder?.en || "";
+
+      document.getElementById("camp-brief-scen-title-es").value = c.scenariosSectionTitle?.es || "";
+      document.getElementById("camp-brief-scen-title-en").value = c.scenariosSectionTitle?.en || "";
+      document.getElementById("camp-brief-scen-sub-es").value = c.scenariosSectionSubtitle?.es || "";
+      document.getElementById("camp-brief-scen-sub-en").value = c.scenariosSectionSubtitle?.en || "";
+
+      renderCampaignBriefEditor();
+    }
+
+    function renderCampaignBriefEditor() {
+      ensureCampaignBriefConfigDefaults();
+      const c = catalogState.campaignBriefConfig;
+
+      const gContainer = document.getElementById("camp-brief-guidelines-editor");
+      if (gContainer) {
+        if (c.guidelines.length === 0) {
+          gContainer.innerHTML = `<div style="padding: 16px; text-align: center; color: var(--text-muted); border: 1px dashed var(--border-subtle); border-radius: var(--radius-md);">Sin puntos de guía configurados.</div>`;
+        } else {
+          gContainer.innerHTML = c.guidelines.map((g, idx) => `
+            <div style="display: grid; grid-template-columns: 92px 1fr 1fr 38px; gap: 10px; align-items: center; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 10px;">
+              <div style="display: flex; gap: 4px; align-items: center;">
+                <span class="order-index-badge">#${idx + 1}</span>
+                <button type="button" class="icon-action-btn" style="width: 26px; height: 26px; font-size: 11px;" ${idx === 0 ? "disabled" : ""} onclick="moveCampGuideline(${idx}, -1)">⬆️</button>
+                <button type="button" class="icon-action-btn" style="width: 26px; height: 26px; font-size: 11px;" ${idx === c.guidelines.length - 1 ? "disabled" : ""} onclick="moveCampGuideline(${idx}, 1)">⬇️</button>
+              </div>
+              <input type="text" class="form-input" value="${escAttr(g.es || "")}" placeholder="Guía (ES)" onchange="updateCampGuideline(${idx}, 'es', this.value)" />
+              <input type="text" class="form-input" value="${escAttr(g.en || "")}" placeholder="Guideline (EN)" onchange="updateCampGuideline(${idx}, 'en', this.value)" />
+              <button type="button" class="icon-action-btn danger" onclick="deleteCampGuideline(${idx})" title="Eliminar guía">🗑️</button>
+            </div>
+          `).join("");
+        }
+      }
+
+      const pContainer = document.getElementById("camp-brief-pillgroups-editor");
+      if (pContainer) {
+        if (c.pillGroups.length === 0) {
+          pContainer.innerHTML = `<div style="padding: 16px; text-align: center; color: var(--text-muted); border: 1px dashed var(--border-subtle); border-radius: var(--radius-md);">Sin grupos de pills configurados.</div>`;
+        } else {
+          pContainer.innerHTML = c.pillGroups.map((group, gIdx) => {
+            const opts = Array.isArray(group.options) ? group.options : [];
+            const optsHtml = opts.map((opt, oIdx) => `
+              <div style="display: grid; grid-template-columns: 84px 1fr 1fr 34px; gap: 8px; align-items: center; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 8px;">
+                <div style="display: flex; gap: 4px; align-items: center;">
+                  <span style="font-size: 11px; font-weight: 700; color: var(--text-muted); min-width: 20px;">#${oIdx + 1}</span>
+                  <button type="button" class="icon-action-btn" style="width: 24px; height: 24px; font-size: 10px;" ${oIdx === 0 ? "disabled" : ""} onclick="moveCampPillOption(${gIdx}, ${oIdx}, -1)">⬆️</button>
+                  <button type="button" class="icon-action-btn" style="width: 24px; height: 24px; font-size: 10px;" ${oIdx === opts.length - 1 ? "disabled" : ""} onclick="moveCampPillOption(${gIdx}, ${oIdx}, 1)">⬇️</button>
+                </div>
+                <input type="text" class="form-input" value="${escAttr(opt.es || "")}" placeholder="Opción (ES)" onchange="updateCampPillOption(${gIdx}, ${oIdx}, 'es', this.value)" />
+                <input type="text" class="form-input" value="${escAttr(opt.en || "")}" placeholder="Option (EN)" onchange="updateCampPillOption(${gIdx}, ${oIdx}, 'en', this.value)" />
+                <button type="button" class="icon-action-btn danger" style="width: 32px; height: 28px;" onclick="deleteCampPillOption(${gIdx}, ${oIdx})" title="Eliminar pill">🗑️</button>
+              </div>
+            `).join("");
+
+            return `
+              <div style="background: var(--bg-surface); border: 1px solid rgba(99,102,241,0.28); border-radius: var(--radius-md); padding: 16px;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr auto auto; gap: 12px; align-items: end; margin-bottom: 14px;">
+                  <div class="form-group">
+                    <label class="form-label" style="font-size: 11px;">Nombre del Grupo (ES)</label>
+                    <input type="text" class="form-input" value="${escAttr(group.label?.es || "")}" onchange="updateCampPillGroup(${gIdx}, 'label.es', this.value)" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" style="font-size: 11px;">Group Label (EN)</label>
+                    <input type="text" class="form-input" value="${escAttr(group.label?.en || "")}" onchange="updateCampPillGroup(${gIdx}, 'label.en', this.value)" />
+                  </div>
+                  <label class="toggle-pill-row" style="height: 34px; padding: 0 10px; cursor: pointer;">
+                    <span>Selección múltiple</span>
+                    <input type="checkbox" class="switch-input" ${group.multiSelect !== false ? "checked" : ""} onchange="updateCampPillGroup(${gIdx}, 'multiSelect', this.checked)" />
+                  </label>
+                  <button type="button" class="icon-action-btn danger" onclick="deleteCampPillGroup(${gIdx})" title="Eliminar grupo completo">🗑️</button>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                  <span style="font-size: 11px; font-weight: 700; color: var(--text-accent); text-transform: uppercase;">Pills disponibles (${opts.length})</span>
+                  <button type="button" class="btn btn-outline btn-sm" style="padding: 4px 10px; font-size: 11px;" onclick="addCampPillOption(${gIdx})">+ Agregar Pill</button>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 6px;">
+                  ${optsHtml || `<div style="font-size: 12px; color: var(--text-muted);">Sin pills en este grupo.</div>`}
+                </div>
+              </div>
+            `;
+          }).join("");
+        }
+      }
+
+      const sContainer = document.getElementById("camp-brief-scenarios-editor");
+      if (sContainer) {
+        if (c.scenarios.length === 0) {
+          sContainer.innerHTML = `<div style="padding: 16px; text-align: center; color: var(--text-muted); border: 1px dashed var(--border-subtle); border-radius: var(--radius-md);">Sin escenarios configurados.</div>`;
+        } else {
+          sContainer.innerHTML = c.scenarios.map((sc, sIdx) => `
+            <div style="background: var(--bg-surface); border: 1px solid rgba(6,182,212,0.28); border-radius: var(--radius-md); padding: 14px;">
+              <div style="display: grid; grid-template-columns: 92px 72px 1fr 1fr 150px 38px; gap: 10px; align-items: end; margin-bottom: 10px;">
+                <div style="display: flex; gap: 4px; align-items: center;">
+                  <span class="order-index-badge">#${sIdx + 1}</span>
+                  <button type="button" class="icon-action-btn" style="width: 26px; height: 26px; font-size: 11px;" ${sIdx === 0 ? "disabled" : ""} onclick="moveCampScenario(${sIdx}, -1)">⬆️</button>
+                  <button type="button" class="icon-action-btn" style="width: 26px; height: 26px; font-size: 11px;" ${sIdx === c.scenarios.length - 1 ? "disabled" : ""} onclick="moveCampScenario(${sIdx}, 1)">⬇️</button>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" style="font-size: 10px;">Ícono</label>
+                  <input type="text" class="form-input" value="${escAttr(sc.icon || "🚀")}" onchange="updateCampScenario(${sIdx}, 'icon', this.value)" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" style="font-size: 10px;">Título del Escenario (ES)</label>
+                  <input type="text" class="form-input" value="${escAttr(sc.title?.es || "")}" onchange="updateCampScenario(${sIdx}, 'title.es', this.value)" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" style="font-size: 10px;">Scenario Title (EN)</label>
+                  <input type="text" class="form-input" value="${escAttr(sc.title?.en || "")}" onchange="updateCampScenario(${sIdx}, 'title.en', this.value)" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" style="font-size: 10px;">ID Caso Real (Opcional)</label>
+                  <input type="text" class="form-input" value="${escAttr(sc.relatedCaseId || "")}" placeholder="mi-increible-paseo" onchange="updateCampScenario(${sIdx}, 'relatedCaseId', this.value)" />
+                </div>
+                <button type="button" class="icon-action-btn danger" onclick="deleteCampScenario(${sIdx})" title="Eliminar escenario">🗑️</button>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+                <div>
+                  <label class="form-label" style="font-size: 10px;">💻 Plataforma / Alojamiento (ES / EN)</label>
+                  <div class="dual-input-row">
+                    <input type="text" class="form-input" value="${escAttr(sc.platform?.es || "")}" onchange="updateCampScenario(${sIdx}, 'platform.es', this.value)" />
+                    <input type="text" class="form-input" value="${escAttr(sc.platform?.en || "")}" onchange="updateCampScenario(${sIdx}, 'platform.en', this.value)" />
+                  </div>
+                </div>
+                <div>
+                  <label class="form-label" style="font-size: 10px;">⏳ Duración (ES / EN)</label>
+                  <div class="dual-input-row">
+                    <input type="text" class="form-input" value="${escAttr(sc.duration?.es || "")}" onchange="updateCampScenario(${sIdx}, 'duration.es', this.value)" />
+                    <input type="text" class="form-input" value="${escAttr(sc.duration?.en || "")}" onchange="updateCampScenario(${sIdx}, 'duration.en', this.value)" />
+                  </div>
+                </div>
+                <div>
+                  <label class="form-label" style="font-size: 10px;">🎯 Objetivo B2B (ES / EN)</label>
+                  <div class="dual-input-row">
+                    <input type="text" class="form-input" value="${escAttr(sc.goal?.es || "")}" onchange="updateCampScenario(${sIdx}, 'goal.es', this.value)" />
+                    <input type="text" class="form-input" value="${escAttr(sc.goal?.en || "")}" onchange="updateCampScenario(${sIdx}, 'goal.en', this.value)" />
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label class="form-label" style="font-size: 10px;">📝 Descripción (ES / EN)</label>
+                <div class="dual-input-row">
+                  <textarea class="form-input" rows="2" onchange="updateCampScenario(${sIdx}, 'description.es', this.value)">${escHtml(sc.description?.es || "")}</textarea>
+                  <textarea class="form-input" rows="2" onchange="updateCampScenario(${sIdx}, 'description.en', this.value)">${escHtml(sc.description?.en || "")}</textarea>
+                </div>
+              </div>
+            </div>
+          `).join("");
+        }
+      }
+    }
+
+    window.addCampGuideline = function() {
+      ensureCampaignBriefConfigDefaults();
+      catalogState.campaignBriefConfig.guidelines.push({ es: "Nuevo punto de guía.", en: "New guideline." });
+      renderCampaignBriefEditor();
+    };
+    window.moveCampGuideline = function(idx, delta) {
+      const arr = catalogState.campaignBriefConfig.guidelines;
+      const target = idx + delta;
+      if (target < 0 || target >= arr.length) return;
+      const [moved] = arr.splice(idx, 1);
+      arr.splice(target, 0, moved);
+      renderCampaignBriefEditor();
+    };
+    window.deleteCampGuideline = function(idx) {
+      catalogState.campaignBriefConfig.guidelines.splice(idx, 1);
+      renderCampaignBriefEditor();
+    };
+    window.updateCampGuideline = function(idx, lang, val) {
+      catalogState.campaignBriefConfig.guidelines[idx][lang] = val;
+    };
+
+    window.addCampPillGroup = function() {
+      ensureCampaignBriefConfigDefaults();
+      catalogState.campaignBriefConfig.pillGroups.push({
+        id: "camp-group-" + Date.now().toString().slice(-4),
+        multiSelect: true,
+        label: { es: "Nuevo Selector", en: "New Selector" },
+        options: [{ es: "Opción 1", en: "Option 1" }]
+      });
+      renderCampaignBriefEditor();
+    };
+    window.deleteCampPillGroup = function(gIdx) {
+      if (!confirm("¿Eliminar este grupo completo de pills?")) return;
+      catalogState.campaignBriefConfig.pillGroups.splice(gIdx, 1);
+      renderCampaignBriefEditor();
+    };
+    window.updateCampPillGroup = function(gIdx, path, val) {
+      const group = catalogState.campaignBriefConfig.pillGroups[gIdx];
+      if (!group) return;
+      if (path === "multiSelect") group.multiSelect = !!val;
+      else if (path === "label.es") { group.label = group.label || {}; group.label.es = val; }
+      else if (path === "label.en") { group.label = group.label || {}; group.label.en = val; }
+    };
+    window.addCampPillOption = function(gIdx) {
+      const group = catalogState.campaignBriefConfig.pillGroups[gIdx];
+      if (!group) return;
+      if (!Array.isArray(group.options)) group.options = [];
+      group.options.push({ es: "Nueva Opción", en: "New Option" });
+      renderCampaignBriefEditor();
+    };
+    window.moveCampPillOption = function(gIdx, oIdx, delta) {
+      const opts = catalogState.campaignBriefConfig.pillGroups[gIdx]?.options;
+      if (!opts) return;
+      const target = oIdx + delta;
+      if (target < 0 || target >= opts.length) return;
+      const [moved] = opts.splice(oIdx, 1);
+      opts.splice(target, 0, moved);
+      renderCampaignBriefEditor();
+    };
+    window.deleteCampPillOption = function(gIdx, oIdx) {
+      const opts = catalogState.campaignBriefConfig.pillGroups[gIdx]?.options;
+      if (!opts) return;
+      opts.splice(oIdx, 1);
+      renderCampaignBriefEditor();
+    };
+    window.updateCampPillOption = function(gIdx, oIdx, lang, val) {
+      const opt = catalogState.campaignBriefConfig.pillGroups[gIdx]?.options?.[oIdx];
+      if (opt) opt[lang] = val;
+    };
+
+    window.addCampScenario = function() {
+      ensureCampaignBriefConfigDefaults();
+      catalogState.campaignBriefConfig.scenarios.push({
+        id: "scenario-" + Date.now().toString().slice(-4),
+        icon: "🚀",
+        title: { es: "Nuevo Formato", en: "New Format" },
+        platform: { es: "Web / Servidores del Cliente", en: "Web / Client Servers" },
+        duration: { es: "Temporada / Permanente", en: "Seasonal / Permanent" },
+        description: { es: "Descripción del formato o escenario de uso.", en: "Description of the format or usage scenario." },
+        goal: { es: "Objetivo B2B principal", en: "Primary B2B goal" },
+        relatedCaseId: ""
+      });
+      renderCampaignBriefEditor();
+    };
+    window.moveCampScenario = function(sIdx, delta) {
+      const arr = catalogState.campaignBriefConfig.scenarios;
+      const target = sIdx + delta;
+      if (target < 0 || target >= arr.length) return;
+      const [moved] = arr.splice(sIdx, 1);
+      arr.splice(target, 0, moved);
+      renderCampaignBriefEditor();
+    };
+    window.deleteCampScenario = function(sIdx) {
+      if (!confirm("¿Eliminar este escenario?")) return;
+      catalogState.campaignBriefConfig.scenarios.splice(sIdx, 1);
+      renderCampaignBriefEditor();
+    };
+    window.updateCampScenario = function(sIdx, path, val) {
+      const sc = catalogState.campaignBriefConfig.scenarios[sIdx];
+      if (!sc) return;
+      const parts = path.split(".");
+      let curr = sc;
+      for (let i = 0; i < parts.length - 1; i++) {
+        if (!curr[parts[i]] || typeof curr[parts[i]] !== "object") curr[parts[i]] = {};
+        curr = curr[parts[i]];
+      }
+      curr[parts[parts.length - 1]] = val;
+    };
 
     // Quoting Simulator
     let simSelectedGames = new Set(["memotest", "simon-dice"]);
@@ -1849,8 +2860,57 @@
       catalogState.pricingConfig.usdToArsRate = Number(document.getElementById("pricing-usd-to-ars").value) || 0;
       catalogState.pricingConfig.timeMultiplier = Number(document.getElementById("pricing-time-multiplier").value) || 1.0;
 
+      ensureBriefConfigDefaults();
+      const b = catalogState.customBriefConfig;
+      b.bannerTitle = { es: document.getElementById("brief-banner-title-es").value, en: document.getElementById("brief-banner-title-en").value };
+      b.bannerSubtitle = { es: document.getElementById("brief-banner-sub-es").value, en: document.getElementById("brief-banner-sub-en").value };
+      b.bannerCta = { es: document.getElementById("brief-banner-cta-es").value, en: document.getElementById("brief-banner-cta-en").value };
+      b.pageTitle = { es: document.getElementById("brief-page-title-es").value, en: document.getElementById("brief-page-title-en").value };
+      b.pageSubtitle = { es: document.getElementById("brief-page-sub-es").value, en: document.getElementById("brief-page-sub-en").value };
+      b.inspiredHeroPrefix = { es: document.getElementById("brief-inspired-prefix-es").value, en: document.getElementById("brief-inspired-prefix-en").value };
+      b.inspiredHeroSubtitle = { es: document.getElementById("brief-inspired-sub-es").value, en: document.getElementById("brief-inspired-sub-en").value };
+      b.inspiredIdeaLabel = { es: document.getElementById("brief-inspired-idea-label-es").value, en: document.getElementById("brief-inspired-idea-label-en").value };
+      b.inspiredIdeaPlaceholder = { es: document.getElementById("brief-inspired-idea-ph-es").value, en: document.getElementById("brief-inspired-idea-ph-en").value };
+      b.defaultIdeaLabel = { es: document.getElementById("brief-default-idea-label-es").value, en: document.getElementById("brief-default-idea-label-en").value };
+      b.defaultIdeaPlaceholder = { es: document.getElementById("brief-default-idea-ph-es").value, en: document.getElementById("brief-default-idea-ph-en").value };
+      b.fields = {
+        companyLabel: { es: document.getElementById("brief-company-label-es").value, en: document.getElementById("brief-company-label-en").value },
+        companyPlaceholder: { es: document.getElementById("brief-company-ph-es").value, en: document.getElementById("brief-company-ph-en").value },
+        themeLabel: { es: document.getElementById("brief-theme-label-es").value, en: document.getElementById("brief-theme-label-en").value },
+        themePlaceholder: { es: document.getElementById("brief-theme-ph-es").value, en: document.getElementById("brief-theme-ph-en").value },
+        dateLabel: { es: document.getElementById("brief-date-label-es").value, en: document.getElementById("brief-date-label-en").value },
+        datePlaceholder: { es: document.getElementById("brief-date-ph-es").value, en: document.getElementById("brief-date-ph-en").value }
+      };
+      b.mechanicsSectionTitle = { es: document.getElementById("brief-mech-title-es").value, en: document.getElementById("brief-mech-title-en").value };
+      b.mechanicsSectionSubtitleShowcase = { es: document.getElementById("brief-mech-sub-show-es").value, en: document.getElementById("brief-mech-sub-show-en").value };
+      b.mechanicsSectionSubtitleCotizador = { es: document.getElementById("brief-mech-sub-cot-es").value, en: document.getElementById("brief-mech-sub-cot-en").value };
+
+      ensureCampaignBriefConfigDefaults();
+      const cb = catalogState.campaignBriefConfig;
+      cb.bannerTitle = { es: document.getElementById("camp-brief-banner-title-es").value, en: document.getElementById("camp-brief-banner-title-en").value };
+      cb.bannerSubtitle = { es: document.getElementById("camp-brief-banner-sub-es").value, en: document.getElementById("camp-brief-banner-sub-en").value };
+      cb.bannerCta = { es: document.getElementById("camp-brief-banner-cta-es").value, en: document.getElementById("camp-brief-banner-cta-en").value };
+      cb.pageTitle = { es: document.getElementById("camp-brief-page-title-es").value, en: document.getElementById("camp-brief-page-title-en").value };
+      cb.pageSubtitle = { es: document.getElementById("camp-brief-page-sub-es").value, en: document.getElementById("camp-brief-page-sub-en").value };
+      cb.inspiredHeroPrefix = { es: document.getElementById("camp-brief-inspired-prefix-es").value, en: document.getElementById("camp-brief-inspired-prefix-en").value };
+      cb.inspiredHeroSubtitle = { es: document.getElementById("camp-brief-inspired-sub-es").value, en: document.getElementById("camp-brief-inspired-sub-en").value };
+      cb.inspiredIdeaLabel = { es: document.getElementById("camp-brief-inspired-idea-label-es").value, en: document.getElementById("camp-brief-inspired-idea-label-en").value };
+      cb.inspiredIdeaPlaceholder = { es: document.getElementById("camp-brief-inspired-idea-ph-es").value, en: document.getElementById("camp-brief-inspired-idea-ph-en").value };
+      cb.defaultIdeaLabel = { es: document.getElementById("camp-brief-default-idea-label-es").value, en: document.getElementById("camp-brief-default-idea-label-en").value };
+      cb.defaultIdeaPlaceholder = { es: document.getElementById("camp-brief-default-idea-ph-es").value, en: document.getElementById("camp-brief-default-idea-ph-en").value };
+      cb.fields = {
+        companyLabel: { es: document.getElementById("camp-brief-company-label-es").value, en: document.getElementById("camp-brief-company-label-en").value },
+        companyPlaceholder: { es: document.getElementById("camp-brief-company-ph-es").value, en: document.getElementById("camp-brief-company-ph-en").value },
+        themeLabel: { es: document.getElementById("camp-brief-theme-label-es").value, en: document.getElementById("camp-brief-theme-label-en").value },
+        themePlaceholder: { es: document.getElementById("camp-brief-theme-ph-es").value, en: document.getElementById("camp-brief-theme-ph-en").value },
+        dateLabel: { es: document.getElementById("camp-brief-date-label-es").value, en: document.getElementById("camp-brief-date-label-en").value },
+        datePlaceholder: { es: document.getElementById("camp-brief-date-ph-es").value, en: document.getElementById("camp-brief-date-ph-en").value }
+      };
+      cb.scenariosSectionTitle = { es: document.getElementById("camp-brief-scen-title-es").value, en: document.getElementById("camp-brief-scen-title-en").value };
+      cb.scenariosSectionSubtitle = { es: document.getElementById("camp-brief-scen-sub-es").value, en: document.getElementById("camp-brief-scen-sub-en").value };
+
       return `/**
- * Corpfolio Studio — Catalog & Configuration Data
+ * Tailored Games — Catalog & Configuration Data
  * Generated via Visual Local Editor (editor.html)
  */
 

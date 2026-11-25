@@ -7,7 +7,7 @@ if (!catalog) {
   process.exit(1);
 }
 
-console.log("Validating GAMETELIER_CATALOG...");
+console.log("Validating Tailored Games Catalog...");
 let errors = 0;
 let checkedFiles = 0;
 

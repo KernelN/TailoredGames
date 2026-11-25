@@ -1,6 +1,6 @@
-# EDITOR.md — Gametelier Studio Visual Local Editor
+# EDITOR.md — Tailored Games Visual Local Editor
 
-> **Document Purpose**: Technical specification and implementation guide for `editor.html`, the zero-token visual catalog editor for Gametelier Studio.
+> **Document Purpose**: Technical specification and implementation guide for `editor.html`, the zero-token visual catalog editor for Tailored Games.
 > Referenced directly by [`AGENTS.md`](file:///d:/Github/Misc/Gametelier-Portfolio/AGENTS.md).
 
 ---
@@ -75,10 +75,10 @@ The editor adheres to the **Dark Tech-Studio** visual design system (`#0B0F19` b
 ---
 
 ### Tab 1: Estudio y Contacto
-- **Nombre del Estudio**: Text input (e.g. `Gametelier Studio`).
+- **Nombre del Estudio**: Text input (e.g. `Tailored Games`).
 - **Tagline**: Dual inputs `{ es: "...", en: "..." }`.
 - **WhatsApp**: International phone format (e.g. `5491100000000`) with test chat button.
-- **Email**: Contact email address (e.g. `contacto@gametelier.com`).
+- **Email**: Contact email address (e.g. `contacto@tailoredgames.com`).
 
 ---
 
@@ -145,10 +145,10 @@ To make deploying saved changes effortless without opening terminals or typing g
 
 ```batch
 @echo off
-title Gametelier Studio - Publicar Cambios a GitHub Pages
+title Tailored Games - Publicar Cambios a GitHub Pages
 color 0B
 echo ===================================================
-echo     Gametelier Studio - Publicador GitHub Pages
+echo     Tailored Games - Publicador GitHub Pages
 echo ===================================================
 echo.
 

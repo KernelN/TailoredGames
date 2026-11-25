@@ -1,13 +1,13 @@
-# AGENTS.md — Gametelier Studio Portfolio & Quote Builder
+# AGENTS.md — Tailored Games Portfolio & Quote Builder
 
-> **Document Purpose**: This master guide and implementation roadmap specifies the architecture, data models, business rules, visual design system, and phased execution checklist for the Gametelier Studio web portfolio.
+> **Document Purpose**: This master guide and implementation roadmap specifies the architecture, data models, business rules, visual design system, and phased execution checklist for the Tailored Games web portfolio.
 > Future agents and developers should refer to this document, follow its conventions, and update the checklist as milestones are completed.
 
 ---
 
 ## 1. Project Overview & Core Philosophy
 
-**Gametelier Studio** is an interactive experiential game studio providing games, installations, and digital mechanics for corporate events, brand activations, and promotional campaigns.
+**Tailored Games** is an interactive experiential game studio providing games, installations, and digital mechanics for corporate events, brand activations, and promotional campaigns.
 
 The website is hosted on **GitHub Pages** and caters directly to **Event Producers** and **HR Managers**. It must convey tech sophistication, prestige, visual excitement, and rock-solid corporate trust.
 
@@ -422,5 +422,19 @@ Future agents should consult this checklist and update the status boxes as featu
 - [x] Add Studio Logo field and upload support in editor with dynamic renderer integration
 - [x] Support multiple games in the Campaigns category across showcase, cotizador, seccion, and editor
 - [x] Implement dark holographic blueprint fallback (`assets/images/concept-blueprint.svg`) and `💡 Concepto / En Desarrollo` badge for unimaged prototype games
+
+### Phase 9: Custom Games Redesign & Interactive "¡Pedí el tuyo!" Brief
+- [x] Show all 4 real Success Cases in Home Custom Games carousel using real case titles, images, and summaries (with `Est. $X / día` + *"Pedir uno similar"* in Cotizador)
+- [x] Redesign `seccion.html?tipo=aMedida` with featured *"¡Pedí el tuyo!"* banner and pure Success Case cards (no SVG Base Template tab)
+- [x] Implement dedicated *"¡Pedí el tuyo!"* view (`?tipo=a-medida-custom`) with optional interactive mini-brief, 1-click WhatsApp/Email/Copy, Inspired-by-Case mode (`?ref=`), and compact 2-column Mechanic Blueprint grid (all 9 mechanics)
+- [x] Add `customBriefConfig` to `assets/js/data/catalog.js` and full Brief / Pill Groups / Case Summary editor controls to `editor.html`
+
+### Phase 10: Tailored Games Rebrand, Brief Typography & Long-Term Games Redesign
+- [x] Clean all remaining "Gametelier" / "Corpfolio Studio" references to **Tailored Games** across HTML, JS, CSS, `publicar.bat`, tests, and documentation
+- [x] Increase interactive Brief typography sizes in `assets/css/components.css` for readability
+- [x] Rename Campaigns to **Juegos de Largo Alcance / Long-Term & Campaign Games** with featured banner, dedicated Brief view (`?tipo=campanas-custom`), Inspired-by-Case mode (`?ref=`), and editable Solution Scenarios grid
+- [x] Add `campaignBriefConfig` to `assets/js/data/catalog.js` and `🌐 Brief "Largo Alcance"` editor tab in `editor.html`
+
+
 
 

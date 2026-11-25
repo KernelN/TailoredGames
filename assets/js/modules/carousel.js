@@ -1,5 +1,5 @@
 /**
- * Corpfolio Studio — Carousel Module
+ * Tailored Games — Carousel Module
  * Handles auto-advancing slideshows with pause-on-hover, touch swiping, and dot navigation.
  */
 

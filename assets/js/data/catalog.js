@@ -90,12 +90,12 @@ const CORPFOLIO_CATALOG = {
           },
           "tags": {
             "es": [
-              "Táctil",
+              "Memoria",
               "Brandeable",
               "Ágil"
             ],
             "en": [
-              "Touch",
+              "Memory",
               "Brandable",
               "Fast-paced"
             ]
@@ -136,12 +136,12 @@ const CORPFOLIO_CATALOG = {
           },
           "tags": {
             "es": [
-              "Memoria",
+              "Agil",
               "Sonido",
               "Luces"
             ],
             "en": [
-              "Memory",
+              "Fast-paced",
               "Audio",
               "Lights"
             ]
@@ -388,7 +388,7 @@ const CORPFOLIO_CATALOG = {
           "category": "aMedida",
           "dailyPrice": 1242500,
           "visible": true,
-          "showcase": false,
+          "showcase": true,
           "isConcept": false,
           "image": "assets/images/games/circular-assembly.svg",
           "screenshots": [
@@ -1173,6 +1173,170 @@ const CORPFOLIO_CATALOG = {
     "usdToArsRate": 1520,
     "timeMultiplier": 1.5,
     "gameBasePrice": 455900
+  },
+  "customBriefConfig": {
+    "bannerTitle": {
+      "es": "¡Pedí el tuyo!",
+      "en": "Request Your Custom Game!"
+    },
+    "bannerSubtitle": {
+      "es": "Diseñamos videojuegos y dinámicas táctiles desde cero para tu marca, temática y público. Contanos sobre tu evento o inspirate en nuestras mecánicas base.",
+      "en": "We design interactive touch games from scratch tailored to your brand, theme, and audience. Tell us about your event or get inspired by our base mechanics."
+    },
+    "bannerCta": {
+      "es": "Armar mi brief / Ver ideas →",
+      "en": "Start my brief / See ideas →"
+    },
+    "pageTitle": {
+      "es": "Pedí tu Juego a Medida",
+      "en": "Request Your Custom Game"
+    },
+    "pageSubtitle": {
+      "es": "Completá los puntos que ya tengas definidos (ningún campo es obligatorio) para enviarnos tu consulta en 1 clic, o explorá nuestras mecánicas base debajo.",
+      "en": "Fill in whatever details you already have (all fields are optional) to send your inquiry in 1 click, or explore our base mechanics below."
+    },
+    "inspiredHeroPrefix": {
+      "es": "Quiero una experiencia inspirada en [case]...",
+      "en": "I'd like an experience inspired by [case]..."
+    },
+    "inspiredHeroSubtitle": {
+      "es": "Tomamos la dinámica probada de [case] y la adaptamos 100% a tu marca, estética y objetivos del evento. Contanos qué te gustaría personalizar o cambiar.",
+      "en": "We take the proven core loop of [case] and tailor it 100% to your brand, visuals, and event goals. Tell us what you'd like to customize or change."
+    },
+    "defaultIdeaLabel": {
+      "es": "¿Tenés una idea en mente? (Opcional)",
+      "en": "Do you have a specific idea in mind? (Optional)"
+    },
+    "defaultIdeaPlaceholder": {
+      "es": "Contanos brevemente qué imaginás. Si todavía no tenés una idea definida, dejalo vacío y completá los puntos siguientes para que te propongamos opciones.",
+      "en": "Briefly describe what you envision. If you don't have an idea yet, leave this blank and fill in the details below so we can pitch concepts."
+    },
+    "inspiredIdeaLabel": {
+      "es": "¿Qué te gustaría adaptar, sumar o cambiar respecto a [case]?",
+      "en": "What would you like to adapt, add, or change from [case]?"
+    },
+    "inspiredIdeaPlaceholder": {
+      "es": "Ej: Me encantó la dinámica, pero ambientada en nuestra industria, con nuestros productos, otra duración o formato de jugadores...",
+      "en": "e.g. Loved the mechanic, but themed around our industry, featuring our products, or with a different duration or player format..."
+    },
+    "fields": {
+      "companyLabel": {
+        "es": "Empresa / Rubro",
+        "en": "Company / Industry"
+      },
+      "companyPlaceholder": {
+        "es": "Ej: Fintech, Automotriz, Productora de Eventos...",
+        "en": "e.g. Fintech, Automotive, Event Agency..."
+      },
+      "themeLabel": {
+        "es": "Temática del Evento",
+        "en": "Event Theme"
+      },
+      "themePlaceholder": {
+        "es": "Ej: Sustentabilidad, Lanzamiento, Convención Anual...",
+        "en": "e.g. Sustainability, Product Launch, Annual Summit..."
+      },
+      "dateLabel": {
+        "es": "Fecha tentativa y duración",
+        "en": "Tentative Date & Duration"
+      },
+      "datePlaceholder": {
+        "es": "Ej: Noviembre 2026, 2 días",
+        "en": "e.g. November 2026, 2 days"
+      }
+    },
+    "guidelines": [
+      {
+        "es": "Si ya tenés una idea o mecánica en mente, contanos lo esencial (aunque sea un boceto).",
+        "en": "If you already have an idea or mechanic in mind, share the essentials (even a rough sketch)."
+      },
+      {
+        "es": "Si todavía no sabés qué juego hacer, indicanos tu rubro, temática y público para que te propongamos 2 o 3 opciones.",
+        "en": "If you don't have a concept yet, share your industry, event theme, and audience so we can pitch 2–3 tailored options."
+      },
+      {
+        "es": "Sumá fecha tentativa y duración del evento para confirmar disponibilidad y estimar presupuesto.",
+        "en": "Include tentative dates and duration so we can confirm availability and prepare an accurate estimate."
+      },
+      {
+        "es": "Todos los campos son opcionales: podés escribirnos directo por WhatsApp o Email en 1 clic en cualquier momento.",
+        "en": "Every field is optional: you can reach out directly via WhatsApp or Email in 1 click at any time."
+      }
+    ],
+    "pillGroups": [
+      {
+        "id": "audience",
+        "multiSelect": true,
+        "label": {
+          "es": "¿Para quién es el juego?",
+          "en": "Who is the game for?"
+        },
+        "options": [
+          {
+            "es": "Clientes / Leads",
+            "en": "Clients / Leads"
+          },
+          {
+            "es": "Empleados / Equipo",
+            "en": "Employees / Team"
+          },
+          {
+            "es": "Familias / Niños",
+            "en": "Families / Kids"
+          },
+          {
+            "es": "Público General",
+            "en": "General Public"
+          },
+          {
+            "es": "Ejecutivos / VIP",
+            "en": "Executives / VIP"
+          }
+        ]
+      },
+      {
+        "id": "goal",
+        "multiSelect": true,
+        "label": {
+          "es": "Objetivo principal",
+          "en": "Main Event Goal"
+        },
+        "options": [
+          {
+            "es": "Captación de Leads",
+            "en": "Lead Capture"
+          },
+          {
+            "es": "Activación de Marca",
+            "en": "Brand Activation"
+          },
+          {
+            "es": "Team Building",
+            "en": "Team Building"
+          },
+          {
+            "es": "Alta Rotación en Stand",
+            "en": "High Booth Turnover"
+          },
+          {
+            "es": "Educación / Concientización",
+            "en": "Education / Awareness"
+          }
+        ]
+      }
+    ],
+    "mechanicsSectionTitle": {
+      "es": "Mecánicas Base e Ideas de Referencia",
+      "en": "Base Mechanics & Reference Ideas"
+    },
+    "mechanicsSectionSubtitleShowcase": {
+      "es": "¿Buscás inspiración? Explorá estas mecánicas probadas y personalizables como punto de partida para tu próximo evento.",
+      "en": "Looking for inspiration? Explore these proven, customizable mechanics as a starting point for your next event."
+    },
+    "mechanicsSectionSubtitleCotizador": {
+      "es": "Explorá estas mecánicas personalizables para inspirarte, ver valores estimados por día y sumarlas directamente a tu cotización.",
+      "en": "Explore these customizable mechanics for inspiration, see estimated daily rates, and add them directly to your quote."
+    }
   }
 };
 

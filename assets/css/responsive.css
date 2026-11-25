@@ -1,5 +1,5 @@
 /**
- * Corpfolio Studio — Responsive Stylesheet
+ * Tailored Games — Responsive Stylesheet
  * Tablet & Mobile Breakpoints
  */
 
@@ -20,8 +20,13 @@
     grid-template-columns: 340px 1fr;
   }
 
-  .custom-template-card {
+  .custom-template-card,
+  .success-case-card {
     grid-template-columns: 360px 1fr;
+  }
+
+  .brief-form-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .b2b-spec-matrix {
@@ -121,8 +126,49 @@
 
   /* Vertical items in seccion.html stack */
   .vertical-item-card,
-  .custom-template-card {
+  .custom-template-card,
+  .success-case-card {
     grid-template-columns: 1fr;
+  }
+
+  .success-case-media {
+    border-right: none;
+    border-bottom: 1px solid var(--border-subtle);
+    min-height: 220px;
+  }
+
+  .success-case-body {
+    padding: 20px;
+  }
+
+  .pedi-tuyo-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 22px 20px;
+  }
+
+  .pedi-tuyo-cta,
+  .pedi-tuyo-cta .btn {
+    width: 100%;
+  }
+
+  .brief-studio-card {
+    padding: 20px;
+  }
+
+  .brief-guidelines-list,
+  .brief-form-grid,
+  .blueprint-grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .brief-actions-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .brief-actions-bar .btn {
+    width: 100%;
   }
 
   .template-impl-pane {
