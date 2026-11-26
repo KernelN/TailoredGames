@@ -435,6 +435,11 @@ Future agents should consult this checklist and update the status boxes as featu
 - [x] Rename Campaigns to **Juegos de Largo Alcance / Long-Term & Campaign Games** with featured banner, dedicated Brief view (`?tipo=campanas-custom`), Inspired-by-Case mode (`?ref=`), and editable Solution Scenarios grid
 - [x] Add `campaignBriefConfig` to `assets/js/data/catalog.js` and `🌐 Brief "Largo Alcance"` editor tab in `editor.html`
 
+### Phase 11: Localized Visual Assets, Hybrid Geo-Language Detection & Success Case Redesign
+- [x] Create English `-en.png` screenshots (`trivia-en.png`, `tap-gallery-en.png`, `mi-increible-paseo-detail-en.png`) and 17 `-en.svg` assets, plus `resolveImage()` in `assets/js/modules/i18n.js` wired through `renderer.js` and `seccion.js`
+- [x] Implement hybrid location-based language detection in `i18n.js` (URL `?lang=` / manual `localStorage` override -> `sessionStorage` geo cache -> timezone heuristic -> silent `api.country.is` IP lookup -> `navigator.language` fallback)
+- [x] Redesign Success Case cards in `seccion.js`, `components.css`, `catalog.js`, and `editor.html` with `🎯 Diseñado para / Built for` context (ABB Family Day & GE Travel RE/MAX) and optional `💬 Client Verdict` quote card
+
 
 
 

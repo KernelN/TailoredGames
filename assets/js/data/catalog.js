@@ -1,11 +1,11 @@
 /**
- * Corpfolio Studio — Catalog & Configuration Data
+ * Tailored Games — Catalog & Configuration Data
  * Generated via Visual Local Editor (editor.html)
  */
 
 const CORPFOLIO_CATALOG = {
   "studioInfo": {
-    "name": "Gametelier Studio",
+    "name": "Tailored Games",
     "logo": "assets/images/logo/logo-full-cleanish.png",
     "favicon": "assets/images/logo/logo.svg",
     "tagline": {
@@ -21,7 +21,7 @@ const CORPFOLIO_CATALOG = {
       "en": "Video games and touch experiences designed from scratch tailored to you, crafted to captivate your audience and empower your events."
     },
     "whatsapp": "541124992975",
-    "email": "contacto@corpfolio.com"
+    "email": "tailoredlabs@gmail.com"
   },
   "promotions": {
     "daysRule": {
@@ -276,17 +276,27 @@ const CORPFOLIO_CATALOG = {
                 "en": "Reforestation Drones"
               },
               "client": {
-                "es": "Caso de Éxito — Reforestación Interactiva",
-                "en": "Success Case — Interactive Reforestation"
+                "es": "ABB — Family Day (Ecología)",
+                "en": "ABB — Family Day (Ecology)"
               },
               "image": "assets/images/games/abb-drones.png",
               "summary": {
                 "es": "Dos participantes comandan drones virtuales en pantalla táctil coordinando disparos de semillas y agua para hacer florecer un bosque, con recuento final de árboles plantados.",
                 "en": "Two players pilot touchscreen virtual drones coordinating seed and water drops to make a forest bloom, concluding with a tree-planting impact count."
               },
-              "eventNote": {
-                "es": "Excelente para stands de sustentabilidad, jornadas de integración familiar y eventos corporativos con foco colaborativo.",
-                "en": "Perfect for sustainability booths, family day activations, and team-building corporate events."
+              "builtFor": {
+                "es": "ABB Family Day — Jornada familiar centrada en ecología, creada para incentivar el cuidado de la naturaleza y la reforestación a través de una experiencia divertida en equipo.",
+                "en": "ABB Family Day — Family event centered around ecology, created to encourage caring for nature and reforestation through a fun, collaborative experience."
+              },
+              "clientVerdict": {
+                "quote": {
+                  "es": "",
+                  "en": ""
+                },
+                "author": {
+                  "es": "",
+                  "en": ""
+                }
               }
             }
           ],
@@ -362,17 +372,27 @@ const CORPFOLIO_CATALOG = {
                 "en": "Sorting Arms"
               },
               "client": {
-                "es": "Caso de Éxito — Robótica y Reciclaje",
-                "en": "Success Case — Robotics & Recycling"
+                "es": "ABB — Family Day (Ecología)",
+                "en": "ABB — Family Day (Ecology)"
               },
               "image": "assets/images/games/abb-brazos.png",
               "summary": {
                 "es": "Brazos robóticos virtuales en pantalla grande clasificando materiales reciclables hacia sus contenedores correspondientes a ritmo acelerado para eventos de sustentabilidad.",
                 "en": "Virtual robotic arms on a large screen sorting recyclables into correct bins at an accelerating pace for sustainability events."
               },
-              "eventNote": {
-                "es": "Ideal para comunicar innovación tecnológica, eficiencia operativa o campañas de reciclaje corporativo.",
-                "en": "Great for communicating technological innovation, operational efficiency, or corporate recycling campaigns."
+              "builtFor": {
+                "es": "ABB Family Day — Jornada familiar centrada en ecología, pensada para enseñar información real sobre reciclaje y separación de residuos a través de un juego accesible para todas las edades.",
+                "en": "ABB Family Day — Family event centered around ecology, designed to teach real-world recycling and waste-sorting facts through an approachable game for all ages."
+              },
+              "clientVerdict": {
+                "quote": {
+                  "es": "",
+                  "en": ""
+                },
+                "author": {
+                  "es": "",
+                  "en": ""
+                }
               }
             }
           ],
@@ -446,17 +466,27 @@ const CORPFOLIO_CATALOG = {
                 "en": "Circular Robot Assembly"
               },
               "client": {
-                "es": "Caso de Éxito — Economía Circular",
-                "en": "Success Case — Circular Economy"
+                "es": "ABB — Family Day (Ecología)",
+                "en": "ABB — Family Day (Ecology)"
               },
               "image": "assets/images/games/abb-circular-assembly.png",
               "summary": {
                 "es": "Transformación de chatarra en robots de última generación, ideal para stands de manufactura, ingeniería y procesos circulares.",
                 "en": "Transforming scrap parts into next-generation robots, ideal for manufacturing, engineering, and circular economy booths."
               },
-              "eventNote": {
-                "es": "Excelente para stands de ingeniería, sustentabilidad industrial y ferias técnicas.",
-                "en": "Suited for engineering booths, industrial sustainability, and technical trade shows."
+              "builtFor": {
+                "es": "ABB Family Day — Jornada familiar centrada en ecología, creada para concientizar sobre la economía circular y evitar el desperdicio mediante una dinámica divertida y cooperativa.",
+                "en": "ABB Family Day — Family event centered around ecology, created to promote circular economy habits and waste reduction through a fun, cooperative challenge."
+              },
+              "clientVerdict": {
+                "quote": {
+                  "es": "",
+                  "en": ""
+                },
+                "author": {
+                  "es": "",
+                  "en": ""
+                }
               }
             }
           ],
@@ -846,17 +876,27 @@ const CORPFOLIO_CATALOG = {
                 "en": "Broker Hunt (GeTravel)"
               },
               "client": {
-                "es": "Caso GeTravel — Activación de Viajes y Turismo",
-                "en": "GeTravel Case — Travel & Tourism Activation"
+                "es": "GE Travel — Evento RE/MAX",
+                "en": "GE Travel — RE/MAX Event"
               },
               "image": "assets/images/games/tap-gallery.png",
               "summary": {
                 "es": "Activación lúdica donde los participantes deben capturar a brokers fugitivos de Remax que viajan por distintos destinos del mundo gracias a GeTravel, apareciendo sorpresivamente en aeropuertos y atracciones.",
                 "en": "Playful activation where players spot and capture rogue Remax brokers travelling worldwide via GeTravel, popping up unexpectedly across international airports and iconic destinations."
               },
-              "eventNote": {
-                "es": "Genera momentos hilarantes y gran interacción en stands de viajes, ferias inmobiliarias y eventos corporativos.",
-                "en": "Creates hilarious crowd moments and high engagement at travel booths, real estate expos, and corporate events."
+              "builtFor": {
+                "es": "Stand de GE Travel en un evento de RE/MAX — Creado para atraer clientes al stand y generar risas y diversión al ver caras conocidas de la empresa en pantalla.",
+                "en": "GE Travel booth at a RE/MAX event — Created to attract clients to the booth and spark laughs and fun as attendees spot familiar company faces right on screen."
+              },
+              "clientVerdict": {
+                "quote": {
+                  "es": "",
+                  "en": ""
+                },
+                "author": {
+                  "es": "",
+                  "en": ""
+                }
               }
             }
           ],
@@ -1337,6 +1377,89 @@ const CORPFOLIO_CATALOG = {
       "es": "Explorá estas mecánicas personalizables para inspirarte, ver valores estimados por día y sumarlas directamente a tu cotización.",
       "en": "Explore these customizable mechanics for inspiration, see estimated daily rates, and add them directly to your quote."
     }
+  },
+  "campaignBriefConfig": {
+    "bannerTitle": {
+      "es": "¡Creá tu Juego de Largo Alcance!",
+      "en": "Build Your Long-Term Game!"
+    },
+    "bannerSubtitle": {
+      "es": "Desarrollamos experiencias interactivas de duración extendida para servidores del cliente o web pública.",
+      "en": "We build extended-duration interactive experiences for client servers or public web."
+    },
+    "bannerCta": {
+      "es": "Armar mi brief / Ver formatos →",
+      "en": "Start my brief / See formats →"
+    },
+    "pageTitle": {
+      "es": "Pedí tu Juego de Largo Alcance",
+      "en": "Request Your Long-Term Game"
+    },
+    "pageSubtitle": {
+      "es": "Completá los datos que ya tengas (todos los campos son opcionales) para enviarnos tu consulta en 1 clic.",
+      "en": "Fill in whatever details you already have (all fields are optional) to send your inquiry in 1 click."
+    },
+    "inspiredHeroPrefix": {
+      "es": "Quiero un proyecto inspirado en [case]...",
+      "en": "I'd like a project inspired by [case]..."
+    },
+    "inspiredHeroSubtitle": {
+      "es": "Tomamos la profundidad y dinámica de [case] y la diseñamos a medida para tu empresa o campaña.",
+      "en": "We take the depth and core loop of [case] and tailor it from scratch for your company or campaign."
+    },
+    "defaultIdeaLabel": {
+      "es": "¿Tenés un proyecto o idea en mente? (Opcional)",
+      "en": "Do you have a project or idea in mind? (Optional)"
+    },
+    "defaultIdeaPlaceholder": {
+      "es": "Contanos brevemente qué querés lograr...",
+      "en": "Briefly describe what you want to achieve..."
+    },
+    "inspiredIdeaLabel": {
+      "es": "¿Qué te gustaría adaptar, sumar o cambiar respecto a [case]?",
+      "en": "What would you like to adapt, add, or change from [case]?"
+    },
+    "inspiredIdeaPlaceholder": {
+      "es": "Ej: Nos gustó el formato, pero aplicado a capacitación interna...",
+      "en": "e.g. Loved the format, tailored to internal training..."
+    },
+    "fields": {
+      "companyLabel": {
+        "es": "Empresa / Institución / Rubro",
+        "en": "Company / Organization / Industry"
+      },
+      "companyPlaceholder": {
+        "es": "Ej: Banco, Retail, Universidad...",
+        "en": "e.g. Bank, Retail, University..."
+      },
+      "themeLabel": {
+        "es": "Temática o Contenido a comunicar",
+        "en": "Theme or Content to Convey"
+      },
+      "themePlaceholder": {
+        "es": "Ej: Onboarding, Seguridad vial...",
+        "en": "e.g. Onboarding, Safety..."
+      },
+      "dateLabel": {
+        "es": "Plazo estimado de lanzamiento",
+        "en": "Target Launch Window"
+      },
+      "datePlaceholder": {
+        "es": "Ej: Q3 2026 / En 2 meses",
+        "en": "e.g. Q3 2026 / In 2 months"
+      }
+    },
+    "guidelines": [],
+    "pillGroups": [],
+    "scenariosSectionTitle": {
+      "es": "Formatos y Escenarios Posibles",
+      "en": "Solution Formats & Scenarios"
+    },
+    "scenariosSectionSubtitle": {
+      "es": "Ejemplos de cómo empresas, marcas e instituciones despliegan juegos de largo alcance.",
+      "en": "Examples of how companies, brands, and institutions deploy long-term games."
+    },
+    "scenarios": []
   }
 };
 

@@ -23,6 +23,11 @@ window.CorpfolioRenderer = (function () {
     return i18n() ? i18n().ui(key) : key;
   }
 
+  function resolveImg(src) {
+    if (!src) return "";
+    return i18n() && typeof i18n().resolveImage === "function" ? i18n().resolveImage(src) : src;
+  }
+
   /**
    * Checks if an item has at least one valid image (either directly or on one of its implementations)
    */
@@ -222,7 +227,8 @@ window.CorpfolioRenderer = (function () {
             ? activeImpl.image
             : (game.image || "");
           const isConcept = !isCustomCat && (game.isConcept || !rawImg || !rawImg.trim());
-          const imgSrc = (!rawImg || !rawImg.trim()) ? 'assets/images/concept-blueprint.svg' : rawImg;
+          const imgSrc = resolveImg((!rawImg || !rawImg.trim()) ? 'assets/images/concept-blueprint.svg' : rawImg);
+          const fallbackSrc = resolveImg('assets/images/concept-blueprint.svg');
 
           const clientLabel = activeImpl && activeImpl.client ? t(activeImpl.client) : "";
           const slideTitle = (isCustomCat && activeImpl && activeImpl.title) ? t(activeImpl.title) : t(game.title);
@@ -250,7 +256,7 @@ window.CorpfolioRenderer = (function () {
             <div class="slide-media" style="position: relative;">
               ${clientLabel ? `<span class="slide-client-badge">🏷️ ${clientLabel}</span>` : ''}
               ${isConcept ? `<span class="badge" style="position: absolute; top: 12px; ${clientLabel ? 'right: 12px;' : 'left: 12px;'} z-index: 5; background: rgba(6,182,212,0.3); color: #38BDF8; border: 1px solid rgba(6,182,212,0.6); backdrop-filter: blur(8px);">${ui("conceptBadge")}</span>` : ''}
-              <img src="${imgSrc}" alt="${slideTitle}" loading="lazy" onerror="this.onerror=null; this.src='assets/images/concept-blueprint.svg';" />
+              <img src="${imgSrc}" alt="${slideTitle}" loading="lazy" onerror="this.onerror=null; this.src='${fallbackSrc}';" />
             </div>
             <div class="slide-info">
               <div class="slide-title-row">
@@ -391,19 +397,20 @@ window.CorpfolioRenderer = (function () {
           const impls = Array.isArray(game.implementations) ? game.implementations : [];
           const activeImpl = impls.find(im => im.image && im.image.trim() !== "") || impls[0] || null;
           const rawImg = (activeImpl && activeImpl.image && activeImpl.image.trim() !== "") ? activeImpl.image : (game.image || "");
-          const imgSrc = (!rawImg || !rawImg.trim()) ? "assets/images/concept-blueprint.svg" : rawImg;
+          const fallbackSrc = resolveImg("assets/images/concept-blueprint.svg");
+          const imgSrc = resolveImg((!rawImg || !rawImg.trim()) ? "assets/images/concept-blueprint.svg" : rawImg);
           const inCart = cartInst?.hasGame(game.id);
 
           return `
             <div class="game-picker-item">
               <div class="game-picker-item-left">
-                <img src="${imgSrc}" class="game-picker-thumb" alt="${t(game.title)}" onerror="this.onerror=null; this.src='assets/images/concept-blueprint.svg';" />
+                <img src="${imgSrc}" class="game-picker-thumb" alt="${t(game.title)}" onerror="this.onerror=null; this.src='${fallbackSrc}';" />
                 <div style="min-width: 0;">
                   <div style="font-size: 14px; font-weight: 700; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                     ${t(game.title)}
                   </div>
                   <div style="font-size: 12px; color: #34D399; font-weight: 600;">
-                    $${fmt(game.dailyPrice)} ${ui("perDay")} ${inCart ? `<span style="color: var(--text-accent); margin-left: 6px;">(✓ En tu cotización)</span>` : ''}
+                    $${fmt(game.dailyPrice)} ${ui("perDay")} ${inCart ? `<span style="color: var(--text-accent); margin-left: 6px;">${ui("inYourQuoteTag")}</span>` : ''}
                   </div>
                 </div>
               </div>
@@ -424,7 +431,7 @@ window.CorpfolioRenderer = (function () {
           listHtml += aMedida.map(renderGameRow).join("");
         }
         if (!listHtml) {
-          listHtml = `<div style="text-align: center; padding: 24px; color: var(--text-muted); font-size: 13px;">No se encontraron juegos con ese nombre.</div>`;
+          listHtml = `<div style="text-align: center; padding: 24px; color: var(--text-muted); font-size: 13px;">${ui("noGamesFound")}</div>`;
         }
 
         const listContainer = modal.querySelector("#game-picker-list-container");
@@ -568,10 +575,13 @@ window.CorpfolioRenderer = (function () {
           ? ui("includedZeroCost")
           : `+$${fmt(addon.dailyPrice)} ${ui('perDay')}`;
 
+        const fallbackSrc = resolveImg("assets/images/concept-blueprint.svg");
+        const addonImg = resolveImg(addon.image || "assets/images/concept-blueprint.svg");
+
         return `
         <div class="addon-card" data-addon-id="${addon.id}">
           <div class="addon-thumb">
-            <img src="${addon.image}" alt="${t(addon.title)}" loading="lazy" onerror="this.onerror=null; this.src='assets/images/concept-blueprint.svg';" />
+            <img src="${addonImg}" alt="${t(addon.title)}" loading="lazy" onerror="this.onerror=null; this.src='${fallbackSrc}';" />
           </div>
           <div class="addon-body">
             <div class="addon-title-row">
@@ -634,10 +644,11 @@ window.CorpfolioRenderer = (function () {
       const linkHref = `seccion.html?tipo=herramientas&mode=${mode}`;
       const visibleTools = filterShowcaseItems(herramientas.items);
 
+      const fallbackSrc = resolveImg("assets/images/concept-blueprint.svg");
       const cardsHtml = visibleTools.map(tool => `
         <div class="tool-card">
           <div class="tool-media">
-            <img src="${tool.image}" alt="${t(tool.title)}" loading="lazy" onerror="this.onerror=null; this.src='assets/images/concept-blueprint.svg';" />
+            <img src="${resolveImg(tool.image || 'assets/images/concept-blueprint.svg')}" alt="${t(tool.title)}" loading="lazy" onerror="this.onerror=null; this.src='${fallbackSrc}';" />
           </div>
           <div class="tool-body">
             <div class="slide-title-row">
@@ -699,9 +710,10 @@ window.CorpfolioRenderer = (function () {
       const linkHref = `seccion.html?tipo=campanas&mode=${mode}`;
       const briefHref = `seccion.html?tipo=campanas-custom&mode=${mode}`;
 
+      const fallbackSrc = resolveImg("assets/images/concept-blueprint.svg");
       const cardsHtml = items.map(campaign => {
         const isConcept = campaign.isConcept || !campaign.image || !campaign.image.trim();
-        const imgSrc = isConcept ? 'assets/images/concept-blueprint.svg' : campaign.image;
+        const imgSrc = resolveImg(isConcept ? 'assets/images/concept-blueprint.svg' : campaign.image);
         const features = (t(campaign.features) || []).map(f => `<li>✓ ${f}</li>`).join('');
         const refBriefHref = `${briefHref}&ref=${encodeURIComponent(campaign.id)}`;
 
@@ -727,7 +739,7 @@ window.CorpfolioRenderer = (function () {
             </div>
 
             <div class="campaign-media" style="position: relative;">
-              <img src="${imgSrc}" alt="${t(campaign.title)}" loading="lazy" onerror="this.onerror=null; this.src='assets/images/concept-blueprint.svg';" />
+              <img src="${imgSrc}" alt="${t(campaign.title)}" loading="lazy" onerror="this.onerror=null; this.src='${fallbackSrc}';" />
             </div>
           </div>
         `;
@@ -777,7 +789,7 @@ window.CorpfolioRenderer = (function () {
 
               <div class="footer-actions">
                 <a href="https://wa.me/${studio?.whatsapp}" target="_blank" rel="noopener" class="btn btn-success">
-                  💬 WhatsApp Directo
+                  💬 ${ui("directWhatsApp")}
                 </a>
                 <a href="mailto:${studio?.email}" class="btn btn-outline">
                   ✉️ ${studio?.email}
@@ -786,8 +798,8 @@ window.CorpfolioRenderer = (function () {
             </div>
 
             <div class="footer-bottom">
-              <span>© ${new Date().getFullYear()} ${studio?.name}. Todos los derechos reservados.</span>
-              <span>B2B Event Entertainment & Brand Activations</span>
+              <span>© ${new Date().getFullYear()} ${studio?.name}. ${ui("allRightsReserved")}</span>
+              <span>${ui("footerTaglineRight")}</span>
             </div>
           </div>
         </footer>
@@ -912,7 +924,7 @@ window.CorpfolioRenderer = (function () {
                 <span style="font-weight: 800; color: #34D399;">$${fmt(game.subtotal)}</span>
               </div>
               <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 8px;">
-                $${fmt(game.dailyRate)} / día
+                $${fmt(game.dailyRate)} ${ui("perDay")}
               </div>
 
               ${game.addons.length > 0 ? `
@@ -974,14 +986,14 @@ window.CorpfolioRenderer = (function () {
 
           ${summary.qualifiesDaysPromo ? `
             <div class="cart-breakdown-row discount">
-              <span>✓ Promo 3+ días (50% OFF)</span>
+              <span>✓ ${ui("promoDaysCartLabel")}</span>
               <span>-$${fmt(summary.daysDiscount)}</span>
             </div>
           ` : ''}
 
           ${summary.qualifiesGamesPromo ? `
             <div class="cart-breakdown-row discount">
-              <span>✓ Promo 4+ juegos (20% OFF)</span>
+              <span>✓ ${ui("promoGamesCartLabel")}</span>
               <span>-$${fmt(summary.gamesDiscount)}</span>
             </div>
           ` : ''}
@@ -1029,12 +1041,12 @@ window.CorpfolioRenderer = (function () {
 
               <div class="form-group">
                 <label class="form-label">${ui("contactNameLabel")}</label>
-                <input type="text" id="modal-contact" class="form-input" placeholder="Nombre y Apellido" />
+                <input type="text" id="modal-contact" class="form-input" placeholder="${ui("contactNamePlaceholder")}" />
               </div>
 
               <div class="form-group">
                 <label class="form-label">${ui("contactInfoLabel")}</label>
-                <input type="text" id="modal-info" class="form-input" placeholder="Email o WhatsApp de contacto" />
+                <input type="text" id="modal-info" class="form-input" placeholder="${ui("contactInfoPlaceholder")}" />
               </div>
             </div>
 

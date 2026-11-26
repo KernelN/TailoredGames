@@ -1407,7 +1407,8 @@
               client: { es: "Caso Corporativo", en: "Corporate Case" },
               image: found.image || "",
               summary: { es: found.description?.es || "", en: found.description?.en || "" },
-              eventNote: { es: "Personalizable 100% para stands y eventos.", en: "100% customizable for booths and events." }
+              builtFor: { es: "Diseñado para eventos y activaciones corporativas.", en: "Built for corporate events and brand activations." },
+              clientVerdict: { quote: { es: "", en: "" }, author: { es: "", en: "" } }
             }
           ];
         }
@@ -1506,7 +1507,8 @@
         client: { es: "Cliente / Activación", en: "Client / Activation" },
         image: item.image || "",
         summary: { es: "Resumen de cómo se implementó la mecánica para este cliente.", en: "Summary of how the mechanic was implemented for this client." },
-        eventNote: { es: "Ideal para stands y activaciones de alto flujo.", en: "Ideal for high-traffic booths and activations." }
+        builtFor: { es: "Diseñado para eventos y activaciones de alto flujo.", en: "Built for high-traffic events and brand activations." },
+        clientVerdict: { quote: { es: "", en: "" }, author: { es: "", en: "" } }
       });
       renderAllCategorySheets();
     };
@@ -1672,7 +1674,7 @@
               </div>
             </div>
 
-            <!-- Case Summary & Event Note -->
+            <!-- Case Summary, Built For & Optional Client Verdict -->
             <div style="grid-column: 2 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; min-width: 0; padding-top: 4px; border-top: 1px dashed rgba(255,255,255,0.08);">
               <div>
                 <label class="form-label" style="font-size: 10px;">📝 Historia / Resumen del Caso (ES / EN)</label>
@@ -1682,10 +1684,24 @@
                 </div>
               </div>
               <div>
-                <label class="form-label" style="font-size: 10px;">💡 Nota de Aplicación en Eventos (ES / EN)</label>
+                <label class="form-label" style="font-size: 10px;">🎯 Diseñado para (ES / EN)</label>
                 <div class="dual-input-row">
-                  <textarea class="form-input" rows="2" placeholder="Ideal para stands de... (ES)" onchange="updateImplField('${item.id}', ${imIdx}, 'eventNote.es', this.value)">${escHtml(im.eventNote?.es || '')}</textarea>
-                  <textarea class="form-input" rows="2" placeholder="Great for booths... (EN)" onchange="updateImplField('${item.id}', ${imIdx}, 'eventNote.en', this.value)">${escHtml(im.eventNote?.en || '')}</textarea>
+                  <textarea class="form-input" rows="2" placeholder="Evento / objetivo para el que se diseñó (ES)" onchange="updateImplField('${item.id}', ${imIdx}, 'builtFor.es', this.value)">${escHtml(im.builtFor?.es || im.eventNote?.es || '')}</textarea>
+                  <textarea class="form-input" rows="2" placeholder="Event / purpose it was built for (EN)" onchange="updateImplField('${item.id}', ${imIdx}, 'builtFor.en', this.value)">${escHtml(im.builtFor?.en || im.eventNote?.en || '')}</textarea>
+                </div>
+              </div>
+              <div>
+                <label class="form-label" style="font-size: 10px;">💬 Veredicto del Cliente — Cita Opcional (ES / EN)</label>
+                <div class="dual-input-row">
+                  <textarea class="form-input" rows="2" placeholder="Cita textual del cliente (opcional, ES)" onchange="updateImplField('${item.id}', ${imIdx}, 'clientVerdict.quote.es', this.value)">${escHtml(im.clientVerdict?.quote?.es || '')}</textarea>
+                  <textarea class="form-input" rows="2" placeholder="Client testimonial quote (optional, EN)" onchange="updateImplField('${item.id}', ${imIdx}, 'clientVerdict.quote.en', this.value)">${escHtml(im.clientVerdict?.quote?.en || '')}</textarea>
+                </div>
+              </div>
+              <div>
+                <label class="form-label" style="font-size: 10px;">✍️ Autor / Cargo del Cliente — Opcional (ES / EN)</label>
+                <div class="dual-input-row">
+                  <input type="text" class="form-input" value="${escAttr(im.clientVerdict?.author?.es || '')}" placeholder="Ej: María Pérez, HR Manager @ ABB (ES)" onchange="updateImplField('${item.id}', ${imIdx}, 'clientVerdict.author.es', this.value)" />
+                  <input type="text" class="form-input" value="${escAttr(im.clientVerdict?.author?.en || '')}" placeholder="e.g. Jane Doe, HR Manager @ ABB (EN)" onchange="updateImplField('${item.id}', ${imIdx}, 'clientVerdict.author.en', this.value)" />
                 </div>
               </div>
             </div>
@@ -1915,7 +1931,8 @@
             client: { es: "Caso Corporativo", en: "Corporate Case" },
             image: "",
             summary: { es: "Implementación personalizada para stand corporativo.", en: "Custom implementation for corporate booth." },
-            eventNote: { es: "Adaptable a productos o servicios de la marca.", en: "Adaptable to brand products or services." }
+            builtFor: { es: "Diseñado a medida para activaciones y eventos de marca.", en: "Built to measure for brand activations and events." },
+            clientVerdict: { quote: { es: "", en: "" }, author: { es: "", en: "" } }
           }
         ];
       }

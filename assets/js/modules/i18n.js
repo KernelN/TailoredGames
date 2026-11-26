@@ -5,6 +5,84 @@
 
 (function () {
   const STORAGE_KEY = "corpfolio_lang";
+  const GEO_CACHE_KEY = "corpfolio_geo_lang";
+
+  const SPANISH_COUNTRIES = new Set([
+    "AR", "ES", "MX", "CO", "CL", "PE", "UY", "PY", "BO", "EC",
+    "VE", "CR", "PA", "GT", "HN", "SV", "NI", "DO", "PR", "CU", "GQ"
+  ]);
+
+  const SPANISH_TIMEZONES = new Set([
+    "America/Buenos_Aires",
+    "America/Cordoba",
+    "America/Salta",
+    "America/Jujuy",
+    "America/Tucuman",
+    "America/Catamarca",
+    "America/La_Rioja",
+    "America/San_Juan",
+    "America/Mendoza",
+    "America/San_Luis",
+    "America/Rio_Gallegos",
+    "America/Ushuaia",
+    "Europe/Madrid",
+    "Atlantic/Canary",
+    "Africa/Ceuta",
+    "America/Mexico_City",
+    "America/Cancun",
+    "America/Merida",
+    "America/Monterrey",
+    "America/Matamoros",
+    "America/Mazatlan",
+    "America/Chihuahua",
+    "America/Ojinaga",
+    "America/Hermosillo",
+    "America/Tijuana",
+    "America/Bahia_Banderas",
+    "America/Bogota",
+    "America/Santiago",
+    "Pacific/Easter",
+    "America/Lima",
+    "America/Montevideo",
+    "America/Asuncion",
+    "America/La_Paz",
+    "America/Guayaquil",
+    "Pacific/Galapagos",
+    "America/Caracas",
+    "America/Costa_Rica",
+    "America/Panama",
+    "America/Guatemala",
+    "America/Tegucigalpa",
+    "America/El_Salvador",
+    "America/Managua",
+    "America/Santo_Domingo",
+    "America/Puerto_Rico",
+    "America/Havana",
+    "Africa/Malabo"
+  ]);
+
+  const LOCALIZED_IMAGES = {
+    "assets/images/games/trivia.png": "assets/images/games/trivia-en.png",
+    "assets/images/games/tap-gallery.png": "assets/images/games/tap-gallery-en.png",
+    "assets/images/campaigns/mi-increible-paseo-detail.png": "assets/images/campaigns/mi-increible-paseo-detail-en.png",
+    "assets/images/concept-blueprint.svg": "assets/images/concept-blueprint-en.svg",
+    "assets/images/addons/ranking.svg": "assets/images/addons/ranking-en.svg",
+    "assets/images/addons/ranking-detail.svg": "assets/images/addons/ranking-detail-en.svg",
+    "assets/images/addons/registro.svg": "assets/images/addons/registro-en.svg",
+    "assets/images/addons/registro-detail.svg": "assets/images/addons/registro-detail-en.svg",
+    "assets/images/addons/sorteo.svg": "assets/images/addons/sorteo-en.svg",
+    "assets/images/addons/sorteo-detail.svg": "assets/images/addons/sorteo-detail-en.svg",
+    "assets/images/tools/ruleta.svg": "assets/images/tools/ruleta-en.svg",
+    "assets/images/tools/ruleta-detail.svg": "assets/images/tools/ruleta-detail-en.svg",
+    "assets/images/tools/sorteador.svg": "assets/images/tools/sorteador-en.svg",
+    "assets/images/tools/sorteador-detail.svg": "assets/images/tools/sorteador-detail-en.svg",
+    "assets/images/games/memotest.svg": "assets/images/games/memotest-en.svg",
+    "assets/images/games/memotest-detail.svg": "assets/images/games/memotest-detail-en.svg",
+    "assets/images/games/simon.svg": "assets/images/games/simon-en.svg",
+    "assets/images/games/simon-detail.svg": "assets/images/games/simon-detail-en.svg",
+    "assets/images/games/trivia.svg": "assets/images/games/trivia-en.svg",
+    "assets/images/games/trivia-detail.svg": "assets/images/games/trivia-detail-en.svg"
+  };
 
   // Common UI translation dictionary
   const UI_DICTIONARY = {
@@ -367,13 +445,101 @@
     campaignCasesBadge: {
       es: "🚀 Proyecto a Medida",
       en: "🚀 Custom Project"
+    },
+    builtForLabel: {
+      es: "Diseñado para:",
+      en: "Built for:"
+    },
+    clientVerdictLabel: {
+      es: "Veredicto del cliente",
+      en: "Client Verdict"
+    },
+    directWhatsApp: {
+      es: "WhatsApp Directo",
+      en: "Direct WhatsApp"
+    },
+    allRightsReserved: {
+      es: "Todos los derechos reservados.",
+      en: "All rights reserved."
+    },
+    footerTaglineRight: {
+      es: "Entretenimiento B2B & Activaciones de Marca",
+      en: "B2B Event Entertainment & Brand Activations"
+    },
+    availableForEvents: {
+      es: "Disponible para activaciones & eventos B2B",
+      en: "Available for B2B activations & events"
+    },
+    inquireExperience: {
+      es: "Consultar por esta experiencia",
+      en: "Inquire about this experience"
+    },
+    inquireWhatsAppPrefix: {
+      es: "Hola, me interesa consultar por ",
+      en: "Hi, I'd like to inquire about "
+    },
+    inYourQuoteTag: {
+      es: "(✓ En tu cotización)",
+      en: "(✓ In your quote)"
+    },
+    noGamesFound: {
+      es: "No se encontraron juegos con ese nombre.",
+      en: "No games found matching that name."
+    },
+    promoDaysCartLabel: {
+      es: "Promo 3+ días (50% OFF)",
+      en: "Promo 3+ days (50% OFF)"
+    },
+    promoGamesCartLabel: {
+      es: "Promo 4+ juegos (20% OFF)",
+      en: "Promo 4+ games (20% OFF)"
+    },
+    contactNamePlaceholder: {
+      es: "Nombre y Apellido",
+      en: "Full Name"
+    },
+    contactInfoPlaceholder: {
+      es: "Email o WhatsApp de contacto",
+      en: "Contact Email or WhatsApp"
+    },
+    customBannerBadgeCotizador: {
+      es: "Estimador & Brief Interactivo",
+      en: "Estimator & Interactive Brief"
+    },
+    customBannerBadgeShowcase: {
+      es: "Desarrollo Desde Cero",
+      en: "Built From Scratch"
+    },
+    campaignBannerBadgeCotizador: {
+      es: "Brief de Proyecto a Medida",
+      en: "Custom Project Brief"
+    },
+    campaignBannerBadgeShowcase: {
+      es: "Intranet, Web & Capacitación",
+      en: "Intranet, Web & Training"
     }
   };
 
   class I18nManager {
     constructor() {
+      this.hasExplicitPreference = false;
+      this.hasGeoCache = false;
       this.currentLang = this.detectLanguage();
       document.documentElement.lang = this.currentLang;
+      this.detectGeoLanguageAsync();
+    }
+
+    detectLangFromTimezone(tz) {
+      if (!tz || typeof tz !== "string") return null;
+      if (tz.startsWith("America/Argentina/") || SPANISH_TIMEZONES.has(tz)) {
+        return "es";
+      }
+      return null;
+    }
+
+    detectLangFromCountry(countryCode) {
+      if (!countryCode || typeof countryCode !== "string") return "en";
+      return SPANISH_COUNTRIES.has(countryCode.trim().toUpperCase()) ? "es" : "en";
     }
 
     detectLanguage() {
@@ -381,20 +547,44 @@
       const params = new URLSearchParams(window.location.search);
       const urlLang = params.get("lang");
       if (urlLang && (urlLang === "es" || urlLang === "en")) {
+        this.hasExplicitPreference = true;
         return urlLang;
       }
 
-      // 2. Check localStorage
+      // 2. Check localStorage (manual override)
       try {
         const stored = localStorage.getItem(STORAGE_KEY);
         if (stored && (stored === "es" || stored === "en")) {
+          this.hasExplicitPreference = true;
           return stored;
         }
       } catch (e) {
         console.warn("localStorage not accessible", e);
       }
 
-      // 3. Check browser locale (es-* defaults to 'es', everything else to 'en')
+      // 3. Check sessionStorage geo cache
+      try {
+        const geoCached = sessionStorage.getItem(GEO_CACHE_KEY);
+        if (geoCached && (geoCached === "es" || geoCached === "en")) {
+          this.hasGeoCache = true;
+          return geoCached;
+        }
+      } catch (e) {
+        // sessionStorage may be unavailable
+      }
+
+      // 4. Timezone heuristic for instant location-aware first paint
+      try {
+        const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const tzLang = this.detectLangFromTimezone(tz);
+        if (tzLang) {
+          return tzLang;
+        }
+      } catch (e) {
+        // Intl may be unavailable
+      }
+
+      // 5. Fallback to browser/OS locale (es-* defaults to 'es', everything else to 'en')
       const browserLang = (navigator.language || navigator.userLanguage || "es").toLowerCase();
       if (browserLang.startsWith("es")) {
         return "es";
@@ -403,12 +593,56 @@
       return "en";
     }
 
+    async detectGeoLanguageAsync() {
+      if (this.hasExplicitPreference || this.hasGeoCache || typeof fetch !== "function") {
+        return;
+      }
+
+      let timeoutId = null;
+      try {
+        const controller = typeof AbortController !== "undefined" ? new AbortController() : null;
+        if (controller) {
+          timeoutId = setTimeout(() => controller.abort(), 2500);
+        }
+
+        const res = await fetch("https://api.country.is/", {
+          method: "GET",
+          signal: controller ? controller.signal : undefined
+        });
+
+        if (timeoutId) clearTimeout(timeoutId);
+        if (!res || !res.ok) return;
+
+        const data = await res.json();
+        if (!data || !data.country) return;
+
+        const detected = this.detectLangFromCountry(data.country);
+        try {
+          sessionStorage.setItem(GEO_CACHE_KEY, detected);
+          this.hasGeoCache = true;
+        } catch (e) {
+          // ignore storage errors
+        }
+
+        // Only update if the user hasn't manually chosen a language since page load
+        if (!this.hasExplicitPreference && detected !== this.currentLang) {
+          this.currentLang = detected;
+          document.documentElement.lang = detected;
+          window.dispatchEvent(new CustomEvent("corpfolio:langchange", { detail: { lang: detected, source: "geo" } }));
+        }
+      } catch (e) {
+        if (timeoutId) clearTimeout(timeoutId);
+        // Fail silently and keep timezone/browser fallback
+      }
+    }
+
     getLang() {
       return this.currentLang;
     }
 
     setLang(lang) {
       if (lang !== "es" && lang !== "en") return;
+      this.hasExplicitPreference = true;
       this.currentLang = lang;
       document.documentElement.lang = lang;
       try {
@@ -423,6 +657,20 @@
 
     toggle() {
       this.setLang(this.currentLang === "es" ? "en" : "es");
+    }
+
+    /**
+     * Resolves localized image path (supports { es, en } objects or explicit -en asset mapping)
+     */
+    resolveImage(src) {
+      if (!src) return "";
+      if (typeof src === "object") {
+        return this.t(src);
+      }
+      if (this.currentLang === "en" && LOCALIZED_IMAGES[src]) {
+        return LOCALIZED_IMAGES[src];
+      }
+      return src;
     }
 
     /**

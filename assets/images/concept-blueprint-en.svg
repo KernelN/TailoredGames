@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="blueprintBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070B14" />
+      <stop offset="50%" stop-color="#0B132B" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+
+    <!-- Radial Cyan Glow -->
+    <radialGradient id="centerGlow" cx="50%" cy="45%" r="60%">
+      <stop offset="0%" stop-color="#06B6D4" stop-opacity="0.25" />
+      <stop offset="60%" stop-color="#6366F1" stop-opacity="0.08" />
+      <stop offset="100%" stop-color="#070B14" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Tech Grid Pattern -->
+    <pattern id="blueprintGrid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#06B6D4" stroke-opacity="0.12" stroke-width="1"/>
+      <circle cx="30" cy="30" r="1.5" fill="#06B6D4" fill-opacity="0.25"/>
+    </pattern>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="800" height="500" fill="url(#blueprintBg)" />
+  <rect width="800" height="500" fill="url(#blueprintGrid)" />
+  <circle cx="400" cy="220" r="300" fill="url(#centerGlow)" />
+
+  <!-- Technical Coordinate Marks -->
+  <g stroke="#06B6D4" stroke-opacity="0.3" stroke-width="1.5">
+    <line x1="50" y1="40" x2="70" y2="40" />
+    <line x1="50" y1="40" x2="50" y2="60" />
+    <line x1="750" y1="40" x2="730" y2="40" />
+    <line x1="750" y1="40" x2="750" y2="60" />
+    <line x1="50" y1="460" x2="70" y2="460" />
+    <line x1="50" y1="460" x2="50" y2="440" />
+    <line x1="750" y1="460" x2="730" y2="460" />
+    <line x1="750" y1="460" x2="750" y2="440" />
+  </g>
+
+  <!-- Top Tech Metadata -->
+  <text x="70" y="58" fill="#38BDF8" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="700" letter-spacing="2">R&amp;D PROTOTYPE • BLUEPRINT SPEC</text>
+  <text x="730" y="58" fill="#64748B" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="10" font-weight="600" text-anchor="end" letter-spacing="1.5">STATUS: PROPOSAL SEED</text>
+
+  <!-- Central Holographic Wireframe Console & Controller -->
+  <g transform="translate(400, 215)" stroke="#06B6D4" fill="none" stroke-linejoin="round">
+    <!-- Isometric Console Unit -->
+    <g stroke-width="1.5" stroke-opacity="0.8">
+      <!-- Top Face -->
+      <polygon points="0,-90 120,-30 0,30 -120,-30" fill="rgba(6, 182, 212, 0.05)" />
+      <!-- Left Face -->
+      <polygon points="-120,-30 0,30 0,75 -120,15" fill="rgba(6, 182, 212, 0.08)" />
+      <!-- Right Face -->
+      <polygon points="0,30 120,-30 120,15 0,75" fill="rgba(6, 182, 212, 0.03)" />
+      <!-- Center Slot/Sensor Line -->
+      <line x1="0" y1="-20" x2="80" y2="20" stroke="#38BDF8" stroke-width="2" />
+      <circle cx="85" cy="22" r="3" fill="#38BDF8" />
+    </g>
+
+    <!-- Isometric Touch Controller Floating in Front -->
+    <g transform="translate(-40, 60)" stroke="#38BDF8" stroke-width="2">
+      <!-- Controller Body Wireframe -->
+      <path d="M -50 -10 C -60 -25 -20 -35 0 -25 C 20 -35 60 -25 50 -10 C 45 25 30 35 15 20 C 0 30 -15 30 -30 20 C -45 35 -55 25 -50 -10 Z" fill="rgba(6, 182, 212, 0.1)" />
+      <!-- D-Pad Wireframe -->
+      <path d="M -25 -15 L -20 -15 L -20 -20 L -15 -20 L -15 -15 L -10 -15 L -10 -10 L -15 -10 L -15 -5 L -20 -5 L -20 -10 L -25 -10 Z" fill="rgba(99, 102, 241, 0.4)" stroke="#818CF8" stroke-width="1" />
+      <!-- Action Buttons -->
+      <circle cx="15" cy="-18" r="3.5" fill="#34D399" stroke="none" />
+      <circle cx="25" cy="-12" r="3.5" fill="#F59E0B" stroke="none" />
+      <circle cx="15" cy="-6" r="3.5" fill="#EF4444" stroke="none" />
+      <circle cx="5" cy="-12" r="3.5" fill="#38BDF8" stroke="none" />
+    </g>
+
+    <!-- Projected Laser Rays -->
+    <line x1="-120" y1="-30" x2="-140" y2="-50" stroke="#06B6D4" stroke-dasharray="3,3" opacity="0.6" />
+    <line x1="120" y1="-30" x2="140" y2="-50" stroke="#06B6D4" stroke-dasharray="3,3" opacity="0.6" />
+    <line x1="0" y1="75" x2="0" y2="105" stroke="#06B6D4" stroke-dasharray="3,3" opacity="0.6" />
+  </g>
+
+  <!-- Concept Label Banner -->
+  <g transform="translate(400, 380)">
+    <rect x="-160" y="-18" width="320" height="36" rx="18" fill="rgba(6, 182, 212, 0.12)" stroke="#06B6D4" stroke-width="1.5" />
+    <circle cx="-135" cy="0" r="5" fill="#38BDF8" />
+    <text x="10" y="5" fill="#F8FAFC" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="13" font-weight="800" text-anchor="middle" letter-spacing="1">CONCEPT IN DEVELOPMENT</text>
+  </g>
+
+  <!-- Subtitle Text -->
+  <text x="400" y="425" fill="#94A3B8" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="500" text-anchor="middle">
+    Prototype design ready for production and custom branding
+  </text>
+</svg>

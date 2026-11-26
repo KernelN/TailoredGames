@@ -40,6 +40,11 @@ document.addEventListener("DOMContentLoaded", () => {
     return i18n ? i18n.ui(key) : key;
   }
 
+  function resolveImg(src) {
+    if (!src) return "";
+    return i18n && typeof i18n.resolveImage === "function" ? i18n.resolveImage(src) : src;
+  }
+
   function escapeHtml(str) {
     return String(str ?? "")
       .replace(/&/g, "&amp;")
@@ -275,9 +280,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // Showcase Mode: direct contact consultation
     return `
       <div class="vertical-pricing-box">
-        <span style="font-size: 13px; color: var(--text-muted);">Disponible para activaciones & eventos B2B</span>
-        <a href="https://wa.me/${catalog.studioInfo.whatsapp}?text=Hola,%20me%20interesa%20consultar%20por%20${encodeURIComponent(t(item.title))}" target="_blank" rel="noopener" class="btn btn-outline btn-sm">
-          💬 Consultar por esta experiencia
+        <span style="font-size: 13px; color: var(--text-muted);">${ui("availableForEvents")}</span>
+        <a href="https://wa.me/${catalog.studioInfo.whatsapp}?text=${encodeURIComponent(ui("inquireWhatsAppPrefix") + t(item.title))}" target="_blank" rel="noopener" class="btn btn-outline btn-sm">
+          💬 ${ui("inquireExperience")}
         </a>
       </div>
     `;
@@ -294,10 +299,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const caseTitle = t(impl.title) || t(item.title);
     const caseClient = t(impl.client) || "";
     const caseSummary = t(impl.summary) || t(item.description);
-    const caseEventNote = t(impl.eventNote) || "";
-    const caseImg = (impl.image && impl.image.trim())
+    const caseBuiltFor = t(impl.builtFor || impl.eventNote) || "";
+    const verdictQuote = t(impl.clientVerdict?.quote).trim();
+    const verdictAuthor = t(impl.clientVerdict?.author).trim();
+    const fallbackSrc = resolveImg("assets/images/concept-blueprint.svg");
+    const caseImg = resolveImg((impl.image && impl.image.trim())
       ? impl.image
-      : ((item.image && item.image.trim()) ? item.image : "assets/images/concept-blueprint.svg");
+      : ((item.image && item.image.trim()) ? item.image : "assets/images/concept-blueprint.svg"));
 
     const customBriefUrl = `seccion.html?tipo=a-medida-custom&mode=${mode}&ref=${encodeURIComponent(impl.id)}`;
     const cardAnchorId = isPrimaryImpl ? item.id : impl.id;
@@ -318,7 +326,7 @@ document.addEventListener("DOMContentLoaded", () => {
       : `
         <div class="vertical-pricing-box">
           <span style="font-size: 13px; color: var(--text-muted);">
-            ${escapeHtml(t(specs.b2bGoal) || "Disponible para activaciones & eventos B2B")}
+            ${escapeHtml(t(specs.b2bGoal) || ui("availableForEvents"))}
           </span>
           <a href="${customBriefUrl}" class="btn btn-primary btn-sm">
             ✨ ${ui("requestSimilar")}
@@ -330,7 +338,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <article class="success-case-card" id="${escapeHtml(cardAnchorId)}">
         <div class="success-case-media">
           ${caseClient ? `<span class="slide-client-badge">🏷️ ${escapeHtml(caseClient)}</span>` : ''}
-          <img src="${escapeHtml(caseImg)}" alt="${escapeHtml(caseTitle)}" loading="lazy" onerror="this.onerror=null; this.src='assets/images/concept-blueprint.svg';" />
+          <img src="${escapeHtml(caseImg)}" alt="${escapeHtml(caseTitle)}" loading="lazy" onerror="this.onerror=null; this.src='${escapeHtml(fallbackSrc)}';" />
         </div>
 
         <div class="success-case-body">
@@ -346,10 +354,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
           <p class="vertical-desc" style="margin-bottom: 14px;">${escapeHtml(caseSummary)}</p>
 
-          ${caseEventNote ? `
-            <div class="success-case-event-note">
-              <span>💡</span>
-              <span>${escapeHtml(caseEventNote)}</span>
+          ${caseBuiltFor ? `
+            <div class="success-case-built-for">
+              <span>🎯</span>
+              <div>
+                <span class="success-case-built-for-label">${escapeHtml(ui("builtForLabel"))}</span>
+                <span>${escapeHtml(caseBuiltFor)}</span>
+              </div>
+            </div>
+          ` : ''}
+
+          ${verdictQuote ? `
+            <div class="success-case-verdict">
+              <div class="success-case-verdict-label">💬 ${escapeHtml(ui("clientVerdictLabel"))}</div>
+              <blockquote class="success-case-verdict-quote">“${escapeHtml(verdictQuote)}”</blockquote>
+              ${verdictAuthor ? `<div class="success-case-verdict-author">— ${escapeHtml(verdictAuthor)}</div>` : ''}
             </div>
           ` : ''}
 
@@ -372,7 +391,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const headerTags = (t(item.tags) || []).slice(0, 2).map(tag => `<span class="tag-pill">${escapeHtml(tag)}</span>`).join("");
     const itemFeatures = (t(item.features) || []).map(f => `<li>${escapeHtml(f)}</li>`).join("");
     const isConcept = item.isConcept || !item.image || !item.image.trim();
-    const imgSrc = isConcept ? "assets/images/concept-blueprint.svg" : item.image;
+    const fallbackSrc = resolveImg("assets/images/concept-blueprint.svg");
+    const imgSrc = resolveImg(isConcept ? "assets/images/concept-blueprint.svg" : item.image);
     const campaignBriefUrl = `seccion.html?tipo=campanas-custom&mode=${mode}&ref=${encodeURIComponent(item.id)}`;
 
     const footerHtml = mode === "cotizador"
@@ -398,7 +418,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="success-case-media">
           <span class="slide-client-badge">🌟 ${escapeHtml(categoryTitle)}</span>
           ${isConcept ? `<span class="badge" style="position: absolute; top: 12px; right: 12px; z-index: 6; background: rgba(6,182,212,0.3); color: #38BDF8; border: 1px solid rgba(6,182,212,0.6); backdrop-filter: blur(8px);">${ui("conceptBadge")}</span>` : ''}
-          <img src="${escapeHtml(imgSrc)}" alt="${escapeHtml(t(item.title))}" loading="lazy" onerror="this.onerror=null; this.src='assets/images/concept-blueprint.svg';" />
+          <img src="${escapeHtml(imgSrc)}" alt="${escapeHtml(t(item.title))}" loading="lazy" onerror="this.onerror=null; this.src='${escapeHtml(fallbackSrc)}';" />
         </div>
 
         <div class="success-case-body">
@@ -427,7 +447,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function buildBriefCardHtml(cfg, refCtx) {
     let refStripHtml = "";
     if (refCtx) {
-      const refImg = (refCtx.img && refCtx.img.trim()) ? refCtx.img : "assets/images/concept-blueprint.svg";
+      const fallbackSrc = resolveImg("assets/images/concept-blueprint.svg");
+      const refImg = resolveImg((refCtx.img && refCtx.img.trim()) ? refCtx.img : "assets/images/concept-blueprint.svg");
       const inCart = refCtx.quoteGameId ? cart?.hasGame(refCtx.quoteGameId) : false;
 
       let refRightActions = "";
@@ -448,7 +469,7 @@ document.addEventListener("DOMContentLoaded", () => {
       refStripHtml = `
         <div class="brief-ref-strip">
           <div class="brief-ref-left">
-            <img src="${escapeHtml(refImg)}" alt="${escapeHtml(refCtx.title)}" class="brief-ref-thumb" onerror="this.onerror=null; this.src='assets/images/concept-blueprint.svg';" />
+            <img src="${escapeHtml(refImg)}" alt="${escapeHtml(refCtx.title)}" class="brief-ref-thumb" onerror="this.onerror=null; this.src='${escapeHtml(fallbackSrc)}';" />
             <div style="min-width: 0;">
               <div style="font-size: 11.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: #38BDF8;">
                 ${ui("currentRefBadge")}
@@ -1017,7 +1038,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const bannerHtml = `
             <section class="pedi-tuyo-banner">
               <div class="pedi-tuyo-content">
-                <div class="hero-badge" style="margin-bottom: 12px;">✨ ${mode === "cotizador" ? "Estimador & Brief Interactivo" : "Desarrollo Desde Cero"}</div>
+                <div class="hero-badge" style="margin-bottom: 12px;">✨ ${mode === "cotizador" ? ui("customBannerBadgeCotizador") : ui("customBannerBadgeShowcase")}</div>
                 <h2 style="font-size: 28px; font-weight: 800; color: #FFFFFF; margin-bottom: 8px;">${escapeHtml(t(cfg.bannerTitle))}</h2>
                 <p style="font-size: 16px; color: var(--text-secondary); max-width: 680px; line-height: 1.6;">${escapeHtml(t(cfg.bannerSubtitle))}</p>
               </div>
@@ -1045,7 +1066,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const bannerHtml = `
             <section class="pedi-tuyo-banner">
               <div class="pedi-tuyo-content">
-                <div class="hero-badge" style="margin-bottom: 12px;">🌐 ${mode === "cotizador" ? "Brief de Proyecto a Medida" : "Intranet, Web & Capacitación"}</div>
+                <div class="hero-badge" style="margin-bottom: 12px;">🌐 ${mode === "cotizador" ? ui("campaignBannerBadgeCotizador") : ui("campaignBannerBadgeShowcase")}</div>
                 <h2 style="font-size: 28px; font-weight: 800; color: #FFFFFF; margin-bottom: 8px;">${escapeHtml(t(cfg.bannerTitle))}</h2>
                 <p style="font-size: 16px; color: var(--text-secondary); max-width: 680px; line-height: 1.6;">${escapeHtml(t(cfg.bannerSubtitle))}</p>
               </div>
@@ -1074,13 +1095,14 @@ document.addEventListener("DOMContentLoaded", () => {
             const headerTags = (t(item.tags) || []).slice(0, 2).map(tag => `<span class="tag-pill">${escapeHtml(tag)}</span>`).join("");
             const itemFeatures = (t(item.features) || []).map(f => `<li>${escapeHtml(f)}</li>`).join("");
             const isConcept = item.isConcept || !item.image || !item.image.trim();
-            const imgSrc = (!item.image || !item.image.trim()) ? "assets/images/concept-blueprint.svg" : item.image;
+            const fallbackSrc = resolveImg("assets/images/concept-blueprint.svg");
+            const imgSrc = resolveImg((!item.image || !item.image.trim()) ? "assets/images/concept-blueprint.svg" : item.image);
 
             return `
               <article class="vertical-item-card" id="${escapeHtml(item.id)}">
                 <div class="vertical-media-column" style="position: relative;">
                   ${isConcept ? `<span class="badge" style="position: absolute; top: 16px; left: 16px; z-index: 5; background: rgba(6,182,212,0.3); color: #38BDF8; border: 1px solid rgba(6,182,212,0.6); backdrop-filter: blur(8px);">${ui("conceptBadge")}</span>` : ''}
-                  <img src="${escapeHtml(imgSrc)}" alt="${escapeHtml(t(item.title))}" loading="lazy" onerror="this.onerror=null; this.src='assets/images/concept-blueprint.svg';" />
+                  <img src="${escapeHtml(imgSrc)}" alt="${escapeHtml(t(item.title))}" loading="lazy" onerror="this.onerror=null; this.src='${escapeHtml(fallbackSrc)}';" />
                 </div>
 
                 <div class="vertical-content-column">
